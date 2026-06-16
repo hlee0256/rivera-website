@@ -1,0 +1,19 @@
+# --- macOS junk ---
+.DS_Store
+**/.DS_Store
+
+# --- Office temp / working files (not part of the site) ---
+~$*
+*.xlsx
+
+# --- Heavy raw source assets (masters, not referenced by the site) ---
+Projects/
+_sheets/
+
+# --- Editor / tooling ---
+.claude/
+.vscode/
+.idea/
+
+# --- Vercel ---
+.vercel

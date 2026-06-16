@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Rivera — Boutique Residences</title>
+<meta name="description" content="Rivera is a boutique property practice. A small, considered collection of residences, guided personally." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="styles.css" />
+<link rel="icon" type="image/svg+xml" href="favicon.svg" />
+</head>
+<body>
+
+<!-- NAV -->
+<header class="nav" id="nav">
+  <div class="wrap nav-in">
+    <a class="logo" href="index.html" aria-label="Rivera — Real Estate">RIVER<svg class="ra" viewBox="0 0 222.5 278" aria-hidden="true"><path fill="currentColor" fill-rule="evenodd" d="M152.8 2.0L171.6 2.0L174.6 4.4L187.5 78.6L187.9 85.4L197.5 135.6L198.9 148.4L200.5 153.6L209.9 211.4L211.5 216.6L212.9 229.4L214.5 234.6L216.9 253.4L219.5 264.6L220.5 274.2L219.2 275.9L172.8 276.0L170.0 275.0L168.9 272.4L158.5 211.6L156.2 205.6L145.1 195.4L133.1 187.3L125.6 183.6L113.6 179.6L101.6 177.0L88.8 177.0L76.8 179.6L69.3 182.3L57.3 189.4L52.2 194.6L47.0 203.6L9.1 274.9L7.6 276.0L3.8 276.0L2.1 274.8L5.0 267.6L33.4 217.4L66.0 156.6L71.4 148.4L76.0 138.6L99.4 97.4L122.0 54.6L127.4 46.4L147.0 9.6L152.2 2.1ZM129.1 51.8L133.5 70.6L134.9 83.4L136.5 88.6L145.9 146.4L147.5 151.6L147.9 158.4L150.5 169.6L155.6 202.3L146.1 192.4L128.1 179.3L120.6 175.6L107.1 171.2L99.6 170.0L85.3 170.2L74.8 172.6L62.3 178.6L62.6 176.4L69.0 163.6L128.8 51.5Z"/></svg></a>
+    <button class="burger" id="burger" aria-label="Menu / Trình đơn"><span></span><span></span><span></span></button>
+    <nav class="menu">
+      <a href="projects.html" data-en="Projects" data-vi="Dự án">Projects</a>
+      <a href="about.html" data-en="About" data-vi="Về chúng tôi">About</a>
+      <a href="index.html#featured" data-en="Featured" data-vi="Nổi bật">Featured</a>
+      <button class="lang" id="lang" type="button" aria-label="Switch language / Đổi ngôn ngữ">
+        <span data-l="en">EN</span><span class="sep">/</span><span data-l="vi" class="on">VI</span>
+      </button>
+      <a class="btn" href="index.html#enquire" data-en="Enquire" data-vi="Liên hệ">Enquire</a>
+    </nav>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero" id="top">
+  <div class="bg">
+    <!-- HERO VIDEO — swap the two <source> URLs for your own .mp4 to use real footage.
+         Currently a free Mixkit aerial clip (mansions on the hills at sunset). -->
+    <video class="hero-vid" autoplay muted loop playsinline preload="auto"
+           poster="https://assets.mixkit.co/videos/43607/43607-thumb-360-0.jpg">
+      <source src="https://assets.mixkit.co/videos/43607/43607-720.mp4" type="video/mp4" />
+      <source src="https://assets.mixkit.co/videos/43607/43607-360.mp4" type="video/mp4" />
+    </video>
+    <div class="bg-overlay"></div>
+  </div>
+  <div class="wrap hero-in">
+    <span class="eyebrow light" data-en="Boutique Property · Est. 2026" data-vi="Bất động sản tinh tuyển · Thành lập 2026">Boutique Property · Est. 2026</span>
+    <h1><span data-en="Homes worth " data-vi="Ngôi nhà xứng đáng ">Homes worth </span><span class="serif" data-en="the wait." data-vi="để chờ đợi.">the wait.</span></h1>
+    <p class="sub" data-en="A small, deliberate collection of residences — sourced quietly, guided personally, and held to a standard most of the market has forgotten." data-vi="Một bộ sưu tập nhỏ, được chọn lọc kỹ lưỡng — tìm kiếm âm thầm, đồng hành tận tâm, và giữ theo chuẩn mực mà phần lớn thị trường đã lãng quên.">A small, deliberate collection of residences — sourced quietly, guided personally, and held to a standard most of the market has forgotten.</p>
+    <div class="cta-row">
+      <a class="btn" href="index.html#enquire"><span data-en="Request a consultation" data-vi="Đặt lịch tư vấn">Request a consultation</span> <span class="arw">→</span></a>
+      <a class="btn outline" href="projects.html" data-en="View projects" data-vi="Xem dự án">View projects</a>
+    </div>
+    <div class="meta"><span data-en="Currently showing" data-vi="Hiện đang giới thiệu">Currently showing</span><b data-en="Nine projects" data-vi="Chín dự án">Nine projects</b></div>
+  </div>
+</section>
+
+<!-- STATEMENT -->
+<section class="statement">
+  <div class="wrap">
+    <p class="big"><span data-en="We don't list everything. We choose a " data-vi="Chúng tôi không rao bán tất cả. Chúng tôi chọn ">We don't list everything. We choose a </span><span class="serif" data-en="considered few" data-vi="một số ít được cân nhắc kỹ">considered few</span><span data-en=" — and look after the families who live in them." data-vi=" — và chăm sóc những gia đình sống trong đó."> — and look after the families who live in them.</span></p>
+    <div class="row">
+      <span class="eyebrow muted" data-en="The Rivera Practice" data-vi="Phương châm Rivera">The Rivera Practice</span>
+      <p data-en="One advisor from first conversation to keys in hand. No call centre, no churn — a relationship measured in decades, not deals." data-vi="Một chuyên viên duy nhất từ cuộc trò chuyện đầu tiên đến khi nhận chìa khóa. Không tổng đài, không thay người — một mối quan hệ đo bằng thập kỷ, không phải bằng giao dịch.">One advisor from first conversation to keys in hand. No call centre, no churn — a relationship measured in decades, not deals.</p>
+    </div>
+  </div>
+</section>
+
+<!-- DEVELOPER MARQUEE -->
+<section class="marquee" aria-label="Developers we work with">
+  <div class="wrap m-label">
+    <span class="eyebrow muted" data-en="Working with Melbourne's leading developers" data-vi="Đồng hành cùng các nhà phát triển hàng đầu Melbourne">Working with Melbourne's leading developers</span>
+  </div>
+  <div class="marquee-mask">
+    <div class="marquee-track" id="devTrack">
+      <img class="dev-logo" src="logo/trimmed/Lendlease_idSz5tj1FI_1.png" alt="Lendlease" />
+      <img class="dev-logo" src="logo/trimmed/Mirvac_idMeucHHKE_0.png" alt="Mirvac" />
+      <img class="dev-logo" src="logo/trimmed/Multiplex.png" alt="Multiplex" />
+      <img class="dev-logo" src="logo/trimmed/metricon.png" alt="Metricon" />
+      <img class="dev-logo" src="logo/icd.svg" alt="ICD Property" />
+      <img class="dev-logo" src="logo/trimmed/osk.png" alt="OSK Property" />
+      <img class="dev-logo" src="logo/trimmed/0035.HK.png" alt="Far East Consortium" />
+      <img class="dev-logo" src="logo/trimmed/Elenberg-Fraser.png" alt="Elenberg Fraser" />
+      <img class="dev-logo" src="logo/trimmed/HansenLogo_black.png" alt="Hansen" />
+      <img class="dev-logo" src="logo/trimmed/luxton.png" alt="Luxton Homes" />
+      <img class="dev-logo dev-logo--invert" src="logo/trimmed/Brady.png" alt="Brady" />
+      <img class="dev-logo" src="logo/trimmed/HTH.png" alt="HTH Lawyers" />
+      <img class="dev-logo" src="logo/trimmed/CC.png" alt="Constant &amp; Co" />
+      <!-- duplicate set (decorative) for the seamless scroll loop -->
+      <img class="dev-logo" src="logo/trimmed/Lendlease_idSz5tj1FI_1.png" alt="" aria-hidden="true" />
+      <img class="dev-logo" src="logo/trimmed/Mirvac_idMeucHHKE_0.png" alt="" aria-hidden="true" />
+      <img class="dev-logo" src="logo/trimmed/Multiplex.png" alt="" aria-hidden="true" />
+      <img class="dev-logo" src="logo/trimmed/metricon.png" alt="" aria-hidden="true" />
+      <img class="dev-logo" src="logo/icd.svg" alt="" aria-hidden="true" />
+      <img class="dev-logo" src="logo/trimmed/osk.png" alt="" aria-hidden="true" />
+      <img class="dev-logo" src="logo/trimmed/0035.HK.png" alt="" aria-hidden="true" />
+      <img class="dev-logo" src="logo/trimmed/Elenberg-Fraser.png" alt="" aria-hidden="true" />
+      <img class="dev-logo" src="logo/trimmed/HansenLogo_black.png" alt="" aria-hidden="true" />
+      <img class="dev-logo" src="logo/trimmed/luxton.png" alt="" aria-hidden="true" />
+      <img class="dev-logo dev-logo--invert" src="logo/trimmed/Brady.png" alt="" aria-hidden="true" />
+      <img class="dev-logo" src="logo/trimmed/HTH.png" alt="" aria-hidden="true" />
+      <img class="dev-logo" src="logo/trimmed/CC.png" alt="" aria-hidden="true" />
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS TEASER -->
+<section class="residences" id="projects-teaser">
+  <div class="wrap">
+    <div class="sec-top">
+      <div>
+        <span class="eyebrow" data-en="The Collection" data-vi="Bộ sưu tập">The Collection</span>
+        <h2 style="margin-top:14px" data-en="Current projects" data-vi="Dự án hiện tại">Current projects</h2>
+        <p data-en="Each property is visited, vetted and represented in person. Prices on application." data-vi="Mỗi bất động sản đều được đến tận nơi, thẩm định và đại diện trực tiếp. Giá theo yêu cầu.">Each property is visited, vetted and represented in person. Prices on application.</p>
+      </div>
+      <a class="lk" href="projects.html" data-en="See all projects →" data-vi="Xem tất cả dự án →">See all projects →</a>
+    </div>
+
+    <div class="grid">
+      <a class="listing" href="the-headland-house.html">
+        <div class="photo has-img" style="background-image:url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=780&q=80')"><span class="cap" data-en="Available · Coastal" data-vi="Còn trống · Ven biển">Available · Coastal</span></div>
+        <div class="info"><h3>The Headland House</h3><span class="price" data-en="On application" data-vi="Giá theo yêu cầu">On application</span></div>
+        <p class="desc" data-en="A cantilevered residence above the dunes, framed by glass and blackbutt." data-vi="Một dinh thự đua ra trên đồi cát, ôm trọn bởi kính và gỗ blackbutt.">A cantilevered residence above the dunes, framed by glass and blackbutt.</p>
+        <div class="tags"><span class="tag" data-en="4 Bed" data-vi="4 PN">4 Bed</span><span class="tag" data-en="Ocean" data-vi="Biển">Ocean</span><span class="tag" data-en="New" data-vi="Mới">New</span></div>
+      </a>
+      <a class="listing" href="maple-stone.html">
+        <div class="photo has-img" style="background-image:url('https://images.unsplash.com/photo-1570129477492-45c003edd2be?auto=format&fit=crop&w=780&q=80')"><span class="cap" data-en="Available · Hinterland" data-vi="Còn trống · Vùng ven">Available · Hinterland</span></div>
+        <div class="info"><h3>Maple &amp; Stone</h3><span class="price" data-en="On application" data-vi="Giá theo yêu cầu">On application</span></div>
+        <p class="desc" data-en="A restored homestead on five acres, with a slow-living garden and studio." data-vi="Trang viên phục dựng trên năm mẫu đất, với khu vườn sống chậm và xưởng sáng tác.">A restored homestead on five acres, with a slow-living garden and studio.</p>
+        <div class="tags"><span class="tag" data-en="5 Bed" data-vi="5 PN">5 Bed</span><span class="tag" data-en="Acreage" data-vi="Đất rộng">Acreage</span></div>
+      </a>
+      <a class="listing" href="the-terraces.html">
+        <div class="photo has-img" style="background-image:url('https://images.unsplash.com/photo-1583608205776-bfd35f0d9f83?auto=format&fit=crop&w=780&q=80')"><span class="cap" data-en="Available · Fitzroy" data-vi="Còn trống · Fitzroy">Available · Fitzroy</span></div>
+        <div class="info"><h3>The Terraces</h3><span class="price" data-en="$1.1M – $1.4M" data-vi="$1.1M – $1.4M">$1.1M – $1.4M</span></div>
+        <p class="desc" data-en="A Victorian terrace reborn — original lacework, north light and a leafy rear courtyard." data-vi="Một dãy nhà phố Victoria hồi sinh — hoa văn sắt nguyên bản, ánh sáng hướng bắc và sân sau xanh mát.">A Victorian terrace reborn — original lacework, north light and a leafy rear courtyard.</p>
+        <div class="tags"><span class="tag" data-en="2 Bed" data-vi="2 PN">2 Bed</span><span class="tag" data-en="Heritage" data-vi="Di sản">Heritage</span></div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<section class="stats">
+  <div class="wrap">
+    <div class="grid4">
+      <div class="stat"><div class="n"><span class="serif">12</span></div><div class="l" data-en="Projects a year — by design" data-vi="Dự án mỗi năm — theo chủ đích">Projects a year — by design</div></div>
+      <div class="stat"><div class="n">1<span class="serif">:</span>1</div><div class="l" data-en="One advisor, start to finish" data-vi="Một chuyên viên, từ đầu đến cuối">One advisor, start to finish</div></div>
+      <div class="stat"><div class="n">100<span class="serif">%</span></div><div class="l" data-en="Properties seen in person" data-vi="Bất động sản đến tận nơi">Properties seen in person</div></div>
+      <div class="stat"><div class="n">∞</div><div class="l" data-en="After the sale, we stay" data-vi="Sau giao dịch, chúng tôi vẫn ở lại">After the sale, we stay</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURED -->
+<section class="featured" id="featured">
+  <div class="bg" style="background-image:url('https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1900&q=80');background-size:cover;background-position:center"></div>
+  <div class="wrap featured-in">
+    <span class="eyebrow" data-en="Featured Residence" data-vi="Dự án nổi bật">Featured Residence</span>
+    <h2><span data-en="The Headland " data-vi="The Headland ">The Headland </span><span class="serif">House.</span></h2>
+    <p data-en="Set above a private beach, with walls of glass that disappear into the horizon. The kind of home you don't find listed — you're introduced to it." data-vi="Tọa lạc trên một bãi biển riêng, với những bức tường kính tan vào đường chân trời. Kiểu nhà bạn không tìm thấy trên danh sách rao bán — mà được giới thiệu đến.">Set above a private beach, with walls of glass that disappear into the horizon. The kind of home you don't find listed — you're introduced to it.</p>
+    <div class="specs">
+      <div><span>4</span><small data-en="Bedrooms" data-vi="Phòng ngủ">Bedrooms</small></div>
+      <div><span>1.2</span><small data-en="Acres" data-vi="Mẫu đất">Acres</small></div>
+      <div><span>2026</span><small data-en="Completed" data-vi="Hoàn thành">Completed</small></div>
+    </div>
+    <a class="btn outline" href="index.html#enquire"><span data-en="Arrange a private viewing" data-vi="Sắp xếp buổi xem riêng">Arrange a private viewing</span> <span class="arw">→</span></a>
+  </div>
+</section>
+
+<!-- ENQUIRE -->
+<section class="enquire" id="enquire">
+  <div class="wrap enquire-grid">
+    <div>
+      <span class="eyebrow" data-en="Enquire" data-vi="Liên hệ">Enquire</span>
+      <h2 style="margin-top:14px"><span data-en="Begin a " data-vi="Bắt đầu một ">Begin a </span><span class="serif" data-en="quiet conversation." data-vi="cuộc trò chuyện nhẹ nhàng.">quiet conversation.</span></h2>
+      <p class="lead" data-en="No pressure, no obligation — just an honest discussion about what you're looking for. We reply personally, usually within a day." data-vi="Không áp lực, không ràng buộc — chỉ là một cuộc trao đổi chân thành về điều bạn đang tìm kiếm. Chúng tôi phản hồi trực tiếp, thường trong vòng một ngày.">No pressure, no obligation — just an honest discussion about what you're looking for. We reply personally, usually within a day.</p>
+      <div class="detail">
+        <span data-en="Direct line" data-vi="Đường dây trực tiếp">Direct line</span>
+        <a href="mailto:hello@rivera.estate">hello@rivera.estate</a>
+      </div>
+    </div>
+    <!-- ENQUIRE FORM — wired for Formspree. Replace YOUR_FORM_ID with your form's ID from formspree.io. -->
+    <form class="efrm" action="https://formspree.io/f/YOUR_FORM_ID" method="POST" novalidate>
+      <div class="fld"><input type="text" name="name" placeholder="Your name" data-en-ph="Your name" data-vi-ph="Họ và tên" required /></div>
+      <div class="fld"><input type="email" name="email" placeholder="Email address" data-en-ph="Email address" data-vi-ph="Địa chỉ email" required /></div>
+      <div class="fld"><input type="text" name="looking" placeholder="What are you looking for?" data-en-ph="What are you looking for?" data-vi-ph="Bạn đang tìm kiếm điều gì?" /></div>
+      <div class="fld"><textarea name="message" rows="3" placeholder="Anything you'd like us to know (optional)" data-en-ph="Anything you'd like us to know (optional)" data-vi-ph="Điều bạn muốn cho chúng tôi biết (không bắt buộc)"></textarea></div>
+      <button class="btn" type="submit"><span data-en="Send enquiry" data-vi="Gửi liên hệ">Send enquiry</span> <span class="arw">→</span></button>
+      <div class="thanks">
+        <h3 data-en="Thank you." data-vi="Cảm ơn bạn.">Thank you.</h3>
+        <p data-en="Your enquiry has reached us. We'll be in touch personally, soon." data-vi="Liên hệ của bạn đã đến với chúng tôi. Chúng tôi sẽ trực tiếp phản hồi sớm.">Your enquiry has reached us. We'll be in touch personally, soon.</p>
+      </div>
+    </form>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="wrap">
+    <div class="foot-top">
+      <div>
+        <a class="logo" href="index.html" aria-label="Rivera — Real Estate">RIVER<svg class="ra" viewBox="0 0 222.5 278" aria-hidden="true"><path fill="currentColor" fill-rule="evenodd" d="M152.8 2.0L171.6 2.0L174.6 4.4L187.5 78.6L187.9 85.4L197.5 135.6L198.9 148.4L200.5 153.6L209.9 211.4L211.5 216.6L212.9 229.4L214.5 234.6L216.9 253.4L219.5 264.6L220.5 274.2L219.2 275.9L172.8 276.0L170.0 275.0L168.9 272.4L158.5 211.6L156.2 205.6L145.1 195.4L133.1 187.3L125.6 183.6L113.6 179.6L101.6 177.0L88.8 177.0L76.8 179.6L69.3 182.3L57.3 189.4L52.2 194.6L47.0 203.6L9.1 274.9L7.6 276.0L3.8 276.0L2.1 274.8L5.0 267.6L33.4 217.4L66.0 156.6L71.4 148.4L76.0 138.6L99.4 97.4L122.0 54.6L127.4 46.4L147.0 9.6L152.2 2.1ZM129.1 51.8L133.5 70.6L134.9 83.4L136.5 88.6L145.9 146.4L147.5 151.6L147.9 158.4L150.5 169.6L155.6 202.3L146.1 192.4L128.1 179.3L120.6 175.6L107.1 171.2L99.6 170.0L85.3 170.2L74.8 172.6L62.3 178.6L62.6 176.4L69.0 163.6L128.8 51.5Z"/></svg></a>
+        <p data-en="A boutique property practice. A considered few residences, guided personally." data-vi="Một công ty bất động sản tinh tuyển. Một số ít dự án được cân nhắc, đồng hành tận tâm.">A boutique property practice. A considered few residences, guided personally.</p>
+      </div>
+      <div class="fcol">
+        <h5 data-en="Explore" data-vi="Khám phá">Explore</h5>
+        <a href="projects.html" data-en="Projects" data-vi="Dự án">Projects</a>
+        <a href="about.html" data-en="About" data-vi="Về chúng tôi">About</a>
+        <a href="index.html#featured" data-en="Featured" data-vi="Nổi bật">Featured</a>
+        <a href="index.html#enquire" data-en="Enquire" data-vi="Liên hệ">Enquire</a>
+      </div>
+      <div class="fcol">
+        <h5 data-en="Contact" data-vi="Liên hệ">Contact</h5>
+        <a href="mailto:hello@rivera.estate">hello@rivera.estate</a>
+        <a href="index.html#enquire" data-en="Request portfolio" data-vi="Yêu cầu danh mục">Request portfolio</a>
+        <a href="index.html#enquire" data-en="Private viewings" data-vi="Xem nhà riêng tư">Private viewings</a>
+      </div>
+    </div>
+    <div class="foot-bot">
+      <span data-en="© 2026 Rivera — Boutique Property Practice." data-vi="© 2026 Rivera — Công ty Bất động sản Tinh tuyển.">© 2026 Rivera — Boutique Property Practice.</span>
+      <span data-en="Concept page · for validation" data-vi="Trang concept · để thẩm định">Concept page · for validation</span>
+    </div>
+  </div>
+</footer>
+
+<script src="app.js" defer></script>
+</body>
+</html>

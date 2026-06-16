@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Projects — Rivera</title>
+<meta name="description" content="The current Rivera collection — houses, apartments and townhouses across Melbourne, each visited and represented in person." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="styles.css" />
+<link rel="icon" type="image/svg+xml" href="favicon.svg" />
+</head>
+<body>
+
+<!-- NAV (starts solid on a light page) -->
+<header class="nav onlight" id="nav">
+  <div class="wrap nav-in">
+    <a class="logo" href="index.html" aria-label="Rivera — Real Estate">RIVER<svg class="ra" viewBox="0 0 222.5 278" aria-hidden="true"><path fill="currentColor" fill-rule="evenodd" d="M152.8 2.0L171.6 2.0L174.6 4.4L187.5 78.6L187.9 85.4L197.5 135.6L198.9 148.4L200.5 153.6L209.9 211.4L211.5 216.6L212.9 229.4L214.5 234.6L216.9 253.4L219.5 264.6L220.5 274.2L219.2 275.9L172.8 276.0L170.0 275.0L168.9 272.4L158.5 211.6L156.2 205.6L145.1 195.4L133.1 187.3L125.6 183.6L113.6 179.6L101.6 177.0L88.8 177.0L76.8 179.6L69.3 182.3L57.3 189.4L52.2 194.6L47.0 203.6L9.1 274.9L7.6 276.0L3.8 276.0L2.1 274.8L5.0 267.6L33.4 217.4L66.0 156.6L71.4 148.4L76.0 138.6L99.4 97.4L122.0 54.6L127.4 46.4L147.0 9.6L152.2 2.1ZM129.1 51.8L133.5 70.6L134.9 83.4L136.5 88.6L145.9 146.4L147.5 151.6L147.9 158.4L150.5 169.6L155.6 202.3L146.1 192.4L128.1 179.3L120.6 175.6L107.1 171.2L99.6 170.0L85.3 170.2L74.8 172.6L62.3 178.6L62.6 176.4L69.0 163.6L128.8 51.5Z"/></svg></a>
+    <button class="burger" id="burger" aria-label="Menu / Trình đơn"><span></span><span></span><span></span></button>
+    <nav class="menu">
+      <a href="projects.html" class="active" data-en="Projects" data-vi="Dự án">Projects</a>
+      <a href="about.html" data-en="About" data-vi="Về chúng tôi">About</a>
+      <a href="index.html#featured" data-en="Featured" data-vi="Nổi bật">Featured</a>
+      <button class="lang" id="lang" type="button" aria-label="Switch language / Đổi ngôn ngữ">
+        <span data-l="en">EN</span><span class="sep">/</span><span data-l="vi" class="on">VI</span>
+      </button>
+      <a class="btn" href="index.html#enquire" data-en="Enquire" data-vi="Liên hệ">Enquire</a>
+    </nav>
+  </div>
+</header>
+
+<!-- PAGE HEADER -->
+<section class="pagehead">
+  <div class="wrap">
+    <span class="eyebrow" data-en="The Collection" data-vi="Bộ sưu tập">The Collection</span>
+    <h1><span data-en="Current " data-vi="Dự án ">Current </span><span class="serif" data-en="projects." data-vi="hiện tại.">projects.</span></h1>
+    <p data-en="A small, working collection — houses, apartments and townhouses across Melbourne. Each one visited, vetted and represented in person. Filter by what you're looking for." data-vi="Một bộ sưu tập nhỏ đang hoạt động — nhà riêng, căn hộ và nhà phố khắp Melbourne. Mỗi căn đều được đến tận nơi, thẩm định và đại diện trực tiếp. Lọc theo điều bạn đang tìm.">A small, working collection — houses, apartments and townhouses across Melbourne. Each one visited, vetted and represented in person. Filter by what you're looking for.</p>
+  </div>
+</section>
+
+<!-- FILTERABLE GALLERY -->
+<section class="gallery">
+  <div class="wrap">
+
+    <div class="filters" id="filters">
+      <button class="filt active" data-filter="all"><span data-en="All" data-vi="Tất cả">All</span> <span class="count"></span></button>
+      <button class="filt" data-filter="house"><span data-en="House" data-vi="Nhà riêng">House</span> <span class="count"></span></button>
+      <button class="filt" data-filter="apartment"><span data-en="Apartment" data-vi="Căn hộ">Apartment</span> <span class="count"></span></button>
+      <button class="filt" data-filter="townhouse"><span data-en="Townhouse" data-vi="Nhà phố">Townhouse</span> <span class="count"></span></button>
+    </div>
+
+    <div class="pgrid">
+
+      <a class="pcard" href="the-headland-house.html" data-type="house">
+        <div class="photo has-img" style="background-image:url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=700&q=80')"><span class="cap" data-en="Coastal" data-vi="Ven biển">Coastal</span></div>
+        <div class="pcard-body">
+          <div class="pcard-head">
+            <div><h3>The Headland House</h3><div class="loc" data-en="Portsea, VIC" data-vi="Portsea, VIC">Portsea, VIC</div></div>
+            <span class="tag" data-en="House" data-vi="Nhà riêng">House</span>
+          </div>
+          <div class="specs-row">
+            <div class="sp"><b>4</b><small data-en="Bed" data-vi="PN">Bed</small></div>
+            <div class="sp"><b>3</b><small data-en="Bath" data-vi="PT">Bath</small></div>
+            <div class="sp"><b>2</b><small data-en="Car" data-vi="Xe">Car</small></div>
+          </div>
+          <div class="price-range">
+            <span class="pr" data-en="$3.2M – $3.8M" data-vi="$3.2M – $3.8M">$3.2M – $3.8M</span>
+            <span class="st" data-en="Available" data-vi="Còn trống">Available</span>
+          </div>
+        </div>
+      </a>
+
+      <a class="pcard" href="maple-stone.html" data-type="house">
+        <div class="photo has-img" style="background-image:url('https://images.unsplash.com/photo-1570129477492-45c003edd2be?auto=format&fit=crop&w=700&q=80')"><span class="cap" data-en="Hinterland" data-vi="Vùng ven">Hinterland</span></div>
+        <div class="pcard-body">
+          <div class="pcard-head">
+            <div><h3>Maple &amp; Stone</h3><div class="loc" data-en="Macedon Ranges, VIC" data-vi="Macedon Ranges, VIC">Macedon Ranges, VIC</div></div>
+            <span class="tag" data-en="House" data-vi="Nhà riêng">House</span>
+          </div>
+          <div class="specs-row">
+            <div class="sp"><b>5</b><small data-en="Bed" data-vi="PN">Bed</small></div>
+            <div class="sp"><b>3</b><small data-en="Bath" data-vi="PT">Bath</small></div>
+            <div class="sp"><b>4</b><small data-en="Car" data-vi="Xe">Car</small></div>
+          </div>
+          <div class="price-range">
+            <span class="pr" data-en="$2.6M – $3.1M" data-vi="$2.6M – $3.1M">$2.6M – $3.1M</span>
+            <span class="st" data-en="Available" data-vi="Còn trống">Available</span>
+          </div>
+        </div>
+      </a>
+
+      <a class="pcard" href="the-long-house.html" data-type="house">
+        <div class="photo has-img" style="background-image:url('https://images.unsplash.com/photo-1600210492493-0946911123ea?auto=format&fit=crop&w=700&q=80')"><span class="cap" data-en="Bayside" data-vi="Ven vịnh">Bayside</span></div>
+        <div class="pcard-body">
+          <div class="pcard-head">
+            <div><h3>The Long House</h3><div class="loc" data-en="Brighton, VIC" data-vi="Brighton, VIC">Brighton, VIC</div></div>
+            <span class="tag" data-en="House" data-vi="Nhà riêng">House</span>
+          </div>
+          <div class="specs-row">
+            <div class="sp"><b>4</b><small data-en="Bed" data-vi="PN">Bed</small></div>
+            <div class="sp"><b>2</b><small data-en="Bath" data-vi="PT">Bath</small></div>
+            <div class="sp"><b>2</b><small data-en="Car" data-vi="Xe">Car</small></div>
+          </div>
+          <div class="price-range">
+            <span class="pr" data-en="On application" data-vi="Giá theo yêu cầu">On application</span>
+            <span class="st" data-en="By appointment" data-vi="Theo lịch hẹn">By appointment</span>
+          </div>
+        </div>
+      </a>
+
+      <a class="pcard" href="380-melbourne.html" data-type="apartment">
+        <div class="photo has-img" style="background-image:url('images/380-melbourne/exterior-2.jpg')"><span class="cap" data-en="Melbourne CBD" data-vi="Trung tâm Melbourne">Melbourne CBD</span></div>
+        <div class="pcard-body">
+          <div class="pcard-head">
+            <div><h3>380 Melbourne</h3><div class="loc" data-en="380 Lonsdale Street, Melbourne" data-vi="380 Lonsdale Street, Melbourne">380 Lonsdale Street, Melbourne</div></div>
+            <span class="tag" data-en="Apartment" data-vi="Căn hộ">Apartment</span>
+          </div>
+          <div class="specs-row">
+            <div class="sp"><b>2</b><small data-en="Bed" data-vi="PN">Bed</small></div>
+            <div class="sp"><b>2</b><small data-en="Bath" data-vi="PT">Bath</small></div>
+            <div class="sp"><b>1</b><small data-en="Car" data-vi="Xe">Car</small></div>
+          </div>
+          <div class="price-range">
+            <span class="pr" data-en="$900K – $1.08M" data-vi="$900K – $1.08M">$900K – $1.08M</span>
+            <span class="st" data-en="Move-in ready" data-vi="Sẵn sàng dọn vào">Move-in ready</span>
+          </div>
+        </div>
+      </a>
+
+      <a class="pcard" href="671-chapel-street.html" data-type="apartment">
+        <div class="photo has-img" style="background-image:url('images/671-chapel-street/exterior-2.jpg')"><span class="cap" data-en="South Yarra" data-vi="South Yarra">South Yarra</span></div>
+        <div class="pcard-body">
+          <div class="pcard-head">
+            <div><h3>671 Chapel Street</h3><div class="loc" data-en="671 Chapel Street, South Yarra" data-vi="671 Chapel Street, South Yarra">671 Chapel Street, South Yarra</div></div>
+            <span class="tag" data-en="Apartment" data-vi="Căn hộ">Apartment</span>
+          </div>
+          <div class="specs-row">
+            <div class="sp"><b>1–3</b><small data-en="Bed" data-vi="PN">Bed</small></div>
+            <div class="sp"><b>1–3</b><small data-en="Bath" data-vi="PT">Bath</small></div>
+            <div class="sp"><b>1–2</b><small data-en="Car" data-vi="Xe">Car</small></div>
+          </div>
+          <div class="price-range">
+            <span class="pr" data-en="From $1.43M" data-vi="Từ $1.43M">From $1.43M</span>
+            <span class="st" data-en="Off the plan · 2028" data-vi="Off the plan · 2028">Off the plan · 2028</span>
+          </div>
+        </div>
+      </a>
+
+      <a class="pcard" href="aspire.html" data-type="apartment">
+        <div class="photo has-img" style="background-image:url('images/aspire/exterior-1.jpg')"><span class="cap" data-en="Melbourne CBD" data-vi="Trung tâm Melbourne">Melbourne CBD</span></div>
+        <div class="pcard-body">
+          <div class="pcard-head">
+            <div><h3>Aspire Melbourne</h3><div class="loc" data-en="301 King Street, Melbourne" data-vi="301 King Street, Melbourne">301 King Street, Melbourne</div></div>
+            <span class="tag" data-en="Apartment" data-vi="Căn hộ">Apartment</span>
+          </div>
+          <div class="specs-row">
+            <div class="sp"><b>1–2</b><small data-en="Bed" data-vi="PN">Bed</small></div>
+            <div class="sp"><b>1–2</b><small data-en="Bath" data-vi="PT">Bath</small></div>
+            <div class="sp"><b>0–1</b><small data-en="Car" data-vi="Xe">Car</small></div>
+          </div>
+          <div class="price-range">
+            <span class="pr" data-en="$610K – $1.2M" data-vi="$610K – $1.2M">$610K – $1.2M</span>
+            <span class="st" data-en="Move-in ready" data-vi="Sẵn sàng dọn vào">Move-in ready</span>
+          </div>
+        </div>
+      </a>
+
+      <a class="pcard" href="the-carlton.html" data-type="apartment">
+        <div class="photo has-img" style="background-image:url('https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=700&q=80')"><span class="cap" data-en="Inner city" data-vi="Nội đô">Inner city</span></div>
+        <div class="pcard-body">
+          <div class="pcard-head">
+            <div><h3>The Carlton</h3><div class="loc" data-en="Carlton, VIC" data-vi="Carlton, VIC">Carlton, VIC</div></div>
+            <span class="tag" data-en="Apartment" data-vi="Căn hộ">Apartment</span>
+          </div>
+          <div class="specs-row">
+            <div class="sp"><b>1</b><small data-en="Bed" data-vi="PN">Bed</small></div>
+            <div class="sp"><b>1</b><small data-en="Bath" data-vi="PT">Bath</small></div>
+            <div class="sp"><b>1</b><small data-en="Car" data-vi="Xe">Car</small></div>
+          </div>
+          <div class="price-range">
+            <span class="pr" data-en="$720K – $950K" data-vi="$720K – $950K">$720K – $950K</span>
+            <span class="st" data-en="Available" data-vi="Còn trống">Available</span>
+          </div>
+        </div>
+      </a>
+
+      <a class="pcard" href="quarter-nine.html" data-type="apartment">
+        <div class="photo has-img" style="background-image:url('https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=700&q=80')"><span class="cap" data-en="Riverside" data-vi="Ven sông">Riverside</span></div>
+        <div class="pcard-body">
+          <div class="pcard-head">
+            <div><h3>Quarter Nine</h3><div class="loc" data-en="Southbank, VIC" data-vi="Southbank, VIC">Southbank, VIC</div></div>
+            <span class="tag" data-en="Apartment" data-vi="Căn hộ">Apartment</span>
+          </div>
+          <div class="specs-row">
+            <div class="sp"><b>3</b><small data-en="Bed" data-vi="PN">Bed</small></div>
+            <div class="sp"><b>2</b><small data-en="Bath" data-vi="PT">Bath</small></div>
+            <div class="sp"><b>2</b><small data-en="Car" data-vi="Xe">Car</small></div>
+          </div>
+          <div class="price-range">
+            <span class="pr" data-en="$1.9M – $2.4M" data-vi="$1.9M – $2.4M">$1.9M – $2.4M</span>
+            <span class="st" data-en="By appointment" data-vi="Theo lịch hẹn">By appointment</span>
+          </div>
+        </div>
+      </a>
+
+      <a class="pcard" href="brunswick-mews.html" data-type="townhouse">
+        <div class="photo has-img" style="background-image:url('https://images.unsplash.com/photo-1600585152220-90363fe7e115?auto=format&fit=crop&w=700&q=80')"><span class="cap" data-en="Inner north" data-vi="Bắc nội đô">Inner north</span></div>
+        <div class="pcard-body">
+          <div class="pcard-head">
+            <div><h3>Brunswick Mews</h3><div class="loc" data-en="Brunswick, VIC" data-vi="Brunswick, VIC">Brunswick, VIC</div></div>
+            <span class="tag" data-en="Townhouse" data-vi="Nhà phố">Townhouse</span>
+          </div>
+          <div class="specs-row">
+            <div class="sp"><b>3</b><small data-en="Bed" data-vi="PN">Bed</small></div>
+            <div class="sp"><b>2</b><small data-en="Bath" data-vi="PT">Bath</small></div>
+            <div class="sp"><b>1</b><small data-en="Car" data-vi="Xe">Car</small></div>
+          </div>
+          <div class="price-range">
+            <span class="pr" data-en="$1.3M – $1.7M" data-vi="$1.3M – $1.7M">$1.3M – $1.7M</span>
+            <span class="st" data-en="Available" data-vi="Còn trống">Available</span>
+          </div>
+        </div>
+      </a>
+
+      <a class="pcard" href="the-terraces.html" data-type="townhouse">
+        <div class="photo has-img" style="background-image:url('https://images.unsplash.com/photo-1583608205776-bfd35f0d9f83?auto=format&fit=crop&w=700&q=80')"><span class="cap" data-en="Inner north" data-vi="Bắc nội đô">Inner north</span></div>
+        <div class="pcard-body">
+          <div class="pcard-head">
+            <div><h3>The Terraces</h3><div class="loc" data-en="Fitzroy, VIC" data-vi="Fitzroy, VIC">Fitzroy, VIC</div></div>
+            <span class="tag" data-en="Townhouse" data-vi="Nhà phố">Townhouse</span>
+          </div>
+          <div class="specs-row">
+            <div class="sp"><b>2</b><small data-en="Bed" data-vi="PN">Bed</small></div>
+            <div class="sp"><b>2</b><small data-en="Bath" data-vi="PT">Bath</small></div>
+            <div class="sp"><b>1</b><small data-en="Car" data-vi="Xe">Car</small></div>
+          </div>
+          <div class="price-range">
+            <span class="pr" data-en="$1.1M – $1.4M" data-vi="$1.1M – $1.4M">$1.1M – $1.4M</span>
+            <span class="st" data-en="Available" data-vi="Còn trống">Available</span>
+          </div>
+        </div>
+      </a>
+
+      <a class="pcard" href="garden-walk.html" data-type="townhouse">
+        <div class="photo has-img" style="background-image:url('https://images.unsplash.com/photo-1568605114967-8130f3a36994?auto=format&fit=crop&w=700&q=80')"><span class="cap" data-en="Leafy east" data-vi="Đông xanh mát">Leafy east</span></div>
+        <div class="pcard-body">
+          <div class="pcard-head">
+            <div><h3>Garden Walk</h3><div class="loc" data-en="Hawthorn, VIC" data-vi="Hawthorn, VIC">Hawthorn, VIC</div></div>
+            <span class="tag" data-en="Townhouse" data-vi="Nhà phố">Townhouse</span>
+          </div>
+          <div class="specs-row">
+            <div class="sp"><b>4</b><small data-en="Bed" data-vi="PN">Bed</small></div>
+            <div class="sp"><b>3</b><small data-en="Bath" data-vi="PT">Bath</small></div>
+            <div class="sp"><b>2</b><small data-en="Car" data-vi="Xe">Car</small></div>
+          </div>
+          <div class="price-range">
+            <span class="pr" data-en="$2.0M – $2.5M" data-vi="$2.0M – $2.5M">$2.0M – $2.5M</span>
+            <span class="st" data-en="New" data-vi="Mới">New</span>
+          </div>
+        </div>
+      </a>
+
+    </div>
+
+    <div class="no-results" id="noResults" data-en="Nothing in this category right now — try another filter." data-vi="Hiện chưa có mục nào trong danh mục này — thử bộ lọc khác.">Nothing in this category right now — try another filter.</div>
+
+    <div style="margin-top:54px">
+      <a class="lk" href="index.html#enquire" data-en="Don't see it? Request the full portfolio →" data-vi="Chưa thấy phù hợp? Yêu cầu danh mục đầy đủ →">Don't see it? Request the full portfolio →</a>
+    </div>
+
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="wrap">
+    <div class="foot-top">
+      <div>
+        <a class="logo" href="index.html" aria-label="Rivera — Real Estate">RIVER<svg class="ra" viewBox="0 0 222.5 278" aria-hidden="true"><path fill="currentColor" fill-rule="evenodd" d="M152.8 2.0L171.6 2.0L174.6 4.4L187.5 78.6L187.9 85.4L197.5 135.6L198.9 148.4L200.5 153.6L209.9 211.4L211.5 216.6L212.9 229.4L214.5 234.6L216.9 253.4L219.5 264.6L220.5 274.2L219.2 275.9L172.8 276.0L170.0 275.0L168.9 272.4L158.5 211.6L156.2 205.6L145.1 195.4L133.1 187.3L125.6 183.6L113.6 179.6L101.6 177.0L88.8 177.0L76.8 179.6L69.3 182.3L57.3 189.4L52.2 194.6L47.0 203.6L9.1 274.9L7.6 276.0L3.8 276.0L2.1 274.8L5.0 267.6L33.4 217.4L66.0 156.6L71.4 148.4L76.0 138.6L99.4 97.4L122.0 54.6L127.4 46.4L147.0 9.6L152.2 2.1ZM129.1 51.8L133.5 70.6L134.9 83.4L136.5 88.6L145.9 146.4L147.5 151.6L147.9 158.4L150.5 169.6L155.6 202.3L146.1 192.4L128.1 179.3L120.6 175.6L107.1 171.2L99.6 170.0L85.3 170.2L74.8 172.6L62.3 178.6L62.6 176.4L69.0 163.6L128.8 51.5Z"/></svg></a>
+        <p data-en="A boutique property practice. A considered few residences, guided personally." data-vi="Một công ty bất động sản tinh tuyển. Một số ít dự án được cân nhắc, đồng hành tận tâm.">A boutique property practice. A considered few residences, guided personally.</p>
+      </div>
+      <div class="fcol">
+        <h5 data-en="Explore" data-vi="Khám phá">Explore</h5>
+        <a href="projects.html" data-en="Projects" data-vi="Dự án">Projects</a>
+        <a href="about.html" data-en="About" data-vi="Về chúng tôi">About</a>
+        <a href="index.html#featured" data-en="Featured" data-vi="Nổi bật">Featured</a>
+        <a href="index.html#enquire" data-en="Enquire" data-vi="Liên hệ">Enquire</a>
+      </div>
+      <div class="fcol">
+        <h5 data-en="Contact" data-vi="Liên hệ">Contact</h5>
+        <a href="mailto:hello@rivera.estate">hello@rivera.estate</a>
+        <a href="index.html#enquire" data-en="Request portfolio" data-vi="Yêu cầu danh mục">Request portfolio</a>
+        <a href="index.html#enquire" data-en="Private viewings" data-vi="Xem nhà riêng tư">Private viewings</a>
+      </div>
+    </div>
+    <div class="foot-bot">
+      <span data-en="© 2026 Rivera — Boutique Property Practice." data-vi="© 2026 Rivera — Công ty Bất động sản Tinh tuyển.">© 2026 Rivera — Boutique Property Practice.</span>
+      <span data-en="Concept page · for validation" data-vi="Trang concept · để thẩm định">Concept page · for validation</span>
+    </div>
+  </div>
+</footer>
+
+<script src="app.js" defer></script>
+</body>
+</html>
