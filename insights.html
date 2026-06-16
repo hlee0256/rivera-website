@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Market notes — Rivera</title>
+<meta name="description" content="Dated notes on the Melbourne property market — the numbers, the rules and policy that matter to buyers, and observations from the Rivera desk." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&family=Instrument+Serif:ital@0;1&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500;1,600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="styles.css" />
+<link rel="icon" type="image/svg+xml" href="favicon.svg" />
+</head>
+<body>
+
+<!-- NAV (starts solid on a light page) -->
+<header class="nav onlight" id="nav">
+  <div class="wrap nav-in">
+    <a class="logo" href="index.html" aria-label="Rivera — Real Estate">RIVER<svg class="ra" viewBox="0 0 222.5 278" aria-hidden="true"><path fill="currentColor" fill-rule="evenodd" d="M152.8 2.0L171.6 2.0L174.6 4.4L187.5 78.6L187.9 85.4L197.5 135.6L198.9 148.4L200.5 153.6L209.9 211.4L211.5 216.6L212.9 229.4L214.5 234.6L216.9 253.4L219.5 264.6L220.5 274.2L219.2 275.9L172.8 276.0L170.0 275.0L168.9 272.4L158.5 211.6L156.2 205.6L145.1 195.4L133.1 187.3L125.6 183.6L113.6 179.6L101.6 177.0L88.8 177.0L76.8 179.6L69.3 182.3L57.3 189.4L52.2 194.6L47.0 203.6L9.1 274.9L7.6 276.0L3.8 276.0L2.1 274.8L5.0 267.6L33.4 217.4L66.0 156.6L71.4 148.4L76.0 138.6L99.4 97.4L122.0 54.6L127.4 46.4L147.0 9.6L152.2 2.1ZM129.1 51.8L133.5 70.6L134.9 83.4L136.5 88.6L145.9 146.4L147.5 151.6L147.9 158.4L150.5 169.6L155.6 202.3L146.1 192.4L128.1 179.3L120.6 175.6L107.1 171.2L99.6 170.0L85.3 170.2L74.8 172.6L62.3 178.6L62.6 176.4L69.0 163.6L128.8 51.5Z"/></svg></a>
+    <button class="burger" id="burger" aria-label="Menu / Trình đơn"><span></span><span></span><span></span></button>
+    <nav class="menu">
+      <a href="projects.html" data-en="Projects" data-vi="Dự án">Projects</a>
+      <a href="about.html" data-en="About" data-vi="Về chúng tôi">About</a>
+      <a href="index.html#featured" data-en="Featured" data-vi="Nổi bật">Featured</a>
+      <a href="map.html" data-en="Map" data-vi="Bản đồ">Map</a>
+      <a href="insights.html" class="active" data-en="Market" data-vi="Thị trường">Market</a>
+      <button class="lang" id="lang" type="button" aria-label="Switch language / Đổi ngôn ngữ">
+        <span data-l="en">EN</span><span class="sep">/</span><span data-l="vi" class="on">VI</span>
+      </button>
+      <a class="btn" href="index.html#enquire" data-en="Enquire" data-vi="Liên hệ">Enquire</a>
+    </nav>
+  </div>
+</header>
+
+<!-- PAGE HEADER -->
+<section class="pagehead">
+  <div class="wrap">
+    <span class="eyebrow" data-en="Market notes" data-vi="Cập nhật thị trường">Market notes</span>
+    <h1><span data-en="The market, " data-vi="Thị trường, ">The market, </span><span class="serif" data-en="read calmly." data-vi="đọc thật bình tĩnh.">read calmly.</span></h1>
+    <p data-en="Short, dated notes on the Melbourne market — the numbers, the rules that change, and what we're seeing from the desk. We'd rather give you context than headlines, so each note carries its date." data-vi="Những ghi chú ngắn, có ngày tháng về thị trường Melbourne — những con số, những quy định thay đổi, và điều chúng tôi đang quan sát. Chúng tôi muốn cho bạn bối cảnh hơn là tiêu đề giật gân, nên mỗi ghi chú đều ghi rõ ngày.">Short, dated notes on the Melbourne market — the numbers, the rules that change, and what we're seeing from the desk. We'd rather give you context than headlines, so each note carries its date.</p>
+    <span class="last-updated" data-en="Last updated · June 2026" data-vi="Cập nhật lần cuối · Tháng 6, 2026">Last updated · June 2026</span>
+  </div>
+</section>
+
+<!-- FILTER ROW (reuses the projects.html filter mechanism via data-card/data-attr) -->
+<section class="note-section">
+  <div class="wrap">
+
+    <div class="filters" id="filters" data-card=".note" data-attr="data-cat">
+      <button class="filt active" data-filter="all"><span data-en="All" data-vi="Tất cả">All</span> <span class="count"></span></button>
+      <button class="filt" data-filter="numbers"><span data-en="By the numbers" data-vi="Con số thị trường">By the numbers</span> <span class="count"></span></button>
+      <button class="filt" data-filter="policy"><span data-en="Rules &amp; policy" data-vi="Chính sách &amp; pháp lý">Rules &amp; policy</span> <span class="count"></span></button>
+      <button class="filt" data-filter="desk"><span data-en="From the desk" data-vi="Góc nhìn Rivera">From the desk</span> <span class="count"></span></button>
+    </div>
+
+    <!-- THE FEED — newest first. Each note is self-contained; add one by copying a block. -->
+    <div class="note-feed">
+
+      <article class="note" data-cat="numbers">
+        <div class="note-meta">
+          <span class="note-tag" data-en="By the numbers" data-vi="Con số thị trường">By the numbers</span>
+          <span class="note-date" data-en="June 2026" data-vi="Tháng 6, 2026">June 2026</span>
+        </div>
+        <h3><span data-en="Auction clearance steadies " data-vi="Tỷ lệ đấu giá thành công ">Auction clearance steadies </span><span class="serif" data-en="into winter." data-vi="ổn định vào mùa đông.">into winter.</span></h3>
+        <p data-en="Melbourne's auction clearance rate held in the mid-60s through late autumn — a calmer, more balanced market than a year ago. Sample figure for layout; replace with a verified weekly result before launch." data-vi="Tỷ lệ đấu giá thành công ở Melbourne giữ quanh mức giữa 60% suốt cuối thu — một thị trường bình ổn, cân bằng hơn so với năm trước. Số liệu mẫu để dựng bố cục; thay bằng kết quả tuần đã kiểm chứng trước khi ra mắt.">Melbourne's auction clearance rate held in the mid-60s through late autumn — a calmer, more balanced market than a year ago. Sample figure for layout; replace with a verified weekly result before launch.</p>
+        <span class="note-src" data-en="Source: placeholder — to be cited" data-vi="Nguồn: tạm thời — sẽ trích dẫn">Source: placeholder — to be cited</span>
+      </article>
+
+      <article class="note" data-cat="policy">
+        <div class="note-meta">
+          <span class="note-tag" data-en="Rules &amp; policy" data-vi="Chính sách &amp; pháp lý">Rules &amp; policy</span>
+          <span class="note-date" data-en="June 2026" data-vi="Tháng 6, 2026">June 2026</span>
+        </div>
+        <h3><span data-en="FIRB fees for foreign buyers — " data-vi="Phí FIRB cho người mua nước ngoài — ">FIRB fees for foreign buyers — </span><span class="serif" data-en="check before you offer." data-vi="kiểm tra trước khi đặt mua.">check before you offer.</span></h3>
+        <p data-en="Foreign Investment Review Board application fees and conditions are reviewed periodically. If you're buying as a non-resident, confirm the current fee and processing time early. Placeholder — verify exact figures with a specialist before launch." data-vi="Phí và điều kiện nộp đơn lên Hội đồng Đánh giá Đầu tư Nước ngoài (FIRB) được rà soát định kỳ. Nếu bạn mua với tư cách người không thường trú, hãy xác nhận mức phí và thời gian xử lý hiện hành từ sớm. Nội dung tạm thời — xác minh con số chính xác với chuyên gia trước khi ra mắt.">Foreign Investment Review Board application fees and conditions are reviewed periodically. If you're buying as a non-resident, confirm the current fee and processing time early. Placeholder — verify exact figures with a specialist before launch.</p>
+        <span class="note-src" data-en="Source: placeholder — to be cited" data-vi="Nguồn: tạm thời — sẽ trích dẫn">Source: placeholder — to be cited</span>
+      </article>
+
+      <article class="note" data-cat="desk">
+        <div class="note-meta">
+          <span class="note-tag" data-en="From the desk" data-vi="Góc nhìn Rivera">From the desk</span>
+          <span class="note-date" data-en="May 2026" data-vi="Tháng 5, 2026">May 2026</span>
+        </div>
+        <h3><span data-en="Quiet listings are " data-vi="Những căn rao kín tiếng ">Quiet listings are </span><span class="serif" data-en="quietly the best." data-vi="lại lặng lẽ đẹp nhất.">quietly the best.</span></h3>
+        <p data-en="The strongest homes we've placed this season never reached the portals — they moved privately, between people who knew them. If you have the patience, off-market is where the considered choices still live. A Rivera observation, not a statistic." data-vi="Những ngôi nhà ấn tượng nhất chúng tôi sắp xếp được mùa này chưa từng lên các trang rao bán — chúng được chuyển nhượng riêng tư, giữa những người hiểu rõ chúng. Nếu bạn đủ kiên nhẫn, kênh ngoài thị trường vẫn là nơi có những lựa chọn đáng cân nhắc. Đây là quan sát của Rivera, không phải số liệu.">The strongest homes we've placed this season never reached the portals — they moved privately, between people who knew them. If you have the patience, off-market is where the considered choices still live. A Rivera observation, not a statistic.</p>
+      </article>
+
+      <article class="note" data-cat="numbers">
+        <div class="note-meta">
+          <span class="note-tag" data-en="By the numbers" data-vi="Con số thị trường">By the numbers</span>
+          <span class="note-date" data-en="May 2026" data-vi="Tháng 5, 2026">May 2026</span>
+        </div>
+        <h3><span data-en="Inner-east medians " data-vi="Giá trung vị khu đông nội đô ">Inner-east medians </span><span class="serif" data-en="hold their ground." data-vi="vẫn giữ vững.">hold their ground.</span></h3>
+        <p data-en="House medians across the inner east moved only modestly over the quarter, while well-presented family homes still drew competition. Sample figure for layout; replace with verified quarterly data before launch." data-vi="Giá trung vị nhà riêng khắp khu đông nội đô chỉ nhích nhẹ trong quý, trong khi những căn gia đình được chăm chút vẫn thu hút cạnh tranh. Số liệu mẫu để dựng bố cục; thay bằng dữ liệu quý đã kiểm chứng trước khi ra mắt.">House medians across the inner east moved only modestly over the quarter, while well-presented family homes still drew competition. Sample figure for layout; replace with verified quarterly data before launch.</p>
+        <span class="note-src" data-en="Source: placeholder — to be cited" data-vi="Nguồn: tạm thời — sẽ trích dẫn">Source: placeholder — to be cited</span>
+      </article>
+
+      <article class="note" data-cat="policy">
+        <div class="note-meta">
+          <span class="note-tag" data-en="Rules &amp; policy" data-vi="Chính sách &amp; pháp lý">Rules &amp; policy</span>
+          <span class="note-date" data-en="April 2026" data-vi="Tháng 4, 2026">April 2026</span>
+        </div>
+        <h3><span data-en="Stamp duty concessions " data-vi="Ưu đãi thuế trước bạ ">Stamp duty concessions </span><span class="serif" data-en="worth a second look." data-vi="đáng xem lại.">worth a second look.</span></h3>
+        <p data-en="Victoria's land transfer (stamp) duty concessions and first-home thresholds change from time to time and can meaningfully shift your budget. Confirm what applies to your purchase. Placeholder — verify current thresholds before launch." data-vi="Các ưu đãi thuế chuyển nhượng đất (thuế trước bạ) và ngưỡng dành cho người mua lần đầu ở Victoria thay đổi theo thời gian và có thể tác động đáng kể đến ngân sách của bạn. Hãy xác nhận điều gì áp dụng cho giao dịch của bạn. Nội dung tạm thời — xác minh ngưỡng hiện hành trước khi ra mắt.">Victoria's land transfer (stamp) duty concessions and first-home thresholds change from time to time and can meaningfully shift your budget. Confirm what applies to your purchase. Placeholder — verify current thresholds before launch.</p>
+        <span class="note-src" data-en="Source: placeholder — to be cited" data-vi="Nguồn: tạm thời — sẽ trích dẫn">Source: placeholder — to be cited</span>
+      </article>
+
+      <article class="note" data-cat="desk">
+        <div class="note-meta">
+          <span class="note-tag" data-en="From the desk" data-vi="Góc nhìn Rivera">From the desk</span>
+          <span class="note-date" data-en="March 2026" data-vi="Tháng 3, 2026">March 2026</span>
+        </div>
+        <h3><span data-en="Off-the-plan: read the " data-vi="Mua hình thành tương lai: hãy đọc ">Off-the-plan: read the </span><span class="serif" data-en="sunset clause first." data-vi="điều khoản sunset trước.">sunset clause first.</span></h3>
+        <p data-en="Buying off-the-plan can be the right move, but the sunset clause and finishes schedule deserve as much attention as the floor plan. We read them with our clients, line by line. A Rivera observation, not a statistic." data-vi="Mua nhà hình thành trong tương lai có thể là lựa chọn đúng, nhưng điều khoản sunset và danh mục hoàn thiện xứng đáng được chú ý như bản vẽ mặt bằng. Chúng tôi đọc cùng khách hàng, từng dòng một. Đây là quan sát của Rivera, không phải số liệu.">Buying off-the-plan can be the right move, but the sunset clause and finishes schedule deserve as much attention as the floor plan. We read them with our clients, line by line. A Rivera observation, not a statistic.</p>
+      </article>
+
+      <article class="note" data-cat="numbers">
+        <div class="note-meta">
+          <span class="note-tag" data-en="By the numbers" data-vi="Con số thị trường">By the numbers</span>
+          <span class="note-date" data-en="March 2026" data-vi="Tháng 3, 2026">March 2026</span>
+        </div>
+        <h3><span data-en="Borrowing power " data-vi="Khả năng vay ">Borrowing power </span><span class="serif" data-en="finds a footing." data-vi="dần tìm được điểm tựa.">finds a footing.</span></h3>
+        <p data-en="With rates steadier than last year, buyers are budgeting with more confidence — though pre-approval still sets the real ceiling. Sample framing for layout; replace with a verified rate reference before launch." data-vi="Khi lãi suất ổn định hơn năm ngoái, người mua dự trù ngân sách tự tin hơn — dù duyệt vay sơ bộ vẫn là mức trần thực sự. Cách diễn đạt mẫu để dựng bố cục; thay bằng tham chiếu lãi suất đã kiểm chứng trước khi ra mắt.">With rates steadier than last year, buyers are budgeting with more confidence — though pre-approval still sets the real ceiling. Sample framing for layout; replace with a verified rate reference before launch.</p>
+        <span class="note-src" data-en="Source: placeholder — to be cited" data-vi="Nguồn: tạm thời — sẽ trích dẫn">Source: placeholder — to be cited</span>
+      </article>
+
+      <article class="note" data-cat="desk">
+        <div class="note-meta">
+          <span class="note-tag" data-en="From the desk" data-vi="Góc nhìn Rivera">From the desk</span>
+          <span class="note-date" data-en="February 2026" data-vi="Tháng 2, 2026">February 2026</span>
+        </div>
+        <h3><span data-en="The right move is sometimes " data-vi="Đôi khi quyết định đúng là ">The right move is sometimes </span><span class="serif" data-en="to wait." data-vi="chờ thêm.">to wait.</span></h3>
+        <p data-en="Early in the year the temptation is to act on the first warm home. We often advise the opposite — let the right one find its moment. Patience has saved our families more than any negotiation. A Rivera observation, not a statistic." data-vi="Đầu năm, người ta dễ bị cám dỗ quyết ngay với căn ấm áp đầu tiên gặp được. Chúng tôi thường khuyên điều ngược lại — hãy để căn phù hợp tìm đúng thời điểm của nó. Sự kiên nhẫn giúp các gia đình của chúng tôi nhiều hơn bất kỳ cuộc thương lượng nào. Đây là quan sát của Rivera, không phải số liệu.">Early in the year the temptation is to act on the first warm home. We often advise the opposite — let the right one find its moment. Patience has saved our families more than any negotiation. A Rivera observation, not a statistic.</p>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- EVERGREEN CALLOUT → GUIDE -->
+<section class="guide-faq">
+  <div class="wrap">
+    <p data-en="New to buying? Start with the calm, step-by-step guide." data-vi="Mua lần đầu? Bắt đầu với hướng dẫn từng bước, nhẹ nhàng.">New to buying? Start with the calm, step-by-step guide.</p>
+    <a class="lk" href="guide.html" data-en="Read the buying guide →" data-vi="Đọc hướng dẫn mua nhà →">Read the buying guide →</a>
+  </div>
+</section>
+
+<!-- CLOSING CTA BAND -->
+<section class="guide-cta">
+  <div class="wrap">
+    <span class="eyebrow" data-en="Ready when you are" data-vi="Sẵn sàng khi bạn cần">Ready when you are</span>
+    <h2><span data-en="Start a " data-vi="Bắt đầu một ">Start a </span><span class="serif" data-en="conversation." data-vi="cuộc trò chuyện.">conversation.</span></h2>
+    <p data-en="No commitment, no pressure — just a quiet talk about what you're looking for and how we might help." data-vi="Không ràng buộc, không thúc ép — chỉ là một cuộc trò chuyện nhẹ nhàng về điều bạn đang tìm và cách chúng tôi có thể giúp.">No commitment, no pressure — just a quiet talk about what you're looking for and how we might help.</p>
+    <a class="btn" href="index.html#enquire"><span data-en="Start a conversation" data-vi="Bắt đầu trò chuyện">Start a conversation</span> <span class="arw">→</span></a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="wrap">
+    <div class="foot-top">
+      <div>
+        <a class="logo" href="index.html" aria-label="Rivera — Real Estate">RIVER<svg class="ra" viewBox="0 0 222.5 278" aria-hidden="true"><path fill="currentColor" fill-rule="evenodd" d="M152.8 2.0L171.6 2.0L174.6 4.4L187.5 78.6L187.9 85.4L197.5 135.6L198.9 148.4L200.5 153.6L209.9 211.4L211.5 216.6L212.9 229.4L214.5 234.6L216.9 253.4L219.5 264.6L220.5 274.2L219.2 275.9L172.8 276.0L170.0 275.0L168.9 272.4L158.5 211.6L156.2 205.6L145.1 195.4L133.1 187.3L125.6 183.6L113.6 179.6L101.6 177.0L88.8 177.0L76.8 179.6L69.3 182.3L57.3 189.4L52.2 194.6L47.0 203.6L9.1 274.9L7.6 276.0L3.8 276.0L2.1 274.8L5.0 267.6L33.4 217.4L66.0 156.6L71.4 148.4L76.0 138.6L99.4 97.4L122.0 54.6L127.4 46.4L147.0 9.6L152.2 2.1ZM129.1 51.8L133.5 70.6L134.9 83.4L136.5 88.6L145.9 146.4L147.5 151.6L147.9 158.4L150.5 169.6L155.6 202.3L146.1 192.4L128.1 179.3L120.6 175.6L107.1 171.2L99.6 170.0L85.3 170.2L74.8 172.6L62.3 178.6L62.6 176.4L69.0 163.6L128.8 51.5Z"/></svg></a>
+        <p data-en="A boutique property practice. A considered few residences, guided personally." data-vi="Một công ty bất động sản tinh tuyển. Một số ít dự án được cân nhắc, đồng hành tận tâm.">A boutique property practice. A considered few residences, guided personally.</p>
+      </div>
+      <div class="fcol">
+        <h5 data-en="Explore" data-vi="Khám phá">Explore</h5>
+        <a href="projects.html" data-en="Projects" data-vi="Dự án">Projects</a>
+        <a href="about.html" data-en="About" data-vi="Về chúng tôi">About</a>
+        <a href="guide.html" data-en="Guide" data-vi="Hướng dẫn">Guide</a>
+        <a href="insights.html" data-en="Market" data-vi="Thị trường">Market</a>
+        <a href="index.html#featured" data-en="Featured" data-vi="Nổi bật">Featured</a>
+        <a href="index.html#enquire" data-en="Enquire" data-vi="Liên hệ">Enquire</a>
+      </div>
+      <div class="fcol">
+        <h5 data-en="Contact" data-vi="Liên hệ">Contact</h5>
+        <a href="mailto:hello@rivera.estate">hello@rivera.estate</a>
+        <a href="index.html#enquire" data-en="Request portfolio" data-vi="Yêu cầu danh mục">Request portfolio</a>
+        <a href="index.html#enquire" data-en="Private viewings" data-vi="Xem nhà riêng tư">Private viewings</a>
+      </div>
+    </div>
+    <div class="foot-bot">
+      <span data-en="© 2026 Rivera — Boutique Property Practice." data-vi="© 2026 Rivera — Công ty Bất động sản Tinh tuyển.">© 2026 Rivera — Boutique Property Practice.</span>
+      <span data-en="Concept page · for validation" data-vi="Trang concept · để thẩm định">Concept page · for validation</span>
+    </div>
+  </div>
+</footer>
+
+<script src="app.js" defer></script>
+</body>
+</html>

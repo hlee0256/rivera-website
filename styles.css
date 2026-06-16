@@ -28,6 +28,8 @@ a{color:inherit;text-decoration:none}
 img{display:block;max-width:100%}
 .wrap{max-width:var(--max);margin:0 auto;padding:0 32px}
 .serif{font-family:"Instrument Serif",Georgia,serif;font-style:italic;font-weight:400;letter-spacing:0}
+/* Instrument Serif has no Vietnamese glyphs; use Cormorant Garamond (full VI support) for the serif accent in Vietnamese so diacritics stay in one consistent typeface. English keeps Instrument Serif. */
+:lang(vi) .serif{font-family:"Cormorant Garamond",Georgia,serif;font-weight:600}
 
 /* labels */
 .eyebrow{font-size:.72rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--brown);display:inline-block}
@@ -271,6 +273,9 @@ body.menu-open .burger span:nth-child(3){transform:translateY(-10px) rotate(-45d
 .featured .specs{display:flex;gap:38px;flex-wrap:wrap;margin-bottom:34px}
 .featured .specs div span{display:block;font-family:"Instrument Serif",serif;font-style:italic;font-size:1.9rem;color:#FBF6EE;line-height:1}
 .featured .specs div small{font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:rgba(251,246,238,.6)}
+.featured-actions{display:flex;align-items:center;gap:14px 26px;flex-wrap:wrap}
+.lk.light{color:#FBF6EE}
+.lk.light:hover{border-color:var(--tan)}
 
 /* ---------------- ENQUIRE ---------------- */
 .enquire{padding:120px 0}
@@ -412,3 +417,125 @@ footer{background:var(--espresso);color:var(--sand);padding:80px 0 40px}
 .rev{opacity:0;transform:translateY(22px);transition:opacity .8s ease,transform .8s cubic-bezier(.2,.7,.2,1)}
 .rev.in{opacity:1;transform:none}
 @media(prefers-reduced-motion:reduce){.rev{opacity:1;transform:none}}
+
+/* ============================================================
+   Melbourne map (map.html) — Leaflet + Rivera styling
+   ============================================================ */
+.cbd-sec{padding:8px 0 110px}
+
+/* controls row: category filters on the left, the view presets on the right.
+   The presets use a segmented switch (joined, no colour swatches) so they read as a
+   distinct control, not another filter pill. Wraps below the filters on narrow screens. */
+.rv-controls{display:flex;justify-content:space-between;align-items:flex-start;gap:14px 24px;flex-wrap:wrap;margin-bottom:26px}
+.rv-filters{margin-bottom:0}
+.rv-views{display:inline-flex;align-items:center;gap:10px}
+.rv-vlabel{font-size:.68rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-soft)}
+.rv-seg{display:inline-flex;border:1px solid var(--line);border-radius:999px;overflow:hidden;background:var(--paper-2)}
+.rv-seg .rv-view{cursor:pointer;font-family:inherit;font-size:.72rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft);background:transparent;border:0;padding:9px 16px;transition:background .2s,color .2s}
+.rv-seg .rv-view + .rv-view{border-left:1px solid var(--line)}
+.rv-seg .rv-view:hover{color:var(--brown)}
+.rv-seg .rv-view.active{background:var(--brown);color:#FBF6EE}
+@media(max-width:600px){.rv-seg .rv-view{padding:9px 12px;font-size:.68rem}}
+
+.rv-map{height:min(76vh,640px);border:1px solid var(--line);border-radius:14px;overflow:hidden;background:var(--paper);z-index:0}
+@media(max-width:600px){.rv-map{height:68vh}}
+
+/* a quiet warm tint over the OSM tiles so the map sits in the palette (tiles only) */
+.rv-map .leaflet-tile-pane{filter:sepia(.16) saturate(.74) brightness(1.04) contrast(.95) hue-rotate(-6deg)}
+
+/* Map marker legend — a deliberately distinct, saturated colour set for the MAP ONLY
+   (red / blue / amber / green / black). This is an intentional departure from the warm
+   brand tokens, chosen for clear category separation on the basemap. Declared as tokens
+   here so the pins and the filter swatches always stay in lock-step. */
+:root{
+  --pin-project:#B23A2E;            /* Dự án — red */
+  --pin-university:#2D6385;         /* Đại học — ocean blue */
+  --pin-shopping:#BE7B33;           /* Mua sắm — amber */
+  --pin-transit:#4E7A41;            /* Giao thông — leaf green */
+  --pin-landmark:var(--espresso);   /* Địa danh — black */
+}
+
+/* Rivera markers — solid saturated fill, thin cream ring + soft shadow so every dot
+   separates cleanly from the basemap. Two sizes only (set in app.js: project large,
+   every other marker one uniform smaller size). */
+.rv-pin{display:block;width:100%;height:100%;border-radius:999px;background:var(--ink-soft);
+  border:2px solid var(--paper-2);
+  box-shadow:0 2px 5px -1px rgba(27,19,13,.55),0 0 0 1px rgba(27,19,13,.22);
+  transform:scale(var(--rv-pin-scale,1));transform-origin:center;
+  transition:transform .2s cubic-bezier(.2,.7,.2,1)}
+.rv-pin--project{background:var(--pin-project)}
+.rv-pin--university{background:var(--pin-university)}
+.rv-pin--shopping{background:var(--pin-shopping)}
+.rv-pin--transit{background:var(--pin-transit)}
+.rv-pin--landmark{background:var(--pin-landmark)}
+.rv-pin.is-project{box-shadow:0 0 0 3px rgba(27,19,13,.16),0 2px 6px -1px rgba(27,19,13,.55),0 0 0 1px rgba(27,19,13,.22)}
+.leaflet-marker-icon:hover .rv-pin{transform:scale(calc(var(--rv-pin-scale,1) * 1.18))}
+
+/* filter-pill swatch — a small dot whose colour matches that category's marker fill
+   (same CSS var). A cream + hairline ring keeps it visible on both the pale pill and
+   the active (brown-filled) pill. The pill itself is never tinted per category. */
+.filt-dot{display:inline-block;width:9px;height:9px;border-radius:999px;margin-right:8px;vertical-align:middle;position:relative;top:-1px;background:var(--ink-soft);box-shadow:0 0 0 1.5px var(--paper-2),0 0 0 2.5px var(--line)}
+.filt[data-cat=project] .filt-dot{background:var(--pin-project)}
+.filt[data-cat=university] .filt-dot{background:var(--pin-university)}
+.filt[data-cat=shopping] .filt-dot{background:var(--pin-shopping)}
+.filt[data-cat=transit] .filt-dot{background:var(--pin-transit)}
+.filt[data-cat=landmark] .filt-dot{background:var(--pin-landmark)}
+
+/* tooltip (hover) + popup (click) share one card look */
+.rv-card{font-family:"Manrope",sans-serif;color:var(--ink);min-width:178px}
+.rv-eyebrow{font-size:.66rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--brown)}
+.rv-name{font-size:1.05rem;font-weight:700;letter-spacing:-.02em;margin-top:3px;line-height:1.2}
+.rv-addr{font-size:.82rem;color:var(--ink-soft);margin-top:3px}
+.rv-desc{font-size:.86rem;color:var(--ink-soft);margin-top:8px;line-height:1.5;font-weight:300}
+.rv-status{display:inline-block;margin-top:10px;font-size:.66rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-soft);border:1px solid var(--line);border-radius:999px;padding:4px 12px}
+.rv-btn{display:flex;align-items:center;justify-content:center;gap:8px;margin-top:13px;background:var(--brown);color:#FBF6EE;font-size:.74rem;font-weight:600;letter-spacing:.04em;text-transform:uppercase;padding:11px 16px;border-radius:4px;transition:background .2s ease}
+.rv-btn:hover{background:var(--coffee);color:#FBF6EE}
+
+/* re-skin Leaflet's tooltip + popup chrome to the Rivera palette */
+.rv-tip.leaflet-tooltip{background:var(--paper-2);border:1px solid var(--line);border-radius:10px;box-shadow:0 14px 30px -18px rgba(27,19,13,.5);padding:12px 14px;max-width:228px;white-space:normal}
+.rv-tip.leaflet-tooltip-top::before{border-top-color:var(--paper-2)}
+.leaflet-popup.rv-pop .leaflet-popup-content-wrapper{background:var(--paper-2);border:1px solid var(--line);border-radius:12px;box-shadow:0 18px 40px -22px rgba(35,26,18,.45)}
+.leaflet-popup.rv-pop .leaflet-popup-content{margin:16px 18px;line-height:1.5}
+.leaflet-popup.rv-pop .leaflet-popup-tip{background:var(--paper-2);border:1px solid var(--line);box-shadow:none}
+.leaflet-popup.rv-pop a.leaflet-popup-close-button{color:var(--ink-soft);padding:9px 9px 0 0}
+.leaflet-popup.rv-pop a.leaflet-popup-close-button:hover{color:var(--brown);background:transparent}
+
+/* Leaflet controls in the palette */
+.rv-map .leaflet-bar a{color:var(--ink);background:rgba(244,240,233,.92);border-color:var(--line)}
+.rv-map .leaflet-bar a:hover{background:var(--brown);color:#FBF6EE}
+.rv-map .leaflet-control-attribution{background:rgba(251,249,244,.82);color:var(--ink-soft)}
+.rv-map .leaflet-control-attribution a{color:var(--brown)}
+
+@media(prefers-reduced-motion:reduce){.rv-pin{transition:none}}
+
+/* ---------------- GUIDE (buying guide) ---------------- */
+.guide-steps{padding:110px 0;border-bottom:1px solid var(--line)}
+.guide-paper{padding:110px 0}
+.cred .rev{display:block;margin-top:14px;font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft)}
+.guide-faq{padding:54px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);text-align:center}
+.guide-faq p{color:var(--ink-soft);font-size:1.08rem;font-weight:300}
+.guide-faq .lk{margin-top:14px}
+.guide-cta{background:var(--espresso);color:var(--sand);padding:104px 0;text-align:center}
+.guide-cta .eyebrow{color:var(--tan)}
+.guide-cta h2{font-size:clamp(2rem,4vw,3rem);color:#FBF6EE;margin:14px auto 18px;max-width:18ch}
+.guide-cta h2 .serif{color:var(--tan)}
+.guide-cta p{color:rgba(244,240,233,.78);max-width:46ch;margin:0 auto 32px;font-weight:300;font-size:1.08rem}
+
+/* ---------------- INSIGHTS (market notes — a dated feed) ---------------- */
+.last-updated{display:inline-block;margin-top:24px;font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-soft)}
+.note-section{padding:64px 0 110px}
+.note-feed{display:grid;grid-template-columns:1fr;gap:24px}
+@media(min-width:900px){.note-feed{grid-template-columns:1fr 1fr}}
+.note{border:1px solid var(--line);border-radius:12px;padding:30px 28px;background:var(--paper-2);transition:opacity .35s}
+.note.hide{display:none}
+.note-meta{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-bottom:16px}
+.note-tag{display:inline-flex;align-items:center;gap:8px;font-size:.68rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft)}
+.note-tag::before{content:"";width:8px;height:8px;border-radius:999px;background:var(--ink-soft);flex:none}
+.note[data-cat=numbers] .note-tag::before{background:var(--brown)}
+.note[data-cat=policy] .note-tag::before{background:var(--clay)}
+.note[data-cat=desk] .note-tag::before{background:var(--tan)}
+.note-date{font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-soft);opacity:.8;white-space:nowrap}
+.note h3{font-size:1.3rem;font-weight:600;letter-spacing:-.02em;line-height:1.28;margin-bottom:10px}
+.note h3 .serif{color:var(--brown)}
+.note p{color:var(--ink-soft);font-size:1rem}
+.note-src{display:block;margin-top:16px;font-size:.72rem;letter-spacing:.06em;color:var(--ink-soft);opacity:.72}
