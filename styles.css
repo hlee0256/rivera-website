@@ -539,3 +539,26 @@ footer{background:var(--espresso);color:var(--sand);padding:80px 0 40px}
 .note h3 .serif{color:var(--brown)}
 .note p{color:var(--ink-soft);font-size:1rem}
 .note-src{display:block;margin-top:16px;font-size:.72rem;letter-spacing:.06em;color:var(--ink-soft);opacity:.72}
+/* feed cards are now links to detail pages */
+.note{display:block;transition:transform .3s cubic-bezier(.2,.7,.2,1),box-shadow .3s,opacity .35s}
+.note:hover{transform:translateY(-2px);box-shadow:0 12px 30px rgba(35,26,18,.07)}
+.note-more{display:inline-block;margin-top:18px;font-size:.78rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--brown)}
+.note:hover .note-more{color:var(--coffee)}
+
+/* ---------------- PAGE HERO BAND (guide / insights / insight detail) ---------------- */
+.page-hero{width:100%;aspect-ratio:21/9;background-size:cover;background-position:center;background-color:var(--sand)}
+@media(max-width:860px){.page-hero{aspect-ratio:4/3}}
+.pagehead.tight{padding-top:56px}
+
+/* ---------------- INSIGHT DETAIL (article page) ---------------- */
+.insight-meta{display:flex;align-items:center;gap:14px;margin-bottom:18px}
+.insight-meta[data-cat=numbers] .note-tag::before{background:var(--brown)}
+.insight-meta[data-cat=policy] .note-tag::before{background:var(--clay)}
+.insight-meta[data-cat=desk] .note-tag::before{background:var(--tan)}
+.insight-article{padding:54px 0 96px}
+.insight-article .wrap{max-width:760px}
+.insight-body p{font-size:1.12rem;color:var(--ink);font-weight:300;line-height:1.75;margin-bottom:22px}
+.insight-body p:last-of-type{margin-bottom:0}
+.insight-source{display:block;margin-top:34px;padding-top:22px;border-top:1px solid var(--line);font-size:.84rem;color:var(--ink-soft)}
+.insight-source a{color:var(--brown);text-decoration:underline}
+.insight-back{margin-top:34px}
