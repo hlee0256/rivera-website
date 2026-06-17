@@ -92,6 +92,9 @@ header.nav{position:fixed;top:0;left:0;right:0;z-index:80;background:rgba(244,24
 .cmp-vals .v b{font-size:1.12rem;font-weight:700;letter-spacing:-.02em;color:var(--ink);line-height:1.1}
 .cmp-vals .v .u{font-size:.72rem;color:var(--ink-soft);font-weight:500}
 .cmp-vals .v .vnd{font-size:.78rem;color:var(--brown);font-weight:700;margin-top:1px}
+.cmp-vals .v .aftertax{display:flex;flex-direction:column;gap:1px;align-items:center;width:100%;margin-top:7px;padding-top:7px;border-top:1px dashed var(--line);font-size:.6rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-soft)}
+.cmp-vals .v .aftertax b{font-size:.92rem;font-weight:700;letter-spacing:-.01em;text-transform:none;color:var(--ink);margin-top:2px}
+.cmp-vals .v .aftertax i{font-size:.72rem;font-style:normal;font-weight:700;text-transform:none;color:var(--brown)}
 .cmp-vals .v .win{font-size:.6rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;
   color:var(--brown);background:rgba(122,78,45,.1);border-radius:999px;padding:3px 9px;margin-top:3px;display:inline-flex}
 .cmp-vals .v.muted b{color:var(--ink-soft);font-weight:600}
@@ -296,8 +299,8 @@ footer .fb{margin-top:18px;font-size:.72rem;color:rgba(230,218,202,.5);letter-sp
       <div class="cmp-row alt">
         <span class="cmp-k">Giá niêm yết</span>
         <div class="cmp-vals">
-          <div class="v"><b>981.000</b><span class="u">AUD</span><span class="vnd">≈ 18,25 tỷ ₫</span><span class="win">Thấp hơn 31.000 AUD</span></div>
-          <div class="v muted"><b>1.012.000</b><span class="u">AUD</span><span class="vnd">≈ 18,82 tỷ ₫</span></div>
+          <div class="v"><b>981.000</b><span class="u">AUD</span><span class="vnd">≈ 18,25 tỷ ₫</span><span class="aftertax">Sau thuế +13,5%<b>≈ 1.113.435 AUD</b><i>≈ 20,71 tỷ ₫</i></span><span class="win">Giá niêm yết thấp hơn 31.000 AUD</span></div>
+          <div class="v muted"><b>1.012.000</b><span class="u">AUD</span><span class="vnd">≈ 18,82 tỷ ₫</span><span class="aftertax">Sau thuế +13,5%<b>≈ 1.148.620 AUD</b><i>≈ 21,36 tỷ ₫</i></span></div>
         </div>
       </div>
 
@@ -309,7 +312,7 @@ footer .fb{margin-top:18px;font-size:.72rem;color:rgba(230,218,202,.5);letter-sp
         </div>
       </div>
 
-      <div class="cmp-foot">Diện tích và thông số theo bản vẽ căn hộ của chủ đầu tư. Giá và phí quản lý mang tính tham khảo. Quy đổi VND theo tỉ giá tham khảo 18.600 ₫/AUD.</div>
+      <div class="cmp-foot">Diện tích và thông số theo bản vẽ căn hộ của chủ đầu tư. Giá và phí quản lý mang tính tham khảo. Giá sau thuế tạm tính cộng 13,5% (thuế chuyển nhượng và phụ thu người mua nước ngoài). Quy đổi VND theo tỉ giá tham khảo 18.600 ₫/AUD.</div>
     </div>
   </div>
 </section>
