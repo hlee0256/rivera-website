@@ -15,6 +15,7 @@
   --line:rgba(35,26,18,.14);
   --line-d:rgba(244,240,233,.16);
   --max:1280px;
+  --serif:"Instrument Serif",Georgia,serif; /* elegant accent for English; VI flips to Cormorant below */
 }
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
@@ -27,9 +28,13 @@ body{
 a{color:inherit;text-decoration:none}
 img{display:block;max-width:100%}
 .wrap{max-width:var(--max);margin:0 auto;padding:0 32px}
-.serif{font-family:"Instrument Serif",Georgia,serif;font-style:italic;font-weight:400;letter-spacing:0}
-/* Instrument Serif has no Vietnamese glyphs; use Cormorant Garamond (full VI support) for the serif accent in Vietnamese so diacritics stay in one consistent typeface. English keeps Instrument Serif. */
-:lang(vi) .serif{font-family:"Cormorant Garamond",Georgia,serif;font-weight:600}
+.serif{font-family:var(--serif);font-style:italic;font-weight:400;letter-spacing:0}
+/* Vietnamese: Instrument Serif has no VI glyphs, so the serif accent switches to
+   Cormorant Garamond (full VI support). Its x-height is smaller, so it is sized up
+   and given weight to match the presence of the English accent. The single --serif
+   variable keeps every serif element unified per language. */
+:lang(vi){--serif:"Cormorant Garamond",Georgia,serif}
+:lang(vi) .serif{font-weight:600;font-size:1.18em}
 
 /* labels */
 .eyebrow{font-size:.72rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--brown);display:inline-block}
@@ -72,6 +77,8 @@ h1,h2,h3{font-weight:700;letter-spacing:-.035em;line-height:1.02;color:var(--ink
 }
 .photo.has-img::before{display:none}      /* add class .has-img once a real photo is set */
 .photo:hover::before{transform:scale(1.06)}
+/* a looping <video class="photo-vid"> fills the .photo box, clipped to its rounded corners */
+.photo .photo-vid{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1;background:var(--coffee)}
 .photo .cap{position:absolute;left:18px;bottom:16px;z-index:2;font-size:.68rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:rgba(251,246,238,.82)}
 .photo .slot{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;z-index:1;color:rgba(251,246,238,.32);font-size:.7rem;letter-spacing:.24em;text-transform:uppercase}
 
@@ -132,7 +139,7 @@ body.menu-open .burger span:nth-child(3){transform:translateY(-10px) rotate(-45d
 .hero .sub{max-width:42ch;margin:26px 0 34px;font-size:1.12rem;color:rgba(251,246,238,.86);font-weight:300}
 .hero .cta-row{display:flex;gap:14px;flex-wrap:wrap}
 .hero .meta{position:absolute;right:32px;bottom:64px;z-index:2;text-align:right;font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(251,246,238,.7)}
-.hero .meta b{display:block;font-family:"Instrument Serif",serif;font-style:italic;font-weight:400;font-size:1.5rem;letter-spacing:0;text-transform:none;color:var(--tan);margin-top:6px}
+.hero .meta b{display:block;font-family:var(--serif);font-style:italic;font-weight:400;font-size:1.5rem;letter-spacing:0;text-transform:none;color:var(--tan);margin-top:6px}
 @media(max-width:840px){.hero .meta{display:none}}
 
 /* ---------------- PAGE HEADER (projects/about) ---------------- */
@@ -155,7 +162,7 @@ body.menu-open .burger span:nth-child(3){transform:translateY(-10px) rotate(-45d
 .marquee-mask{position:relative;overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
 .marquee-track{display:flex;width:max-content;align-items:center;gap:64px;animation:scroll 40s linear infinite;will-change:transform}
 .marquee-mask:hover .marquee-track{animation-play-state:paused}
-.marquee-track .dev{font-family:"Instrument Serif",Georgia,serif;font-style:normal;font-size:1.5rem;letter-spacing:.01em;white-space:nowrap;color:var(--ink-soft);opacity:.72;transition:opacity .25s,color .25s}
+.marquee-track .dev{font-family:var(--serif);font-style:normal;font-size:1.5rem;letter-spacing:.01em;white-space:nowrap;color:var(--ink-soft);opacity:.72;transition:opacity .25s,color .25s}
 .marquee-track .dev:hover{opacity:1;color:var(--brown)}
 /* real logos: <img class="dev-logo" src="logo/trimmed/name.png" alt="Name"> — see the marquee in index.html.
    Sources are pre-trimmed of transparent padding (logo/trimmed/) so this single height + max-width
@@ -222,7 +229,10 @@ body.menu-open .burger span:nth-child(3){transform:translateY(-10px) rotate(-45d
 .stat .n{font-size:clamp(2.6rem,5vw,4rem);font-weight:300;letter-spacing:-.04em;color:#FBF6EE;line-height:1}
 .stat .n .serif{color:var(--tan)}
 .stat .l{margin-top:12px;font-size:.78rem;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:rgba(230,218,202,.66)}
-@media(max-width:820px){.stats .grid4{grid-template-columns:1fr 1fr;gap:44px 30px}}
+.stats .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:44px 40px}
+.stats .grid3 .n{font-size:clamp(2.4rem,3.6vw,3.1rem)}
+.stats .grid3 .l{margin-top:14px;font-size:.95rem;font-weight:400;letter-spacing:0;text-transform:none;line-height:1.55;color:rgba(230,218,202,.74);max-width:30ch}
+@media(max-width:820px){.stats .grid4{grid-template-columns:1fr 1fr;gap:44px 30px}.stats .grid3{grid-template-columns:1fr;gap:40px}}
 
 /* ---------------- APPROACH / PROCESS ---------------- */
 .approach{padding:120px 0}
@@ -246,7 +256,7 @@ body.menu-open .burger span:nth-child(3){transform:translateY(-10px) rotate(-45d
 .founder h2{font-size:clamp(2rem,4vw,3rem);margin:14px 0 22px;max-width:18ch}
 .founder h2 .serif{color:var(--brown)}
 .founder p{color:var(--ink-soft);font-size:1.08rem;margin-bottom:18px;max-width:54ch}
-.founder .sign{font-family:"Instrument Serif",serif;font-style:italic;font-size:1.7rem;color:var(--brown);margin-top:10px}
+.founder .sign{font-family:var(--serif);font-style:italic;font-size:1.7rem;color:var(--brown);margin-top:10px}
 .founder .role{font-size:.74rem;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-soft);margin-top:4px}
 @media(max-width:860px){.founder-grid{grid-template-columns:1fr;gap:44px}.founder .photo{aspect-ratio:16/11}}
 
@@ -255,7 +265,7 @@ body.menu-open .burger span:nth-child(3){transform:translateY(-10px) rotate(-45d
 .creds .sec-top{margin-bottom:46px}
 .creds-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
 .cred{border:1px solid var(--line);border-radius:12px;padding:30px 26px;background:var(--paper-2)}
-.cred .ic{font-family:"Instrument Serif",serif;font-style:italic;font-size:2.2rem;color:var(--brown);line-height:1}
+.cred .ic{font-family:var(--serif);font-style:italic;font-size:2.2rem;color:var(--brown);line-height:1}
 .cred h4{font-size:1.12rem;font-weight:600;margin:14px 0 8px;letter-spacing:-.02em}
 .cred p{color:var(--ink-soft);font-size:.98rem}
 @media(max-width:860px){.creds-grid{grid-template-columns:1fr 1fr}}
@@ -271,7 +281,7 @@ body.menu-open .burger span:nth-child(3){transform:translateY(-10px) rotate(-45d
 .featured h2 .serif{color:var(--tan)}
 .featured p{max-width:40ch;color:rgba(251,246,238,.84);font-weight:300;font-size:1.1rem;margin-bottom:28px}
 .featured .specs{display:flex;gap:38px;flex-wrap:wrap;margin-bottom:34px}
-.featured .specs div span{display:block;font-family:"Instrument Serif",serif;font-style:italic;font-size:1.9rem;color:#FBF6EE;line-height:1}
+.featured .specs div span{display:block;font-family:var(--serif);font-style:italic;font-size:1.9rem;color:#FBF6EE;line-height:1}
 .featured .specs div small{font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:rgba(251,246,238,.6)}
 .featured-actions{display:flex;align-items:center;gap:14px 26px;flex-wrap:wrap}
 .lk.light{color:#FBF6EE}
@@ -358,7 +368,7 @@ footer{background:var(--espresso);color:var(--sand);padding:80px 0 40px}
 .pd-features h3{font-size:1.5rem;font-weight:600;letter-spacing:-.02em;margin-bottom:30px}
 .pd-features ul{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:0 56px}
 .pd-features li{display:flex;gap:16px;align-items:baseline;padding:18px 0;border-top:1px solid var(--line);color:var(--ink-soft);font-size:1.02rem}
-.pd-features li .fi{font-family:"Instrument Serif",serif;font-style:italic;color:var(--brown);font-size:1.1rem;min-width:26px}
+.pd-features li .fi{font-family:var(--serif);font-style:italic;color:var(--brown);font-size:1.1rem;min-width:26px}
 @media(max-width:760px){.pd-features ul{grid-template-columns:1fr}}
 
 .pd-gallery{padding:30px 0 110px}
@@ -404,6 +414,20 @@ footer{background:var(--espresso);color:var(--sand);padding:80px 0 40px}
 .pd-map-cta{display:inline-flex;align-items:center;gap:7px;white-space:nowrap;font-size:.8rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--brown);transition:gap .25s}
 .pd-map-cta:hover{gap:11px}
 @media(max-width:600px){.pd-map-canvas{height:300px}.pd-map-bar{flex-direction:column;align-items:flex-start;gap:12px}}
+
+/* Rivera's view / investment angle — a short editorial band under the gallery */
+.pd-take{background:var(--paper-2);border-top:1px solid var(--line);padding:90px 0}
+.pd-take-in{display:grid;grid-template-columns:1.25fr 1fr;gap:56px;align-items:center}
+.pd-take h2{font-size:clamp(1.8rem,3.4vw,2.6rem);letter-spacing:-.02em;margin-top:14px;max-width:18ch}
+.pd-take h2 .serif{color:var(--brown)}
+.pd-take p{margin-top:18px;color:var(--ink-soft);font-size:1.08rem;font-weight:300;line-height:1.7;max-width:50ch}
+.pd-take-note{margin-top:18px;font-size:.8rem;color:var(--ink-soft);opacity:.75}
+.pd-figs{display:grid;gap:0}
+.pd-fig{display:flex;align-items:baseline;gap:20px;border-top:1px solid var(--line);padding:20px 2px}
+.pd-fig:last-child{border-bottom:1px solid var(--line)}
+.pd-fig .fn{font-size:clamp(1.7rem,3vw,2.1rem);font-weight:300;letter-spacing:-.03em;color:var(--brown);line-height:1;min-width:118px}
+.pd-fig .fl{font-size:.95rem;color:var(--ink-soft);font-weight:500}
+@media(max-width:900px){.pd-take-in{grid-template-columns:1fr;gap:34px}}
 
 .pd-cta{background:var(--espresso);color:var(--sand);padding:100px 0}
 .pd-cta-in{display:grid;grid-template-columns:1.3fr 1fr;gap:50px;align-items:center}
@@ -490,6 +514,17 @@ footer{background:var(--espresso);color:var(--sand);padding:80px 0 40px}
 .rv-status{display:inline-block;margin-top:10px;font-size:.66rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-soft);border:1px solid var(--line);border-radius:999px;padding:4px 12px}
 .rv-btn{display:flex;align-items:center;justify-content:center;gap:8px;margin-top:13px;background:var(--brown);color:#FBF6EE;font-size:.74rem;font-weight:600;letter-spacing:.04em;text-transform:uppercase;padding:11px 16px;border-radius:4px;transition:background .2s ease}
 .rv-btn:hover{background:var(--coffee);color:#FBF6EE}
+/* "Nearby" list inside the project popup — transit (green dot) + university (blue dot),
+   colours tied to the map marker legend (--pin-*). Walk/tram time right-aligned. */
+.rv-nearby{margin-top:13px;padding-top:12px;border-top:1px solid var(--line)}
+.rv-nearby-h{font-size:.6rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:8px}
+.rv-nearby ul{list-style:none;display:flex;flex-direction:column;gap:7px}
+.rv-nearby li{display:flex;align-items:center;gap:8px;font-size:.84rem;line-height:1.3}
+.rv-nd{width:8px;height:8px;border-radius:999px;flex:0 0 auto;box-shadow:0 0 0 1px rgba(27,19,13,.18)}
+.rv-nd--transit{background:var(--pin-transit)}
+.rv-nd--university{background:var(--pin-university)}
+.rv-nn{color:var(--ink);font-weight:500}
+.rv-nt{color:var(--ink-soft);margin-left:auto;white-space:nowrap;padding-left:10px}
 
 /* re-skin Leaflet's tooltip + popup chrome to the Rivera palette */
 .rv-tip.leaflet-tooltip{background:var(--paper-2);border:1px solid var(--line);border-radius:10px;box-shadow:0 14px 30px -18px rgba(27,19,13,.5);padding:12px 14px;max-width:228px;white-space:normal}
