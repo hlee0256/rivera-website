@@ -15,5 +15,10 @@ _sheets/
 .vscode/
 .idea/
 
+# --- Python bytecode (from tools/copy_tool.py) ---
+__pycache__/
+*.pyc
+
 # --- Vercel ---
 .vercel
+.env*

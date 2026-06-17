@@ -73,9 +73,14 @@ verbatim so the nav, language toggle and mobile menu keep working.
 
 ## Common edits — how to
 
-- **Add a project** (`projects.html`): copy a whole `<article class="pcard" data-type="...">`
-  block. Set `data-type` to `house`, `apartment`, or `townhouse` — the filter and its counts
-  update automatically from `data-type`. Fill the bilingual fields per the rules above.
+- **Add a project**: the owner fills in `docs/ADD-A-PROJECT.md` (a copy-paste form) and hands it
+  over. One project lives in **three** places that must stay in sync: a `<a class="pcard"
+  data-type="...">` card in `projects.html`, a new detail page `slug.html` (duplicate an
+  existing one like `brunswick-mews.html`), and a `{ cat:'project', lat, lng, ... }` object
+  appended to `MAP_LOCATIONS` in `app.js` — that last object is what places the **dot on
+  `map.html`**. Set `data-type` to `house`, `apartment`, or `townhouse` (filter counts update
+  themselves). Fill the bilingual fields per the rules above. See `docs/ADD-A-PROJECT.md` for the
+  full build recipe and field list.
 - **Use a real photo** instead of the designed placeholder: on a `.photo` div add
   `class="photo has-img"` and `style="background-image:url('images/your.jpg')"`. Put images in
   an `images/` folder next to the HTML.
