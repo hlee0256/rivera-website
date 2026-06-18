@@ -14,6 +14,8 @@
   --ink-soft:#6E5E4D;
   --line:rgba(35,26,18,.14);
   --line-d:rgba(244,240,233,.16);
+  --ok:#5E8C5A;           /* available / selling — muted leaf green status dot */
+  --alert:#B0533B;        /* sold out — warm terracotta status dot */
   --max:1280px;
   --serif:"Instrument Serif",Georgia,serif; /* elegant accent for English; VI flips to Cormorant below */
 }
@@ -207,22 +209,40 @@ body.menu-open .burger span:nth-child(3){transform:translateY(-10px) rotate(-45d
 .filt:hover{border-color:var(--brown);color:var(--brown)}
 .filt.active{background:var(--brown);border-color:var(--brown);color:#FBF6EE}
 .filt .count{opacity:.6;margin-left:6px;font-weight:500}
+.ic-defs{position:absolute;width:0;height:0;overflow:hidden}
 .pgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:30px}
-.pcard{display:flex;flex-direction:column;border:1px solid var(--line);border-radius:12px;overflow:hidden;background:var(--paper-2);transition:transform .3s cubic-bezier(.2,.7,.2,1),box-shadow .3s,opacity .35s}
-.pcard:hover{transform:translateY(-4px);box-shadow:0 18px 40px -22px rgba(35,26,18,.45)}
+.pcard{position:relative;display:flex;flex-direction:column;border:1px solid var(--line);border-radius:14px;overflow:hidden;background:var(--paper-2);transition:transform .35s cubic-bezier(.2,.7,.2,1),box-shadow .35s,opacity .35s}
+.pcard:hover{transform:translateY(-5px);box-shadow:0 22px 48px -26px rgba(35,26,18,.5)}
 .pcard.hide{display:none}
-.pcard .photo{aspect-ratio:4/5}
-.pcard-body{padding:22px 22px 24px}
-.pcard-head{display:flex;justify-content:space-between;align-items:baseline;gap:12px}
-.pcard-head h3{font-size:1.3rem;font-weight:600;letter-spacing:-.03em}
-.pcard .loc{color:var(--ink-soft);font-size:.92rem;margin-top:4px}
+.pcard .photo{aspect-ratio:16/11}
+/* status (lifecycle) + sale (availability) pills overlaid on the cover */
+.pill{position:absolute;top:14px;z-index:3;display:inline-flex;align-items:center;gap:7px;font-size:.72rem;font-weight:600;letter-spacing:.02em;line-height:1;padding:8px 14px;border-radius:999px}
+.pill-status{left:14px}
+.st-cp{background:var(--brown);color:#FBF6EE}          /* completed */
+.st-uc{background:var(--espresso);color:var(--tan)}   /* under construction */
+.st-pc{background:var(--sand);color:var(--brown)}      /* pre-construction */
+.pill-sale{right:14px;background:var(--paper-2);color:var(--ink);text-transform:uppercase;letter-spacing:.07em;font-size:.66rem;box-shadow:0 8px 20px -8px rgba(27,19,13,.55)}
+.pill-sale .dot{width:8px;height:8px;border-radius:50%;background:var(--ok)}
+.pill-sale.soon .dot{background:var(--clay)}
+.pill-sale.sold .dot{background:var(--alert)}
+.pcard-body{display:flex;flex-direction:column;flex:1;padding:24px 24px 26px}
+.pcard-body h3{font-size:1.34rem;font-weight:600;letter-spacing:-.03em;line-height:1.12}
+.pcard .loc{color:var(--ink-soft);font-size:.9rem;margin-top:7px}
+.pcard-desc{color:var(--ink);font-size:.93rem;line-height:1.55;margin-top:14px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+/* pricing block: one row per bedroom tier, lowest "from" price per segment */
+.pcard-prices{margin-top:auto;padding-top:18px;border-top:1px solid var(--line);display:flex;flex-direction:column;gap:13px}
+.price-row{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.price-specs{display:flex;align-items:center;gap:14px;color:var(--ink-soft);font-size:.86rem}
+.price-specs .spec{display:inline-flex;align-items:center;gap:6px;white-space:nowrap}
+.price-specs .spec b{font-weight:600;color:var(--ink)}
+.price-specs .ic{width:18px;height:18px;color:var(--brown);flex:0 0 auto;display:block}
+.price-amt{font-weight:700;font-size:.97rem;color:var(--ink);white-space:nowrap}
+.price-amt small{font-weight:500;color:var(--ink-soft);font-size:.72rem;margin-right:5px}
+/* .specs-row is shared by every project detail page (.pd-card) — keep its base */
 .specs-row{display:flex;gap:20px;margin:18px 0 16px;padding:16px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
 .specs-row .sp{display:flex;align-items:baseline;gap:6px}
 .specs-row .sp b{font-size:1.1rem;font-weight:600;color:var(--ink)}
 .specs-row .sp small{font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-soft)}
-.price-range{display:flex;justify-content:space-between;align-items:center;gap:10px}
-.price-range .pr{font-size:1.05rem;font-weight:600;color:var(--brown)}
-.price-range .st{font-size:.7rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-soft);border:1px solid var(--line);border-radius:999px;padding:5px 11px}
 .no-results{display:none;padding:60px 0;text-align:center;color:var(--ink-soft)}
 .no-results.show{display:block}
 @media(max-width:900px){.pgrid{grid-template-columns:1fr 1fr}}

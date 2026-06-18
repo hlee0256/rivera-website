@@ -172,6 +172,20 @@
     ---------------------------------------------------------- */
     var MAP_LOCATIONS=[
       // --- Projects (the brand-brown heroes) ---
+      { id:'collins-wharf-aluna', cat:'project', url:'collins-wharf-aluna.html',
+        nameEn:'Collins Wharf · Aluna', nameVi:'Collins Wharf · Aluna',
+        lat:-37.8202, lng:144.9395,
+        address:'989 Collins Street, Docklands VIC',
+        descEn:'Waterfront apartments on Collins Wharf, between the Yarra and Victoria Harbour.',
+        descVi:'Căn hộ ven sông trên Collins Wharf, giữa sông Yarra và cảng Victoria.',
+        status:{ en:'Off the plan · 2029', vi:'Theo bản vẽ · 2029' } },
+      { id:'collins-wharf-ancora', cat:'project', url:'collins-wharf-ancora.html',
+        nameEn:'Collins Wharf · Ancora', nameVi:'Collins Wharf · Ancora',
+        lat:-37.8222, lng:144.9443,
+        address:'971 Collins Street, Docklands VIC',
+        descEn:'Waterfront apartments by Lendlease where Collins Street meets Victoria Harbour.',
+        descVi:'Căn hộ ven nước của Lendlease, nơi phố Collins gặp cảng Victoria Harbour.',
+        status:{ en:'Off the plan · 2027', vi:'Theo bản vẽ · 2027' } },
       { id:'380-melbourne', cat:'project', url:'380-melbourne.html',
         nameEn:'380 Melbourne', nameVi:'380 Melbourne',
         lat:-37.8118, lng:144.9601,
