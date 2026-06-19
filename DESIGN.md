@@ -256,23 +256,23 @@ The core listing card — a raised `--paper-2` surface, hairline border, photo o
 divided spec row, and a price/status footer. The whole card is the link.
 
 ```html
-<a class="pcard" href="the-headland-house.html" data-type="house">
+<a class="pcard" href="671-chapel-street.html" data-type="apartment">
   <div class="photo has-img" style="background-image:url('…')">
-    <span class="cap">Coastal</span>
+    <span class="cap">South Yarra</span>
   </div>
   <div class="pcard-body">
     <div class="pcard-head">
-      <div><h3>The Headland House</h3><div class="loc">Portsea, VIC</div></div>
-      <span class="tag">House</span>
+      <div><h3>671 Chapel Street</h3><div class="loc">South Yarra, VIC</div></div>
+      <span class="tag">Apartment</span>
     </div>
     <div class="specs-row">
-      <div class="sp"><b>4</b><small>Bed</small></div>
-      <div class="sp"><b>3</b><small>Bath</small></div>
-      <div class="sp"><b>2</b><small>Car</small></div>
+      <div class="sp"><b>1–3</b><small>Bed</small></div>
+      <div class="sp"><b>2</b><small>Bath</small></div>
+      <div class="sp"><b>1</b><small>Car</small></div>
     </div>
     <div class="price-range">
-      <span class="pr">$3.2M – $3.8M</span>
-      <span class="st">Available</span>
+      <span class="pr">On application</span>
+      <span class="st">Now selling</span>
     </div>
   </div>
 </a>

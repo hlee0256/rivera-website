@@ -186,6 +186,13 @@
         descEn:'Waterfront apartments by Lendlease where Collins Street meets Victoria Harbour.',
         descVi:'Căn hộ ven nước của Lendlease, nơi phố Collins gặp cảng Victoria Harbour.',
         status:{ en:'Off the plan · 2027', vi:'Theo bản vẽ · 2027' } },
+      { id:'671-chapel-street', cat:'project', url:'671-chapel-street.html',
+        nameEn:'671 Chapel Street', nameVi:'671 Chapel Street',
+        lat:-37.8380, lng:144.9923,   // approximate (northern end of Chapel St, Como precinct)
+        address:'671 Chapel Street, South Yarra VIC',
+        descEn:'South Yarra residences by CASA, with open views to the Yarra River and the city skyline.',
+        descVi:'Căn hộ South Yarra của CASA, tầm nhìn thoáng ra sông Yarra và đường chân trời thành phố.',
+        status:{ en:'Off the plan · 2028', vi:'Theo bản vẽ · 2028' } },
       { id:'380-melbourne', cat:'project', url:'380-melbourne.html',
         nameEn:'380 Melbourne', nameVi:'380 Melbourne',
         lat:-37.8118, lng:144.9601,
@@ -200,6 +207,13 @@
         descEn:'Tower apartments at the quiet western edge of the grid.',
         descVi:'Căn hộ tầng cao ở rìa tây yên tĩnh của lưới phố.',
         status:{ en:'Move-in ready', vi:'Sẵn sàng dọn vào' } },
+      { id:'piccolo-house', cat:'project', url:'piccolo-house.html',
+        nameEn:'Piccolo House', nameVi:'Piccolo House',
+        lat:-37.8042, lng:145.0268,   // approximate (Barry St, near Studley Park Rd, Kew)
+        address:'18 Barry Street, Kew VIC',
+        descEn:'Five low-rise garden pavilions by Woods Bagot in leafy Kew, with a resort-style wellness level.',
+        descVi:'Năm toà pavilion thấp tầng do Woods Bagot thiết kế giữa Kew xanh mát, với một tầng wellness chuẩn resort.',
+        status:{ en:'Off the plan · 2027', vi:'Theo bản vẽ · 2027' } },
 
       // --- Universities ---
       { id:'unimelb', cat:'university',
