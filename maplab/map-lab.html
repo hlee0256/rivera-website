@@ -92,6 +92,40 @@
   @media(prefers-reduced-motion:reduce){
     .rv-filters.rv-nudge .filt:not(.active){animation:none}
     .rv-hint .rv-hint-ic{animation:none}}
+
+  /* ---- project search box + autocomplete ----
+          Sits above the controls. Client-side only (the location list is tiny),
+          so results are instant. Mobile: full width, 16px input so iOS doesn't
+          zoom on focus, 44px-tall suggestions for comfortable tapping. ---- */
+  .rv-search{position:relative;max-width:430px;margin:0 0 18px}
+  .rv-search-ic{position:absolute;left:15px;top:50%;transform:translateY(-50%);
+    display:inline-flex;color:var(--ink-soft);pointer-events:none}
+  .rv-search-ic svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.8;
+    stroke-linecap:round;stroke-linejoin:round}
+  .rv-search input{width:100%;font-family:inherit;font-size:16px;color:var(--ink);
+    background:var(--paper-2);border:1px solid var(--line);border-radius:999px;
+    padding:13px 44px 13px 44px;transition:border-color .2s,box-shadow .2s}
+  .rv-search input::placeholder{color:var(--ink-soft);opacity:.85}
+  .rv-search input:focus{outline:none;border-color:var(--brown);box-shadow:0 0 0 3px rgba(122,78,45,.12)}
+  .rv-search-clear{position:absolute;right:8px;top:50%;transform:translateY(-50%);
+    display:none;align-items:center;justify-content:center;width:30px;height:30px;
+    border:0;background:transparent;color:var(--ink-soft);font-size:1.3rem;line-height:1;
+    cursor:pointer;border-radius:999px;transition:color .2s,background .2s}
+  .rv-search-clear:hover{color:var(--brown);background:rgba(122,78,45,.08)}
+  .rv-search.has-text .rv-search-clear{display:inline-flex}
+  .rv-search-list{position:absolute;top:calc(100% + 6px);left:0;right:0;z-index:20;
+    list-style:none;margin:0;padding:6px;background:var(--paper-2);border:1px solid var(--line);
+    border-radius:12px;box-shadow:0 18px 40px -22px rgba(35,26,18,.55);
+    max-height:300px;overflow-y:auto;display:none}
+  .rv-search.open .rv-search-list{display:block}
+  .rv-search-list li{display:flex;flex-direction:column;gap:1px;min-height:44px;justify-content:center;
+    padding:8px 12px;border-radius:8px;cursor:pointer}
+  .rv-search-list li[aria-selected=true],.rv-search-list li:hover{background:rgba(122,78,45,.09)}
+  .rv-search-list .rv-sr-name{font-size:.95rem;font-weight:600;color:var(--ink);letter-spacing:-.01em}
+  .rv-search-list .rv-sr-addr{font-size:.78rem;color:var(--ink-soft)}
+  .rv-search-list .rv-sr-empty{padding:10px 12px;font-size:.86rem;color:var(--ink-soft);cursor:default}
+  .rv-search-list .rv-sr-empty:hover{background:transparent}
+  @media(max-width:600px){.rv-search{max-width:none}}
 </style>
 </head>
 <body>
@@ -126,6 +160,17 @@
 <!-- INTERACTIVE MAP -->
 <section class="cbd-sec">
   <div class="wrap">
+
+    <!-- project search: type a residence name, pick it, the map flies there and opens it -->
+    <div class="rv-search" id="rv-search">
+      <span class="rv-search-ic" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg></span>
+      <input type="text" id="rv-search-input" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"
+             role="combobox" aria-expanded="false" aria-controls="rv-search-list" aria-autocomplete="list"
+             aria-label="Search a Rivera residence / Tìm một dự án Rivera"
+             data-en-ph="Search a residence…" data-vi-ph="Tìm một dự án…" placeholder="Search a residence…" />
+      <button class="rv-search-clear" id="rv-search-clear" type="button" aria-label="Clear search / Xoá tìm kiếm">&times;</button>
+      <ul class="rv-search-list" id="rv-search-list" role="listbox" aria-label="Matching residences / Dự án khớp"></ul>
+    </div>
 
     <div class="rv-controls">
       <div class="filters rv-filters rv-nudge" id="rv-filters">
@@ -356,7 +401,7 @@ document.addEventListener('DOMContentLoaded', function(){
   var OFF_BY_DEFAULT = { shopping:true, landmark:true };
 
   /* ---- markers ---- */
-  var markersByCat = {};
+  var markersByCat = {}, markerById = {};
   MAP_LOCATIONS.forEach(function(loc){
     var isProj = loc.cat==='project';
     var sz = isProj ? 16 : 26;   // projects: a small refined dot; icon chips hold the glyph
@@ -369,6 +414,7 @@ document.addEventListener('DOMContentLoaded', function(){
     m.bindPopup(function(){ return cardHtml(loc,true); },{ className:'rv-pop', maxWidth:268, minWidth:212, autoPanPadding:[26,26] });
     if(!OFF_BY_DEFAULT[loc.cat]) m.addTo(map);   // shopping & landmarks start hidden
     (markersByCat[loc.cat]=markersByCat[loc.cat]||[]).push(m);
+    markerById[loc.id] = m;
   });
 
   function cardHtml(loc, detail){
@@ -427,6 +473,90 @@ document.addEventListener('DOMContentLoaded', function(){
   /* ---- re-open popups in the new language on toggle ---- */
   var langBtn = document.getElementById('lang');
   if(langBtn) langBtn.addEventListener('click', function(){ map.closePopup(); });
+
+  /* =========================================================
+     PROJECT SEARCH — type a residence name, pick it, the map
+     flies there and opens its popup. Client-side, instant.
+     ========================================================= */
+  var PROJECTS = MAP_LOCATIONS.filter(function(l){ return l.cat==='project'; });
+  var sWrap = document.getElementById('rv-search');
+  var sInput = document.getElementById('rv-search-input');
+  var sList = document.getElementById('rv-search-list');
+  var sClear = document.getElementById('rv-search-clear');
+  var matches = [], activeIdx = -1;
+
+  // accent-insensitive folding so "docklands" or VI text without marks still match
+  function fold(s){ return String(s).toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/đ/g,'d'); }
+  function nameOf(loc){ return loc[curLang()==='vi'?'nameVi':'nameEn']; }
+  function openList(){ sWrap.classList.add('open'); sInput.setAttribute('aria-expanded','true'); }
+  function closeList(){ sWrap.classList.remove('open'); sInput.setAttribute('aria-expanded','false'); activeIdx=-1; }
+
+  function render(){
+    sList.innerHTML='';
+    if(!matches.length){
+      var e=document.createElement('li'); e.className='rv-sr-empty';
+      e.textContent = curLang()==='vi' ? 'Không tìm thấy dự án nào.' : 'No matching residence.';
+      sList.appendChild(e); return;
+    }
+    matches.forEach(function(loc,i){
+      var li=document.createElement('li');
+      li.setAttribute('role','option'); li.setAttribute('data-id',loc.id);
+      li.setAttribute('aria-selected', i===activeIdx?'true':'false');
+      var nm=document.createElement('span'); nm.className='rv-sr-name'; nm.textContent=nameOf(loc);
+      var ad=document.createElement('span'); ad.className='rv-sr-addr'; ad.textContent=loc.address;
+      li.appendChild(nm); li.appendChild(ad); sList.appendChild(li);
+    });
+  }
+  function update(){
+    var q=sInput.value.trim();
+    sWrap.classList.toggle('has-text', q.length>0);
+    if(!q){ matches=[]; closeList(); return; }
+    var fq=fold(q);
+    matches = PROJECTS.filter(function(loc){
+      return fold(loc.nameEn).indexOf(fq)>-1 || fold(loc.nameVi).indexOf(fq)>-1 || fold(loc.address).indexOf(fq)>-1;
+    }).slice(0,8);
+    activeIdx = matches.length ? 0 : -1;
+    render(); openList();
+  }
+  // if a category is toggled off, switch it back on so the popup can show
+  function ensureCat(cat){
+    var pill=filterBar.querySelector('.filt[data-cat='+cat+']');
+    if(pill && !pill.classList.contains('active')){
+      pill.classList.add('active');
+      (markersByCat[cat]||[]).forEach(function(m){ m.addTo(map); });
+    }
+  }
+  function choose(loc){
+    if(!loc) return;
+    sInput.value=nameOf(loc); sWrap.classList.add('has-text');
+    closeList(); sInput.blur();              // dismiss the mobile keyboard
+    ensureCat(loc.cat);
+    var m=markerById[loc.id]; if(!m) return;
+    var ll=m.getLatLng(), z=Math.max(map.getZoom(),16);
+    if(reduceMotion){ map.setView(ll,z,{animate:false}); m.openPopup(); }
+    else { map.flyTo(ll,z); map.once('moveend', function(){ m.openPopup(); }); }
+  }
+
+  sInput.addEventListener('input', update);
+  sInput.addEventListener('focus', function(){ if(sInput.value.trim()) update(); });
+  sInput.addEventListener('keydown', function(e){
+    if(e.key==='ArrowDown'){ e.preventDefault(); if(!sWrap.classList.contains('open')){ update(); return; }
+      if(matches.length){ activeIdx=(activeIdx+1)%matches.length; render(); } }
+    else if(e.key==='ArrowUp'){ e.preventDefault();
+      if(matches.length){ activeIdx=(activeIdx-1+matches.length)%matches.length; render(); } }
+    else if(e.key==='Enter'){ if(matches.length){ e.preventDefault(); choose(matches[activeIdx>-1?activeIdx:0]); } }
+    else if(e.key==='Escape'){ sInput.value=''; sWrap.classList.remove('has-text'); closeList(); }
+  });
+  sList.addEventListener('click', function(e){
+    var li=e.target.closest('li[data-id]'); if(!li) return;
+    var id=li.getAttribute('data-id');
+    choose(PROJECTS.filter(function(p){ return p.id===id; })[0]);
+  });
+  sClear.addEventListener('click', function(){
+    sInput.value=''; matches=[]; sWrap.classList.remove('has-text'); closeList(); sInput.focus();
+  });
+  document.addEventListener('click', function(e){ if(!sWrap.contains(e.target)) closeList(); });
+  if(langBtn) langBtn.addEventListener('click', closeList);   // labels differ per language
 
   setTimeout(function(){ map.invalidateSize(); }, 0);
   window.addEventListener('resize', function(){ map.invalidateSize(); });
