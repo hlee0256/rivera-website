@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Contact — Hà Anh Traco</title>
+<meta name="description" content="Contact Ha Anh Transport & Trading Co. (Hà Anh Traco) in Hải Phòng for a freight quote — road, inland waterway, customs and warehousing." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&family=Instrument+Serif:ital@0;1&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500;1,600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="styles.css" />
+<link rel="icon" type="image/svg+xml" href="favicon.svg" />
+</head>
+<body>
+
+<!-- NAV (starts solid on a light page) -->
+<header class="nav onlight" id="nav">
+  <div class="wrap nav-in">
+    <a class="logo" href="index.html" aria-label="Hà Anh Traco">HÀ ANH <span class="d">TRACO</span></a>
+    <button class="burger" id="burger" aria-label="Menu / Trình đơn"><span></span><span></span><span></span></button>
+    <nav class="menu">
+      <a href="services.html" data-en="Services" data-vi="Dịch vụ">Services</a>
+      <a href="about.html" data-en="About" data-vi="Về chúng tôi">About</a>
+      <button class="lang" id="lang" type="button" aria-label="Switch language / Đổi ngôn ngữ">
+        <span data-l="en">EN</span><span class="sep">/</span><span data-l="vi" class="on">VI</span>
+      </button>
+      <a class="btn" href="contact.html" data-en="Get a quote" data-vi="Báo giá">Get a quote</a>
+    </nav>
+  </div>
+</header>
+
+<!-- PAGE HEADER -->
+<section class="pagehead">
+  <div class="wrap">
+    <span class="eyebrow" data-en="Contact" data-vi="Liên hệ">Contact</span>
+    <h1><span data-en="Let's move your " data-vi="Hãy để chúng tôi vận chuyển ">Let's move your </span><span class="serif" data-en="cargo." data-vi="hàng của bạn.">cargo.</span></h1>
+    <p data-en="Send us the route, the cargo and the timing. Our dispatch team will come back with a clear quote — usually within the working day." data-vi="Gửi cho chúng tôi tuyến đường, loại hàng và thời gian. Đội điều vận sẽ phản hồi báo giá rõ ràng — thường trong ngày làm việc.">Send us the route, the cargo and the timing. Our dispatch team will come back with a clear quote — usually within the working day.</p>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="enquire" id="contact">
+  <div class="wrap enquire-grid">
+    <div>
+      <span class="eyebrow" data-en="Reach us directly" data-vi="Liên hệ trực tiếp">Reach us directly</span>
+      <h2 style="margin-top:14px"><span data-en="Dispatch is " data-vi="Điều vận trực ">Dispatch is </span><span class="serif" data-en="always on." data-vi="suốt ngày đêm.">always on.</span></h2>
+      <div class="detail">
+        <span data-en="Dispatch line" data-vi="Đường dây điều vận">Dispatch line</span>
+        <a href="tel:+842253978897">+84 225 3978 897</a>
+      </div>
+      <div class="detail">
+        <span data-en="Second line" data-vi="Đường dây thứ hai">Second line</span>
+        <a href="tel:+842253978898">+84 225 3978 898</a>
+      </div>
+      <div class="detail">
+        <span data-en="Email" data-vi="Email">Email</span>
+        <a href="mailto:haanhtraco@gmail.com">haanhtraco@gmail.com</a>
+      </div>
+      <div class="detail">
+        <span data-en="Office" data-vi="Văn phòng">Office</span>
+        <a data-en="86 Hoàng Thế Thiện, Đông Khê, Ngô Quyền, Hải Phòng" data-vi="86 Hoàng Thế Thiện, P. Đông Khê, Q. Ngô Quyền, Hải Phòng">86 Hoàng Thế Thiện, Đông Khê, Ngô Quyền, Hải Phòng</a>
+      </div>
+      <div class="detail">
+        <span data-en="Yard" data-vi="Bãi xe">Yard</span>
+        <a data-en="Hạ Đoạn 2, Trần Hưng Đạo, Đông Hải 2, Hải An, Hải Phòng" data-vi="Hạ Đoạn 2, Đường Trần Hưng Đạo, P. Đông Hải 2, Q. Hải An, Hải Phòng">Hạ Đoạn 2, Trần Hưng Đạo, Đông Hải 2, Hải An, Hải Phòng</a>
+      </div>
+    </div>
+    <!-- QUOTE FORM: wired for Formspree. Replace YOUR_FORM_ID with your form's ID from formspree.io. -->
+    <form class="efrm" action="https://formspree.io/f/YOUR_FORM_ID" method="POST" novalidate>
+      <div class="fld"><input type="text" name="name" placeholder="Your name" data-en-ph="Your name" data-vi-ph="Họ và tên" required /></div>
+      <div class="fld"><input type="email" name="email" placeholder="Email address" data-en-ph="Email address" data-vi-ph="Địa chỉ email" required /></div>
+      <div class="fld"><input type="tel" name="phone" placeholder="Phone" data-en-ph="Phone" data-vi-ph="Số điện thoại" /></div>
+      <div class="fld"><input type="text" name="route" placeholder="Route (from → to)" data-en-ph="Route (from → to)" data-vi-ph="Tuyến đường (từ → đến)" /></div>
+      <div class="fld"><textarea name="message" rows="3" placeholder="Cargo, volume and timing" data-en-ph="Cargo, volume and timing" data-vi-ph="Loại hàng, khối lượng và thời gian"></textarea></div>
+      <button class="btn" type="submit"><span data-en="Request quote" data-vi="Gửi yêu cầu">Request quote</span> <span class="arw">→</span></button>
+      <div class="thanks">
+        <h3 data-en="Thank you." data-vi="Cảm ơn bạn.">Thank you.</h3>
+        <p data-en="Your request has reached our dispatch team. We'll come back to you shortly." data-vi="Yêu cầu của bạn đã đến đội điều vận. Chúng tôi sẽ phản hồi sớm.">Your request has reached our dispatch team. We'll come back to you shortly.</p>
+      </div>
+    </form>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="wrap">
+    <div class="foot-top">
+      <div>
+        <a class="logo" href="index.html" aria-label="Hà Anh Traco">HÀ ANH <span class="d">TRACO</span></a>
+        <p data-en="Ha Anh Transport & Trading Co., Ltd — road freight, inland waterway, customs and warehousing in Hải Phòng." data-vi="Công ty TNHH Vận tải Thương mại Hà Anh — vận tải đường bộ, đường thủy nội địa, hải quan và kho bãi tại Hải Phòng.">Ha Anh Transport & Trading Co., Ltd — road freight, inland waterway, customs and warehousing in Hải Phòng.</p>
+      </div>
+      <div class="fcol">
+        <h5 data-en="Explore" data-vi="Khám phá">Explore</h5>
+        <a href="services.html" data-en="Services" data-vi="Dịch vụ">Services</a>
+        <a href="about.html" data-en="About" data-vi="Về chúng tôi">About</a>
+        <a href="index.html#featured" data-en="Featured" data-vi="Nổi bật">Featured</a>
+        <a href="contact.html" data-en="Contact" data-vi="Liên hệ">Contact</a>
+      </div>
+      <div class="fcol">
+        <h5 data-en="Contact" data-vi="Liên hệ">Contact</h5>
+        <a href="tel:+842253978897">+84 225 3978 897</a>
+        <a href="mailto:haanhtraco@gmail.com">haanhtraco@gmail.com</a>
+        <a href="contact.html" data-en="Request a quote" data-vi="Yêu cầu báo giá">Request a quote</a>
+      </div>
+    </div>
+    <div class="foot-bot">
+      <span data-en="© 2026 Ha Anh Transport & Trading Co., Ltd · Hải Phòng, Vietnam." data-vi="© 2026 Công ty TNHH Vận tải Thương mại Hà Anh · Hải Phòng, Việt Nam.">© 2026 Ha Anh Transport & Trading Co., Ltd · Hải Phòng, Vietnam.</span>
+      <span data-en="Hà Anh Traco" data-vi="Vận Tải Hà Anh">Hà Anh Traco</span>
+    </div>
+  </div>
+</footer>
+
+<script src="app.js" defer></script>
+</body>
+</html>

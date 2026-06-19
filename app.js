@@ -1,5 +1,5 @@
 /* ============================================================
-   Rivera — shared script (index / projects / about)
+   Hà Anh Traco — shared script (index / services / about / contact)
    ============================================================ */
 (function(){
   // ---- nav: solid on scroll (skipped on pages that start "onlight") ----
@@ -46,10 +46,10 @@
     document.querySelectorAll('.lang span[data-l]').forEach(function(s){
       s.classList.toggle('on',s.getAttribute('data-l')===lang);
     });
-    try{localStorage.setItem('rivera-lang',lang);}catch(e){}
+    try{localStorage.setItem('haanh-lang',lang);}catch(e){}
   }
   var saved='vi';
-  try{saved=localStorage.getItem('rivera-lang')||'vi';}catch(e){}
+  try{saved=localStorage.getItem('haanh-lang')||'vi';}catch(e){}
   setLang(saved);
   var langBtn=document.getElementById('lang');
   if(langBtn){

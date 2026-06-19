@@ -2,20 +2,23 @@
    Rivera — shared stylesheet (index / projects / about)
    ============================================================ */
 :root{
-  --espresso:#1B130D;     /* near-black warm */
-  --coffee:#2A1E14;
-  --brown:#7A4E2D;        /* Rivera Brown — primary */
-  --clay:#9A6A41;
-  --tan:#C9A982;
-  --sand:#E6DACA;
-  --paper:#F4F0E9;        /* page bg */
-  --paper-2:#FBF9F4;
-  --ink:#231A12;          /* body text on paper */
-  --ink-soft:#6E5E4D;
-  --line:rgba(35,26,18,.14);
-  --line-d:rgba(244,240,233,.16);
-  --ok:#5E8C5A;           /* available / selling — muted leaf green status dot */
-  --alert:#B0533B;        /* sold out — warm terracotta status dot */
+  /* Hà Anh Traco — maritime navy + amber. A Hải Phòng port-logistics identity.
+     Variable NAMES are kept from the original system so every component still
+     resolves; only the values changed (warm brown → harbour navy/steel/amber). */
+  --espresso:#0C1C2A;     /* deep harbour navy — darkest sections */
+  --coffee:#13283B;       /* navy for dark bands (stats, footer, featured) */
+  --brown:#15577A;        /* PRIMARY — steel-blue (buttons, links, accents) */
+  --clay:#2C7CA6;         /* lighter blue */
+  --tan:#E2A552;          /* warm amber — the accent on dark backgrounds */
+  --sand:#D7E0E7;         /* cool light accent */
+  --paper:#F2F4F6;        /* page bg — cool off-white */
+  --paper-2:#FBFCFD;
+  --ink:#15212B;          /* body text on paper */
+  --ink-soft:#566875;
+  --line:rgba(21,33,43,.14);
+  --line-d:rgba(242,244,246,.16);
+  --ok:#2E8B6E;           /* available / in service — teal-green status dot */
+  --alert:#C0563B;        /* unavailable — terracotta status dot */
   --max:1280px;
   --serif:"Instrument Serif",Georgia,serif; /* elegant accent for English; VI flips to Cormorant below */
 }
@@ -74,7 +77,7 @@ h1,h2,h3{font-weight:700;letter-spacing:-.035em;line-height:1.02;color:var(--ink
   content:"";position:absolute;inset:0;
   background:
     linear-gradient(125deg, rgba(255,240,222,.10) 0%, transparent 42%),
-    radial-gradient(140% 120% at 78% 8%, #b07e4f 0%, #7A4E2D 38%, #3a2616 78%, #211610 100%);
+    radial-gradient(140% 120% at 78% 8%, #2c7ca6 0%, #15577a 38%, #122a3d 78%, #0c1c2a 100%);
   transition:transform .9s cubic-bezier(.2,.7,.2,1);
 }
 .photo.has-img::before{display:none}      /* add class .has-img once a real photo is set */
@@ -137,7 +140,7 @@ body.menu-open .burger span:nth-child(3){transform:translateY(-10px) rotate(-45d
 /* ---------------- HERO (landing) ---------------- */
 .hero{position:relative;min-height:100vh;display:flex;align-items:flex-end;color:#FBF6EE;overflow:hidden}
 .hero .bg{position:absolute;inset:0;z-index:0}
-.hero .bg .hero-vid{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;background:radial-gradient(130% 100% at 70% 0%, #9c6c41 0%, #6e4527 40%, #2c1c11 82%, #1a110a 100%)}
+.hero .bg .hero-vid{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;background:radial-gradient(130% 100% at 70% 0%, #2c7ca6 0%, #194f6e 40%, #112536 82%, #0a1622 100%)}
 .hero .bg .bg-overlay{position:absolute;inset:0;z-index:1;background:linear-gradient(to top, rgba(20,13,8,.70) 0%, rgba(27,19,13,.18) 46%, rgba(27,19,13,.30) 100%),linear-gradient(105deg, rgba(20,13,8,.34) 0%, transparent 58%)}
 .hero .bg .slot{position:absolute;top:96px;right:32px;z-index:2;font-size:.68rem;letter-spacing:.24em;text-transform:uppercase;color:rgba(251,246,238,.34)}
 .hero-in{position:relative;z-index:2;width:100%;padding-bottom:64px}
@@ -299,7 +302,7 @@ body.menu-open .burger span:nth-child(3){transform:translateY(-10px) rotate(-45d
 /* ---------------- FEATURED FULL-BLEED ---------------- */
 .featured{position:relative;min-height:88vh;display:flex;align-items:center;color:#FBF6EE;overflow:hidden}
 .featured .bg{position:absolute;inset:0}
-.featured .bg::before{content:"";position:absolute;inset:0;background:linear-gradient(100deg, rgba(18,12,7,.9) 0%, rgba(18,12,7,.5) 48%, rgba(18,12,7,.2) 100%),radial-gradient(120% 130% at 86% 80%, #a9794b 0%, #6c4427 42%, #281a10 88%)}
+.featured .bg::before{content:"";position:absolute;inset:0;background:linear-gradient(100deg, rgba(8,18,28,.9) 0%, rgba(8,18,28,.5) 48%, rgba(8,18,28,.2) 100%),radial-gradient(120% 130% at 86% 80%, #2c7ca6 0%, #194f6e 42%, #0f2233 88%)}
 .featured-in{position:relative;z-index:2}
 .featured .eyebrow{color:var(--tan)}
 .featured h2{font-size:clamp(2.3rem,5vw,4rem);color:#FBF6EE;max-width:14ch;margin:16px 0 20px}
@@ -746,7 +749,7 @@ footer{background:var(--espresso);color:var(--sand);padding:80px 0 40px}
 /* landing-page featured film (index.html) sits behind the warm gradient overlay */
 .featured .bg .featvid{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0}
 /* the warm overlay becomes a translucent scrim so the film shows through (text sits left, kept dark for contrast) */
-.featured .bg::before{z-index:1;background:linear-gradient(100deg,rgba(18,12,7,.9) 0%,rgba(18,12,7,.55) 46%,rgba(18,12,7,.2) 100%)}
+.featured .bg::before{z-index:1;background:linear-gradient(100deg,rgba(8,18,28,.9) 0%,rgba(8,18,28,.55) 46%,rgba(8,18,28,.2) 100%)}
 .featured .featured-in{width:100%}  /* keep copy left-aligned over the darkest scrim, not centred over the bright film */
 
 /* ---- gallery strip directly under hero ---- */
