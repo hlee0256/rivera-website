@@ -207,6 +207,13 @@
         descEn:'Tower apartments at the quiet western edge of the grid.',
         descVi:'Căn hộ tầng cao ở rìa tây yên tĩnh của lưới phố.',
         status:{ en:'Move-in ready', vi:'Sẵn sàng dọn vào' } },
+      { id:'piccolo-house', cat:'project', url:'piccolo-house.html',
+        nameEn:'Piccolo House', nameVi:'Piccolo House',
+        lat:-37.8042, lng:145.0268,   // approximate (Barry St, near Studley Park Rd, Kew)
+        address:'18 Barry Street, Kew VIC',
+        descEn:'Five low-rise garden pavilions by Woods Bagot in leafy Kew, with a resort-style wellness level.',
+        descVi:'Năm toà pavilion thấp tầng do Woods Bagot thiết kế giữa Kew xanh mát, với một tầng wellness chuẩn resort.',
+        status:{ en:'Off the plan · 2027', vi:'Theo bản vẽ · 2027' } },
 
       // --- Universities ---
       { id:'unimelb', cat:'university',
