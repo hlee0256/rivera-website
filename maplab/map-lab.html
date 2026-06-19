@@ -4,24 +4,24 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Map (lab) — Rivera</title>
-<meta name="description" content="Experimental Rivera map: branded category icons for every destination, plus the Melbourne rail and tram lines. A standalone test page before it lands on the live Map." />
+<meta name="description" content="Experimental Rivera map: branded, colour-coded category icons for every destination. A standalone test page before it lands on the live Map." />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&family=Instrument+Serif:ital@0;1&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500;1,600&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
-<link rel="stylesheet" href="styles.css" />
-<link rel="icon" type="image/svg+xml" href="favicon.svg" />
+<link rel="stylesheet" href="../styles.css" />
+<link rel="icon" type="image/svg+xml" href="../favicon.svg" />
 
 <!-- ============================================================
      LAB-ONLY STYLES. Everything experimental lives inline here so the
      shared styles.css is untouched until we promote the winning ideas.
-     Two things are being trialled:
-       1) every NON-project destination becomes a branded icon "chip"
-          (cream paper, brown hairline ring, brown line glyph) — one
-          consistent shape, the glyph carries the category. Projects
-          keep their solid brand dot, the hero.
-       2) the Melbourne transit NETWORK as lines (rail solid, tram
-          dashed) under the Transit toggle, alongside the stations.
+     This revision:
+       - non-project destinations are COLOUR-CODED icon chips (filled
+         with the category colour + cream glyph), so they read by both
+         shape AND hue. Projects keep their solid brand dot (smaller).
+       - the map basemap is given more contrast (it was washing out,
+         especially on mobile).
+       - transit LINES removed — only the stations remain (as icons).
      ============================================================ -->
 <style>
   /* a small, calm banner so anyone opening this knows it's a trial */
@@ -30,52 +30,47 @@
     border:1px solid var(--line);border-radius:999px;padding:6px 14px;background:var(--paper-2)}
   .lab-tag::before{content:"";width:7px;height:7px;border-radius:999px;background:var(--brown)}
 
-  /* ---- the icon chip: one shape for every non-project category ---- */
+  /* ---- more contrast on the basemap (overrides the paler filter in
+          styles.css; the #id beats the .rv-map class selector) ---- */
+  #rivera-map-lab .leaflet-tile-pane{filter:sepia(.06) saturate(1.02) contrast(1.12) brightness(.97)}
+
+  /* ---- icon chip: one shape language, but FILLED with the category
+          colour + a cream glyph, so categories separate by colour too ---- */
   .rv-mk{display:flex;align-items:center;justify-content:center;width:100%;height:100%;
-    background:var(--paper-2);border:1.5px solid var(--brown);border-radius:999px;color:var(--brown);
-    box-shadow:0 2px 6px -1px rgba(27,19,13,.4),0 0 0 1px rgba(27,19,13,.05);
+    border-radius:999px;color:#FBF6EE;border:2px solid var(--paper-2);
+    box-shadow:0 2px 6px -1px rgba(27,19,13,.5),0 0 0 1px rgba(27,19,13,.18);
     transform:scale(var(--rv-pin-scale,1));transform-origin:center;
     transition:transform .2s cubic-bezier(.2,.7,.2,1),box-shadow .2s ease}
-  .rv-mk svg{width:60%;height:60%;display:block;fill:none;stroke:currentColor;
-    stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+  .rv-mk svg{width:58%;height:58%;display:block;fill:none;stroke:currentColor;
+    stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+  .rv-mk--university{background:var(--pin-university)}
+  .rv-mk--shopping{background:var(--pin-shopping)}
+  .rv-mk--transit{background:var(--pin-transit)}
+  .rv-mk--landmark{background:var(--pin-landmark)}
   .leaflet-marker-icon:hover .rv-mk{transform:scale(calc(var(--rv-pin-scale,1) * 1.16));
-    box-shadow:0 5px 12px -3px rgba(27,19,13,.5),0 0 0 1px rgba(27,19,13,.08)}
+    box-shadow:0 5px 12px -3px rgba(27,19,13,.55),0 0 0 1px rgba(27,19,13,.22)}
 
-  /* ---- the project hero: keeps its solid brand dot (unchanged idea) ---- */
+  /* ---- the project hero: keeps its solid brand dot, now smaller ---- */
   .rv-hero{display:block;width:100%;height:100%;border-radius:999px;background:var(--pin-project);
     border:2px solid var(--paper-2);
-    box-shadow:0 0 0 3px rgba(27,19,13,.14),0 2px 6px -1px rgba(27,19,13,.5),0 0 0 1px rgba(27,19,13,.22);
+    box-shadow:0 0 0 2px rgba(27,19,13,.16),0 2px 5px -1px rgba(27,19,13,.5),0 0 0 1px rgba(27,19,13,.22);
     transform:scale(var(--rv-pin-scale,1));transform-origin:center;
     transition:transform .2s cubic-bezier(.2,.7,.2,1)}
-  .leaflet-marker-icon:hover .rv-hero{transform:scale(calc(var(--rv-pin-scale,1) * 1.16))}
+  .leaflet-marker-icon:hover .rv-hero{transform:scale(calc(var(--rv-pin-scale,1) * 1.18))}
 
-  /* ---- legend pills carry the real glyph (not just a dot) so the page
-          doubles as the icon key ---- */
-  .filt .filt-ic{display:inline-flex;width:17px;height:17px;margin-right:8px;vertical-align:middle;
-    position:relative;top:-1px;color:var(--brown)}
-  .filt .filt-ic svg{width:100%;height:100%;fill:none;stroke:currentColor;stroke-width:1.7;
+  /* ---- legend pills carry a mini of the real marker (filled colour chip
+          + glyph) so the page doubles as the icon key ---- */
+  .filt .filt-ic{display:inline-flex;align-items:center;justify-content:center;width:18px;height:18px;
+    border-radius:999px;margin-right:8px;vertical-align:middle;position:relative;top:-1px;color:#FBF6EE;
+    box-shadow:0 0 0 1.5px var(--paper-2),0 0 0 2.5px var(--line)}
+  .filt .filt-ic svg{width:60%;height:60%;fill:none;stroke:currentColor;stroke-width:1.9;
     stroke-linecap:round;stroke-linejoin:round}
-  .filt.active .filt-ic{color:#FBF6EE}
-  /* projects stay a coloured dot in the key, matching their map marker */
-  .filt[data-cat=project] .filt-ic{align-items:center;justify-content:center}
-  .filt[data-cat=project] .filt-ic::before{content:"";width:11px;height:11px;border-radius:999px;
-    background:var(--pin-project);box-shadow:0 0 0 1.5px var(--paper-2),0 0 0 2.5px var(--line)}
-  .filt.active[data-cat=project] .filt-ic::before{box-shadow:0 0 0 1.5px var(--brown),0 0 0 2.5px rgba(251,246,238,.5)}
-
-  /* ---- transit lines: all green (ties to the Transit category), rail
-          solid + tram dashed. A cream "casing" underneath lifts them off
-          the basemap. Drawn in JS as Leaflet polylines. ---- */
-  .rv-line-rail{stroke:var(--pin-transit)}
-  .rv-line-tram{stroke:var(--pin-transit)}
-
-  /* ---- a compact line-key strip under the map ---- */
-  .rv-linekey{display:flex;flex-wrap:wrap;align-items:center;gap:18px 26px;margin-top:18px;
-    font-size:.8rem;color:var(--ink-soft)}
-  .rv-linekey .lk{display:inline-flex;align-items:center;gap:9px}
-  .rv-linekey .lk-swatch{width:30px;height:0;border-top-width:3px;border-top-style:solid;
-    border-top-color:var(--pin-transit);border-radius:2px}
-  .rv-linekey .lk-swatch.dash{border-top-style:dashed}
-  .rv-linekey .lk-note{color:var(--ink-soft);opacity:.8;font-size:.76rem;font-style:italic}
+  .filt[data-cat=project] .filt-ic{background:var(--pin-project)}
+  .filt[data-cat=university] .filt-ic{background:var(--pin-university)}
+  .filt[data-cat=shopping] .filt-ic{background:var(--pin-shopping)}
+  .filt[data-cat=transit] .filt-ic{background:var(--pin-transit)}
+  .filt[data-cat=landmark] .filt-ic{background:var(--pin-landmark)}
+  .filt.active .filt-ic{box-shadow:0 0 0 1.5px var(--brown),0 0 0 2.5px rgba(251,246,238,.55)}
 </style>
 </head>
 <body>
@@ -83,17 +78,17 @@
 <!-- NAV (starts solid on a light page) -->
 <header class="nav onlight" id="nav">
   <div class="wrap nav-in">
-    <a class="logo" href="index.html" aria-label="Rivera — Real Estate">RIVER<svg class="ra" viewBox="0 0 222.5 278" aria-hidden="true"><path fill="currentColor" fill-rule="evenodd" d="M152.8 2.0L171.6 2.0L174.6 4.4L187.5 78.6L187.9 85.4L197.5 135.6L198.9 148.4L200.5 153.6L209.9 211.4L211.5 216.6L212.9 229.4L214.5 234.6L216.9 253.4L219.5 264.6L220.5 274.2L219.2 275.9L172.8 276.0L170.0 275.0L168.9 272.4L158.5 211.6L156.2 205.6L145.1 195.4L133.1 187.3L125.6 183.6L113.6 179.6L101.6 177.0L88.8 177.0L76.8 179.6L69.3 182.3L57.3 189.4L52.2 194.6L47.0 203.6L9.1 274.9L7.6 276.0L3.8 276.0L2.1 274.8L5.0 267.6L33.4 217.4L66.0 156.6L71.4 148.4L76.0 138.6L99.4 97.4L122.0 54.6L127.4 46.4L147.0 9.6L152.2 2.1ZM129.1 51.8L133.5 70.6L134.9 83.4L136.5 88.6L145.9 146.4L147.5 151.6L147.9 158.4L150.5 169.6L155.6 202.3L146.1 192.4L128.1 179.3L120.6 175.6L107.1 171.2L99.6 170.0L85.3 170.2L74.8 172.6L62.3 178.6L62.6 176.4L69.0 163.6L128.8 51.5Z"/></svg></a>
+    <a class="logo" href="../index.html" aria-label="Rivera — Real Estate">RIVER<svg class="ra" viewBox="0 0 222.5 278" aria-hidden="true"><path fill="currentColor" fill-rule="evenodd" d="M152.8 2.0L171.6 2.0L174.6 4.4L187.5 78.6L187.9 85.4L197.5 135.6L198.9 148.4L200.5 153.6L209.9 211.4L211.5 216.6L212.9 229.4L214.5 234.6L216.9 253.4L219.5 264.6L220.5 274.2L219.2 275.9L172.8 276.0L170.0 275.0L168.9 272.4L158.5 211.6L156.2 205.6L145.1 195.4L133.1 187.3L125.6 183.6L113.6 179.6L101.6 177.0L88.8 177.0L76.8 179.6L69.3 182.3L57.3 189.4L52.2 194.6L47.0 203.6L9.1 274.9L7.6 276.0L3.8 276.0L2.1 274.8L5.0 267.6L33.4 217.4L66.0 156.6L71.4 148.4L76.0 138.6L99.4 97.4L122.0 54.6L127.4 46.4L147.0 9.6L152.2 2.1ZM129.1 51.8L133.5 70.6L134.9 83.4L136.5 88.6L145.9 146.4L147.5 151.6L147.9 158.4L150.5 169.6L155.6 202.3L146.1 192.4L128.1 179.3L120.6 175.6L107.1 171.2L99.6 170.0L85.3 170.2L74.8 172.6L62.3 178.6L62.6 176.4L69.0 163.6L128.8 51.5Z"/></svg></a>
     <button class="burger" id="burger" aria-label="Menu / Trình đơn"><span></span><span></span><span></span></button>
     <nav class="menu">
-      <a href="projects.html" data-en="Projects" data-vi="Dự án">Projects</a>
-      <a href="about.html" data-en="About" data-vi="Về chúng tôi">About</a>
-      <a href="map.html" class="active" data-en="Map" data-vi="Bản đồ">Map</a>
-      <a href="insights.html" data-en="Market" data-vi="Thị trường">Market</a>
+      <a href="../projects.html" data-en="Projects" data-vi="Dự án">Projects</a>
+      <a href="../about.html" data-en="About" data-vi="Về chúng tôi">About</a>
+      <a href="../map.html" class="active" data-en="Map" data-vi="Bản đồ">Map</a>
+      <a href="../insights.html" data-en="Market" data-vi="Thị trường">Market</a>
       <button class="lang" id="lang" type="button" aria-label="Switch language / Đổi ngôn ngữ">
         <span data-l="en">EN</span><span class="sep">/</span><span data-l="vi" class="on">VI</span>
       </button>
-      <a class="btn" href="enquire.html" data-en="Enquire" data-vi="Liên hệ">Enquire</a>
+      <a class="btn" href="../enquire.html" data-en="Enquire" data-vi="Liên hệ">Enquire</a>
     </nav>
   </div>
 </header>
@@ -103,7 +98,7 @@
   <div class="wrap">
     <span class="lab-tag" data-en="Lab · experimental" data-vi="Thử nghiệm · concept">Lab · experimental</span>
     <h1 style="margin-top:18px"><span data-en="Find your place " data-vi="Tìm chỗ của bạn ">Find your place </span><span class="serif" data-en="in the city." data-vi="giữa lòng phố thị.">in the city.</span></h1>
-    <p data-en="A trial of two ideas before they reach the live Map: every destination other than a Rivera residence now carries a quiet, on-brand icon, and the city's rail and tram lines are drawn in so you can read how the network runs past each home. Hover a marker for a quick read, or open it for the full detail." data-vi="Bản thử nghiệm hai ý tưởng trước khi đưa lên trang Bản đồ chính: mỗi điểm đến ngoài dự án Rivera nay mang một biểu tượng tinh tế, đúng tinh thần thương hiệu; và các tuyến tàu, tram của thành phố được vẽ vào để bạn thấy mạng lưới chạy qua từng dự án ra sao. Di chuột qua một điểm để xem nhanh, hoặc mở ra để biết chi tiết.">A trial of two ideas before they reach the live Map: every destination other than a Rivera residence now carries a quiet, on-brand icon, and the city's rail and tram lines are drawn in so you can read how the network runs past each home. Hover a marker for a quick read, or open it for the full detail.</p>
+    <p data-en="A trial before it reaches the live Map: every destination other than a Rivera residence now carries a quiet, colour-coded icon, so each category reads at a glance by both its shape and its colour. Hover a marker for a quick read, or open it for the full detail." data-vi="Bản thử nghiệm trước khi đưa lên trang Bản đồ chính: mỗi điểm đến ngoài dự án Rivera nay mang một biểu tượng tinh tế, phân màu theo nhóm, để mỗi loại nhận ra ngay qua cả hình dạng lẫn màu sắc. Di chuột qua một điểm để xem nhanh, hoặc mở ra để biết chi tiết.">A trial before it reaches the live Map: every destination other than a Rivera residence now carries a quiet, colour-coded icon, so each category reads at a glance by both its shape and its colour. Hover a marker for a quick read, or open it for the full detail.</p>
   </div>
 </section>
 
@@ -130,14 +125,7 @@
       </div>
     </div>
 
-    <div class="rv-map" id="rivera-map-lab" role="application" aria-label="Map of Melbourne with Rivera projects, branded landmark icons and the rail and tram network / Bản đồ Melbourne với các dự án Rivera, biểu tượng địa danh và mạng lưới tàu, tram"></div>
-
-    <!-- line key for the transit network overlay -->
-    <div class="rv-linekey" id="rv-linekey">
-      <span class="lk"><span class="lk-swatch"></span><span data-en="Rail / City Loop &amp; Metro Tunnel" data-vi="Tàu / City Loop &amp; Metro Tunnel">Rail / City Loop &amp; Metro Tunnel</span></span>
-      <span class="lk"><span class="lk-swatch dash"></span><span data-en="Tram routes" data-vi="Tuyến tram">Tram routes</span></span>
-      <span class="lk-note" data-en="Lines are indicative, drawn to read the network — not to scale." data-vi="Các tuyến mang tính minh hoạ, vẽ để thấy mạng lưới — không theo tỉ lệ.">Lines are indicative, drawn to read the network — not to scale.</span>
-    </div>
+    <div class="rv-map" id="rivera-map-lab" role="application" aria-label="Map of Melbourne with Rivera projects and colour-coded landmark icons / Bản đồ Melbourne với các dự án Rivera và biểu tượng địa danh phân màu"></div>
 
   </div>
 </section>
@@ -147,23 +135,23 @@
   <div class="wrap">
     <div class="foot-top">
       <div>
-        <a class="logo" href="index.html" aria-label="Rivera — Real Estate">RIVER<svg class="ra" viewBox="0 0 222.5 278" aria-hidden="true"><path fill="currentColor" fill-rule="evenodd" d="M152.8 2.0L171.6 2.0L174.6 4.4L187.5 78.6L187.9 85.4L197.5 135.6L198.9 148.4L200.5 153.6L209.9 211.4L211.5 216.6L212.9 229.4L214.5 234.6L216.9 253.4L219.5 264.6L220.5 274.2L219.2 275.9L172.8 276.0L170.0 275.0L168.9 272.4L158.5 211.6L156.2 205.6L145.1 195.4L133.1 187.3L125.6 183.6L113.6 179.6L101.6 177.0L88.8 177.0L76.8 179.6L69.3 182.3L57.3 189.4L52.2 194.6L47.0 203.6L9.1 274.9L7.6 276.0L3.8 276.0L2.1 274.8L5.0 267.6L33.4 217.4L66.0 156.6L71.4 148.4L76.0 138.6L99.4 97.4L122.0 54.6L127.4 46.4L147.0 9.6L152.2 2.1ZM129.1 51.8L133.5 70.6L134.9 83.4L136.5 88.6L145.9 146.4L147.5 151.6L147.9 158.4L150.5 169.6L155.6 202.3L146.1 192.4L128.1 179.3L120.6 175.6L107.1 171.2L99.6 170.0L85.3 170.2L74.8 172.6L62.3 178.6L62.6 176.4L69.0 163.6L128.8 51.5Z"/></svg></a>
+        <a class="logo" href="../index.html" aria-label="Rivera — Real Estate">RIVER<svg class="ra" viewBox="0 0 222.5 278" aria-hidden="true"><path fill="currentColor" fill-rule="evenodd" d="M152.8 2.0L171.6 2.0L174.6 4.4L187.5 78.6L187.9 85.4L197.5 135.6L198.9 148.4L200.5 153.6L209.9 211.4L211.5 216.6L212.9 229.4L214.5 234.6L216.9 253.4L219.5 264.6L220.5 274.2L219.2 275.9L172.8 276.0L170.0 275.0L168.9 272.4L158.5 211.6L156.2 205.6L145.1 195.4L133.1 187.3L125.6 183.6L113.6 179.6L101.6 177.0L88.8 177.0L76.8 179.6L69.3 182.3L57.3 189.4L52.2 194.6L47.0 203.6L9.1 274.9L7.6 276.0L3.8 276.0L2.1 274.8L5.0 267.6L33.4 217.4L66.0 156.6L71.4 148.4L76.0 138.6L99.4 97.4L122.0 54.6L127.4 46.4L147.0 9.6L152.2 2.1ZM129.1 51.8L133.5 70.6L134.9 83.4L136.5 88.6L145.9 146.4L147.5 151.6L147.9 158.4L150.5 169.6L155.6 202.3L146.1 192.4L128.1 179.3L120.6 175.6L107.1 171.2L99.6 170.0L85.3 170.2L74.8 172.6L62.3 178.6L62.6 176.4L69.0 163.6L128.8 51.5Z"/></svg></a>
         <p data-en="A boutique property practice. A considered few residences, guided personally." data-vi="Một công ty bất động sản tinh tuyển. Một số ít dự án được cân nhắc, đồng hành tận tâm.">A boutique property practice. A considered few residences, guided personally.</p>
       </div>
       <div class="fcol">
         <h5 data-en="Explore" data-vi="Khám phá">Explore</h5>
-        <a href="projects.html" data-en="Projects" data-vi="Dự án">Projects</a>
-        <a href="about.html" data-en="About" data-vi="Về chúng tôi">About</a>
-        <a href="guide.html" data-en="Guide" data-vi="Hướng dẫn">Guide</a>
-        <a href="insights.html" data-en="Market" data-vi="Thị trường">Market</a>
-        <a href="index.html#featured" data-en="Featured" data-vi="Nổi bật">Featured</a>
-        <a href="enquire.html" data-en="Enquire" data-vi="Liên hệ">Enquire</a>
+        <a href="../projects.html" data-en="Projects" data-vi="Dự án">Projects</a>
+        <a href="../about.html" data-en="About" data-vi="Về chúng tôi">About</a>
+        <a href="../guide.html" data-en="Guide" data-vi="Hướng dẫn">Guide</a>
+        <a href="../insights.html" data-en="Market" data-vi="Thị trường">Market</a>
+        <a href="../index.html#featured" data-en="Featured" data-vi="Nổi bật">Featured</a>
+        <a href="../enquire.html" data-en="Enquire" data-vi="Liên hệ">Enquire</a>
       </div>
       <div class="fcol">
         <h5 data-en="Contact" data-vi="Liên hệ">Contact</h5>
         <a href="mailto:hello@rivera.estate">hello@rivera.estate</a>
-        <a href="enquire.html" data-en="Request portfolio" data-vi="Yêu cầu danh mục">Request portfolio</a>
-        <a href="enquire.html" data-en="Private viewings" data-vi="Xem nhà riêng tư">Private viewings</a>
+        <a href="../enquire.html" data-en="Request portfolio" data-vi="Yêu cầu danh mục">Request portfolio</a>
+        <a href="../enquire.html" data-en="Private viewings" data-vi="Xem nhà riêng tư">Private viewings</a>
       </div>
     </div>
     <div class="foot-bot">
@@ -176,52 +164,45 @@
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin="" defer></script>
 <!-- shared script: runs nav, mobile menu, language toggle. Its own map block is keyed to
      #rivera-map and stays dormant here (this lab uses #rivera-map-lab). -->
-<script src="app.js" defer></script>
+<script src="../app.js" defer></script>
 
 <!-- ============================================================
      LAB MAP SCRIPT — standalone. Self-contained so the shared app.js
-     is untouched. Reuses the same MAP_LOCATIONS shape and the same
-     view presets as the live map; the new parts are the icon markers
-     and the transit-line overlay.
+     is untouched. Trials: colour-coded icon markers (transit lines
+     have been removed).
      ============================================================ -->
 <script defer>
 document.addEventListener('DOMContentLoaded', function(){
   var mapEl = document.getElementById('rivera-map-lab');
   if(!mapEl || !window.L) return;
 
-  /* ---- destinations: same data as the live map ---- */
+  /* ---- destinations: same data as the live map (Quarter Nine removed) ---- */
   var MAP_LOCATIONS = [
     // Projects (the brand-brown heroes — kept as solid dots)
-    { id:'collins-wharf-aluna', cat:'project', url:'collins-wharf-aluna.html',
+    { id:'collins-wharf-aluna', cat:'project', url:'../collins-wharf-aluna.html',
       nameEn:'Collins Wharf · Aluna', nameVi:'Collins Wharf · Aluna', lat:-37.8202, lng:144.9395,
       address:'989 Collins Street, Docklands VIC',
       descEn:'Waterfront apartments on Collins Wharf, between the Yarra and Victoria Harbour.',
       descVi:'Căn hộ ven sông trên Collins Wharf, giữa sông Yarra và cảng Victoria.',
       status:{ en:'Off the plan · 2029', vi:'Theo bản vẽ · 2029' } },
-    { id:'collins-wharf-ancora', cat:'project', url:'collins-wharf-ancora.html',
+    { id:'collins-wharf-ancora', cat:'project', url:'../collins-wharf-ancora.html',
       nameEn:'Collins Wharf · Ancora', nameVi:'Collins Wharf · Ancora', lat:-37.8222, lng:144.9443,
       address:'971 Collins Street, Docklands VIC',
       descEn:'Waterfront apartments by Lendlease where Collins Street meets Victoria Harbour.',
       descVi:'Căn hộ ven nước của Lendlease, nơi phố Collins gặp cảng Victoria Harbour.',
       status:{ en:'Off the plan · 2027', vi:'Theo bản vẽ · 2027' } },
-    { id:'380-melbourne', cat:'project', url:'380-melbourne.html',
+    { id:'380-melbourne', cat:'project', url:'../380-melbourne.html',
       nameEn:'380 Melbourne', nameVi:'380 Melbourne', lat:-37.8118, lng:144.9601,
       address:'380 Lonsdale Street, Melbourne VIC',
       descEn:'CBD residence steps from Melbourne Central, RMIT and Queen Victoria Market.',
       descVi:'Căn hộ trung tâm, vài bước tới Melbourne Central, RMIT và chợ Queen Victoria.',
       status:{ en:'Move-in ready', vi:'Sẵn sàng dọn vào' } },
-    { id:'aspire', cat:'project', url:'aspire.html',
+    { id:'aspire', cat:'project', url:'../aspire.html',
       nameEn:'Aspire Melbourne', nameVi:'Aspire Melbourne', lat:-37.8133, lng:144.9556,
       address:'301 King Street, Melbourne VIC',
       descEn:'Tower apartments at the quiet western edge of the grid.',
       descVi:'Căn hộ tầng cao ở rìa tây yên tĩnh của lưới phố.',
       status:{ en:'Move-in ready', vi:'Sẵn sàng dọn vào' } },
-    { id:'quarter-nine', cat:'project', url:'quarter-nine.html',
-      nameEn:'Quarter Nine', nameVi:'Quarter Nine', lat:-37.8228, lng:144.9646,
-      address:'Southbank, VIC',
-      descEn:'Riverside apartments across the Yarra from the CBD.',
-      descVi:'Căn hộ ven sông, bên kia sông Yarra so với trung tâm.',
-      status:{ en:'By appointment', vi:'Theo lịch hẹn' } },
 
     // Universities
     { id:'unimelb', cat:'university', nameEn:'University of Melbourne', nameVi:'Đại học Melbourne',
@@ -243,7 +224,7 @@ document.addEventListener('DOMContentLoaded', function(){
       descEn:'Open-air precinct of shops and grocers off Swanston.',
       descVi:'Khu phố mở với cửa hàng và chợ thực phẩm cạnh Swanston.' },
 
-    // Transit (stations) — Metro Tunnel stations opened 30 Nov 2025; new coords approximate
+    // Transit (stations only — lines removed)
     { id:'flinders-st', cat:'transit', nameEn:'Flinders Street Station', nameVi:'Ga Flinders Street',
       lat:-37.8183, lng:144.9671, address:'Flinders Street, Melbourne VIC',
       descEn:'The city’s main rail hub, on the river.',
@@ -309,30 +290,13 @@ document.addEventListener('DOMContentLoaded', function(){
   };
   var VIEW_LISTING = { en:'View listing', vi:'Xem chi tiết' };
 
-  /* ---- the branded glyphs, one per non-project category (thin brown line
-          icons, matching the brand's inline-SVG icon style) ---- */
+  /* ---- the branded glyphs, one per non-project category ---- */
   var GLYPH = {
     university:'<path d="M12 4 1.8 9 12 14 22.2 9 12 4Z"/><path d="M6 11.2V16c0 1.3 2.7 2.6 6 2.6s6-1.3 6-2.6v-4.8"/><path d="M22.2 9v5"/>',
     shopping:'<path d="M5.5 8h13l-1 12h-11l-1-12Z"/><path d="M8.7 8V6.6a3.3 3.3 0 0 1 6.6 0V8"/>',
     transit:'<rect x="5.5" y="3.5" width="13" height="13" rx="3"/><path d="M5.5 11h13"/><path d="M9.3 16.5 7.3 20.5M14.7 16.5 16.7 20.5"/>',
     landmark:'<path d="M3.2 9.5 12 4.2l8.8 5.3"/><path d="M5.5 10v8M9.2 10v8M14.8 10v8M18.5 10v8"/><path d="M3.5 20.5h17"/>'
   };
-
-  /* ---- the transit network — indicative polylines, all green to tie to the
-          Transit category. Rail solid, tram dashed. Coordinates are
-          stylised to read the network, not surveyed. ---- */
-  var RAIL = [
-    // City Loop (closed): Flinders → Southern Cross → Flagstaff → Melbourne Central → Parliament → Flinders
-    [[-37.8183,144.9671],[-37.8183,144.9525],[-37.8113,144.9558],[-37.8102,144.9628],[-37.8110,144.9727],[-37.8183,144.9671]],
-    // Metro Tunnel (NW→SE through the new stations): Arden → Parkville → State Library → Town Hall → Anzac
-    [[-37.7968,144.9430],[-37.7983,144.9583],[-37.8094,144.9645],[-37.8158,144.9668],[-37.8300,144.9710],[-37.8398,144.9745]]
-  ];
-  var TRAM = [
-    // Swanston Street spine (north–south): Melbourne Uni → State Library → Town Hall → Flinders
-    [[-37.7980,144.9636],[-37.8050,144.9642],[-37.8098,144.9647],[-37.8148,144.9658],[-37.8182,144.9665]],
-    // Collins Street (east–west): Docklands/Spencer → city → Spring Street
-    [[-37.8195,144.9525],[-37.8170,144.9610],[-37.8150,144.9680],[-37.8135,144.9728]]
-  ];
 
   function curLang(){ return document.documentElement.getAttribute('lang')==='vi' ? 'vi' : 'en'; }
   function esc(s){ return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];}); }
@@ -350,32 +314,17 @@ document.addEventListener('DOMContentLoaded', function(){
     attribution:'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>'
   }).addTo(map);
 
-  var GREEN = getComputedStyle(document.documentElement).getPropertyValue('--pin-transit').trim() || '#4E7A41';
-  var CASE  = getComputedStyle(document.documentElement).getPropertyValue('--paper-2').trim() || '#FBF9F4';
-
-  /* ---- transit lines (drawn first, beneath the markers) ----
-          each line gets a pale casing under it so it lifts off the basemap */
-  var transitLayer = L.layerGroup();
-  function addLine(coords, dashed){
-    L.polyline(coords,{ color:CASE, weight:dashed?6:7, opacity:.9, lineCap:'round', lineJoin:'round' }).addTo(transitLayer);
-    L.polyline(coords,{ color:GREEN, weight:dashed?3:4, opacity:.92, lineCap:'round', lineJoin:'round',
-      dashArray: dashed ? '1 9' : null }).addTo(transitLayer);
-  }
-  RAIL.forEach(function(c){ addLine(c,false); });
-  TRAM.forEach(function(c){ addLine(c,true); });
-  transitLayer.addTo(map);
-
   /* ---- markers ---- */
   var markersByCat = {};
   MAP_LOCATIONS.forEach(function(loc){
     var isProj = loc.cat==='project';
-    var sz = isProj ? 22 : 28;   // projects: compact dot; icon chips: a touch larger to hold the glyph
+    var sz = isProj ? 16 : 26;   // projects: a small refined dot; icon chips hold the glyph
     var html = isProj
       ? '<span class="rv-hero"></span>'
       : '<span class="rv-mk rv-mk--'+loc.cat+'"><svg viewBox="0 0 24 24" aria-hidden="true">'+(GLYPH[loc.cat]||'')+'</svg></span>';
     var icon = L.divIcon({ className:'', iconSize:[sz,sz], iconAnchor:[sz/2,sz/2], html:html });
     var m = L.marker([loc.lat,loc.lng],{ icon:icon, riseOnHover:true });
-    m.bindTooltip(function(){ return cardHtml(loc,false); },{ direction:'top', offset:[0,isProj?-12:-15], className:'rv-tip', opacity:1 });
+    m.bindTooltip(function(){ return cardHtml(loc,false); },{ direction:'top', offset:[0,isProj?-10:-14], className:'rv-tip', opacity:1 });
     m.bindPopup(function(){ return cardHtml(loc,true); },{ className:'rv-pop', maxWidth:268, minWidth:212, autoPanPadding:[26,26] });
     m.addTo(map);
     (markersByCat[loc.cat]=markersByCat[loc.cat]||[]).push(m);
@@ -394,15 +343,13 @@ document.addEventListener('DOMContentLoaded', function(){
     return html + '</div>';
   }
 
-  /* ---- category filters. Transit toggles both its stations AND the line overlay
-          (so "Transit off" hides the whole network) ---- */
+  /* ---- category filters (each pill toggles its markers on/off) ---- */
   var filterBar = document.getElementById('rv-filters');
   filterBar.addEventListener('click', function(e){
     var btn = e.target.closest('.filt'); if(!btn) return;
     btn.classList.toggle('active');
     var cat = btn.getAttribute('data-cat'), on = btn.classList.contains('active');
     (markersByCat[cat]||[]).forEach(function(m){ on ? m.addTo(map) : map.removeLayer(m); });
-    if(cat==='transit'){ on ? transitLayer.addTo(map) : map.removeLayer(transitLayer); }
   });
 
   /* ---- markers scale with zoom ---- */
