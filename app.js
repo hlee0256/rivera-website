@@ -172,6 +172,13 @@
     ---------------------------------------------------------- */
     var MAP_LOCATIONS=[
       // --- Projects (the brand-brown heroes) ---
+      { id:'aura-melbourne-square', cat:'project', url:'aura-melbourne-square.html',
+        nameEn:'AURA at Melbourne Square', nameVi:'AURA tại Melbourne Square',
+        lat:-37.8268, lng:144.9645,
+        address:'7 Hoff Boulevard, Southbank VIC 3006',
+        descEn:'The 67-level gateway tower of Melbourne Square, wrapped around the 3,745 sqm Kennedy Park.',
+        descVi:'Toà tháp cửa ngõ 67 tầng của Melbourne Square, ôm quanh công viên Kennedy rộng 3.745 m².',
+        status:{ en:'Pre-construction · selling now', vi:'Chưa khởi công · đang mở bán' } },
       { id:'collins-wharf-aluna', cat:'project', url:'collins-wharf-aluna.html',
         nameEn:'Collins Wharf · Aluna', nameVi:'Collins Wharf · Aluna',
         lat:-37.8202, lng:144.9395,
@@ -584,4 +591,41 @@
         .catch(function(){f.classList.add('sent');});
     });
   });
+
+  // ---- AURA at Melbourne Square (aura-melbourne-square.html) ----
+  // Page-scoped: own reveal observer + altitude rail. Does NOT touch the
+  // shared reveal list above. Guarded so it never runs on other pages.
+  var auPage=document.getElementById('aura-page');
+  if(auPage){
+    var auReduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if(!auReduce&&'IntersectionObserver' in window){
+      var auIo=new IntersectionObserver(function(es){
+        es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');auIo.unobserve(e.target);}});
+      },{threshold:.12});
+      auPage.querySelectorAll('.au-rev').forEach(function(el,i){el.style.transitionDelay=(i%3)*0.06+'s';auIo.observe(el);});
+    }else{
+      auPage.querySelectorAll('.au-rev').forEach(function(el){el.classList.add('in');});
+    }
+    var auRail=document.getElementById('au-rail');
+    var auBands=auPage.querySelectorAll('[data-band]');
+    if(auRail&&auBands.length&&'IntersectionObserver' in window){
+      var auBandIo=new IntersectionObserver(function(es){
+        es.forEach(function(e){
+          if(e.isIntersecting){
+            var b=e.target.getAttribute('data-band');
+            auRail.setAttribute('data-active',b);
+            var dot=auRail.querySelector('.au-rail-dot');
+            var tick=auRail.querySelector('.au-rail-tick[data-band="'+b+'"]');
+            if(dot&&tick) dot.style.top=tick.offsetTop+'px';
+          }
+        });
+      },{rootMargin:'-45% 0px -45% 0px'});
+      auBands.forEach(function(s){auBandIo.observe(s);});
+    }
+    var auStrip=auPage.querySelector('.au-strip');var auProg=auPage.querySelector('.au-strip-prog');
+    if(auStrip&&auProg) auStrip.addEventListener('scroll',function(){
+      var max=auStrip.scrollWidth-auStrip.clientWidth;
+      auProg.style.transform='scaleX('+(max>0?Math.max(.05,auStrip.scrollLeft/max):.18)+')';
+    },{passive:true});
+  }
 })();
