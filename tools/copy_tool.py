@@ -16,12 +16,11 @@ import sys, os, re, html
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 XLSX = os.path.join(ROOT, "Rivera-copy-EN-VI.xlsx")
 
-# reading order: the 3 main pages, then the 9 detail pages in collection order
+# reading order: the 3 main pages, then the 5 detail pages in collection order
 PAGES = [
     "index.html", "projects.html", "about.html",
-    "the-headland-house.html", "maple-stone.html", "the-long-house.html",
-    "esplanade-residences.html", "the-carlton.html", "quarter-nine.html",
-    "brunswick-mews.html", "the-terraces.html", "garden-walk.html",
+    "collins-wharf-aluna.html", "collins-wharf-ancora.html", "671-chapel-street.html",
+    "380-melbourne.html", "aspire.html",
 ]
 
 TOKEN = re.compile(r'<!--(?P<comment>.*?)-->|<(?P<tag>[a-zA-Z][^>]*?)>', re.DOTALL)
