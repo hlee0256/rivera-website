@@ -31,8 +31,12 @@
   .lab-tag::before{content:"";width:7px;height:7px;border-radius:999px;background:var(--brown)}
 
   /* ---- more contrast on the basemap (overrides the paler filter in
-          styles.css; the #id beats the .rv-map class selector) ---- */
-  #rivera-map-lab .leaflet-tile-pane{filter:sepia(.06) saturate(1.02) contrast(1.12) brightness(.97)}
+          styles.css; the #id beats the .rv-map class selector).
+          NOTE: this is a single uniform filter over the raster tiles — it
+          raises overall contrast/saturation (which does pull the near-white
+          roads away from the beige buildings) but it cannot recolour roads
+          alone. Colour-only change, as asked; nothing else touched. ---- */
+  #rivera-map-lab .leaflet-tile-pane{filter:sepia(.04) saturate(1.16) contrast(1.24) brightness(.95)}
 
   /* ---- icon chip: one shape language, but FILLED with the category
           colour + a cream glyph, so categories separate by colour too ---- */
@@ -71,6 +75,23 @@
   .filt[data-cat=transit] .filt-ic{background:var(--pin-transit)}
   .filt[data-cat=landmark] .filt-ic{background:var(--pin-landmark)}
   .filt.active .filt-ic{box-shadow:0 0 0 1.5px var(--brown),0 0 0 2.5px rgba(251,246,238,.55)}
+
+  /* ---- first-visit nudge: some categories start hidden, so gently draw the
+          eye to the (inactive) filter pills and show a one-line hint. Both
+          stop the moment the visitor touches a filter. Kept calm, on-brand. ---- */
+  @keyframes rvPulse{0%,100%{box-shadow:0 0 0 0 rgba(122,78,45,0)}
+    50%{box-shadow:0 0 0 5px rgba(122,78,45,.18)}}
+  .rv-filters.rv-nudge .filt:not(.active){animation:rvPulse 1.8s ease-in-out 4}
+  .rv-hint{display:inline-flex;align-items:center;gap:9px;margin:2px 0 24px;font-size:.84rem;
+    font-weight:500;color:var(--brown);transition:opacity .4s ease}
+  .rv-hint.gone{opacity:0;pointer-events:none}
+  @keyframes rvBob{0%,100%{transform:translateY(0)}50%{transform:translateY(-3px)}}
+  .rv-hint .rv-hint-ic{display:inline-flex;animation:rvBob 1.4s ease-in-out infinite}
+  .rv-hint .rv-hint-ic svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:1.9;
+    stroke-linecap:round;stroke-linejoin:round}
+  @media(prefers-reduced-motion:reduce){
+    .rv-filters.rv-nudge .filt:not(.active){animation:none}
+    .rv-hint .rv-hint-ic{animation:none}}
 </style>
 </head>
 <body>
@@ -107,12 +128,12 @@
   <div class="wrap">
 
     <div class="rv-controls">
-      <div class="filters rv-filters" id="rv-filters">
+      <div class="filters rv-filters rv-nudge" id="rv-filters">
         <button class="filt active" data-cat="project"><span class="filt-ic" aria-hidden="true"></span><span data-en="Projects" data-vi="Dự án">Projects</span></button>
         <button class="filt active" data-cat="university"><span class="filt-ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 4 1.8 9 12 14 22.2 9 12 4Z"/><path d="M6 11.2V16c0 1.3 2.7 2.6 6 2.6s6-1.3 6-2.6v-4.8"/><path d="M22.2 9v5"/></svg></span><span data-en="Universities" data-vi="Đại học">Universities</span></button>
-        <button class="filt active" data-cat="shopping"><span class="filt-ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5.5 8h13l-1 12h-11l-1-12Z"/><path d="M8.7 8V6.6a3.3 3.3 0 0 1 6.6 0V8"/></svg></span><span data-en="Shopping" data-vi="Mua sắm">Shopping</span></button>
+        <button class="filt" data-cat="shopping"><span class="filt-ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5.5 8h13l-1 12h-11l-1-12Z"/><path d="M8.7 8V6.6a3.3 3.3 0 0 1 6.6 0V8"/></svg></span><span data-en="Shopping" data-vi="Mua sắm">Shopping</span></button>
         <button class="filt active" data-cat="transit"><span class="filt-ic" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="5.5" y="3.5" width="13" height="13" rx="3"/><path d="M5.5 11h13"/><path d="M9.3 16.5 7.3 20.5M14.7 16.5 16.7 20.5"/></svg></span><span data-en="Transit" data-vi="Giao thông">Transit</span></button>
-        <button class="filt active" data-cat="landmark"><span class="filt-ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3.2 9.5 12 4.2l8.8 5.3"/><path d="M5.5 10v8M9.2 10v8M14.8 10v8M18.5 10v8"/><path d="M3.5 20.5h17"/></svg></span><span data-en="Landmarks" data-vi="Địa danh">Landmarks</span></button>
+        <button class="filt" data-cat="landmark"><span class="filt-ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3.2 9.5 12 4.2l8.8 5.3"/><path d="M5.5 10v8M9.2 10v8M14.8 10v8M18.5 10v8"/><path d="M3.5 20.5h17"/></svg></span><span data-en="Landmarks" data-vi="Địa danh">Landmarks</span></button>
       </div>
 
       <div class="rv-views" id="rv-views" role="group" aria-label="Map view presets / Khung nhìn bản đồ">
@@ -124,6 +145,8 @@
         </div>
       </div>
     </div>
+
+    <p class="rv-hint" id="rv-hint"><span class="rv-hint-ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 20V5"/><path d="M6 11l6-6 6 6"/></svg></span><span data-en="Tap a category above to add it — shopping and landmarks start hidden." data-vi="Chạm vào một nhóm phía trên để thêm — mua sắm và địa danh đang ẩn lúc đầu.">Tap a category above to add it — shopping and landmarks start hidden.</span></p>
 
     <div class="rv-map" id="rivera-map-lab" role="application" aria-label="Map of Melbourne with Rivera projects and colour-coded landmark icons / Bản đồ Melbourne với các dự án Rivera và biểu tượng địa danh phân màu"></div>
 
@@ -213,6 +236,21 @@ document.addEventListener('DOMContentLoaded', function(){
       lat:-37.8076, lng:144.9632, address:'La Trobe Street, Melbourne VIC',
       descEn:'City campus along the north edge of the grid.',
       descVi:'Khuôn viên trung tâm dọc rìa bắc của lưới phố.' },
+    { id:'monash-college-docklands', cat:'university',
+      nameEn:'Monash College (Docklands)', nameVi:'Monash College (Docklands)',
+      lat:-37.8204, lng:144.9450, address:'750 Collins Street, Docklands VIC',
+      descEn:'Pathway college in Docklands, beside Collins Square.',
+      descVi:'Trường dự bị tại Docklands, cạnh Collins Square.' },
+    { id:'victoria-university', cat:'university',
+      nameEn:'Victoria University (City)', nameVi:'Đại học Victoria (Thành phố)',
+      lat:-37.8108, lng:144.9580, address:'370 Little Lonsdale Street, Melbourne VIC',
+      descEn:'City campus tower on Little Lonsdale Street.',
+      descVi:'Khuôn viên trung tâm trên phố Little Lonsdale.' },
+    { id:'monash-clayton', cat:'university',
+      nameEn:'Monash University (Clayton)', nameVi:'Đại học Monash (Clayton)',
+      lat:-37.9106, lng:145.1347, address:'Wellington Road, Clayton VIC',
+      descEn:'Australia’s largest university, in the south-east at Clayton.',
+      descVi:'Đại học lớn nhất nước Úc, ở phía đông nam tại Clayton.' },
 
     // Shopping
     { id:'emporium', cat:'shopping', nameEn:'Emporium Melbourne', nameVi:'Emporium Melbourne',
@@ -314,6 +352,9 @@ document.addEventListener('DOMContentLoaded', function(){
     attribution:'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>'
   }).addTo(map);
 
+  /* ---- categories hidden on first load (visitor toggles them on) ---- */
+  var OFF_BY_DEFAULT = { shopping:true, landmark:true };
+
   /* ---- markers ---- */
   var markersByCat = {};
   MAP_LOCATIONS.forEach(function(loc){
@@ -326,7 +367,7 @@ document.addEventListener('DOMContentLoaded', function(){
     var m = L.marker([loc.lat,loc.lng],{ icon:icon, riseOnHover:true });
     m.bindTooltip(function(){ return cardHtml(loc,false); },{ direction:'top', offset:[0,isProj?-10:-14], className:'rv-tip', opacity:1 });
     m.bindPopup(function(){ return cardHtml(loc,true); },{ className:'rv-pop', maxWidth:268, minWidth:212, autoPanPadding:[26,26] });
-    m.addTo(map);
+    if(!OFF_BY_DEFAULT[loc.cat]) m.addTo(map);   // shopping & landmarks start hidden
     (markersByCat[loc.cat]=markersByCat[loc.cat]||[]).push(m);
   });
 
@@ -345,8 +386,12 @@ document.addEventListener('DOMContentLoaded', function(){
 
   /* ---- category filters (each pill toggles its markers on/off) ---- */
   var filterBar = document.getElementById('rv-filters');
+  var hintEl = document.getElementById('rv-hint');
   filterBar.addEventListener('click', function(e){
     var btn = e.target.closest('.filt'); if(!btn) return;
+    // first interaction stops the nudge and retires the hint
+    filterBar.classList.remove('rv-nudge');
+    if(hintEl) hintEl.classList.add('gone');
     btn.classList.toggle('active');
     var cat = btn.getAttribute('data-cat'), on = btn.classList.contains('active');
     (markersByCat[cat]||[]).forEach(function(m){ on ? m.addTo(map) : map.removeLayer(m); });
