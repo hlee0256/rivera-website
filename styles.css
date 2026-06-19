@@ -494,7 +494,7 @@ footer{background:var(--espresso);color:var(--sand);padding:80px 0 40px}
    pale Voyager basemap reads with more punch (roads vs buildings) on screen and,
    especially, in in-app/mobile webviews. A single uniform filter can lift overall
    contrast but cannot recolour roads independently of buildings. */
-.rv-map .leaflet-tile-pane{filter:sepia(.05) saturate(1.4) contrast(1.32) brightness(.9)}
+.rv-map .leaflet-tile-pane{filter:sepia(.03) saturate(1.08) contrast(1.14) brightness(1)}
 
 /* Map marker legend — a deliberately distinct, saturated colour set for the MAP ONLY
    (red / blue / amber / green / black). This is an intentional departure from the warm
