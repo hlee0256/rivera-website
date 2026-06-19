@@ -489,8 +489,12 @@ footer{background:var(--espresso);color:var(--sand);padding:80px 0 40px}
 .rv-map{height:min(76vh,640px);border:1px solid var(--line);border-radius:14px;overflow:hidden;background:var(--paper);z-index:0}
 @media(max-width:600px){.rv-map{height:68vh}}
 
-/* a quiet warm tint over the OSM tiles so the map sits in the palette (tiles only) */
-.rv-map .leaflet-tile-pane{filter:sepia(.16) saturate(.74) brightness(1.04) contrast(.95) hue-rotate(-6deg)}
+/* a warm tint over the OSM tiles so the map sits in the palette (tiles only).
+   Pushed for contrast — higher contrast + saturation, lower brightness — so the
+   pale Voyager basemap reads with more punch (roads vs buildings) on screen and,
+   especially, in in-app/mobile webviews. A single uniform filter can lift overall
+   contrast but cannot recolour roads independently of buildings. */
+.rv-map .leaflet-tile-pane{filter:sepia(.05) saturate(1.4) contrast(1.32) brightness(.9)}
 
 /* Map marker legend — a deliberately distinct, saturated colour set for the MAP ONLY
    (red / blue / amber / green / black). This is an intentional departure from the warm
@@ -504,31 +508,52 @@ footer{background:var(--espresso);color:var(--sand);padding:80px 0 40px}
   --pin-landmark:var(--espresso);   /* Địa danh — black */
 }
 
-/* Rivera markers — solid saturated fill, thin cream ring + soft shadow so every dot
-   separates cleanly from the basemap. Two sizes only (set in app.js: project large,
-   every other marker one uniform smaller size). */
-.rv-pin{display:block;width:100%;height:100%;border-radius:999px;background:var(--ink-soft);
+/* Rivera markers — two languages of marker:
+   1) project = a small solid brand dot (the hero), thin cream ring + soft shadow.
+   2) every other destination = a colour-coded ICON CHIP: filled with its category
+      colour + a cream line glyph, so categories read by both shape AND colour. */
+.rv-hero{display:block;width:100%;height:100%;border-radius:999px;background:var(--pin-project);
   border:2px solid var(--paper-2);
-  box-shadow:0 2px 5px -1px rgba(27,19,13,.55),0 0 0 1px rgba(27,19,13,.22);
+  box-shadow:0 0 0 2px rgba(27,19,13,.16),0 2px 5px -1px rgba(27,19,13,.5),0 0 0 1px rgba(27,19,13,.22);
   transform:scale(var(--rv-pin-scale,1));transform-origin:center;
   transition:transform .2s cubic-bezier(.2,.7,.2,1)}
-.rv-pin--project{background:var(--pin-project)}
-.rv-pin--university{background:var(--pin-university)}
-.rv-pin--shopping{background:var(--pin-shopping)}
-.rv-pin--transit{background:var(--pin-transit)}
-.rv-pin--landmark{background:var(--pin-landmark)}
-.rv-pin.is-project{box-shadow:0 0 0 3px rgba(27,19,13,.16),0 2px 6px -1px rgba(27,19,13,.55),0 0 0 1px rgba(27,19,13,.22)}
-.leaflet-marker-icon:hover .rv-pin{transform:scale(calc(var(--rv-pin-scale,1) * 1.18))}
+.leaflet-marker-icon:hover .rv-hero{transform:scale(calc(var(--rv-pin-scale,1) * 1.18))}
 
-/* filter-pill swatch — a small dot whose colour matches that category's marker fill
-   (same CSS var). A cream + hairline ring keeps it visible on both the pale pill and
-   the active (brown-filled) pill. The pill itself is never tinted per category. */
-.filt-dot{display:inline-block;width:9px;height:9px;border-radius:999px;margin-right:8px;vertical-align:middle;position:relative;top:-1px;background:var(--ink-soft);box-shadow:0 0 0 1.5px var(--paper-2),0 0 0 2.5px var(--line)}
-.filt[data-cat=project] .filt-dot{background:var(--pin-project)}
-.filt[data-cat=university] .filt-dot{background:var(--pin-university)}
-.filt[data-cat=shopping] .filt-dot{background:var(--pin-shopping)}
-.filt[data-cat=transit] .filt-dot{background:var(--pin-transit)}
-.filt[data-cat=landmark] .filt-dot{background:var(--pin-landmark)}
+.rv-mk{display:flex;align-items:center;justify-content:center;width:100%;height:100%;
+  border-radius:999px;color:#FBF6EE;border:2px solid var(--paper-2);
+  box-shadow:0 2px 6px -1px rgba(27,19,13,.5),0 0 0 1px rgba(27,19,13,.18);
+  transform:scale(var(--rv-pin-scale,1));transform-origin:center;
+  transition:transform .2s cubic-bezier(.2,.7,.2,1),box-shadow .2s ease}
+.rv-mk svg{width:58%;height:58%;display:block;fill:none;stroke:currentColor;
+  stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+.rv-mk--university{background:var(--pin-university)}
+.rv-mk--shopping{background:var(--pin-shopping)}
+.rv-mk--transit{background:var(--pin-transit)}
+.rv-mk--landmark{background:var(--pin-landmark)}
+.leaflet-marker-icon:hover .rv-mk{transform:scale(calc(var(--rv-pin-scale,1) * 1.16));
+  box-shadow:0 5px 12px -3px rgba(27,19,13,.55),0 0 0 1px rgba(27,19,13,.22)}
+
+/* filter-pill key — a mini of the real marker: a filled colour chip (+ glyph for the
+   icon categories, a plain dot for projects), so the legend mirrors the map exactly. */
+.filt-ic{display:inline-flex;align-items:center;justify-content:center;width:18px;height:18px;border-radius:999px;margin-right:8px;vertical-align:middle;position:relative;top:-1px;color:#FBF6EE;box-shadow:0 0 0 1.5px var(--paper-2),0 0 0 2.5px var(--line)}
+.filt-ic svg{width:60%;height:60%;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+.filt[data-cat=project] .filt-ic{background:var(--pin-project)}
+.filt[data-cat=university] .filt-ic{background:var(--pin-university)}
+.filt[data-cat=shopping] .filt-ic{background:var(--pin-shopping)}
+.filt[data-cat=transit] .filt-ic{background:var(--pin-transit)}
+.filt[data-cat=landmark] .filt-ic{background:var(--pin-landmark)}
+.filt.active .filt-ic{box-shadow:0 0 0 1.5px var(--brown),0 0 0 2.5px rgba(251,246,238,.55)}
+
+/* first-visit nudge — some categories start hidden, so gently pulse the inactive
+   pills and show a one-line hint; both retire on the first filter tap (app.js). */
+@keyframes rvPulse{0%,100%{box-shadow:0 0 0 0 rgba(122,78,45,0)}50%{box-shadow:0 0 0 5px rgba(122,78,45,.18)}}
+.rv-filters.rv-nudge .filt:not(.active){animation:rvPulse 1.8s ease-in-out 4}
+.rv-hint{display:inline-flex;align-items:center;gap:9px;margin:2px 0 24px;font-size:.84rem;font-weight:500;color:var(--brown);transition:opacity .4s ease}
+.rv-hint.gone{opacity:0;pointer-events:none}
+@keyframes rvBob{0%,100%{transform:translateY(0)}50%{transform:translateY(-3px)}}
+.rv-hint .rv-hint-ic{display:inline-flex;animation:rvBob 1.4s ease-in-out infinite}
+.rv-hint .rv-hint-ic svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+@media(prefers-reduced-motion:reduce){.rv-filters.rv-nudge .filt:not(.active){animation:none}.rv-hint .rv-hint-ic{animation:none}}
 
 /* tooltip (hover) + popup (click) share one card look */
 .rv-card{font-family:"Manrope",sans-serif;color:var(--ink);min-width:178px}
@@ -566,7 +591,7 @@ footer{background:var(--espresso);color:var(--sand);padding:80px 0 40px}
 .rv-map .leaflet-control-attribution{background:rgba(251,249,244,.82);color:var(--ink-soft)}
 .rv-map .leaflet-control-attribution a{color:var(--brown)}
 
-@media(prefers-reduced-motion:reduce){.rv-pin{transition:none}}
+@media(prefers-reduced-motion:reduce){.rv-mk,.rv-hero{transition:none}}
 
 /* ---------------- GUIDE (buying guide) ---------------- */
 .guide-steps{padding:110px 0;border-bottom:1px solid var(--line)}

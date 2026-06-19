@@ -200,17 +200,10 @@
         descEn:'Tower apartments at the quiet western edge of the grid.',
         descVi:'Căn hộ tầng cao ở rìa tây yên tĩnh của lưới phố.',
         status:{ en:'Move-in ready', vi:'Sẵn sàng dọn vào' } },
-      { id:'quarter-nine', cat:'project', url:'quarter-nine.html',
-        nameEn:'Quarter Nine', nameVi:'Quarter Nine',
-        lat:-37.8228, lng:144.9646,
-        address:'Southbank, VIC',
-        descEn:'Riverside apartments across the Yarra from the CBD.',
-        descVi:'Căn hộ ven sông, bên kia sông Yarra so với trung tâm.',
-        status:{ en:'By appointment', vi:'Theo lịch hẹn' } },
 
       // --- Universities ---
       { id:'unimelb', cat:'university',
-        nameEn:'University of Melbourne', nameVi:'Đại học Melbourne',
+        nameEn:'University of Melbourne (Parkville)', nameVi:'Đại học Melbourne (Parkville)',
         lat:-37.7964, lng:144.9612,
         address:'Parkville, VIC',
         descEn:'Leading university, a short tram north in Parkville.',
@@ -221,6 +214,24 @@
         address:'La Trobe Street, Melbourne VIC',
         descEn:'City campus along the north edge of the grid.',
         descVi:'Khuôn viên trung tâm dọc rìa bắc của lưới phố.' },
+      { id:'monash-college-docklands', cat:'university',
+        nameEn:'Monash College (Docklands)', nameVi:'Monash College (Docklands)',
+        lat:-37.8204, lng:144.9450,
+        address:'750 Collins Street, Docklands VIC',
+        descEn:'Pathway college in Docklands, beside Collins Square.',
+        descVi:'Trường dự bị tại Docklands, cạnh Collins Square.' },
+      { id:'victoria-university', cat:'university',
+        nameEn:'Victoria University (City)', nameVi:'Đại học Victoria (Thành phố)',
+        lat:-37.8108, lng:144.9580,
+        address:'370 Little Lonsdale Street, Melbourne VIC',
+        descEn:'City campus tower on Little Lonsdale Street.',
+        descVi:'Khuôn viên trung tâm trên phố Little Lonsdale.' },
+      { id:'monash-clayton', cat:'university',
+        nameEn:'Monash University (Clayton)', nameVi:'Đại học Monash (Clayton)',
+        lat:-37.9106, lng:145.1347,
+        address:'Wellington Road, Clayton VIC',
+        descEn:'Australia’s largest university, in the south-east at Clayton.',
+        descVi:'Đại học lớn nhất nước Úc, ở phía đông nam tại Clayton.' },
 
       // --- Shopping ---
       { id:'emporium', cat:'shopping',
@@ -256,6 +267,12 @@
         address:'William Street, Melbourne VIC',
         descEn:'City Loop station at the quiet north-west corner of the grid.',
         descVi:'Ga City Loop ở góc tây bắc yên tĩnh của lưới phố.' },
+      { id:'parliament', cat:'transit',
+        nameEn:'Parliament Station', nameVi:'Ga Parliament',
+        lat:-37.8110, lng:144.9727,
+        address:'Spring Street, Melbourne VIC',
+        descEn:'City Loop station beneath Spring Street and the gardens.',
+        descVi:'Ga City Loop bên dưới phố Spring và khu vườn.' },
       { id:'state-library-station', cat:'transit',
         nameEn:'State Library Station', nameVi:'Ga State Library',
         lat:-37.8094, lng:144.9645,   // approximate (Metro Tunnel, new)
@@ -282,7 +299,7 @@
         address:'Swanston & Collins Street, Melbourne VIC',
         descEn:'Civic landmark on the Swanston and Collins corner.',
         descVi:'Công trình biểu tượng ở góc Swanston và Collins.' },
-      { id:'parliament', cat:'landmark',
+      { id:'parliament-house', cat:'landmark',
         nameEn:'Parliament House', nameVi:'Tòa nhà Nghị viện',
         lat:-37.8113, lng:144.9730,
         address:'Spring Street, Melbourne VIC',
@@ -357,19 +374,32 @@
       attribution:'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>'
     }).addTo(map);
 
-    // ---- markers (custom Rivera divIcons) ----
+    // ---- marker glyphs: a thin line icon per non-project category (brand
+    //      inline-SVG style). Projects keep their solid dot, no glyph. ----
+    var GLYPH={
+      university:'<path d="M12 4 1.8 9 12 14 22.2 9 12 4Z"/><path d="M6 11.2V16c0 1.3 2.7 2.6 6 2.6s6-1.3 6-2.6v-4.8"/><path d="M22.2 9v5"/>',
+      shopping:'<path d="M5.5 8h13l-1 12h-11l-1-12Z"/><path d="M8.7 8V6.6a3.3 3.3 0 0 1 6.6 0V8"/>',
+      transit:'<rect x="5.5" y="3.5" width="13" height="13" rx="3"/><path d="M5.5 11h13"/><path d="M9.3 16.5 7.3 20.5M14.7 16.5 16.7 20.5"/>',
+      landmark:'<path d="M3.2 9.5 12 4.2l8.8 5.3"/><path d="M5.5 10v8M9.2 10v8M14.8 10v8M18.5 10v8"/><path d="M3.5 20.5h17"/>'
+    };
+    // categories hidden on first load (the visitor toggles them on)
+    var OFF_BY_DEFAULT={ shopping:true, landmark:true };
+
+    // ---- markers: a project is a small solid dot (the hero); every other
+    //      destination is a colour-coded icon chip (category fill + cream glyph) ----
     var markersByCat={};
     city.locations.forEach(function(loc){
-      var isProj=loc.cat==='project', sz=isProj?22:15;   // exactly two sizes: project large, all else uniform
-      var icon=L.divIcon({
-        className:'', iconSize:[sz,sz], iconAnchor:[sz/2,sz/2],
-        html:'<span class="rv-pin rv-pin--'+loc.cat+(isProj?' is-project':'')+'"></span>'
-      });
+      var isProj=loc.cat==='project';
+      var sz=isProj?16:26;
+      var html=isProj
+        ? '<span class="rv-hero"></span>'
+        : '<span class="rv-mk rv-mk--'+loc.cat+'"><svg viewBox="0 0 24 24" aria-hidden="true">'+(GLYPH[loc.cat]||'')+'</svg></span>';
+      var icon=L.divIcon({ className:'', iconSize:[sz,sz], iconAnchor:[sz/2,sz/2], html:html });
       var m=L.marker([loc.lat,loc.lng],{ icon:icon, riseOnHover:true });
       // hover → quick tooltip, click → detailed popup; both read the live language
-      m.bindTooltip(function(){ return cardHtml(loc,false); },{ direction:'top', offset:[0,isProj?-12:-9], className:'rv-tip', opacity:1 });
+      m.bindTooltip(function(){ return cardHtml(loc,false); },{ direction:'top', offset:[0,isProj?-10:-14], className:'rv-tip', opacity:1 });
       m.bindPopup(function(){ return cardHtml(loc,true); },{ className:'rv-pop', maxWidth:268, minWidth:212, autoPanPadding:[26,26] });
-      m.addTo(map);
+      if(!OFF_BY_DEFAULT[loc.cat]) m.addTo(map);   // shopping & landmarks start hidden
       (markersByCat[loc.cat]=markersByCat[loc.cat]||[]).push(m);
     });
 
@@ -389,8 +419,12 @@
 
     // ---- category filters (each pill toggles its markers on/off) ----
     var filterBar=document.getElementById('rv-filters');
+    var hintEl=document.getElementById('rv-hint');
     filterBar.addEventListener('click',function(e){
       var btn=e.target.closest('.filt'); if(!btn) return;
+      // first interaction stops the first-visit nudge and retires the hint
+      filterBar.classList.remove('rv-nudge');
+      if(hintEl) hintEl.classList.add('gone');
       btn.classList.toggle('active');
       var cat=btn.getAttribute('data-cat'), on=btn.classList.contains('active');
       (markersByCat[cat]||[]).forEach(function(m){ on?m.addTo(map):map.removeLayer(m); });
