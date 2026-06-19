@@ -545,15 +545,47 @@ footer{background:var(--espresso);color:var(--sand);padding:80px 0 40px}
 .filt.active .filt-ic{box-shadow:0 0 0 1.5px var(--brown),0 0 0 2.5px rgba(251,246,238,.55)}
 
 /* first-visit nudge — some categories start hidden, so gently pulse the inactive
-   pills and show a one-line hint; both retire on the first filter tap (app.js). */
+   pills and BLINK a one-line hint; both retire on the first filter tap, and the hint
+   then fades and is removed entirely (app.js sets display:none after the fade). */
 @keyframes rvPulse{0%,100%{box-shadow:0 0 0 0 rgba(122,78,45,0)}50%{box-shadow:0 0 0 5px rgba(122,78,45,.18)}}
 .rv-filters.rv-nudge .filt:not(.active){animation:rvPulse 1.8s ease-in-out 4}
-.rv-hint{display:inline-flex;align-items:center;gap:9px;margin:2px 0 24px;font-size:.84rem;font-weight:500;color:var(--brown);transition:opacity .4s ease}
-.rv-hint.gone{opacity:0;pointer-events:none}
-@keyframes rvBob{0%,100%{transform:translateY(0)}50%{transform:translateY(-3px)}}
-.rv-hint .rv-hint-ic{display:inline-flex;animation:rvBob 1.4s ease-in-out infinite}
+@keyframes rvBlink{0%,100%{opacity:1}50%{opacity:.32}}
+.rv-hint{display:inline-flex;align-items:center;gap:9px;margin:13px 0 24px;font-size:.84rem;font-weight:500;color:var(--brown);transition:opacity .4s ease;animation:rvBlink 1.25s ease-in-out infinite}
+.rv-hint.gone{animation:none;opacity:0;pointer-events:none}
+.rv-hint .rv-hint-ic{display:inline-flex}
 .rv-hint .rv-hint-ic svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
-@media(prefers-reduced-motion:reduce){.rv-filters.rv-nudge .filt:not(.active){animation:none}.rv-hint .rv-hint-ic{animation:none}}
+@media(prefers-reduced-motion:reduce){.rv-filters.rv-nudge .filt:not(.active){animation:none}.rv-hint{animation:none}}
+
+/* map controls — top row (search + view presets), then the category toggles below */
+.rv-toolbar{display:flex;justify-content:space-between;align-items:center;gap:14px 28px;flex-wrap:wrap;margin-bottom:16px}
+.rv-toolbar .rv-search{flex:1 1 280px;max-width:440px;margin:0}
+.rv-vlabel{white-space:nowrap}
+@media(max-width:640px){
+  .rv-toolbar{align-items:stretch}
+  .rv-toolbar .rv-search{flex-basis:auto;max-width:none}
+  .rv-views{justify-content:flex-start}
+}
+
+/* project search box + autocomplete. Client-side (the list is tiny) so results are
+   instant. Mobile: full width, 16px input so iOS doesn't zoom on focus, 44px-tall rows. */
+.rv-search{position:relative;max-width:430px;margin:0 0 18px}
+.rv-search-ic{position:absolute;left:15px;top:50%;transform:translateY(-50%);display:inline-flex;color:var(--ink-soft);pointer-events:none}
+.rv-search-ic svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.rv-search input{width:100%;font-family:inherit;font-size:16px;color:var(--ink);background:var(--paper-2);border:1px solid var(--line);border-radius:999px;padding:13px 44px;transition:border-color .2s,box-shadow .2s}
+.rv-search input::placeholder{color:var(--ink-soft);opacity:.85}
+.rv-search input:focus{outline:none;border-color:var(--brown);box-shadow:0 0 0 3px rgba(122,78,45,.12)}
+.rv-search-clear{position:absolute;right:8px;top:50%;transform:translateY(-50%);display:none;align-items:center;justify-content:center;width:30px;height:30px;border:0;background:transparent;color:var(--ink-soft);font-size:1.3rem;line-height:1;cursor:pointer;border-radius:999px;transition:color .2s,background .2s}
+.rv-search-clear:hover{color:var(--brown);background:rgba(122,78,45,.08)}
+.rv-search.has-text .rv-search-clear{display:inline-flex}
+.rv-search-list{position:absolute;top:calc(100% + 6px);left:0;right:0;z-index:20;list-style:none;margin:0;padding:6px;background:var(--paper-2);border:1px solid var(--line);border-radius:12px;box-shadow:0 18px 40px -22px rgba(35,26,18,.55);max-height:300px;overflow-y:auto;display:none}
+.rv-search.open .rv-search-list{display:block}
+.rv-search-list li{display:flex;flex-direction:column;gap:1px;min-height:44px;justify-content:center;padding:8px 12px;border-radius:8px;cursor:pointer}
+.rv-search-list li[aria-selected=true],.rv-search-list li:hover{background:rgba(122,78,45,.09)}
+.rv-search-list .rv-sr-name{font-size:.95rem;font-weight:600;color:var(--ink);letter-spacing:-.01em}
+.rv-search-list .rv-sr-addr{font-size:.78rem;color:var(--ink-soft)}
+.rv-search-list .rv-sr-empty{padding:10px 12px;font-size:.86rem;color:var(--ink-soft);cursor:default}
+.rv-search-list .rv-sr-empty:hover{background:transparent}
+@media(max-width:600px){.rv-search{max-width:none}}
 
 /* tooltip (hover) + popup (click) share one card look */
 .rv-card{font-family:"Manrope",sans-serif;color:var(--ink);min-width:178px}

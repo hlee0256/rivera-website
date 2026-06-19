@@ -383,11 +383,11 @@
       landmark:'<path d="M3.2 9.5 12 4.2l8.8 5.3"/><path d="M5.5 10v8M9.2 10v8M14.8 10v8M18.5 10v8"/><path d="M3.5 20.5h17"/>'
     };
     // categories hidden on first load (the visitor toggles them on)
-    var OFF_BY_DEFAULT={ shopping:true, landmark:true };
+    var OFF_BY_DEFAULT={ shopping:true, transit:true, landmark:true };
 
     // ---- markers: a project is a small solid dot (the hero); every other
     //      destination is a colour-coded icon chip (category fill + cream glyph) ----
-    var markersByCat={};
+    var markersByCat={}, markerById={};
     city.locations.forEach(function(loc){
       var isProj=loc.cat==='project';
       var sz=isProj?16:26;
@@ -399,8 +399,9 @@
       // hover → quick tooltip, click → detailed popup; both read the live language
       m.bindTooltip(function(){ return cardHtml(loc,false); },{ direction:'top', offset:[0,isProj?-10:-14], className:'rv-tip', opacity:1 });
       m.bindPopup(function(){ return cardHtml(loc,true); },{ className:'rv-pop', maxWidth:268, minWidth:212, autoPanPadding:[26,26] });
-      if(!OFF_BY_DEFAULT[loc.cat]) m.addTo(map);   // shopping & landmarks start hidden
+      if(!OFF_BY_DEFAULT[loc.cat]) m.addTo(map);   // transit, shopping & landmarks start hidden
       (markersByCat[loc.cat]=markersByCat[loc.cat]||[]).push(m);
+      markerById[loc.id]=m;
     });
 
     // shared card markup; detail=true adds the "View listing" link for projects
@@ -422,9 +423,12 @@
     var hintEl=document.getElementById('rv-hint');
     filterBar.addEventListener('click',function(e){
       var btn=e.target.closest('.filt'); if(!btn) return;
-      // first interaction stops the first-visit nudge and retires the hint
+      // first interaction stops the first-visit nudge and retires the hint (fade, then remove)
       filterBar.classList.remove('rv-nudge');
-      if(hintEl) hintEl.classList.add('gone');
+      if(hintEl && !hintEl.classList.contains('gone')){
+        hintEl.classList.add('gone');
+        setTimeout(function(){ if(hintEl) hintEl.style.display='none'; },450);
+      }
       btn.classList.toggle('active');
       var cat=btn.getAttribute('data-cat'), on=btn.classList.contains('active');
       (markersByCat[cat]||[]).forEach(function(m){ on?m.addTo(map):map.removeLayer(m); });
@@ -466,6 +470,86 @@
     // close any open popup when the language flips, so it reopens in the new language
     var langBtn2=document.getElementById('lang');
     if(langBtn2) langBtn2.addEventListener('click',function(){ map.closePopup(); });
+
+    // ---- project search: type a residence, pick it, the map flies there and opens it ----
+    var PROJECTS=MAP_LOCATIONS.filter(function(l){ return l.cat==='project'; });
+    var sWrap=document.getElementById('rv-search');
+    var sInput=document.getElementById('rv-search-input');
+    var sList=document.getElementById('rv-search-list');
+    var sClear=document.getElementById('rv-search-clear');
+    if(sWrap && sInput && sList){
+      var matches=[], activeIdx=-1;
+      // accent-insensitive folding so "docklands" or VI text without marks still match
+      var fold=function(s){ return String(s).toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/đ/g,'d'); };
+      var nameOf=function(loc){ return loc[curLang()==='vi'?'nameVi':'nameEn']; };
+      var openList=function(){ sWrap.classList.add('open'); sInput.setAttribute('aria-expanded','true'); };
+      var closeList=function(){ sWrap.classList.remove('open'); sInput.setAttribute('aria-expanded','false'); activeIdx=-1; };
+      var render=function(){
+        sList.innerHTML='';
+        if(!matches.length){
+          var em=document.createElement('li'); em.className='rv-sr-empty';
+          em.textContent=curLang()==='vi'?'Không tìm thấy dự án nào.':'No matching residence.';
+          sList.appendChild(em); return;
+        }
+        matches.forEach(function(loc,i){
+          var li=document.createElement('li');
+          li.setAttribute('role','option'); li.setAttribute('data-id',loc.id);
+          li.setAttribute('aria-selected', i===activeIdx?'true':'false');
+          var nm=document.createElement('span'); nm.className='rv-sr-name'; nm.textContent=nameOf(loc);
+          var ad=document.createElement('span'); ad.className='rv-sr-addr'; ad.textContent=loc.address;
+          li.appendChild(nm); li.appendChild(ad); sList.appendChild(li);
+        });
+      };
+      var update=function(){
+        var q=sInput.value.trim();
+        sWrap.classList.toggle('has-text', q.length>0);
+        if(!q){ matches=[]; closeList(); return; }
+        var fq=fold(q);
+        matches=PROJECTS.filter(function(loc){
+          return fold(loc.nameEn).indexOf(fq)>-1 || fold(loc.nameVi).indexOf(fq)>-1 || fold(loc.address).indexOf(fq)>-1;
+        }).slice(0,8);
+        activeIdx=matches.length?0:-1;
+        render(); openList();
+      };
+      // if a category is toggled off, switch it back on so the popup can show
+      var ensureCat=function(cat){
+        var pill=filterBar.querySelector('.filt[data-cat='+cat+']');
+        if(pill && !pill.classList.contains('active')){
+          pill.classList.add('active');
+          (markersByCat[cat]||[]).forEach(function(m){ m.addTo(map); });
+        }
+      };
+      var choose=function(loc){
+        if(!loc) return;
+        sInput.value=nameOf(loc); sWrap.classList.add('has-text');
+        closeList(); sInput.blur();              // dismiss the mobile keyboard
+        ensureCat(loc.cat);
+        var m=markerById[loc.id]; if(!m) return;
+        var ll=m.getLatLng(), z=Math.max(map.getZoom(),16);
+        if(reduceMotion){ map.setView(ll,z,{animate:false}); m.openPopup(); }
+        else { map.flyTo(ll,z); map.once('moveend', function(){ m.openPopup(); }); }
+      };
+      sInput.addEventListener('input', update);
+      sInput.addEventListener('focus', function(){ if(sInput.value.trim()) update(); });
+      sInput.addEventListener('keydown', function(e){
+        if(e.key==='ArrowDown'){ e.preventDefault(); if(!sWrap.classList.contains('open')){ update(); return; }
+          if(matches.length){ activeIdx=(activeIdx+1)%matches.length; render(); } }
+        else if(e.key==='ArrowUp'){ e.preventDefault();
+          if(matches.length){ activeIdx=(activeIdx-1+matches.length)%matches.length; render(); } }
+        else if(e.key==='Enter'){ if(matches.length){ e.preventDefault(); choose(matches[activeIdx>-1?activeIdx:0]); } }
+        else if(e.key==='Escape'){ sInput.value=''; sWrap.classList.remove('has-text'); closeList(); }
+      });
+      sList.addEventListener('click', function(e){
+        var li=e.target.closest('li[data-id]'); if(!li) return;
+        var id=li.getAttribute('data-id');
+        choose(PROJECTS.filter(function(p){ return p.id===id; })[0]);
+      });
+      if(sClear) sClear.addEventListener('click', function(){
+        sInput.value=''; matches=[]; sWrap.classList.remove('has-text'); closeList(); sInput.focus();
+      });
+      document.addEventListener('click', function(e){ if(!sWrap.contains(e.target)) closeList(); });
+      if(langBtn2) langBtn2.addEventListener('click', closeList);   // labels differ per language
+    }
 
     // keep the map sized correctly after first layout and on resize
     setTimeout(function(){ map.invalidateSize(); },0);
