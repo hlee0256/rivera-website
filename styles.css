@@ -727,33 +727,27 @@ footer{background:var(--espresso);color:var(--sand);padding:80px 0 40px}
   .au-rail[data-active="sky"] .au-rail-tick[data-band="sky"]{opacity:1;color:var(--brown);font-weight:700}
 }
 
-/* ---- 00 hero ---- */
-.au-hero{position:relative;display:grid;grid-template-columns:46% 54%;min-height:100svh}
-.au-hero-img{position:relative;overflow:hidden;background:var(--coffee)}
-.au-hero-vid{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;display:block}
-.au-hero-img::after{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(to top,rgba(27,19,13,.5),rgba(27,19,13,0) 52%)}
-.au-hero-panel{background:var(--paper-2);display:flex;align-items:center;padding:clamp(40px,6vw,92px)}
-.au-hero-panel-in{max-width:540px;width:100%}
-.au-hero .au-edition{margin-bottom:26px}
-.au-hero .pd-back{display:flex;width:fit-content;color:var(--ink-soft);margin-bottom:20px}
-.au-hero .pd-back:hover{color:var(--brown)}
-.au-hero-panel-in .eyebrow{display:block}
-.au-tagstrip .st{font-size:.7rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-soft);border:1px solid var(--line);border-radius:999px;padding:7px 14px}
-.au-h1{margin:16px 0 0;line-height:.92}
-.au-h1>span:first-child{display:block;font-weight:800;font-size:clamp(3.2rem,9vw,6rem);letter-spacing:.08em;color:var(--ink)}
-.au-h1-sub{display:block;font-style:italic;font-size:clamp(1.3rem,3.3vw,2.1rem);color:var(--brown);margin-top:8px;letter-spacing:0;font-weight:400}
-.au-tagline{font-size:clamp(1.15rem,2.4vw,1.6rem);color:var(--ink-soft);margin-top:18px;font-style:italic}
-.au-hero .pd-loc{margin-top:22px}
-.au-tagstrip{display:flex;flex-wrap:wrap;gap:9px;margin-top:24px}
-.au-scrollcue{display:inline-flex;align-items:center;gap:9px;margin-top:34px;font:600 .66rem/1 "Manrope",sans-serif;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-soft)}
-.au-scrollcue::after{content:"↓";font-size:.9rem}
-@media(prefers-reduced-motion:no-preference){.au-scrollcue::after{animation:au-bob 1.8s ease-in-out infinite}}
+/* ---- 00 hero (full-bleed immersive video; built on the shared .pd-hero) ---- */
+.au-hero{min-height:100svh}
+.au-hero .au-edition{color:rgba(251,246,238,.66);margin-bottom:22px}
+.au-hero .au-h1{margin:8px 0 0;line-height:.94}
+.au-hero .au-h1>span:first-child{display:block;font-weight:800;font-size:clamp(3rem,8.5vw,5.8rem);letter-spacing:.08em;color:#FBF6EE}
+.au-hero .au-h1-sub{display:block;font-style:italic;font-weight:400;font-size:clamp(1.3rem,3.3vw,2.1rem);color:var(--tan);margin-top:6px;letter-spacing:0}
+.au-hero .au-tagline{font-size:clamp(1.15rem,2.4vw,1.55rem);color:rgba(251,246,238,.88);margin-top:16px;font-style:italic}
+.au-hero .pd-loc{margin-top:20px}
+.au-hero .pd-tagstrip{margin-top:22px}
+.au-hero .au-scrollcue{display:inline-flex;align-items:center;gap:9px;margin-top:32px;font:600 .66rem/1 "Manrope",sans-serif;letter-spacing:.2em;text-transform:uppercase;color:rgba(251,246,238,.72)}
+.au-hero .au-scrollcue::after{content:"↓";font-size:.9rem}
+@media(prefers-reduced-motion:no-preference){.au-hero .au-scrollcue::after{animation:au-bob 1.8s ease-in-out infinite}}
 @keyframes au-bob{0%,100%{transform:translateY(0)}50%{transform:translateY(4px)}}
-@media(max-width:860px){
-  .au-hero{grid-template-columns:1fr;min-height:0}
-  .au-hero-img{min-height:62svh}
-  .au-hero-panel{padding:clamp(30px,8vw,52px)}
-}
+/* shared-element zoom: the hero film morphs to/from the landing-page featured film */
+.au-vt-hero{view-transition-name:aura-hero}
+::view-transition-group(aura-hero){animation-duration:.55s;animation-timing-function:cubic-bezier(.2,.7,.2,1)}
+/* landing-page featured film (index.html) sits behind the warm gradient overlay */
+.featured .bg .featvid{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0}
+/* the warm overlay becomes a translucent scrim so the film shows through (text sits left, kept dark for contrast) */
+.featured .bg::before{z-index:1;background:linear-gradient(100deg,rgba(18,12,7,.9) 0%,rgba(18,12,7,.55) 46%,rgba(18,12,7,.2) 100%)}
+.featured .featured-in{width:100%}  /* keep copy left-aligned over the darkest scrim, not centred over the bright film */
 
 /* ---- gallery strip directly under hero ---- */
 .au-strip-sec{background:var(--paper);padding:0 0 clamp(46px,7vw,84px)}
@@ -878,6 +872,7 @@ footer{background:var(--espresso);color:var(--sand);padding:80px 0 40px}
 
 /* ---- CTA ---- */
 .au-cta .au-edition-end{display:block;color:var(--tan);opacity:.65;margin-bottom:22px}
+.au-cta h2{color:#FBF6EE}  /* keep the sans "Arrange a" legible on the dark band */
 
 /* ---- responsive ---- */
 @media(max-width:980px){
