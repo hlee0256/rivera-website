@@ -730,9 +730,8 @@ footer{background:var(--espresso);color:var(--sand);padding:80px 0 40px}
 /* ---- 00 hero ---- */
 .au-hero{position:relative;display:grid;grid-template-columns:46% 54%;min-height:100svh}
 .au-hero-img{position:relative;overflow:hidden;background:var(--coffee)}
-.au-hero-img::before{content:"";position:absolute;inset:-2%;background-image:linear-gradient(to top,rgba(27,19,13,.6),rgba(27,19,13,0) 46%),url('images/aura-melbourne-square/hero.jpg');background-size:cover,cover;background-position:center,center 32%;background-repeat:no-repeat}
-@media(prefers-reduced-motion:no-preference){.au-hero-img::before{animation:au-zoom 26s ease-out both}}
-@keyframes au-zoom{from{transform:scale(1.001)}to{transform:scale(1.075)}}
+.au-hero-vid{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;display:block}
+.au-hero-img::after{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(to top,rgba(27,19,13,.5),rgba(27,19,13,0) 52%)}
 .au-hero-panel{background:var(--paper-2);display:flex;align-items:center;padding:clamp(40px,6vw,92px)}
 .au-hero-panel-in{max-width:540px;width:100%}
 .au-hero .au-edition{margin-bottom:26px}
