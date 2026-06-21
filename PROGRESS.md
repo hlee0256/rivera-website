@@ -87,6 +87,11 @@ bespoke flagship; the other detail pages follow the shared `.pd-*` template.
 
 ## Log (newest first)
 
+### 2026-06-21 · Claude (Opus) · AURA film: clean text-free cut + grade + smoother zoom
+- **Did:** re-cut the hero film to text-free footage only (4 windows stitched, frame-accurate: rowers/jogger/tower detail · architectural+woman · tea · water+zen-stones, ~11.3s → `hero-cut.mp4`), removing every title/branding card incl. the long OSK logo tail (fixes the "stuck at the end"). Added a subtle colour grade (saturate/contrast/brightness via `.au-vt-hero` filter) on both films. Added a landing→detail playback-time hand-off (sessionStorage) so the hero film resumes where the featured film left off instead of restarting, and a `prefetch` of the AURA page for a snappier click-through.
+- **Files touched:** images/aura-melbourne-square/hero-cut.mp4 (new), aura-melbourne-square.html, index.html, styles.css, app.js; removed hero-full.mp4.
+- **Follow-ups:** colour grade is mild + easily tunable; the cross-document zoom continuity is best in Chromium (graceful fallback elsewhere).
+
 ### 2026-06-21 · Claude (Opus) · AURA hero: use the full original film
 - **Asked to:** use the original (uncut) developer film for the AURA hero instead of the trimmed clip.
 - **Did:** exported the full 98s film (video-only passthrough + faststart → `hero-full.mp4`) and repointed both the AURA hero and the landing-page Featured film to it; removed the old trimmed `hero.mp4`.

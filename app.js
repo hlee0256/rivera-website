@@ -592,11 +592,29 @@
     });
   });
 
+  // ---- AURA landing film: hand its playback time to the detail-page hero (seamless zoom) ----
+  var auFeat=document.querySelector('.featured .featvid');
+  if(auFeat){
+    var auSaveT=function(){ try{ sessionStorage.setItem('aura-hero-t', String(auFeat.currentTime||0)); }catch(e){} };
+    var auFeatLink=document.querySelector('.featured a[href="aura-melbourne-square.html"]');
+    if(auFeatLink) auFeatLink.addEventListener('click', auSaveT);
+    window.addEventListener('pagehide', auSaveT);
+  }
+
   // ---- AURA at Melbourne Square (aura-melbourne-square.html) ----
   // Page-scoped: own reveal observer + altitude rail. Does NOT touch the
   // shared reveal list above. Guarded so it never runs on other pages.
   var auPage=document.getElementById('aura-page');
   if(auPage){
+    // resume the hero film where the landing film left off (seamless zoom continuity)
+    var auHeroVid=auPage.querySelector('video.hero-vid');
+    if(auHeroVid){
+      var auT=0; try{ auT=parseFloat(sessionStorage.getItem('aura-hero-t'))||0; sessionStorage.removeItem('aura-hero-t'); }catch(e){}
+      if(auT>0.1){
+        var auSeek=function(){ var d=auHeroVid.duration; try{ auHeroVid.currentTime=(d&&isFinite(d))?(auT%d):auT; }catch(e){} };
+        if(auHeroVid.readyState>=1) auSeek(); else auHeroVid.addEventListener('loadedmetadata', auSeek, {once:true});
+      }
+    }
     var auReduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if(!auReduce&&'IntersectionObserver' in window){
       var auIo=new IntersectionObserver(function(es){
