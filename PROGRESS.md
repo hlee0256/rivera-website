@@ -1,26 +1,13 @@
-# PROGRESS.md — Rivera master log
+# PROGRESS.md — Rivera live state
 
-The single source of truth for **what state the site is in and what is in flight.**
-Every agent reads this first and **updates it before finishing** any site-changing task
-(this is enforced in `CLAUDE.md`).
+**What state the site is in and what's in flight.** Short by design: read this first; it's the
+shared memory that keeps work coherent. The dated history lives in `CHANGELOG.md` (skim-only).
 
-> Want a visual view? Ask: **"build a progress dashboard from PROGRESS.md"** and the agent
-> will generate a `progress.html` (read-only, styled in the Rivera palette) from the Status
-> Board + Log below. Regenerate it any time this file changes.
+**After a site-changing task:** update the Status Board row and Open threads if either changed,
+and add one short entry to the top of `CHANGELOG.md`. That's it.
 
----
-
-## How to update (required of every agent)
-
-**Before you start:** read this file, then `CLAUDE.md`, `DESIGN.md`, and `Aura-design.md`.
-
-**Before you finish any task that changes the site:**
-1. Update the row in the **Project Status Board** (or add one) — set the Stage, Live, Updated.
-2. Add **one dated entry** to the top of the **Log** (newest first), using the template.
-3. If you opened or resolved a site-wide issue, update **Open threads**.
-
-Keep entries short and factual. Never delete Log history; only the summary sections
-(Status Board, Current state, Open threads) get rewritten.
+> Want a visual view? Ask **"build a progress dashboard"** → a read-only `progress.html` in the
+> Rivera palette, from the Status Board + `CHANGELOG.md`.
 
 ---
 
@@ -37,7 +24,7 @@ Keep entries short and factual. Never delete Log history; only the summary secti
 | **Build** | Bilingual page built (VI-native), Rivera tokens/components, page-scoped CSS/JS if bespoke. |
 | **Review** | Self-review pass: native VI, factual honesty, no em-dashes, a11y, links/assets, balance. |
 | **Verify** | Previewed in EN + VI, desktop + mobile; screenshots. |
-| **Live** | Deployed to `main` (Vercel) and confirmed at the live URL. |
+| **Live** | Pushed to `main` (Vercel) and confirmed at the live URL. |
 
 ---
 
@@ -61,19 +48,22 @@ fictional placeholders).
 ## Current state
 
 Static, bilingual (**VI default** / EN), no-build marketing site for Rivera, a boutique
-Melbourne property practice. One shared `styles.css` + `app.js`. Deployed on **Vercel** from
-`main` (`https://rivera-website.vercel.app`). Pages: `index.html` (landing, featuring AURA),
-`projects.html` (7-project collection), `about.html`, `map.html`, `insights.html` + insight
-articles, `enquire.html`, `guide.html`, and 7 project detail pages. AURA is the deliberately
-bespoke flagship; the other detail pages follow the shared `.pd-*` template.
+Melbourne property practice. One shared `styles.css` + `app.js` (map markers in `map-data.js`).
+Deployed on **Vercel** from `main` (`https://rivera-website.vercel.app`). Pages: `index.html`
+(landing, featuring AURA), `projects.html` (7-project collection), `about.html`, `map.html`,
+`insights.html` + insight articles, `enquire.html`, `guide.html`, and 7 project detail pages.
+AURA is the deliberately bespoke flagship; the other detail pages follow the shared `.pd-*`
+template.
 
 ## Open threads
 
 - `about.html` still references a placeholder founder ("Elena", 3×) — confirm the real story or relabel.
 - Contact email `hello@rivera.estate` and the `index.html` enquiry form `YOUR_FORM_ID` are placeholders.
 - AU real-estate legals still missing: agent licence number, agency details, privacy policy.
-- Map (`map.html`) and the landing teaser: keep in sync as projects change.
-- Housekeeping: stale per-session worktrees under `.claude/worktrees/` can be pruned.
+- Map (`map.html` / `map-data.js`) and the landing teaser: keep in sync as projects change.
+- Domain not yet pointed: site runs on the Vercel staging URL. To go live on **rivera.au**, add
+  the domain in Vercel → Settings → Domains (A record `76.76.21.21` or the CNAME Vercel gives),
+  but only after the placeholder/legals threads above are cleared.
 
 ## Decisions locked
 
@@ -81,48 +71,4 @@ bespoke flagship; the other detail pages follow the shared `.pd-*` template.
 - **No em-dashes** anywhere in copy. Period/comma/colon, or middot `·`; en-dash `–` only in numeric ranges.
 - **`projects.html` = the 7 real projects**, pill cards (status + sale) + lowest-per-segment "from $X" pricing. No type filter, no fictional listings.
 - **AURA is the effort/quality bar** for project pages — see `Aura-design.md`. Match the effort, not the layout.
-- **Deploy = cherry-pick the changed files onto `origin/main`** (worktree trick). Never blanket-push a feature branch or working tree to production.
-
----
-
-## Log (newest first)
-
-### 2026-06-21 · Claude (Opus) · AURA film: clean text-free cut + grade + smoother zoom
-- **Did:** re-cut the hero film to text-free footage only (4 windows stitched, frame-accurate: rowers/jogger/tower detail · architectural+woman · tea · water+zen-stones, ~11.3s → `hero-cut.mp4`), removing every title/branding card incl. the long OSK logo tail (fixes the "stuck at the end"). Added a subtle colour grade (saturate/contrast/brightness via `.au-vt-hero` filter) on both films. Added a landing→detail playback-time hand-off (sessionStorage) so the hero film resumes where the featured film left off instead of restarting, and a `prefetch` of the AURA page for a snappier click-through.
-- **Files touched:** images/aura-melbourne-square/hero-cut.mp4 (new), aura-melbourne-square.html, index.html, styles.css, app.js; removed hero-full.mp4.
-- **Follow-ups:** colour grade is mild + easily tunable; the cross-document zoom continuity is best in Chromium (graceful fallback elsewhere).
-
-### 2026-06-21 · Claude (Opus) · AURA hero: use the full original film
-- **Asked to:** use the original (uncut) developer film for the AURA hero instead of the trimmed clip.
-- **Did:** exported the full 98s film (video-only passthrough + faststart → `hero-full.mp4`) and repointed both the AURA hero and the landing-page Featured film to it; removed the old trimmed `hero.mp4`.
-- **Files touched:** images/aura-melbourne-square/hero-full.mp4 (new), aura-melbourne-square.html, index.html; removed hero.mp4.
-- **Follow-ups:** the original film carries title/branding cards throughout and a long static OSK Property logo tail (~56s on); flagged to the owner in case a different cut is wanted later.
-
-### 2026-06-21 · Claude (Opus) · Workflow docs + Desktop folder repair
-- **Asked to:** establish a better master progress sheet, extract AURA's design language into `Aura-design.md`, make `CLAUDE.md` enforce progress updates, and fix the local Desktop folder.
-- **Did:** created `PROGRESS.md` (this file) with a Status Board + pipeline; created `Aura-design.md`; refreshed `CLAUDE.md` (corrected stale facts, added the mandatory "update PROGRESS.md" rule + doc pointers); switched the Desktop working tree from the stale `chore/cleanup-folder` back to `main` (old WIP preserved in a stash).
-- **Files touched:** PROGRESS.md (new), Aura-design.md (new), CLAUDE.md.
-- **Follow-ups:** none.
-
-### 2026-06-21 · Claude (Opus) · AURA: immersive hero + landing feature + zoom
-- **Did:** rebuilt the AURA hero as a full-bleed film (trimmed developer clip); made AURA the landing-page Featured Residence running the same film; added a cross-document View-Transition zoom between them; fixed the CTA heading contrast.
-- **Files touched:** aura-melbourne-square.html, index.html, styles.css.
-- **Follow-ups:** none.
-
-### 2026-06-19 · Claude (Opus) · Added AURA at Melbourne Square (bespoke)
-- **Did:** built the bespoke "Ascent" detail page (research → design panel → review), optimised 30 renders + a trimmed hero film, added the projects card + map marker.
-- **Files touched:** aura-melbourne-square.html (new), styles.css, app.js, projects.html, images/aura-melbourne-square/.
-- **Follow-ups:** none.
-
-### 2026-06-19 · (prior session) · Added Piccolo House (Kew)
-- **Did:** added the Piccolo House project (detail page, card, map, images).
-
-### 2026-06-18 · Claude · Project-card redesign + Collins Wharf
-- **Did:** redesigned `projects.html` cards (status + sale pills, per-segment pricing); added Collins Wharf Aluna + Ancora detail pages and cards.
-- **Files touched:** projects.html, styles.css, app.js, collins-wharf-*.html, images/.
-
-### 2026-06-18 · (prior session) · Cleanup + map upgrades
-- **Did:** removed the 9 fictional placeholder projects (show only the real ones); shipped map upgrades (search, icons) to the live site.
-
-### 2026-06-17 · (history) · Initial build
-- **Did:** first version of the site; map page; the early project detail pages; bilingual copy pass.
+- **The real folder `~/Desktop/Rivera-Website` (`main`) is the source of truth.** Edit it directly; deploy = commit + push `main` → Vercel. Don't work in git worktrees; never commit `.env*`.

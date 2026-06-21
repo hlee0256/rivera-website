@@ -416,6 +416,59 @@ Always honour reduced motion — the system already disables the marquee and rev
 
 ---
 
+## 6. Page templates (the shared `.pd-*` project detail page)
+
+`aura-melbourne-square.html` is the bespoke flagship (see `Aura-design.md`). **Every other
+project page is the shared template** — clone `380-melbourne.html` and swap content. The order
+is fixed; scale the depth to the material (see `Aura-design.md` §5), never invent sections to
+fill a shape.
+
+### 6.1 Detail-page section order
+
+1. **Hero (`.pd-hero`)** — full-bleed, dark, text bottom-left. Prefer a looping muted video as
+   the **first child**: `<video class="hero-vid" autoplay muted loop playsinline poster="…">`
+   (`.pd-hero .hero-vid` makes it cover). No video → `background-image` on `.pd-hero`. Contains
+   `.pd-back` ("← All projects"), `.eyebrow light`, `<h1>`, `.pd-loc` (address), and a
+   `.pd-tagstrip` of up to ~4 `.st` chips.
+2. **Overview (`.pd-body > .pd-grid`)** — two columns: prose `.pd-lead` + sticky spec card
+   `.pd-card` (see §4.2). `.pd-lead` = eyebrow + split serif `<h2>` + two short paragraphs
+   (lead with story + location) + a `.pd-features` Highlights list (`<span class="fi">01</span>`,
+   ~5 points). `.pd-card` = `Guide` price `.pr`, an icon `.specs-row` (bed/bath/car), a
+   `.pd-facts` key/value list, a full-width `.btn`, and a `.pd-note` indicative-price disclaimer.
+3. **Gallery (`.pd-gallery`)** — the crossfade carousel (§6.2).
+4. **Location (`.pd-map-sec`)** — the Google-Maps panel (§6.3).
+5. **CTA (`.pd-cta`)** — dark band, split serif heading, one paragraph, `.btn` + back link.
+6. **Footer** — the shared footer, verbatim.
+
+Cards link with `<a class="pcard" href="<slug>.html">` (the whole card is the link — **no
+`data-type`, no filter** on `projects.html`; status/sale pills carry the meaning). Media goes
+to `images/<slug>/` via `sips` + Swift/AVFoundation (no `ffmpeg` on this machine — see
+`CLAUDE.md`); lazy-load below-fold imagery.
+
+### 6.2 Gallery carousel + category tabs
+
+One framed `#pcarousel`, **crossfade** (not slide), auto-advance every 4.8s, pause on hover,
+arrows + dots, swipe on touch (logic = the guarded carousel block in `app.js`). Each slide:
+`<div class="pc-slide" data-cat="…" style="background-image:url('…')"><span class="pc-cap" …></span></div>`.
+Tabs (`#pcTabs`) filter via `data-cat`. Vocabulary: `all`, `residence` (label **Interiors /
+Phòng ngủ**), `building`, `views`, `amenities`. The `data-cat` **key is fixed**; only its label
+is translated (note the key stays `residence` even though the label reads "Interiors"). Keep
+categories balanced and interleave them so the "All" reel alternates interior / building / view.
+
+### 6.3 Location map (no API key)
+
+A real Google map that **looks static** but opens Google Maps on click:
+- `<iframe class="pd-map-frame" src="https://www.google.com/maps?q=<ADDRESS>&z=15&output=embed">`
+  with `pointer-events:none` (reads as a still image).
+- A full-panel `<a class="pd-map-overlay" href="https://www.google.com/maps/search/?api=1&query=<ADDRESS>" target="_blank">` makes the whole map clickable.
+- A `.pd-map-bar` below shows the address + an "Open in Google Maps →" link.
+- The map is **warm-tinted with CSS** (`filter: sepia(.42) saturate(.82) hue-rotate(-8deg) …`
+  plus a `--brown` multiply overlay) to sit in the palette. An exact themed map would need the
+  paid Maps JS API — deliberately avoided. (`map.html` is a separate, richer Leaflet map; see
+  `MAP_LOCATIONS` in `app.js`.)
+
+---
+
 ## Appendix — Build checklist for a new page
 
 1. Link the fonts + `styles.css`; add `app.js` before `</body>`.

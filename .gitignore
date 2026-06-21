@@ -17,3 +17,8 @@ _sheets/
 
 # --- Vercel ---
 .vercel
+
+# Local env / secrets (never commit)
+.env
+.env.local
+.env.*.local

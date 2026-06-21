@@ -127,5 +127,5 @@ minutes) · the particulars (pricing + facts + Rivera's view) · CTA.
 - `DESIGN.md` — the token/component/motion system (the "how it's built").
 - `CLAUDE.md` — quick orientation + the hard rules + the update-PROGRESS rule.
 - `PROGRESS.md` — current status board + log.
-- `PROJECT-DESIGN-RULES.md` — the older design contract (overlaps `DESIGN.md`; this file and
-  `DESIGN.md` take precedence where they conflict).
+- `DESIGN.md` §6 — the shared `.pd-*` detail-page template (section order, carousel, map) for
+  non-bespoke projects.

@@ -4,26 +4,32 @@ Context file for Claude Code. **Read this first before editing anything.**
 
 ## ⚠️ Required workflow (every agent, every time)
 
-1. **Before you start**, read in this order: **`PROGRESS.md`** (current status + what's in
-   flight), **`DESIGN.md`** (the token/component system), and **`Aura-design.md`** (the
-   project-page design language + the quality bar).
-2. **Before you finish any task that changes the site**, **update `PROGRESS.md`**: set the
-   Project Status Board row, add one dated Log entry, touch Open threads if needed. This is
-   **non-negotiable** — the progress sheet is the shared memory across sessions.
-3. Pure conversation / advice that changes nothing is exempt. Everything that edits a file is not.
+1. **Before you start**, read `PROGRESS.md` (it is short by design: status board, **locked
+   decisions**, and **open threads** — this is what keeps work coherent, e.g. don't re-add a
+   type filter or calque the Vietnamese), then `DESIGN.md` and `Aura-design.md` as the build
+   reference. You do **not** need to read the history — that lives in `CHANGELOG.md` and is
+   skim-only, for when you need the backstory of a past decision.
+2. **After a task that changes the site:** if a project's stage or an open thread changed,
+   update that line in `PROGRESS.md`, and append one dated entry to the top of `CHANGELOG.md`.
+   Keep it to a few lines. (Pure conversation/advice that changes nothing is exempt.)
 
-> The owner may ask: *"build a progress dashboard from PROGRESS.md"* → generate a read-only
-> `progress.html` styled in the Rivera palette from the Status Board + Log.
+> The owner may ask: *"build a progress dashboard"* → generate a read-only `progress.html`
+> styled in the Rivera palette from the `PROGRESS.md` board + the `CHANGELOG.md` history.
 
 ## The docs (what each is for)
 
 | File | Use it for |
 |------|-----------|
 | `CLAUDE.md` (this) | Quick orientation + the hard rules. |
-| `PROGRESS.md` | Live status board + log. Read first, update last. |
+| `PROGRESS.md` | Short live state: status board + locked decisions + open threads. Read first. |
+| `CHANGELOG.md` | Append-only dated history. Not required reading; skim only for backstory. |
 | `DESIGN.md` | The definitive token / type / component / motion system. Never hardcode a value that isn't here. |
 | `Aura-design.md` | How to build a project page to the AURA standard (philosophy + method). **Match the effort, not the layout.** |
-| `PROJECT-DESIGN-RULES.md` | Older design contract (overlaps `DESIGN.md`; the two above win on conflict). |
+
+That's the whole set: **`CLAUDE.md`, `PROGRESS.md`, `DESIGN.md`, `Aura-design.md`** (plus the
+code in `styles.css` / `app.js`). The detail-page `.pd-*` template, carousel and map patterns
+live in `DESIGN.md` §6. (The retired `PROJECT-DESIGN-RULES.md` / `DEPLOY.md` are in `legacy/` —
+superseded, do not follow.)
 
 ## What this is
 
@@ -44,9 +50,13 @@ or via a tiny local server. Do not add React/Vite/npm unless explicitly asked.
 | `index.html` | Landing: hero video, statement, developer marquee, projects teaser, stats, **Featured Residence (currently AURA, running its hero film)**, enquiry form. |
 | `projects.html` | The collection: **7 real projects** as pill cards (status + sale pills) with lowest-per-segment "from $X" pricing. **No type filter, no fictional placeholders.** |
 | `about.html` | Founder/practice story, philosophy, track record. |
-| `<slug>.html` | One project detail page. 7 exist; **`aura-melbourne-square.html` is the bespoke flagship** (see `Aura-design.md`); the others follow the shared `.pd-*` template (clone `380-melbourne.html`). |
+| `<slug>.html` | One project detail page. 7 exist; **`aura-melbourne-square.html` is the bespoke flagship** (see `Aura-design.md`); the others follow the shared `.pd-*` template (clone `380-melbourne.html`, recipe in `DESIGN.md` §6). |
+| `map.html` | Interactive Leaflet map of Melbourne (projects + universities / transit / shopping / landmarks). Loads `map-data.js` then `app.js`. |
+| `map-data.js` | **The map's marker data** (`window.MAP_LOCATIONS`), separated from logic so a data edit can't break the rest of the site. Loaded only by `map.html`. |
+| `insights.html` + `insight-*.html` | The insights feed (filterable) + 8 individual articles. |
+| `enquire.html`, `guide.html` | Standalone enquiry page and the buyer's guide. |
 | `styles.css` | Single shared stylesheet. Bespoke pages add one `.au-`-prefixed block at the end. |
-| `app.js` | Single shared script: language toggle, mobile menu, scroll reveal, project filter (insights/map), carousel, map (`MAP_LOCATIONS`), form. Page-specific JS goes in a guarded block gated on a page id. |
+| `app.js` | Single shared script: language toggle, mobile menu, scroll reveal, card filter (insights/projects), carousel, map rendering (reads `window.MAP_LOCATIONS` from `map-data.js`), form, AURA page block. Page-specific JS goes in a guarded block gated on a page id. |
 
 A change to `styles.css` / `app.js` propagates everywhere — that's intentional. Keep pages consistent.
 
@@ -95,21 +105,25 @@ Materials arrive in `Projects/<Name>/` (renders, price list, brochure, short bri
 2. **`<slug>.html`** — the detail page. Match the AURA *effort* at a fitting *scale* (a tower
    gets the full treatment; a small apartment gets a tighter page). Copy the shared
    `<header class="nav">` and `<footer>` verbatim.
-3. **`app.js` → `MAP_LOCATIONS`** — one object with `lat`/`lng` so the map dot appears.
+3. **`map-data.js` → `window.MAP_LOCATIONS`** — append one object with `lat`/`lng` so the map dot appears. (Data only; the map logic in `app.js` doesn't change.)
 
 Media pipeline: optimise photos into `images/<slug>/` (`sips`, no `ffmpeg` on this machine —
 use Swift/AVFoundation to trim hero video + grab a poster). Lazy-load below-fold images.
 
 ## Deploy
 
-Production branch is **`main`** → auto-builds on Vercel (`https://rivera-website.vercel.app`).
-Deploy by cherry-picking **only the changed files** onto `origin/main` via the worktree trick;
-never blanket-push a feature branch or the working tree. Set the commit author email to
-`hoanganhhp99@gmail.com`. Confirm at the live URL afterwards, then update `PROGRESS.md`.
+**The real folder `~/Desktop/Rivera-Website` (branch `main`) is the source of truth.** Edit
+files there directly. To publish: commit the changed files on `main` and `git push origin main`
+— Vercel auto-builds the live site (no build step). That is the whole deploy.
 
-## Current status — remaining placeholders
+- The owner doesn't use git and shouldn't be asked git questions: carry every change through to
+  live yourself. Commit author email: `hoanganhhp99@gmail.com`.
+- **Never commit secrets** — `.env*` is gitignored; keep it that way.
+- Don't create git worktrees for routine work; they put edits in a hidden folder the owner
+  can't see. Work in the real folder. (Any `.claude/worktrees/*` are disposable.)
 
-- `about.html` still references a placeholder founder ("Elena") — confirm the real story or relabel.
-- Contact email `hello@rivera.estate` and the `index.html` form `YOUR_FORM_ID` are placeholders.
-- AU legals still missing: agent licence number, agency details, privacy policy.
-- (Real photos + the 7 project detail pages are done; the projects gallery and map are live.)
+## Current status
+
+The 7 project detail pages, the projects gallery and the map are live. **Outstanding
+placeholders and open threads live in `PROGRESS.md` (Open threads)** — that is the single
+source; don't keep a second copy here.
