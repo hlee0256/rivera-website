@@ -4,12 +4,18 @@ Context file for Claude Code. **Read this first before editing anything.**
 
 ## ⚠️ Required workflow (every agent, every time)
 
-1. **Before you start**, read `PROGRESS.md` (it is short by design: status board, **locked
-   decisions**, and **open threads** — this is what keeps work coherent, e.g. don't re-add a
-   type filter or calque the Vietnamese), then `DESIGN.md` and `Aura-design.md` as the build
-   reference. You do **not** need to read the history — that lives in `CHANGELOG.md` and is
-   skim-only, for when you need the backstory of a past decision.
-2. **After a task that changes the site:** if a project's stage or an open thread changed,
+1. **Always, before you start:** read `PROGRESS.md`. It is short by design (status board,
+   **locked decisions**, **open threads**) and is what keeps work coherent — e.g. don't re-add
+   a type filter or calque the Vietnamese. Skipping it is what causes expensive re-dos, so this
+   one is non-negotiable even for small tasks.
+2. **Only when you'll touch design, layout, copy, or build/edit a page:** also read
+   `Aura-design.md` — one file with two halves: **Part I** the project-page standard/method,
+   **Part II** the token/component/motion system. For a trivial edit that touches none of those
+   — a typo, a doc/config line — you can skip it and save the read. (It's not auto-loaded; the
+   cost is paid once per session, only if you open it.)
+3. You do **not** need the history — it lives in `CHANGELOG.md`, skim-only, for the backstory of
+   a past decision.
+4. **After a task that changes the site:** if a project's stage or an open thread changed,
    update that line in `PROGRESS.md`, and append one dated entry to the top of `CHANGELOG.md`.
    Keep it to a few lines. (Pure conversation/advice that changes nothing is exempt.)
 
@@ -23,13 +29,12 @@ Context file for Claude Code. **Read this first before editing anything.**
 | `CLAUDE.md` (this) | Quick orientation + the hard rules. |
 | `PROGRESS.md` | Short live state: status board + locked decisions + open threads. Read first. |
 | `CHANGELOG.md` | Append-only dated history. Not required reading; skim only for backstory. |
-| `DESIGN.md` | The definitive token / type / component / motion system. Never hardcode a value that isn't here. |
-| `Aura-design.md` | How to build a project page to the AURA standard (philosophy + method). **Match the effort, not the layout.** |
+| `Aura-design.md` | The whole design doc in two parts: **Part I** how to build a project page to the AURA standard (*match the effort, not the layout*); **Part II** the definitive token / type / component / motion system (never hardcode a value that isn't there). |
 
-That's the whole set: **`CLAUDE.md`, `PROGRESS.md`, `DESIGN.md`, `Aura-design.md`** (plus the
-code in `styles.css` / `app.js`). The detail-page `.pd-*` template, carousel and map patterns
-live in `DESIGN.md` §6. (The retired `PROJECT-DESIGN-RULES.md` / `DEPLOY.md` are in `legacy/` —
-superseded, do not follow.)
+That's the whole set: **`CLAUDE.md`, `PROGRESS.md`, `Aura-design.md`** (plus the code in
+`styles.css` / `app.js`). The detail-page `.pd-*` template, carousel and map patterns live in
+`Aura-design.md` Part II §6. (The retired `PROJECT-DESIGN-RULES.md` / `DEPLOY.md` are in
+`legacy/` — superseded, do not follow.)
 
 ## What this is
 
@@ -50,7 +55,7 @@ or via a tiny local server. Do not add React/Vite/npm unless explicitly asked.
 | `index.html` | Landing: hero video, statement, developer marquee, projects teaser, stats, **Featured Residence (currently AURA, running its hero film)**, enquiry form. |
 | `projects.html` | The collection: **7 real projects** as pill cards (status + sale pills) with lowest-per-segment "from $X" pricing. **No type filter, no fictional placeholders.** |
 | `about.html` | Founder/practice story, philosophy, track record. |
-| `<slug>.html` | One project detail page. 7 exist; **`aura-melbourne-square.html` is the bespoke flagship** (see `Aura-design.md`); the others follow the shared `.pd-*` template (clone `380-melbourne.html`, recipe in `DESIGN.md` §6). |
+| `<slug>.html` | One project detail page. 7 exist; **`aura-melbourne-square.html` is the bespoke flagship** (see `Aura-design.md` Part I); the others follow the shared `.pd-*` template (clone `380-melbourne.html`, recipe in `Aura-design.md` Part II §6). |
 | `map.html` | Interactive Leaflet map of Melbourne (projects + universities / transit / shopping / landmarks). Loads `map-data.js` then `app.js`. |
 | `map-data.js` | **The map's marker data** (`window.MAP_LOCATIONS`), separated from logic so a data edit can't break the rest of the site. Loaded only by `map.html`. |
 | `insights.html` + `insight-*.html` | The insights feed (filterable) + 8 individual articles. |
@@ -60,7 +65,7 @@ or via a tiny local server. Do not add React/Vite/npm unless explicitly asked.
 
 A change to `styles.css` / `app.js` propagates everywhere — that's intentional. Keep pages consistent.
 
-## Design system (full detail in `DESIGN.md`)
+## Design system (full detail in `Aura-design.md` Part II)
 
 Warm "Rivera Brown on cream paper" palette, declared as `:root` tokens in `styles.css`:
 `--brown #7A4E2D` (primary) · `--espresso #1B130D` / `--coffee #2A1E14` (dark sections) ·
@@ -68,7 +73,7 @@ Warm "Rivera Brown on cream paper" palette, declared as `:root` tokens in `style
 (backgrounds) · `--ink #231A12` / `--ink-soft #6E5E4D` (text) · `--ok` / `--alert` (status dots).
 Type: **Manrope** (sans) + a serif accent via `var(--serif)` (Instrument Serif for EN,
 Cormorant Garamond for VI). Always pair a sans heading with **one** italic serif accent span.
-**Never hardcode a hex, size, or easing not in `DESIGN.md`.**
+**Never hardcode a hex, size, or easing not in `Aura-design.md` Part II.**
 
 ## ⚠️ The bilingual system (most important convention)
 

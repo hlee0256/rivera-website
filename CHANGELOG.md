@@ -6,6 +6,24 @@ task, add one short entry to the top.
 
 ---
 
+### 2026-06-21 · Claude (Opus) · Merged DESIGN.md into Aura-design.md; conditional doc reads; TAKEAWAYS Part II
+- **Docs merge:** folded `DESIGN.md` into **`Aura-design.md`** so there is now ONE design doc —
+  **Part I** the project-page standard/method (the old Aura-design content), **Part II** the
+  token/type/component/motion system + `.pd-*` template (the old DESIGN.md, verbatim). Deleted
+  `DESIGN.md`; repointed every reference (`CLAUDE.md`, `legacy/README.md`, `TAKEAWAYS.md`) to
+  `Aura-design.md` Part I/II. Append-only CHANGELOG entries below keep their original `DESIGN.md`
+  wording (history isn't rewritten).
+- **Conditional reads (token saving):** `CLAUDE.md` workflow now requires **only** `PROGRESS.md`
+  before every task; `Aura-design.md` is read **only** when touching design/layout/copy/build.
+  Rationale: the read cost is per-session, not per-task, and skipping `PROGRESS.md` (locked
+  decisions) is what causes the expensive re-dos — so it stays mandatory.
+- **TAKEAWAYS.md:** added Part II (working-with-AI retrospective in Vietnamese): what the owner
+  does well / to improve, the most token-heavy operations, redundant ops the owner can self-serve,
+  and what AI must preload. Corrected the deploy section to the real-folder workflow.
+- **Files touched:** Aura-design.md (merged), CLAUDE.md, TAKEAWAYS.md, legacy/README.md,
+  CHANGELOG.md; DESIGN.md (deleted).
+- **Follow-ups:** none.
+
 ### 2026-06-21 · Claude (Opus) · Docs slimmed, map data split out, real-folder workflow
 - **Docs:** retired the two redundant briefing docs into `legacy/`. `PROJECT-DESIGN-RULES.md`
   (the "older contract") ~90% duplicated CLAUDE/DESIGN and had stale, contradictory facts

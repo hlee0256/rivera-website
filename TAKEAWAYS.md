@@ -1,8 +1,8 @@
 # TAKEAWAYS.md — lessons from building the AURA page (and the site around it)
 
 A retrospective of the hard-won, easy-to-forget things from this build. For the next agent or
-the next project. Pairs with `Aura-design.md` (the design bar), `DESIGN.md` (tokens),
-`PROGRESS.md` (status), `CLAUDE.md` (rules). This file is the *war stories*.
+the next project. Pairs with `Aura-design.md` (the design bar + the token/component system),
+`PROGRESS.md` (status), `CLAUDE.md` (rules), `CHANGELOG.md` (history). This file is the *war stories*.
 
 ---
 
@@ -64,6 +64,13 @@ Lessons:
 - Studios are often coded `beds=1` in the sheet — split them out by Product Type.
 
 ## 5. Git & deploy reality (READ THIS — it caused the most confusion)
+
+> **UPDATE (2026-06-21, commit `462000f`): the workflow below is now SUPERSEDED.** The real
+> folder `~/Desktop/Rivera-Website` (branch `main`) is the single source of truth. **Edit it
+> directly; deploy = commit the changed files + `git push origin main` → Vercel.** Do **not**
+> create worktrees for routine work (they hide edits in a folder the owner can't see), and
+> never commit `.env*`. The worktree saga below is kept as *why* the Desktop-folder confusion
+> happened — not as the method to use.
 
 Multiple Claude sessions each run in their **own git worktree** under `.claude/worktrees/<name>/`
 on their own branch. `main` (the live branch, Vercel) **moves under you** as other sessions
@@ -198,20 +205,31 @@ Scale sections to the material; never pad, never invent. Full detail in `Aura-de
 
 ## 14. AI phải preload gì — có thực sự cần?
 
-"Preload" = thứ tự động nạp vào đầu mỗi phiên: `CLAUDE.md`, chỉ mục `MEMORY.md`, và những file mà
-`CLAUDE.md` bắt đọc trước (`PROGRESS.md`, `DESIGN.md`, `Aura-design.md`).
+**Phân biệt quan trọng (đừng nhầm như bản nháp đầu của mục này): chi phí là THEO PHIÊN, không
+phải theo tác vụ.**
+- `CLAUDE.md` được **tự động** nạp vào đầu *mỗi phiên* (không tránh được, mà cũng đúng — nó là luật).
+- `PROGRESS.md` / `Aura-design.md` **KHÔNG** tự nạp. Chúng chỉ được đọc vì `CLAUDE.md` *bảo* đọc;
+  và một khi đã đọc trong phiên thì nằm luôn trong ngữ cảnh, nên **chỉ trả phí một lần cho cả
+  phiên**, không phải mỗi lần sửa.
 
-**Cần — giữ lại, nhưng giữ NGẮN:**
-- `CLAUDE.md` (luật chơi) và `PROGRESS.md` (trạng thái) — cần. Càng gọn càng rẻ mỗi lần nạp.
-- Chỉ mục `MEMORY.md` — cần và rẻ (mỗi memory một dòng).
+Hệ quả: nỗi lo "mỗi tweak nhỏ cũng tốn token đọc mấy file md" phần lớn **không đúng**. Nó chỉ lãng
+phí khi *cả phiên* chỉ làm đúng một việc tí xíu (đọc bộ ba ~10K token, một lần). Phiên nào làm việc
+thật thì khoản đọc đó coi như miễn phí. Và nhớ: `PROGRESS.md` (locked decisions) chính là thứ *ngăn*
+các lỗi tốn token nhất (thêm nhầm bộ lọc, dịch ngược tiếng Việt, phải làm lại) — bỏ nó là tiết kiệm giả.
 
-**Đáng xem lại / nên nạp có điều kiện (token tiết kiệm được nằm ở đây):**
-- **`CLAUDE.md` đang BẮT đọc cả `DESIGN.md` (429 dòng) + `Aura-design.md` trước MỌI việc.** Với một
-  lần sửa typo hay sửa doc thì đây là lãng phí. *Đề xuất:* luôn đọc `PROGRESS.md` (ngắn); chỉ đọc
-  `DESIGN.md`/`Aura-design.md` khi việc là **thiết kế/dựng trang**, không cần cho sửa chữ hay sửa doc.
-- **`PROJECT-DESIGN-RULES.md` trùng nội dung với `DESIGN.md`** — nên gộp/bỏ để khỏi nạp hai lần.
-- **Danh sách công cụ MCP nạp sẵn rất dài** (lịch, Notion, Figma, Slack, computer-use…). Gần như
-  không dùng cho một site tĩnh — phần lớn là nhiễu với dự án này (khó tắt, nhưng nên biết).
+**Đã sửa:**
+- `CLAUDE.md` giờ quy định: **luôn** đọc `PROGRESS.md` (ngắn, chặn lỗi đắt); chỉ đọc
+  `Aura-design.md` **khi đụng thiết kế/dựng/sửa trang**, bỏ qua được cho sửa typo/doc.
+  Đây là toàn bộ phần token tiết kiệm được một cách an toàn.
+- **Gộp `DESIGN.md` vào `Aura-design.md`** (theo yêu cầu): giờ chỉ còn MỘT file design —
+  Part I là triết lý/phương pháp (AURA standard), Part II là hệ token/component/motion (nguyên
+  `DESIGN.md` cũ). Bớt một file phải đọc, mọi tham chiếu đã trỏ lại sang `Aura-design.md`.
+- `PROJECT-DESIGN-RULES.md` (trùng hệ design) và `DEPLOY.md` đã nằm trong `legacy/` — hết nạp trùng.
 
-**Một dòng kết:** preload đúng = *luật + trạng thái* (ngắn, luôn nạp) cộng với *hệ thiết kế* (dài, chỉ
-nạp khi đụng tới thiết kế). Tách hai nhóm đó ra là cách giảm token cố định mỗi phiên mà không mất chất lượng.
+**Còn lại (biết thì hơn, khó tắt):** danh sách công cụ MCP nạp sẵn rất dài (lịch, Notion, Figma,
+Slack, computer-use…) gần như vô dụng cho một site tĩnh, nhưng nó là cơ chế của Claude Code, không
+chỉnh trong repo được.
+
+**Một dòng kết:** preload đúng = *luật + trạng thái* (ngắn, luôn nạp) + *hệ thiết kế* (dài, chỉ nạp
+khi đụng tới thiết kế). Đó là cách giảm token cố định mà không mất chất lượng — nhưng đừng phóng đại:
+khoản này nhỏ, và cắt nhầm `PROGRESS.md` còn tốn hơn nhiều.
