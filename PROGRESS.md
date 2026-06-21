@@ -87,6 +87,12 @@ bespoke flagship; the other detail pages follow the shared `.pd-*` template.
 
 ## Log (newest first)
 
+### 2026-06-21 · Claude (Opus) · AURA hero: use the full original film
+- **Asked to:** use the original (uncut) developer film for the AURA hero instead of the trimmed clip.
+- **Did:** exported the full 98s film (video-only passthrough + faststart → `hero-full.mp4`) and repointed both the AURA hero and the landing-page Featured film to it; removed the old trimmed `hero.mp4`.
+- **Files touched:** images/aura-melbourne-square/hero-full.mp4 (new), aura-melbourne-square.html, index.html; removed hero.mp4.
+- **Follow-ups:** the original film carries title/branding cards throughout and a long static OSK Property logo tail (~56s on); flagged to the owner in case a different cut is wanted later.
+
 ### 2026-06-21 · Claude (Opus) · Workflow docs + Desktop folder repair
 - **Asked to:** establish a better master progress sheet, extract AURA's design language into `Aura-design.md`, make `CLAUDE.md` enforce progress updates, and fix the local Desktop folder.
 - **Did:** created `PROGRESS.md` (this file) with a Status Board + pipeline; created `Aura-design.md`; refreshed `CLAUDE.md` (corrected stale facts, added the mandatory "update PROGRESS.md" rule + doc pointers); switched the Desktop working tree from the stale `chore/cleanup-folder` back to `main` (old WIP preserved in a stash).
