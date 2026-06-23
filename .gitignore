@@ -6,6 +6,11 @@
 ~$*
 *.xlsx
 
+# --- Private commission / accounting documents (client PII + figures; never publish) ---
+commission-statement.html
+Rivera-Commission-Statement.pdf
+*-commission-statement.*
+
 # --- Heavy raw source assets (masters, not referenced by the site) ---
 Projects/
 _sheets/
