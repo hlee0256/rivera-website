@@ -6,6 +6,21 @@ task, add one short entry to the top.
 
 ---
 
+### 2026-06-24 · Claude (Opus) · Market notes: four new insight articles (week of 24 June 2026)
+- **Four new notes added to `insights.html`** (newest first), each its own page, bilingual VI-native,
+  no em-dashes, web-sourced and cited:
+  - `insight-aml-ctf.html` (policy) — AML/CTF Tranche 2: from 1 July 2026 agents/conveyancers/lawyers
+    must run buyer identity + source-of-funds checks. Curated short and plain for VI investors. Source: AUSTRAC.
+  - `insight-buyers-gain-ground.html` (numbers) — Melbourne median ~$812,621, ~2.9% below Nov-2025 peak;
+    sales down ~14.2% y/y, listings up; buyer leverage. Source: Cotality/CoreLogic.
+  - `insight-clearance-below-50.html` (numbers) — combined capitals clearance 47.4% (w/e 21 Jun), first
+    sub-50% since the pandemic; Melbourne 50.6%. Source: Domain / The Nightly.
+  - `insight-off-the-plan-investors.html` (policy) — VIC temporary off-the-plan duty concession open to
+    all buyers incl. investors/companies/trusts; deduct construction costs; to contracts before 21 Apr 2027. Source: SRO Vic.
+- **`insights.html`:** four cards prepended to the feed; "Last updated" set to 24 June 2026. `data-en`/`data-vi` balanced (106/106).
+- **Note:** the local `AML CTF` source folder isn't present in this cloud checkout; AML article was written from verified AUSTRAC/web sources.
+- **Follow-ups:** none.
+
 ### 2026-06-21 · Claude (Opus) · Merged DESIGN.md into Aura-design.md; conditional doc reads; TAKEAWAYS Part II
 - **Docs merge:** folded `DESIGN.md` into **`Aura-design.md`** so there is now ONE design doc —
   **Part I** the project-page standard/method (the old Aura-design content), **Part II** the
