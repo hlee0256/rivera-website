@@ -456,4 +456,123 @@
       auProg.style.transform='scaleX('+(max>0?Math.max(.05,auStrip.scrollLeft/max):.18)+')';
     },{passive:true});
   }
+
+  // ---- Your selection: account-less shortlist (cards · nav · drawer, all pages) ----
+  (function(){
+    var menu=document.querySelector('header.nav .menu');
+    if(!menu) return;
+    var KEY='rivera-selection';
+    function read(){ try{ return JSON.parse(localStorage.getItem(KEY)||'[]'); }catch(e){ return []; } }
+    function write(list){ try{ localStorage.setItem(KEY, JSON.stringify(list)); }catch(e){} }
+    function curLang(){ return document.documentElement.getAttribute('lang')==='vi'?'vi':'en'; }
+    function t(en,vi){ return curLang()==='vi'?vi:en; }
+    function has(slug){ return read().some(function(x){return x.slug===slug;}); }
+    var ICON='<svg viewBox="0 0 24 24" aria-hidden="true" width="18" height="18"><path d="M6 3h12a1 1 0 0 1 1 1v17l-7-4-7 4V4a1 1 0 0 1 1-1Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>';
+    var ICON_FILL='<svg viewBox="0 0 24 24" aria-hidden="true" width="18" height="18"><path d="M6 3h12a1 1 0 0 1 1 1v17l-7-4-7 4V4a1 1 0 0 1 1-1Z" fill="currentColor" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>';
+
+    function localize(root){ var l=curLang(); Array.prototype.slice.call(root.querySelectorAll('[data-en]')).forEach(function(el){ var v=el.getAttribute('data-'+l); if(v!==null) el.textContent=v; }); }
+
+    // nav control
+    var navBtn=document.createElement('button');
+    navBtn.type='button'; navBtn.className='selnav'; navBtn.id='selNav';
+    navBtn.setAttribute('aria-label','Your selection / Lựa chọn của bạn');
+    navBtn.innerHTML=ICON+'<span class="selnav-n">0</span>';
+    var enquireBtn=menu.querySelector('a.btn');
+    if(enquireBtn) menu.insertBefore(navBtn, enquireBtn); else menu.appendChild(navBtn);
+
+    // drawer + overlay
+    var overlay=document.createElement('div'); overlay.className='psel-overlay'; overlay.id='selOverlay';
+    var panel=document.createElement('aside'); panel.className='psel-panel'; panel.id='selPanel';
+    panel.setAttribute('aria-hidden','true'); panel.setAttribute('aria-label','Your selection / Lựa chọn của bạn');
+    panel.innerHTML=
+      '<div class="psel-head">'+
+        '<span class="eyebrow" data-en="Your selection" data-vi="Lựa chọn của bạn">Your selection</span>'+
+        '<button type="button" class="psel-x" id="selClose" aria-label="Close / Đóng">&times;</button>'+
+      '</div>'+
+      '<div class="psel-list" id="selList"></div>'+
+      '<div class="psel-foot">'+
+        '<a class="btn" href="enquire.html"><span data-en="Talk to us about these" data-vi="Trao đổi với chúng tôi">Talk to us about these</span> <span class="arw">&rarr;</span></a>'+
+      '</div>';
+    document.body.appendChild(overlay); document.body.appendChild(panel);
+    var listEl=panel.querySelector('#selList');
+
+    function renderList(){
+      var list=read(); listEl.innerHTML='';
+      if(!list.length){
+        var empty=document.createElement('p'); empty.className='psel-empty';
+        empty.setAttribute('data-en','You have not saved any residences yet. Tap the bookmark on a home to add it here.');
+        empty.setAttribute('data-vi','Bạn chưa lưu căn hộ nào. Chạm vào dấu lưu trên một căn để thêm vào đây.');
+        empty.textContent=empty.getAttribute('data-'+curLang());
+        listEl.appendChild(empty); panel.classList.add('is-empty');
+      } else {
+        panel.classList.remove('is-empty');
+        list.forEach(function(it){
+          var row=document.createElement('div'); row.className='psel-item';
+          var a=document.createElement('a'); a.href=it.href; a.className='psel-name'; a.textContent=it.name;
+          var rm=document.createElement('button'); rm.type='button'; rm.className='psel-rm';
+          rm.setAttribute('aria-label','Remove / Bỏ'); rm.innerHTML='&times;';
+          rm.addEventListener('click',function(){ toggle(it.slug,it.name,it.href); });
+          row.appendChild(a); row.appendChild(rm); listEl.appendChild(row);
+        });
+      }
+    }
+    function updateCount(){ var n=read().length; navBtn.querySelector('.selnav-n').textContent=String(n); navBtn.classList.toggle('has', n>0); }
+    function setSaved(btn,on){
+      btn.classList.toggle('is-saved',on); btn.setAttribute('aria-pressed',on?'true':'false');
+      var ic=btn.querySelector('.psave-ic')||btn; ic.innerHTML = on?ICON_FILL:ICON;
+      var tx=btn.querySelector('.psave-tx');
+      if(tx){ tx.setAttribute('data-en',on?'Saved':'Save'); tx.setAttribute('data-vi',on?'Đã lưu':'Lưu'); tx.textContent=tx.getAttribute('data-'+curLang()); }
+    }
+    function syncSaveButtons(){ Array.prototype.slice.call(document.querySelectorAll('.psave')).forEach(function(b){ setSaved(b, has(b.getAttribute('data-slug'))); }); }
+
+    var toastEl=null, toastTimer=null;
+    function toast(msg){
+      if(!toastEl){ toastEl=document.createElement('div'); toastEl.className='psel-toast'; document.body.appendChild(toastEl); }
+      toastEl.textContent=msg; toastEl.classList.add('show');
+      if(toastTimer) clearTimeout(toastTimer);
+      toastTimer=setTimeout(function(){ toastEl.classList.remove('show'); }, 2200);
+    }
+    function toggle(slug,name,href){
+      var list=read(), i=-1;
+      for(var k=0;k<list.length;k++){ if(list[k].slug===slug){ i=k; break; } }
+      var added; if(i>=0){ list.splice(i,1); added=false; } else { list.push({slug:slug,name:name,href:href}); added=true; }
+      write(list); updateCount(); syncSaveButtons(); renderList();
+      toast(added? t('Added to your selection','Đã thêm vào lựa chọn') : t('Removed from your selection','Đã bỏ khỏi lựa chọn'));
+    }
+
+    // save buttons on the projects gallery cards
+    Array.prototype.slice.call(document.querySelectorAll('.pgrid .pcard')).forEach(function(card){
+      var href=card.getAttribute('href')||''; if(!/\.html$/.test(href)) return;
+      var slug=href.replace(/\.html$/,''); var h3=card.querySelector('h3'); var name=h3?h3.textContent.trim():slug;
+      var photo=card.querySelector('.photo')||card;
+      var btn=document.createElement('button'); btn.type='button'; btn.className='psave'; btn.setAttribute('data-slug',slug);
+      btn.setAttribute('aria-label','Save to your selection / Lưu vào lựa chọn');
+      btn.innerHTML='<span class="psave-ic">'+ICON+'</span>';
+      btn.addEventListener('click',function(e){ e.preventDefault(); e.stopPropagation(); toggle(slug,name,href); });
+      photo.appendChild(btn);
+    });
+
+    // save button on a project detail-page hero
+    if(document.querySelector('.pd-hero, #aura-page')){
+      var heroIn=document.querySelector('.pd-hero-in') || document.querySelector('.au-hero .wrap') || document.querySelector('.au-hero');
+      if(heroIn){
+        var dslug=location.pathname.split('/').pop().replace(/\.html$/,'');
+        var dname=(document.title||dslug).split(' — ')[0].split(' – ')[0].trim();
+        var dbtn=document.createElement('button'); dbtn.type='button'; dbtn.className='psave psave-pd'; dbtn.setAttribute('data-slug',dslug);
+        dbtn.setAttribute('aria-label','Save to your selection / Lưu vào lựa chọn');
+        dbtn.innerHTML='<span class="psave-ic">'+ICON+'</span><span class="psave-tx" data-en="Save" data-vi="Lưu">Save</span>';
+        dbtn.addEventListener('click',function(){ toggle(dslug,dname,dslug+'.html'); });
+        heroIn.appendChild(dbtn);
+      }
+    }
+
+    function openPanel(){ renderList(); localize(panel); panel.classList.add('open'); overlay.classList.add('show'); panel.setAttribute('aria-hidden','false'); }
+    function closePanel(){ panel.classList.remove('open'); overlay.classList.remove('show'); panel.setAttribute('aria-hidden','true'); }
+    navBtn.addEventListener('click',openPanel);
+    overlay.addEventListener('click',closePanel);
+    panel.querySelector('#selClose').addEventListener('click',closePanel);
+    document.addEventListener('keydown',function(e){ if(e.key==='Escape') closePanel(); });
+
+    updateCount(); syncSaveButtons(); renderList(); localize(panel);
+  })();
 })();

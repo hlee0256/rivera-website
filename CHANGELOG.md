@@ -6,6 +6,15 @@ task, add one short entry to the top.
 
 ---
 
+### 2026-06-28 · Claude (Opus) · Add "Your selection" shortlist
+- **Account-less shortlist** backed by `localStorage` (key `rivera-selection`), no backend, no new deps.
+- Bookmark control on each projects-gallery card (`.pgrid .pcard`) and on every project detail-page hero
+  (incl. the AURA flagship); a site-wide nav indicator (`.selnav`, shows when count > 0) opens a slide-in
+  drawer listing saved residences with remove + a "Talk to us about these" CTA to `enquire.html`.
+- `enquire.html` now pre-fills a "Residences you are considering" field from the saved selection
+  (removable chips), carried in the submit payload as `residences`.
+- Bilingual VI/EN throughout, tokens-only styling, motion respects `prefers-reduced-motion`.
+
 ### 2026-06-24 · Claude (Opus) · Market notes: four new insight articles (week of 24 June 2026)
 - **Four new notes added to `insights.html`** (newest first), each its own page, bilingual VI-native,
   no em-dashes, web-sourced and cited:

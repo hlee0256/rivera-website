@@ -69,6 +69,9 @@
   .chip:active,.seg:active{transform:scale(.97)}
   .chip.active{background:var(--brown);border-color:var(--brown);color:#FBF6EE}
   .seg.active{background:var(--espresso);border-color:var(--espresso);color:#FBF6EE}
+  .chip.is-fixed{display:inline-flex;align-items:center;gap:8px;cursor:default;background:var(--paper-2);border-color:var(--line)}
+  .chip.is-fixed .chipx{border:0;background:transparent;color:var(--ink-soft);font-size:1.1rem;line-height:1;cursor:pointer;padding:0}
+  .chip.is-fixed .chipx:hover{color:var(--alert)}
 
   .lead-form .btn{margin-top:8px;align-self:flex-start;padding:17px 32px}
 
@@ -243,6 +246,12 @@
         <div class="fld"><textarea id="lf-message" name="message" rows="3" placeholder="A few words about what you are looking for" data-en-ph="A few words about what you are looking for" data-vi-ph="Đôi dòng về điều bạn đang tìm kiếm"></textarea></div>
       </div>
 
+        <div class="field" id="resField" hidden>
+          <label class="flabel"><span data-en="Residences you are considering" data-vi="Những căn bạn đang cân nhắc">Residences you are considering</span></label>
+          <div class="opts" id="resChips"></div>
+          <input type="hidden" name="residences" id="lf-residences" />
+        </div>
+
       <button class="btn" type="submit"><span data-en="Send details" data-vi="Gửi thông tin">Send details</span> <span class="arw">→</span></button>
 
       <div class="ferr ferr-submit" data-err="submit" data-en="Something went wrong sending your note. Please try again, or reach us on Messenger." data-vi="Đã xảy ra lỗi khi gửi thông tin. Vui lòng thử lại, hoặc nhắn cho chúng tôi qua Messenger.">Something went wrong sending your note. Please try again, or reach us on Messenger.</div>
@@ -409,6 +418,28 @@
 
   function lang(){ return document.documentElement.getAttribute('lang')==='vi'?'vi':'en'; }
 
+  /* prefill residences from the saved selection */
+  (function(){
+    var KEY='rivera-selection';
+    var field=document.getElementById('resField'), chips=document.getElementById('resChips'), hidden=document.getElementById('lf-residences');
+    if(!field||!chips||!hidden) return;
+    function read(){ try{return JSON.parse(localStorage.getItem(KEY)||'[]');}catch(e){return [];} }
+    function write(l){ try{localStorage.setItem(KEY,JSON.stringify(l));}catch(e){} }
+    function render(){
+      var list=read(); chips.innerHTML='';
+      if(!list.length){ field.hidden=true; hidden.value=''; return; }
+      field.hidden=false; hidden.value=list.map(function(x){return x.name;}).join(' · ');
+      list.forEach(function(it){
+        var chip=document.createElement('span'); chip.className='chip is-fixed';
+        var tx=document.createElement('span'); tx.textContent=it.name; chip.appendChild(tx);
+        var x=document.createElement('button'); x.type='button'; x.className='chipx'; x.setAttribute('aria-label','Remove / Bỏ'); x.innerHTML='&times;';
+        x.addEventListener('click',function(){ write(read().filter(function(y){return y.slug!==it.slug;})); render(); });
+        chip.appendChild(x); chips.appendChild(chip);
+      });
+    }
+    render();
+  })();
+
   /* ---------------- lead form: chips, intent, validation ---------------- */
   var form=document.getElementById('leadForm');
   if(form){
@@ -498,7 +529,8 @@
         email:    emailI.value.trim(),
         interest: interestArr,                 // array — backend joins
         intent:   intentInput.value,           // canonical value, not the label
-        message:  messageI.value.trim()
+        message:  messageI.value.trim(),
+        residences: (document.getElementById('lf-residences')||{}).value || ''
       };
 
       function success(){

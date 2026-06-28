@@ -57,6 +57,10 @@ template.
 
 ## Open threads
 
+- **"Your selection" shortlist is live** (account-less, `localStorage` key `rivera-selection`):
+  bookmark on project cards + detail-page heroes, a site-wide nav indicator + slide-in drawer, and
+  a pre-fill on `enquire.html`. Its drawer CTA routes to `enquire.html`, which still carries the
+  placeholder Apps Script / Formspree endpoint (see the form-endpoint thread below).
 - `about.html` still references a placeholder founder ("Elena", 3×) — confirm the real story or relabel.
 - Contact email `hello@rivera.estate` and the `index.html` enquiry form `YOUR_FORM_ID` are placeholders.
 - AU real-estate legals still missing: agent licence number, agency details, privacy policy.
