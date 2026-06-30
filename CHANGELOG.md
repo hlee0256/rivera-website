@@ -6,6 +6,26 @@ task, add one short entry to the top.
 
 ---
 
+### 2026-06-30 · Claude (Opus) · About-page cleanup + real contact details (pre-client review)
+- **`about.html` rebuilt for client presentation:**
+  - **Removed the fictional founder** "Elena Rivera" (name, signature, role, and the stock portrait).
+    The story section is now an anonymous practice story (eyebrow "Our Story / Câu chuyện của chúng tôi"),
+    ending on a "boutique property practice · Melbourne" line. Per owner's call.
+  - **Premium on-brand imagery:** swapped the two external Unsplash photos for warm AURA renders already
+    in `images/aura-melbourne-square/` (`club-cumulus-sunset.jpg` for the story, `living-room.jpg` for philosophy).
+  - **Stats corrected** to the owner's real-ish figures: 10 years · 100+ families · 50+ suburbs (was 18 / 200+ / 60+).
+    Credentials softened to honest claims (dropped the specific REIV-membership wording; licence number still pending).
+  - **Em-dashes removed** from all body copy (10 in the old page) → commas/colons/periods; footer copyright +
+    page-title em-dashes kept (allowed exceptions). `data-en`/`data-vi` balanced (51/51).
+- **Contact details set site-wide:** `hello@rivera.estate` → **info.riveraau@gmail.com** across 26 production pages,
+  plus two phone lines added to every footer Contact column and the landing "Direct line" block:
+  **VN +84 782 067 555** and **AUS +61 450 151 686**. (`maplab/` and `legacy/` left as-is, non-production.)
+- **Enquire page:** wired the floating Zalo button to the VN line (`https://zalo.me/0782067555`) and relabelled its
+  tooltip to "Chat on Zalo / Trò chuyện qua Zalo" (was an inert "coming soon" placeholder).
+- **Verified** in Chromium, full page, both languages (VI + EN) at 1280px.
+- **Follow-ups still open:** `index.html` enquiry form still has `YOUR_FORM_ID` (Formspree id not set);
+  AU legals (agent licence number, agency details, privacy policy); confirm the Zalo deep-link format resolves.
+
 ### 2026-06-24 · Claude (Opus) · Market notes: four new insight articles (week of 24 June 2026)
 - **Four new notes added to `insights.html`** (newest first), each its own page, bilingual VI-native,
   no em-dashes, web-sourced and cited:
