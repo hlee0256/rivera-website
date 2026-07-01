@@ -1,0 +1,10 @@
+User-agent: *
+Allow: /
+Disallow: /maplab/
+Disallow: /legacy/
+Disallow: /tools/
+Disallow: /380-melbourne-so-sanh.html
+Disallow: /index-380.html
+Disallow: /*.md$
+
+Sitemap: https://rivera-website.vercel.app/sitemap.xml

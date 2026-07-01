@@ -3,6 +3,13 @@
    carousel · Leaflet map · enquiry form · AURA detail-page block)
    ============================================================ */
 (function(){
+  // ---- shared contact endpoints (one place to update) ----
+  // LEAD_ENDPOINT: the same Google Apps Script backend the enquire.html lead
+  // form posts to. ZALO/MESSENGER power the site-wide floating dock below.
+  var LEAD_ENDPOINT='https://script.google.com/macros/s/AKfycbwurdZI9R-458lfe4Aelh67iBZJ4-8ZAxO4iTIANxkyLkSsqjkrTHJb0fN8nv8NhV52Qw/exec';
+  var ZALO_URL='https://zalo.me/0782067555';
+  var MESSENGER_URL='https://m.me/61589577010550';
+
   // ---- nav: solid on scroll (skipped on pages that start "onlight") ----
   var nav=document.getElementById('nav');
   if(nav && !nav.classList.contains('onlight')){
@@ -31,6 +38,23 @@
       img.replaceWith(span);
     });
   });
+
+  // ---- site-wide floating contact dock (Zalo + Messenger) ----
+  // Mirrors the enquire.html chat dock (same classes, styled in styles.css);
+  // skipped on any page that already ships its own .chat-dock. Injected
+  // before the language pass below so its data-en/data-vi get localised.
+  if(!document.querySelector('.chat-dock')){
+    var dock=document.createElement('div');
+    dock.className='chat-dock';
+    dock.innerHTML=
+      '<a class="chat-btn zalo" href="'+ZALO_URL+'" target="_blank" rel="noopener" aria-label="Chat with us on Zalo">'
+      +'<span class="zmark">Zalo</span>'
+      +'<span class="ctip" data-en="Chat on Zalo" data-vi="Trò chuyện qua Zalo">Chat on Zalo</span></a>'
+      +'<a class="chat-btn messenger" href="'+MESSENGER_URL+'" target="_blank" rel="noopener" aria-label="Chat with us on Messenger">'
+      +'<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C6.3 2 2 6.27 2 11.6c0 2.88 1.27 5.43 3.36 7.16V22l3.07-1.69c.82.23 1.69.35 2.57.35 5.7 0 10-4.27 10-9.6S17.7 2 12 2zm1.01 12.84l-2.55-2.72-4.97 2.72 5.47-5.8 2.61 2.72 4.91-2.72-5.47 5.8z"/></svg>'
+      +'<span class="ctip" data-en="Chat on Messenger" data-vi="Trò chuyện qua Messenger">Chat on Messenger</span></a>';
+    document.body.appendChild(dock);
+  }
 
   // ---- language toggle (VI default, EN after explicit toggle) ----
   function setLang(lang){
@@ -387,18 +411,34 @@
     window.addEventListener('resize',function(){ map.invalidateSize(); });
   }
 
-  // ---- enquire form: POST to Formspree, fall back to on-page thanks ----
+  // ---- enquiry form (.efrm): POST to the shared Apps Script lead backend ----
+  // Same endpoint + payload shape as the enquire.html lead form, so every
+  // enquiry lands in one inbox/sheet. A form with its own real `action`
+  // still posts there instead (Formspree-style, FormData + JSON accept).
   document.querySelectorAll('form.efrm').forEach(function(f){
     f.addEventListener('submit',function(e){
       e.preventDefault();
       var email=f.querySelector('input[type=email]');
       if(!email.value||email.value.indexOf('@')===-1){email.focus();email.closest('.fld').style.borderColor='var(--brown)';return;}
+      var done=function(){f.classList.add('sent');};
       var action=f.getAttribute('action')||'';
-      if(!action||action.indexOf('YOUR_FORM_ID')!==-1){f.classList.add('sent');return;}
-      var data=new FormData(f);
-      fetch(action,{method:'POST',body:data,headers:{'Accept':'application/json'}})
-        .then(function(){f.classList.add('sent');})
-        .catch(function(){f.classList.add('sent');});
+      if(action && action.indexOf('YOUR_FORM_ID')===-1){
+        fetch(action,{method:'POST',body:new FormData(f),headers:{'Accept':'application/json'}}).then(done).catch(done);
+        return;
+      }
+      var g=function(n){var el=f.querySelector('[name="'+n+'"]');return el?el.value.trim():'';};
+      var payload={
+        name:g('name'), email:g('email'), phone:g('phone'),
+        intent:g('looking'), message:g('message'),
+        source:(location.pathname.split('/').pop()||'index.html')
+      };
+      // text/plain keeps it a "simple" request (no CORS preflight); the
+      // opaque no-cors response resolving is treated as success.
+      fetch(LEAD_ENDPOINT,{
+        method:'POST',mode:'no-cors',
+        headers:{'Content-Type':'text/plain;charset=utf-8'},
+        body:JSON.stringify(payload)
+      }).then(done).catch(done);
     });
   });
 

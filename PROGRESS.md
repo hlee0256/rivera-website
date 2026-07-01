@@ -55,11 +55,30 @@ Deployed on **Vercel** from `main` (`https://rivera-website.vercel.app`). Pages:
 AURA is the deliberately bespoke flagship; the other detail pages follow the shared `.pd-*`
 template.
 
+**2.0 layer (2026-07-02):** landing hero runs real project footage (the 671 Chapel Street
+golden-hour film, self-hosted); every page carries the floating Zalo + Messenger dock
+(injected by `app.js`, same design as the enquire dock) and a Zalo line in the footer; all
+public pages have canonical/OG/Twitter/theme-color meta + JSON-LD; `sitemap.xml`,
+`robots.txt` and `.vercelignore` (keeps `*.md`/`legacy/`/`tools/`/`maplab/` off the deploy);
+internal variants (`380-melbourne-so-sanh.html`, `index-380.html`) are `noindex`.
+
 ## Open threads
 
-- ~~`about.html` placeholder founder "Elena"~~ — **done (2026-06-30):** removed; story is now an anonymous practice story, no name/signature/portrait. Stats set to 10 yrs · 100+ families · 50+ suburbs.
-- ~~Contact email `hello@rivera.estate`~~ — **done (2026-06-30):** now `info.riveraau@gmail.com` site-wide, with VN +84 782 067 555 / AUS +61 450 151 686 in every footer. **Still open:** the `index.html` enquiry form `YOUR_FORM_ID` (Formspree id) is unset; verify the Zalo deep-link (`zalo.me/0782067555`) resolves.
-- AU real-estate legals still missing: agent licence number, agency details, privacy policy. (About-page credentials copy softened on 2026-06-30 to avoid an unverifiable REIV-membership claim until confirmed.)
+- ~~`index.html` enquiry form Formspree `YOUR_FORM_ID`~~ — **done (2026-07-02):** the landing
+  (and `index-380.html`) forms now post to the same Google Apps Script lead backend as
+  `enquire.html` (shared `LEAD_ENDPOINT` in `app.js`), with an optional phone/Zalo field.
+  **Owner action:** send one real test enquiry end-to-end; verify the Zalo deep-link
+  (`zalo.me/0782067555`) resolves on a phone; confirm Messenger `m.me/61589577010550` is the
+  business Page (it's now in the site-wide dock).
+- AU real-estate legals still missing: agent licence number, agency details, privacy policy.
+  Now also **blocks running Meta/TikTok lead ads**, not just the domain switch. (About-page
+  credentials copy softened on 2026-06-30 until confirmed.)
+- SEO layer (2026-07-02) uses the Vercel staging URL as base: when **rivera.au** goes live,
+  re-base canonical/OG URLs + `sitemap.xml`/`robots.txt` (one scripted pass).
+- Social launch (July): once FB/IG/TikTok handles are final, add social links to the footer
+  and `sameAs` to the index JSON-LD.
+- Fact check: VIC off-the-plan concession end date reads **20/10/2026** on the AURA page but
+  **21/04/2027** on `insight-off-the-plan.html` (found 2026-07-02) — verify and align.
 - Map (`map.html` / `map-data.js`) and the landing teaser: keep in sync as projects change.
 - Domain not yet pointed: site runs on the Vercel staging URL. To go live on **rivera.au**, add
   the domain in Vercel → Settings → Domains (A record `76.76.21.21` or the CNAME Vercel gives),

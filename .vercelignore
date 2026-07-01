@@ -1,0 +1,8 @@
+# Keep internal working docs and labs out of the public deployment.
+# (They live in the repo for the team; the live site doesn't need them.)
+*.md
+legacy/
+tools/
+maplab/
+Projects/
+.claude/

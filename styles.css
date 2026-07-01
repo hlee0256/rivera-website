@@ -914,3 +914,34 @@ footer{background:var(--espresso);color:var(--sand);padding:80px 0 40px}
   .ins-check-h{font-size:1.6rem}
   .ins-h{font-size:1.3rem}
 }
+
+/* ============================================================
+   Site-wide floating contact dock (Zalo + Messenger).
+   Same design as the enquire.html page dock; app.js injects it on
+   every page that doesn't already carry a .chat-dock of its own.
+   ============================================================ */
+.chat-dock{position:fixed;right:24px;bottom:24px;z-index:70;
+  display:flex;flex-direction:column;gap:14px}
+.chat-btn{position:relative;width:56px;height:56px;border-radius:999px;
+  display:flex;align-items:center;justify-content:center;background:var(--brown);
+  color:#FBF6EE;box-shadow:0 14px 32px -14px rgba(35,26,18,.65);
+  transition:transform .25s cubic-bezier(.2,.7,.2,1),background .25s ease}
+.chat-btn:hover{transform:translateY(-3px);background:var(--coffee)}
+.chat-btn.messenger{background:var(--espresso)}
+.chat-btn.messenger:hover{background:#0a0703}
+.chat-btn svg{width:27px;height:27px}
+.chat-btn .zmark{font-weight:800;font-size:.92rem;letter-spacing:-.02em}
+.chat-btn .ctip{position:absolute;right:70px;top:50%;
+  transform:translateY(-50%) translateX(6px);background:var(--ink);color:#FBF6EE;
+  font-size:.74rem;font-weight:500;letter-spacing:.03em;padding:8px 13px;border-radius:7px;
+  white-space:nowrap;opacity:0;pointer-events:none;
+  transition:opacity .2s ease,transform .2s cubic-bezier(.2,.7,.2,1)}
+.chat-btn .ctip::after{content:"";position:absolute;right:-5px;top:50%;
+  transform:translateY(-50%);border:5px solid transparent;border-left-color:var(--ink)}
+.chat-btn:hover .ctip{opacity:1;transform:translateY(-50%) translateX(0)}
+@media(max-width:560px){.chat-dock{right:16px;bottom:16px;gap:12px}
+  .chat-btn{width:50px;height:50px}.chat-btn svg{width:24px;height:24px}}
+@media (prefers-reduced-motion: reduce){
+  .chat-btn,.chat-btn .ctip{transition:none}
+}
+@media print{.chat-dock{display:none}}

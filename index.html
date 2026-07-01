@@ -12,6 +12,21 @@
 <link rel="icon" type="image/svg+xml" href="favicon.svg" />
 <style>@view-transition { navigation: auto; }</style>
 <link rel="prefetch" href="aura-melbourne-square.html" />
+<link rel="canonical" href="https://rivera-website.vercel.app/" />
+<meta name="theme-color" content="#1B130D" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Rivera" />
+<meta property="og:title" content="Rivera · Boutique Residences" />
+<meta property="og:description" content="Rivera is a boutique property practice. A small, considered collection of residences, guided personally." />
+<meta property="og:url" content="https://rivera-website.vercel.app/" />
+<meta property="og:image" content="https://rivera-website.vercel.app/images/671-chapel-street/hero-poster.jpg" />
+<meta property="og:locale" content="vi_VN" />
+<meta property="og:locale:alternate" content="en_AU" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Rivera · Boutique Residences" />
+<meta name="twitter:description" content="Rivera is a boutique property practice. A small, considered collection of residences, guided personally." />
+<meta name="twitter:image" content="https://rivera-website.vercel.app/images/671-chapel-street/hero-poster.jpg" />
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "RealEstateAgent", "name": "Rivera", "description": "Rivera is a boutique property practice. A small, considered collection of residences, guided personally.", "url": "https://rivera-website.vercel.app/", "email": "info.riveraau@gmail.com", "telephone": "+61 450 151 686", "areaServed": {"@type": "City", "name": "Melbourne"}, "address": {"@type": "PostalAddress", "addressLocality": "Melbourne", "addressRegion": "VIC", "addressCountry": "AU"}, "knowsLanguage": ["vi", "en"], "image": "https://rivera-website.vercel.app/images/671-chapel-street/hero-poster.jpg"}</script>
 </head>
 <body>
 
@@ -36,12 +51,12 @@
 <!-- HERO -->
 <section class="hero" id="top">
   <div class="bg">
-    <!-- HERO VIDEO: swap the two <source> URLs for your own .mp4 to use real footage.
-         Currently a free Mixkit aerial clip (mansions on the hills at sunset). -->
+    <!-- HERO VIDEO: real project footage — the 671 Chapel Street film
+         (golden-hour Melbourne skyline from South Yarra), self-hosted. -->
     <video class="hero-vid" autoplay muted loop playsinline preload="auto"
-           poster="https://assets.mixkit.co/videos/43607/43607-thumb-360-0.jpg">
-      <source src="https://assets.mixkit.co/videos/43607/43607-720.mp4" type="video/mp4" />
-      <source src="https://assets.mixkit.co/videos/43607/43607-360.mp4" type="video/mp4" />
+           poster="images/671-chapel-street/hero-poster.jpg"
+           aria-label="Golden-hour film of the Melbourne skyline from South Yarra">
+      <source src="images/671-chapel-street/hero.mp4" type="video/mp4" />
     </video>
     <div class="bg-overlay"></div>
   </div>
@@ -188,10 +203,12 @@
         <a href="tel:+61450151686">AUS · +61 450 151 686</a>
       </div>
     </div>
-    <!-- ENQUIRE FORM: wired for Formspree. Replace YOUR_FORM_ID with your form's ID from formspree.io. -->
-    <form class="efrm" action="https://formspree.io/f/YOUR_FORM_ID" method="POST" novalidate>
+    <!-- ENQUIRE FORM: posts to the shared Apps Script lead backend via app.js
+         (same inbox as the enquire.html lead form). -->
+    <form class="efrm" method="POST" novalidate>
       <div class="fld"><input type="text" name="name" placeholder="Your name" data-en-ph="Your name" data-vi-ph="Họ và tên" required /></div>
       <div class="fld"><input type="email" name="email" placeholder="Email address" data-en-ph="Email address" data-vi-ph="Địa chỉ email" required /></div>
+      <div class="fld"><input type="tel" name="phone" placeholder="Phone or Zalo (optional)" data-en-ph="Phone or Zalo (optional)" data-vi-ph="Số điện thoại hoặc Zalo (không bắt buộc)" /></div>
       <div class="fld"><input type="text" name="looking" placeholder="What are you looking for?" data-en-ph="What are you looking for?" data-vi-ph="Bạn đang tìm kiếm điều gì?" /></div>
       <div class="fld"><textarea name="message" rows="3" placeholder="Anything you'd like us to know (optional)" data-en-ph="Anything you'd like us to know (optional)" data-vi-ph="Điều bạn muốn cho chúng tôi biết (không bắt buộc)"></textarea></div>
       <button class="btn" type="submit"><span data-en="Send enquiry" data-vi="Gửi liên hệ">Send enquiry</span> <span class="arw">→</span></button>
@@ -225,6 +242,7 @@
         <a href="mailto:info.riveraau@gmail.com">info.riveraau@gmail.com</a>
         <a href="tel:+84782067555">VN · +84 782 067 555</a>
         <a href="tel:+61450151686">AUS · +61 450 151 686</a>
+        <a href="https://zalo.me/0782067555" target="_blank" rel="noopener">Zalo · 0782 067 555</a>
         <a href="enquire.html" data-en="Request portfolio" data-vi="Yêu cầu danh mục">Request portfolio</a>
         <a href="enquire.html" data-en="Private viewings" data-vi="Xem nhà riêng tư">Private viewings</a>
       </div>

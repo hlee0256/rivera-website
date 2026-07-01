@@ -6,6 +6,23 @@ task, add one short entry to the top.
 
 ---
 
+### 2026-07-02 · Claude · Website 2.0 layer (hero, working lead form, contact dock, SEO)
+- **Landing hero film is now real footage:** the stock Mixkit clip (US mansions) replaced with the
+  self-hosted 671 Chapel Street golden-hour Melbourne film + its poster (2 MB, lightest in the library).
+- **Landing form finally sends:** `index.html` / `index-380.html` `.efrm` forms now post JSON to the same
+  Google Apps Script lead backend as the enquire page (shared `LEAD_ENDPOINT` in `app.js`); dead Formspree
+  placeholder removed; optional "Phone or Zalo" field added. Blocked-endpoint path verified in Chromium.
+- **Site-wide floating contact dock** (Zalo + Messenger, same design as the enquire dock) injected by
+  `app.js` on every page without one; `Zalo · 0782 067 555` added to every footer's Contact column.
+- **SEO/social layer on 26 public pages:** canonical, Open Graph + Twitter cards (per-page og:image from
+  the project's own hero poster), `theme-color`, and JSON-LD (RealEstateAgent on the landing,
+  ApartmentComplex on the 7 project pages, Article on the 12 insights). `sitemap.xml` (26 URLs) +
+  `robots.txt`; `noindex` on the two internal variants; `.vercelignore` keeps internal docs off the deploy.
+- Verified: bilingual attribute counts balanced on all pages, JSON-LD parses, og:image files exist,
+  language toggle + dock + graceful form submit pass a live Chromium run (desktop + mobile).
+- (Parallel, outside the repo: FB/IG launch plan, 10 ready-to-post bilingual posts, TikTok launch plan,
+  30-day growth/HR/AI plan, competitor research — delivered to the owner as documents.)
+
 ### 2026-06-30 · Claude (Opus) · About-page cleanup + real contact details (pre-client review)
 - **`about.html` rebuilt for client presentation:**
   - **Removed the fictional founder** "Elena Rivera" (name, signature, role, and the stock portrait).
