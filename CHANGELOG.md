@@ -20,6 +20,10 @@ task, add one short entry to the top.
   `robots.txt`; `noindex` on the two internal variants; `.vercelignore` keeps internal docs off the deploy.
 - Verified: bilingual attribute counts balanced on all pages, JSON-LD parses, og:image files exist,
   language toggle + dock + graceful form submit pass a live Chromium run (desktop + mobile).
+- **Footer "Concept page · for validation" retired on 26 pages** (audit P0: it told every visitor the
+  live site was a mockup) → honest neutral disclaimer "Details are indicative and subject to change. /
+  Thông tin mang tính tham khảo, có thể thay đổi." Audit backlog (em-dash copy debt, footer drift,
+  video weight) logged in PROGRESS.md open threads.
 - (Parallel, outside the repo: FB/IG launch plan, 10 ready-to-post bilingual posts, TikTok launch plan,
   30-day growth/HR/AI plan, competitor research — delivered to the owner as documents.)
 

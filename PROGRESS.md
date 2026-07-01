@@ -79,6 +79,11 @@ internal variants (`380-melbourne-so-sanh.html`, `index-380.html`) are `noindex`
   and `sameAs` to the index JSON-LD.
 - Fact check: VIC off-the-plan concession end date reads **20/10/2026** on the AURA page but
   **21/04/2027** on `insight-off-the-plan.html` (found 2026-07-02) — verify and align.
+- Copy debt (site audit 2026-07-02): ~94 em-dashes still in visible copy across ~15 older
+  pages (mostly EN strings + some meta descriptions) — needs a careful editorial pass, not a
+  blind replace. Footer/nav markup has drifted into 2-3 variants; consolidate when convenient.
+- Hero videos on project pages are 8-13 MB; compress when back on the Mac (`sips`/AVFoundation
+  pipeline). `map.html` depends on unpkg/CARTO CDNs (single point of failure, noted).
 - Map (`map.html` / `map-data.js`) and the landing teaser: keep in sync as projects change.
 - Domain not yet pointed: site runs on the Vercel staging URL. To go live on **rivera.au**, add
   the domain in Vercel → Settings → Domains (A record `76.76.21.21` or the CNAME Vercel gives),
