@@ -79,6 +79,9 @@ header.nav{position:fixed;top:0;left:0;right:0;z-index:80;background:rgba(244,24
 .duty{list-style:none;margin-top:6px;display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
 .duty li{border:1px solid var(--line);border-radius:12px;background:var(--paper-2);padding:16px 16px;color:var(--ink-soft);font-size:.92rem;line-height:1.55}
 .duty li b{display:block;color:var(--brown);font-weight:700;font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;margin-bottom:8px}
+.duty .mini{list-style:none;margin:0;display:grid;gap:6px}
+.duty .mini li{position:relative;padding-left:16px;border:0;background:none;border-radius:0;padding-top:0;padding-bottom:0;font-size:.92rem}
+.duty .mini li::before{content:"";position:absolute;left:1px;top:.56em;width:5px;height:5px;border-radius:999px;background:var(--brown)}
 @media(max-width:760px){.duty{grid-template-columns:1fr}}
 
 /* ---------------- BẢNG TÍCH (trách nhiệm · chi phí · rủi ro) ---------------- */
@@ -90,21 +93,19 @@ header.nav{position:fixed;top:0;left:0;right:0;z-index:80;background:rgba(244,24
 .ck-hd .ck-lbl{font-size:.64rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-soft)}
 .ck-it{font-size:.92rem;color:var(--ink);line-height:1.4}
 .ck-c{display:flex;justify-content:center;align-items:center}
-.tick{width:24px;height:24px;border-radius:999px;display:inline-flex;align-items:center;justify-content:center;flex:none}
-.tick svg{width:13px;height:13px;fill:none;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
-.tick.own{background:var(--brown)}.tick.own svg{stroke:#FBF6EE}
-.tick.riv{background:var(--tan)}.tick.riv svg{stroke:#3A2A19}
-.tick.ten{background:transparent;border:1.6px solid var(--ink-soft)}.tick.ten svg{stroke:var(--ink-soft)}
-.ck-na{color:var(--ink-soft);opacity:.4;font-size:1.1rem;line-height:1}
+.mk{flex:none;display:inline-flex;align-items:center;justify-content:center}
+.mk.own{width:26px;height:26px;border-radius:999px;background:var(--brown)}
+.mk.own svg{width:14px;height:14px;fill:none;stroke:#FBF6EE;stroke-width:2.7;stroke-linecap:round;stroke-linejoin:round}
+.mk.off{width:11px;height:11px;border-radius:999px;border:1.6px solid var(--line);background:var(--paper)}
 .ck-legend{display:flex;flex-wrap:wrap;gap:14px 18px;margin-top:12px;font-size:.8rem;color:var(--ink-soft)}
-.ck-legend span{display:inline-flex;align-items:center;gap:7px}
-.ck-legend .tick{width:18px;height:18px}
-.ck-legend .tick svg{width:10px;height:10px}
+.ck-legend span{display:inline-flex;align-items:center;gap:8px}
+.ck-legend .mk.own{width:20px;height:20px}
+.ck-legend .mk.own svg{width:11px;height:11px}
 @media(max-width:520px){
-  .ck-row{grid-template-columns:1fr 58px 58px;gap:6px;padding:12px 12px}
+  .ck-row{grid-template-columns:1fr 62px 62px;gap:6px;padding:12px 12px}
   .ck-hd .ck-c{font-size:.56rem;letter-spacing:.03em}
   .ck-it{font-size:.86rem}
-  .tick{width:22px;height:22px}
+  .mk.own{width:24px;height:24px}
 }
 
 /* ---------------- BẢNG SỐ (4.4) ---------------- */
@@ -207,9 +208,23 @@ footer{background:var(--espresso);color:var(--sand);padding:34px 0;margin-top:24
     <p><strong><em>Chủ sở hữu ký hợp đồng trực tiếp với người thuê. Tiền thuê net được chuyển vào tài khoản của chủ sở hữu sau khi trừ phí quản lý 8% và các chi phí phát sinh nếu có.</em></strong></p>
     <h3>Trách nhiệm mỗi bên</h3>
     <ul class="duty">
-      <li><b>Chủ sở hữu</b>Đứng tên hợp đồng thuê. Thực hiện các nghĩa vụ của chủ sở hữu theo luật bang Victoria. Chi trả chi phí sửa chữa lớn.</li>
-      <li><b>Rivera</b>Đại diện quản lý ủy thác: tìm kiếm và thẩm định hồ sơ khách thuê, quản lý dòng tiền, kiểm tra định kỳ và điều phối sửa chữa, đại diện pháp lý tại tòa VCAT khi cần.</li>
-      <li><b>Bản chất</b>Doanh thu biến động theo thị trường khi: 1. phòng trống; 2. gián đoạn thanh toán (có thể đến 120 ngày). Bù lại, chủ sở hữu hưởng trọn phần lợi khi thị trường thuận lợi.</li>
+      <li><b>Chủ sở hữu</b><ul class="mini">
+        <li>Đứng tên hợp đồng thuê.</li>
+        <li>Thực hiện nghĩa vụ chủ sở hữu theo luật bang Victoria.</li>
+        <li>Chi trả chi phí sửa chữa lớn.</li>
+      </ul></li>
+      <li><b>Rivera</b><ul class="mini">
+        <li>Đại diện quản lý ủy thác.</li>
+        <li>Tìm kiếm và thẩm định hồ sơ khách thuê.</li>
+        <li>Quản lý dòng tiền.</li>
+        <li>Kiểm tra định kỳ và điều phối sửa chữa.</li>
+        <li>Đại diện pháp lý tại tòa VCAT khi cần.</li>
+      </ul></li>
+      <li><b>Bản chất</b><ul class="mini">
+        <li>Doanh thu biến động theo thị trường.</li>
+        <li>Rủi ro khi phòng trống hoặc gián đoạn thanh toán (có thể đến 120 ngày).</li>
+        <li>Bù lại, hưởng trọn phần lợi khi thị trường thuận lợi.</li>
+      </ul></li>
     </ul>
   </div>
 </section>
@@ -224,9 +239,21 @@ footer{background:var(--espresso);color:var(--sand);padding:34px 0;margin-top:24
     <p><strong><em>Rivera trực tiếp thuê lại căn hộ với giá cố định 600 AUD/tuần, chi trả đủ 52 tuần mỗi năm, bất kể căn hộ có khách hay đang trống.</em></strong></p>
     <h3>Trách nhiệm mỗi bên</h3>
     <ul class="duty">
-      <li><b>Chủ sở hữu</b>Nhận nguồn thu cố định đều đặn mỗi tuần và chỉ chi trả các khoản phí thuộc quyền sở hữu tài sản (theo mục 4.2).</li>
-      <li><b>Rivera</b>Tự vận hành cho thuê lại và chịu trách nhiệm pháp lý với tư cách bên cho thuê đối với người thuê cuối. Tự tìm khách, thu tiền, xử lý tranh chấp và chậm thanh toán, kiểm tra an toàn định kỳ, chi trả bảo trì nhỏ (tối đa 300 AUD mỗi sự cố, không quá 1000 AUD mỗi năm cho mỗi căn). Chủ sở hữu được miễn phí quản lý, phí tìm khách và marketing.</li>
-      <li><b>Bản chất</b>Dòng tiền của chủ sở hữu ổn định trước biến động thị trường. Rivera tiếp nhận phần lớn rủi ro vận hành và dòng tiền trong thời hạn hợp đồng.</li>
+      <li><b>Chủ sở hữu</b><ul class="mini">
+        <li>Nhận nguồn thu cố định đều đặn mỗi tuần.</li>
+        <li>Chỉ chi trả các khoản phí thuộc quyền sở hữu tài sản (mục 4.2).</li>
+      </ul></li>
+      <li><b>Rivera</b><ul class="mini">
+        <li>Tự vận hành cho thuê lại, chịu trách nhiệm pháp lý với người thuê cuối.</li>
+        <li>Tìm khách, thu tiền, xử lý tranh chấp và chậm thanh toán.</li>
+        <li>Kiểm tra an toàn định kỳ.</li>
+        <li>Chi trả bảo trì nhỏ (tối đa 300 AUD/sự cố, không quá 1000 AUD/năm mỗi căn).</li>
+        <li>Miễn cho chủ sở hữu phí quản lý, phí tìm khách và marketing.</li>
+      </ul></li>
+      <li><b>Bản chất</b><ul class="mini">
+        <li>Dòng tiền của chủ sở hữu ổn định trước biến động thị trường.</li>
+        <li>Rivera tiếp nhận phần lớn rủi ro vận hành và dòng tiền trong thời hạn hợp đồng.</li>
+      </ul></li>
     </ul>
     <p>Việc cho thuê lại được quy định rõ ràng và có sự đồng ý bằng văn bản của chủ sở hữu trong hợp đồng gốc. Mức thuê Head Lease được xác định trên cơ sở điều kiện thị trường tại thời điểm ký hợp đồng, đồng thời phản ánh việc Rivera tiếp nhận chi phí vận hành và phần lớn rủi ro trong thời hạn thuê.</p>
   </div>
@@ -243,53 +270,51 @@ footer{background:var(--espresso);color:var(--sand);padding:34px 0;margin-top:24
     <h3>4.1. Trách nhiệm</h3>
     <div class="ck">
       <div class="ck-row ck-hd"><span class="ck-lbl">Việc</span><span class="ck-c">Property Management</span><span class="ck-c">Head Lease</span></div>
-      <div class="ck-row"><span class="ck-it">Tình trạng căn hộ, kiểm tra an toàn định kỳ</span><span class="ck-c"><i class="tick own"><svg viewBox="0 0 16 16"><path d="M3.5 8.5 6.5 11.5 12.5 4.5"/></svg></i></span><span class="ck-c"><i class="tick riv"><svg viewBox="0 0 16 16"><path d="M3.5 8.5 6.5 11.5 12.5 4.5"/></svg></i></span></div>
-      <div class="ck-row"><span class="ck-it">Tìm khách, ký hợp đồng, thu tiền</span><span class="ck-c"><i class="tick riv"><svg viewBox="0 0 16 16"><path d="M3.5 8.5 6.5 11.5 12.5 4.5"/></svg></i></span><span class="ck-c"><i class="tick riv"><svg viewBox="0 0 16 16"><path d="M3.5 8.5 6.5 11.5 12.5 4.5"/></svg></i></span></div>
-      <div class="ck-row"><span class="ck-it">Đại diện pháp lý tại VCAT</span><span class="ck-c"><i class="tick riv"><svg viewBox="0 0 16 16"><path d="M3.5 8.5 6.5 11.5 12.5 4.5"/></svg></i></span><span class="ck-c"><i class="tick riv"><svg viewBox="0 0 16 16"><path d="M3.5 8.5 6.5 11.5 12.5 4.5"/></svg></i></span></div>
-      <div class="ck-row"><span class="ck-it">Xử lý hư hỏng do người thuê (qua bond)</span><span class="ck-c"><i class="tick riv"><svg viewBox="0 0 16 16"><path d="M3.5 8.5 6.5 11.5 12.5 4.5"/></svg></i></span><span class="ck-c"><i class="tick riv"><svg viewBox="0 0 16 16"><path d="M3.5 8.5 6.5 11.5 12.5 4.5"/></svg></i></span></div>
-      <div class="ck-row"><span class="ck-it">Bảo trì lớn, kết cấu, hệ thống</span><span class="ck-c"><i class="tick own"><svg viewBox="0 0 16 16"><path d="M3.5 8.5 6.5 11.5 12.5 4.5"/></svg></i></span><span class="ck-c"><i class="tick own"><svg viewBox="0 0 16 16"><path d="M3.5 8.5 6.5 11.5 12.5 4.5"/></svg></i></span></div>
+      <div class="ck-row"><span class="ck-it">Tình trạng căn hộ, kiểm tra an toàn định kỳ</span><span class="ck-c"><i class="mk own"><svg viewBox="0 0 16 16"><path d="M3.5 8.5 6.5 11.5 12.5 4.5"/></svg></i></span><span class="ck-c"><i class="mk off"></i></span></div>
+      <div class="ck-row"><span class="ck-it">Tìm khách, ký hợp đồng, thu tiền</span><span class="ck-c"><i class="mk off"></i></span><span class="ck-c"><i class="mk off"></i></span></div>
+      <div class="ck-row"><span class="ck-it">Đại diện pháp lý tại VCAT</span><span class="ck-c"><i class="mk off"></i></span><span class="ck-c"><i class="mk off"></i></span></div>
+      <div class="ck-row"><span class="ck-it">Xử lý hư hỏng do người thuê (qua bond)</span><span class="ck-c"><i class="mk off"></i></span><span class="ck-c"><i class="mk off"></i></span></div>
+      <div class="ck-row"><span class="ck-it">Bảo trì lớn, kết cấu, hệ thống</span><span class="ck-c"><i class="mk own"><svg viewBox="0 0 16 16"><path d="M3.5 8.5 6.5 11.5 12.5 4.5"/></svg></i></span><span class="ck-c"><i class="mk own"><svg viewBox="0 0 16 16"><path d="M3.5 8.5 6.5 11.5 12.5 4.5"/></svg></i></span></div>
     </div>
     <div class="ck-legend">
-      <span><i class="tick own"><svg viewBox="0 0 16 16"><path d="M3.5 8.5 6.5 11.5 12.5 4.5"/></svg></i> Chủ sở hữu</span>
-      <span><i class="tick riv"><svg viewBox="0 0 16 16"><path d="M3.5 8.5 6.5 11.5 12.5 4.5"/></svg></i> Rivera</span>
+      <span><i class="mk own"><svg viewBox="0 0 16 16"><path d="M3.5 8.5 6.5 11.5 12.5 4.5"/></svg></i> Chủ sở hữu chịu</span>
+      <span><i class="mk off"></i> Rivera đảm nhận</span>
     </div>
 
     <h3>4.2. Chi phí</h3>
     <div class="ck">
       <div class="ck-row ck-hd"><span class="ck-lbl">Khoản phí</span><span class="ck-c">Property Management</span><span class="ck-c">Head Lease</span></div>
-      <div class="ck-row"><span class="ck-it">Phí hội đồng địa phương</span><span class="ck-c"><i class="tick own"><svg viewBox="0 0 16 16"><path d="M3.5 8.5 6.5 11.5 12.5 4.5"/></svg></i></span><span class="ck-c"><i class="tick own"><svg viewBox="0 0 16 16"><path d="M3.5 8.5 6.5 11.5 12.5 4.5"/></svg></i></span></div>
-      <div class="ck-row"><span class="ck-it">Phí ban quản lý toà nhà</span><span class="ck-c"><i class="tick own"><svg viewBox="0 0 16 16"><path d="M3.5 8.5 6.5 11.5 12.5 4.5"/></svg></i></span><span class="ck-c"><i class="tick own"><svg viewBox="0 0 16 16"><path d="M3.5 8.5 6.5 11.5 12.5 4.5"/></svg></i></span></div>
-      <div class="ck-row"><span class="ck-it">Thuế đất</span><span class="ck-c"><i class="tick own"><svg viewBox="0 0 16 16"><path d="M3.5 8.5 6.5 11.5 12.5 4.5"/></svg></i></span><span class="ck-c"><i class="tick own"><svg viewBox="0 0 16 16"><path d="M3.5 8.5 6.5 11.5 12.5 4.5"/></svg></i></span></div>
-      <div class="ck-row"><span class="ck-it">Phí dịch vụ nước</span><span class="ck-c"><i class="tick own"><svg viewBox="0 0 16 16"><path d="M3.5 8.5 6.5 11.5 12.5 4.5"/></svg></i></span><span class="ck-c"><i class="tick own"><svg viewBox="0 0 16 16"><path d="M3.5 8.5 6.5 11.5 12.5 4.5"/></svg></i></span></div>
-      <div class="ck-row"><span class="ck-it">Điện, gas, nước tiêu thụ, internet</span><span class="ck-c"><i class="tick ten"><svg viewBox="0 0 16 16"><path d="M3.5 8.5 6.5 11.5 12.5 4.5"/></svg></i></span><span class="ck-c"><i class="tick riv"><svg viewBox="0 0 16 16"><path d="M3.5 8.5 6.5 11.5 12.5 4.5"/></svg></i></span></div>
-      <div class="ck-row"><span class="ck-it">Bảo trì nhỏ (dưới 300 AUD/lần)</span><span class="ck-c"><i class="tick own"><svg viewBox="0 0 16 16"><path d="M3.5 8.5 6.5 11.5 12.5 4.5"/></svg></i></span><span class="ck-c"><i class="tick riv"><svg viewBox="0 0 16 16"><path d="M3.5 8.5 6.5 11.5 12.5 4.5"/></svg></i></span></div>
-      <div class="ck-row"><span class="ck-it">Bảo trì lớn, kết cấu, hệ thống</span><span class="ck-c"><i class="tick own"><svg viewBox="0 0 16 16"><path d="M3.5 8.5 6.5 11.5 12.5 4.5"/></svg></i></span><span class="ck-c"><i class="tick own"><svg viewBox="0 0 16 16"><path d="M3.5 8.5 6.5 11.5 12.5 4.5"/></svg></i></span></div>
-      <div class="ck-row"><span class="ck-it">Phí tìm khách</span><span class="ck-c"><i class="tick own"><svg viewBox="0 0 16 16"><path d="M3.5 8.5 6.5 11.5 12.5 4.5"/></svg></i></span><span class="ck-c"><span class="ck-na">·</span></span></div>
-      <div class="ck-row"><span class="ck-it">Phí marketing</span><span class="ck-c"><i class="tick own"><svg viewBox="0 0 16 16"><path d="M3.5 8.5 6.5 11.5 12.5 4.5"/></svg></i></span><span class="ck-c"><span class="ck-na">·</span></span></div>
-      <div class="ck-row"><span class="ck-it">Phí quản lý</span><span class="ck-c"><i class="tick own"><svg viewBox="0 0 16 16"><path d="M3.5 8.5 6.5 11.5 12.5 4.5"/></svg></i></span><span class="ck-c"><span class="ck-na">·</span></span></div>
+      <div class="ck-row"><span class="ck-it">Phí hội đồng địa phương</span><span class="ck-c"><i class="mk own"><svg viewBox="0 0 16 16"><path d="M3.5 8.5 6.5 11.5 12.5 4.5"/></svg></i></span><span class="ck-c"><i class="mk own"><svg viewBox="0 0 16 16"><path d="M3.5 8.5 6.5 11.5 12.5 4.5"/></svg></i></span></div>
+      <div class="ck-row"><span class="ck-it">Phí ban quản lý toà nhà</span><span class="ck-c"><i class="mk own"><svg viewBox="0 0 16 16"><path d="M3.5 8.5 6.5 11.5 12.5 4.5"/></svg></i></span><span class="ck-c"><i class="mk own"><svg viewBox="0 0 16 16"><path d="M3.5 8.5 6.5 11.5 12.5 4.5"/></svg></i></span></div>
+      <div class="ck-row"><span class="ck-it">Thuế đất</span><span class="ck-c"><i class="mk own"><svg viewBox="0 0 16 16"><path d="M3.5 8.5 6.5 11.5 12.5 4.5"/></svg></i></span><span class="ck-c"><i class="mk own"><svg viewBox="0 0 16 16"><path d="M3.5 8.5 6.5 11.5 12.5 4.5"/></svg></i></span></div>
+      <div class="ck-row"><span class="ck-it">Phí dịch vụ nước</span><span class="ck-c"><i class="mk own"><svg viewBox="0 0 16 16"><path d="M3.5 8.5 6.5 11.5 12.5 4.5"/></svg></i></span><span class="ck-c"><i class="mk own"><svg viewBox="0 0 16 16"><path d="M3.5 8.5 6.5 11.5 12.5 4.5"/></svg></i></span></div>
+      <div class="ck-row"><span class="ck-it">Điện, gas, nước tiêu thụ, internet</span><span class="ck-c"><i class="mk off"></i></span><span class="ck-c"><i class="mk off"></i></span></div>
+      <div class="ck-row"><span class="ck-it">Bảo trì nhỏ (dưới 300 AUD/lần)</span><span class="ck-c"><i class="mk own"><svg viewBox="0 0 16 16"><path d="M3.5 8.5 6.5 11.5 12.5 4.5"/></svg></i></span><span class="ck-c"><i class="mk off"></i></span></div>
+      <div class="ck-row"><span class="ck-it">Bảo trì lớn, kết cấu, hệ thống</span><span class="ck-c"><i class="mk own"><svg viewBox="0 0 16 16"><path d="M3.5 8.5 6.5 11.5 12.5 4.5"/></svg></i></span><span class="ck-c"><i class="mk own"><svg viewBox="0 0 16 16"><path d="M3.5 8.5 6.5 11.5 12.5 4.5"/></svg></i></span></div>
+      <div class="ck-row"><span class="ck-it">Phí tìm khách</span><span class="ck-c"><i class="mk own"><svg viewBox="0 0 16 16"><path d="M3.5 8.5 6.5 11.5 12.5 4.5"/></svg></i></span><span class="ck-c"><i class="mk off"></i></span></div>
+      <div class="ck-row"><span class="ck-it">Phí marketing</span><span class="ck-c"><i class="mk own"><svg viewBox="0 0 16 16"><path d="M3.5 8.5 6.5 11.5 12.5 4.5"/></svg></i></span><span class="ck-c"><i class="mk off"></i></span></div>
+      <div class="ck-row"><span class="ck-it">Phí quản lý</span><span class="ck-c"><i class="mk own"><svg viewBox="0 0 16 16"><path d="M3.5 8.5 6.5 11.5 12.5 4.5"/></svg></i></span><span class="ck-c"><i class="mk off"></i></span></div>
     </div>
     <div class="ck-legend">
-      <span><i class="tick own"><svg viewBox="0 0 16 16"><path d="M3.5 8.5 6.5 11.5 12.5 4.5"/></svg></i> Chủ sở hữu</span>
-      <span><i class="tick riv"><svg viewBox="0 0 16 16"><path d="M3.5 8.5 6.5 11.5 12.5 4.5"/></svg></i> Rivera</span>
-      <span><i class="tick ten"><svg viewBox="0 0 16 16"><path d="M3.5 8.5 6.5 11.5 12.5 4.5"/></svg></i> Người thuê</span>
-      <span><span class="ck-na">·</span> không áp dụng</span>
+      <span><i class="mk own"><svg viewBox="0 0 16 16"><path d="M3.5 8.5 6.5 11.5 12.5 4.5"/></svg></i> Chủ sở hữu chi trả</span>
+      <span><i class="mk off"></i> Rivera hoặc người thuê chi trả · không áp dụng</span>
     </div>
     <div class="note">
-      <p>Với Head Lease, Rivera thanh toán điện, gas, nước tiêu thụ và internet, có thể thu lại từ người thuê hoặc tính gộp vào tiền thuê theo hợp đồng.</p>
+      <p>Điện, gas, nước tiêu thụ và internet: với Property Management do người thuê tự đăng ký; với Head Lease do Rivera thanh toán, có thể thu lại từ người thuê hoặc tính gộp vào tiền thuê.</p>
     </div>
 
     <h3>4.3. Rủi ro</h3>
     <div class="ck">
       <div class="ck-row ck-hd"><span class="ck-lbl">Rủi ro</span><span class="ck-c">Property Management</span><span class="ck-c">Head Lease</span></div>
-      <div class="ck-row"><span class="ck-it">Người thuê không thanh toán</span><span class="ck-c"><i class="tick own"><svg viewBox="0 0 16 16"><path d="M3.5 8.5 6.5 11.5 12.5 4.5"/></svg></i></span><span class="ck-c"><i class="tick riv"><svg viewBox="0 0 16 16"><path d="M3.5 8.5 6.5 11.5 12.5 4.5"/></svg></i></span></div>
-      <div class="ck-row"><span class="ck-it">Người thuê chậm thanh toán</span><span class="ck-c"><i class="tick own"><svg viewBox="0 0 16 16"><path d="M3.5 8.5 6.5 11.5 12.5 4.5"/></svg></i></span><span class="ck-c"><i class="tick riv"><svg viewBox="0 0 16 16"><path d="M3.5 8.5 6.5 11.5 12.5 4.5"/></svg></i></span></div>
-      <div class="ck-row"><span class="ck-it">Người thuê chấm dứt hợp đồng sớm</span><span class="ck-c"><i class="tick own"><svg viewBox="0 0 16 16"><path d="M3.5 8.5 6.5 11.5 12.5 4.5"/></svg></i></span><span class="ck-c"><i class="tick riv"><svg viewBox="0 0 16 16"><path d="M3.5 8.5 6.5 11.5 12.5 4.5"/></svg></i></span></div>
-      <div class="ck-row"><span class="ck-it">Biến động giá thuê thị trường</span><span class="ck-c"><i class="tick own"><svg viewBox="0 0 16 16"><path d="M3.5 8.5 6.5 11.5 12.5 4.5"/></svg></i></span><span class="ck-c"><i class="tick riv"><svg viewBox="0 0 16 16"><path d="M3.5 8.5 6.5 11.5 12.5 4.5"/></svg></i></span></div>
-      <div class="ck-row"><span class="ck-it">Tranh chấp, khiếu nại tại VCAT</span><span class="ck-c"><i class="tick own"><svg viewBox="0 0 16 16"><path d="M3.5 8.5 6.5 11.5 12.5 4.5"/></svg></i></span><span class="ck-c"><i class="tick riv"><svg viewBox="0 0 16 16"><path d="M3.5 8.5 6.5 11.5 12.5 4.5"/></svg></i></span></div>
+      <div class="ck-row"><span class="ck-it">Người thuê không thanh toán</span><span class="ck-c"><i class="mk own"><svg viewBox="0 0 16 16"><path d="M3.5 8.5 6.5 11.5 12.5 4.5"/></svg></i></span><span class="ck-c"><i class="mk off"></i></span></div>
+      <div class="ck-row"><span class="ck-it">Người thuê chậm thanh toán</span><span class="ck-c"><i class="mk own"><svg viewBox="0 0 16 16"><path d="M3.5 8.5 6.5 11.5 12.5 4.5"/></svg></i></span><span class="ck-c"><i class="mk off"></i></span></div>
+      <div class="ck-row"><span class="ck-it">Người thuê chấm dứt hợp đồng sớm</span><span class="ck-c"><i class="mk own"><svg viewBox="0 0 16 16"><path d="M3.5 8.5 6.5 11.5 12.5 4.5"/></svg></i></span><span class="ck-c"><i class="mk off"></i></span></div>
+      <div class="ck-row"><span class="ck-it">Biến động giá thuê thị trường</span><span class="ck-c"><i class="mk own"><svg viewBox="0 0 16 16"><path d="M3.5 8.5 6.5 11.5 12.5 4.5"/></svg></i></span><span class="ck-c"><i class="mk off"></i></span></div>
+      <div class="ck-row"><span class="ck-it">Tranh chấp, khiếu nại tại VCAT</span><span class="ck-c"><i class="mk own"><svg viewBox="0 0 16 16"><path d="M3.5 8.5 6.5 11.5 12.5 4.5"/></svg></i></span><span class="ck-c"><i class="mk off"></i></span></div>
     </div>
     <div class="ck-legend">
-      <span><i class="tick own"><svg viewBox="0 0 16 16"><path d="M3.5 8.5 6.5 11.5 12.5 4.5"/></svg></i> Chủ sở hữu</span>
-      <span><i class="tick riv"><svg viewBox="0 0 16 16"><path d="M3.5 8.5 6.5 11.5 12.5 4.5"/></svg></i> Rivera</span>
+      <span><i class="mk own"><svg viewBox="0 0 16 16"><path d="M3.5 8.5 6.5 11.5 12.5 4.5"/></svg></i> Chủ sở hữu chịu</span>
+      <span><i class="mk off"></i> Rivera đảm nhận</span>
     </div>
     <div class="note">
       <p>Về tranh chấp tại VCAT: với Property Management, chủ sở hữu là bên tham gia tranh chấp, Rivera chủ yếu hỗ trợ. Với Head Lease, Rivera là bên trực tiếp tham gia và chịu trách nhiệm trong các tranh chấp với chủ sở hữu và với người thuê.</p>

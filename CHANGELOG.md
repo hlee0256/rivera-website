@@ -6,6 +6,15 @@ task, add one short entry to the top.
 
 ---
 
+### 2026-07-03 · Claude · Canopy proposal v8: presence/absence tables, bullet cards
+- **Check tables redesigned** (owner: the two similar-tone ticks blurred together). Dropped the
+  two-colour scheme and the tenant tick; now a single owner-centric mark: **solid brown ✓ =
+  Chủ sở hữu chịu/chi trả · faint ring = Rivera đảm nhận / không áp dụng**. Strong presence/absence
+  contrast; the Head Lease column visibly empties (esp. 4.3 risk: PM all ✓, HL all rings) — the
+  "chỗ có chỗ không" the owner asked for. 4.2 utilities note reworded (PM = tenant, HL = Rivera).
+- **Phần 2 & 3 responsibility cards → bullet points** (Chủ sở hữu / Rivera / Bản chất each a
+  `.mini` bullet list instead of a run-on paragraph).
+
 ### 2026-07-03 · Claude · Canopy proposal v7: check-mark tables, restructure, terminology
 - **Mobile-friendly two-colour check tables** replace the horizontal-scroll tables in 4.1/4.2/4.3
   (owner: "trên mobile phải kéo ngang"). One unified structure: rows = item, columns = the two
