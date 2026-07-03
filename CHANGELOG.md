@@ -6,6 +6,11 @@ task, add one short entry to the top.
 
 ---
 
+### 2026-07-03 · Claude · Canopy proposal v9: consistent ✓/✕ table markers
+- Owner: the ✓-vs-faint-dot mix looked inconsistent. Replaced the faint ring with a matched
+  cross so every cell is the same-size badge: **solid brown ✓ = Chủ sở hữu · muted ✕ = không
+  phải chủ sở hữu (Rivera / không áp dụng)**. Uniform style across 4.1/4.2/4.3; legends updated.
+
 ### 2026-07-03 · Claude · Canopy proposal v8: presence/absence tables, bullet cards
 - **Check tables redesigned** (owner: the two similar-tone ticks blurred together). Dropped the
   two-colour scheme and the tenant tick; now a single owner-centric mark: **solid brown ✓ =
