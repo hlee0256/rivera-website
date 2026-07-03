@@ -49,7 +49,8 @@ fictional placeholders).
 
 Static, bilingual (**VI default** / EN), no-build marketing site for Rivera, a boutique
 Melbourne property practice. One shared `styles.css` + `app.js` (map markers in `map-data.js`).
-Deployed on **Vercel** from `main` (`https://rivera-website.vercel.app`). Pages: `index.html`
+Deployed on **Vercel** from `main`; **live on the custom domain `https://rivera.au`** (apex +
+`www`). Pages: `index.html`
 (landing, featuring AURA), `projects.html` (7-project collection), `about.html`, `map.html`,
 `insights.html` + insight articles, `enquire.html`, `guide.html`, and 7 project detail pages.
 AURA is the deliberately bespoke flagship; the other detail pages follow the shared `.pd-*`
@@ -63,9 +64,12 @@ proposal, 2026-07-03).
 - ~~Contact email `hello@rivera.estate`~~ — **done (2026-06-30):** now `info.riveraau@gmail.com` site-wide, with VN +84 782 067 555 / AUS +61 450 151 686 in every footer. **Still open:** the `index.html` enquiry form `YOUR_FORM_ID` (Formspree id) is unset; verify the Zalo deep-link (`zalo.me/0782067555`) resolves.
 - AU real-estate legals still missing: agent licence number, agency details, privacy policy. (About-page credentials copy softened on 2026-06-30 to avoid an unverifiable REIV-membership claim until confirmed.)
 - Map (`map.html` / `map-data.js`) and the landing teaser: keep in sync as projects change.
-- Domain not yet pointed: site runs on the Vercel staging URL. To go live on **rivera.au**, add
-  the domain in Vercel → Settings → Domains (A record `76.76.21.21` or the CNAME Vercel gives),
-  but only after the placeholder/legals threads above are cleared.
+- ~~Domain not yet pointed~~ — **done:** `rivera.au` + `www.rivera.au` are pointed and serving
+  production (verified 2026-07-03 via the Vercel project domains). The old
+  `rivera-website.vercel.app` staging hostname is **not** assigned to the project and does not
+  resolve; use `https://rivera.au/...` for every shared link (e.g. the standalone client docs).
+  Note: the `*.vercel.app` deployment aliases are login-gated by Vercel deployment protection;
+  only the `rivera.au` custom domain is public.
 
 ## Decisions locked
 
