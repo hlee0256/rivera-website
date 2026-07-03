@@ -6,6 +6,22 @@ task, add one short entry to the top.
 
 ---
 
+### 2026-07-03 · Claude · Canopy proposal v4: range pricing, no point valuation
+- **Strategy shift per owner:** never present a 730 point valuation (owner intends to re-let
+  above it; a point anchor next to a 600 offer reads as lowballing). The page now presents
+  **two transparent options** — fixed 600/tuần (Rivera absorbs 100% financial risk, no
+  letting/marketing/management fees) vs Quản lý 8% at the market range **730 – 770/tuần** —
+  and lets the client price their own risk.
+- **Removed 4.4 "Con số thực nhận"** entirely (bar chart + net-income table were built on the
+  730 anchor) plus its now-unused CSS. The fee itemization that justifies the 600 discount
+  moved into the 4.2 note (letting ~1.5 tuần, marketing ~400, quản lý 8%).
+- **Phần 5 Căn cứ định giá** kept (only survivor of the valuation content) and reframed to the
+  range: lead "Định giá thị trường hiện tại: 730 – 770"; cards updated ("1 tuần trống = mất
+  730 – 770"); closing line now derives 600 as range minus fees minus vacancy risk, not
+  "tính từ 730".
+- Hero subtitle now states the two options; khuyến nghị chip "Khoản chênh nói rõ ngay từ đầu"
+  → "Không phí quản lý, không phí tìm khách, không marketing".
+
 ### 2026-07-03 · Claude · Canopy proposal v3: fixed rate 600/wk, restructured comparison
 - **Head Lease fixed rate locked at 600/tuần** (was 620) per owner. 4.4 recomputed with a
   marketing fee line (−400): mgmt net 30,442 (≈585/tuần, −19.8% vs 730), HL 31,200 (−17.8%),
