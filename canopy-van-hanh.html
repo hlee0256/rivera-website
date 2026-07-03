@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
 <title>The Canopy House · Đề xuất vận hành · Rivera</title>
-<meta name="description" content="Ba căn hộ tại The Canopy House: hai lựa chọn vận hành, dòng tiền cố định 600/tuần hoặc quản lý 8% theo giá thị trường. Tài liệu dành riêng cho chủ nhà." />
+<meta name="description" content="Ba căn hộ tại The Canopy House: hai lựa chọn vận hành, dòng tiền cố định 600 AUD/tuần hoặc Property Management theo giá thị trường." />
 <meta name="robots" content="noindex" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -56,10 +56,7 @@ header.nav{position:fixed;top:0;left:0;right:0;z-index:80;background:rgba(244,24
 .hero-in{position:relative;z-index:2}
 .hero .eyebrow{color:var(--tan);margin-bottom:14px}
 .hero h1{font-size:clamp(2.1rem,8.5vw,3.4rem);color:#FBF6EE;max-width:18ch}
-.hero p{margin-top:16px;color:rgba(244,240,233,.86);font-weight:300;font-size:1.06rem;max-width:46ch}
-.hero-chips{display:flex;flex-wrap:wrap;gap:9px;margin-top:24px}
-.hero-chips span{font-size:.68rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;
-  color:#FBF6EE;border:1px solid rgba(251,246,238,.34);border-radius:999px;padding:7px 13px;background:rgba(255,255,255,.04)}
+.hero p{margin-top:16px;color:rgba(244,240,233,.86);font-weight:300;font-size:1.06rem;max-width:48ch}
 
 /* ---------------- SECTIONS ---------------- */
 .sec{padding:52px 0;border-bottom:1px solid var(--line)}
@@ -67,7 +64,7 @@ header.nav{position:fixed;top:0;left:0;right:0;z-index:80;background:rgba(244,24
 .sec-head{margin-bottom:22px}
 .sec-head h2{font-size:clamp(1.55rem,5vw,2.1rem);margin-top:10px}
 .sec h3{font-size:1.06rem;font-weight:700;margin:30px 0 12px}
-.sec p{color:var(--ink-soft);margin-top:10px;max-width:70ch}
+.sec p{color:var(--ink-soft);margin-top:10px;max-width:72ch}
 .sec p strong,.sec li strong{color:var(--ink);font-weight:700}
 .lead{font-size:1.04rem}
 
@@ -78,53 +75,60 @@ header.nav{position:fixed;top:0;left:0;right:0;z-index:80;background:rgba(244,24
 .stats .st .l{margin-top:8px;font-size:.8rem;color:var(--ink-soft);line-height:1.45}
 @media(max-width:760px){.stats{grid-template-columns:repeat(2,1fr)}}
 
-/* gạch đầu dòng */
-.pts{list-style:none;margin-top:16px;display:grid;gap:8px;max-width:64ch}
-.pts li{position:relative;padding-left:20px;color:var(--ink-soft)}
-.pts li::before{content:"";position:absolute;left:2px;top:.58em;width:7px;height:7px;border-radius:999px;background:var(--brown)}
-
 /* thẻ trách nhiệm 3 cột */
 .duty{list-style:none;margin-top:6px;display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
 .duty li{border:1px solid var(--line);border-radius:12px;background:var(--paper-2);padding:16px 16px;color:var(--ink-soft);font-size:.92rem;line-height:1.55}
 .duty li b{display:block;color:var(--brown);font-weight:700;font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;margin-bottom:8px}
 @media(max-width:760px){.duty{grid-template-columns:1fr}}
 
-/* ---------------- BẢNG ---------------- */
+/* ---------------- BẢNG TÍCH (trách nhiệm · chi phí · rủi ro) ---------------- */
+.ck{margin-top:14px;border:1px solid var(--line);border-radius:12px;background:var(--paper-2);overflow:hidden}
+.ck-row{display:grid;grid-template-columns:1fr 108px 108px;align-items:center;gap:10px;padding:13px 16px;border-top:1px solid var(--line)}
+.ck-row:first-child{border-top:0}
+.ck-hd{background:var(--sand)}
+.ck-hd .ck-c{font-size:.64rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--brown);line-height:1.25}
+.ck-hd .ck-lbl{font-size:.64rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-soft)}
+.ck-it{font-size:.92rem;color:var(--ink);line-height:1.4}
+.ck-c{display:flex;justify-content:center;align-items:center}
+.tick{width:24px;height:24px;border-radius:999px;display:inline-flex;align-items:center;justify-content:center;flex:none}
+.tick svg{width:13px;height:13px;fill:none;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
+.tick.own{background:var(--brown)}.tick.own svg{stroke:#FBF6EE}
+.tick.riv{background:var(--tan)}.tick.riv svg{stroke:#3A2A19}
+.tick.ten{background:transparent;border:1.6px solid var(--ink-soft)}.tick.ten svg{stroke:var(--ink-soft)}
+.ck-na{color:var(--ink-soft);opacity:.4;font-size:1.1rem;line-height:1}
+.ck-legend{display:flex;flex-wrap:wrap;gap:14px 18px;margin-top:12px;font-size:.8rem;color:var(--ink-soft)}
+.ck-legend span{display:inline-flex;align-items:center;gap:7px}
+.ck-legend .tick{width:18px;height:18px}
+.ck-legend .tick svg{width:10px;height:10px}
+@media(max-width:520px){
+  .ck-row{grid-template-columns:1fr 58px 58px;gap:6px;padding:12px 12px}
+  .ck-hd .ck-c{font-size:.56rem;letter-spacing:.03em}
+  .ck-it{font-size:.86rem}
+  .tick{width:22px;height:22px}
+}
+
+/* ---------------- BẢNG SỐ (4.4) ---------------- */
 .tbl-wrap{margin-top:14px;border:1px solid var(--line);border-radius:12px;background:var(--paper-2);overflow-x:auto}
-table{width:100%;border-collapse:collapse;min-width:600px}
-th,td{padding:11px 16px;text-align:left;vertical-align:top;border-bottom:1px solid var(--line);font-size:.93rem}
-thead th{font-size:.7rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--brown);
-  border-bottom:1px solid var(--line);white-space:nowrap}
-tbody tr:last-child th,tbody tr:last-child td{border-bottom:0}
-tbody th{font-weight:600;color:var(--ink)}
-td{color:var(--ink-soft)}
-table.tbl-num{min-width:0}
-.tbl-num td{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
-.tbl-num th{white-space:normal}
-tr.hl th,tr.hl td{background:var(--sand);color:var(--ink);font-weight:700}
+table.tbl-num{width:100%;border-collapse:collapse;min-width:0}
+.tbl-num th,.tbl-num td{padding:11px 16px;text-align:left;vertical-align:top;border-bottom:1px solid var(--line);font-size:.93rem}
+.tbl-num thead th{font-size:.68rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--brown);white-space:normal}
+.tbl-num tbody tr:last-child th,.tbl-num tbody tr:last-child td{border-bottom:0}
+.tbl-num tbody th{font-weight:600;color:var(--ink)}
+.tbl-num td{color:var(--ink-soft);text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.tbl-num tr.hl th,.tbl-num tr.hl td{background:var(--sand);color:var(--ink);font-weight:700}
+
 .note{margin-top:14px;border-left:3px solid var(--brown);padding:4px 0 4px 16px}
 .note p{margin-top:0}
 .note p + p{margin-top:10px}
-
-/* thẻ căn so sánh (link ra tin đăng) */
-.comps{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:14px}
-.comps a{display:flex;flex-direction:column;border:1px solid var(--line);border-radius:12px;background:var(--paper-2);padding:16px;font-size:.9rem;color:var(--ink-soft);line-height:1.55;transition:border-color .2s ease}
-.comps a:hover{border-color:var(--brown)}
-.comps a b{display:block;color:var(--ink);font-weight:700;margin-bottom:6px;font-size:.95rem}
-.comps a .src{display:block;margin-top:auto;padding-top:12px;font-size:.7rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--brown)}
-@media(max-width:760px){.comps{grid-template-columns:1fr}}
-table.tbl-fit{min-width:0}
+.note-hl{margin-top:16px;background:var(--sand);border-radius:10px;border-left:3px solid var(--brown);padding:15px 18px}
+.note-hl p{margin-top:0;color:var(--ink)}
 
 /* hai lựa chọn */
 .opt2{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px}
 .opt2 .op{border:1px solid var(--line);border-radius:12px;background:var(--paper-2);padding:20px 18px}
-.opt2 .op b{display:block;font-size:.7rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--brown);margin-bottom:10px}
+.opt2 .op b{display:block;font-size:.7rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--brown);margin-bottom:10px}
 .opt2 .op p{margin-top:0;font-size:.94rem}
 @media(max-width:700px){.opt2{grid-template-columns:1fr}}
-
-/* dải chip giá trị */
-.chips{display:flex;flex-wrap:wrap;gap:9px;margin-top:16px}
-.chips span{font-size:.8rem;font-weight:600;color:var(--ink);border:1px solid var(--line);border-radius:999px;padding:8px 14px;background:var(--paper-2)}
 
 /* cam kết */
 .num{list-style:none;margin-top:6px;display:grid;grid-template-columns:1fr 1fr;gap:10px}
@@ -154,7 +158,6 @@ footer{background:var(--espresso);color:var(--sand);padding:34px 0;margin-top:24
   .hero{padding-top:40px}
   .sec{padding:32px 0}
   .tbl-wrap{overflow:visible}
-  table{min-width:0}
 }
 </style>
 </head>
@@ -163,8 +166,8 @@ footer{background:var(--espresso);color:var(--sand);padding:34px 0;margin-top:24
 <!-- NAV -->
 <header class="nav">
   <div class="wrap nav-in">
-    <a class="logo" href="#" aria-label="Rivera — Real Estate">RIVER<svg class="ra" viewBox="0 0 222.5 278" aria-hidden="true"><path fill="currentColor" fill-rule="evenodd" d="M152.8 2.0L171.6 2.0L174.6 4.4L187.5 78.6L187.9 85.4L197.5 135.6L198.9 148.4L200.5 153.6L209.9 211.4L211.5 216.6L212.9 229.4L214.5 234.6L216.9 253.4L219.5 264.6L220.5 274.2L219.2 275.9L172.8 276.0L170.0 275.0L168.9 272.4L158.5 211.6L156.2 205.6L145.1 195.4L133.1 187.3L125.6 183.6L113.6 179.6L101.6 177.0L88.8 177.0L76.8 179.6L69.3 182.3L57.3 189.4L52.2 194.6L47.0 203.6L9.1 274.9L7.6 276.0L3.8 276.0L2.1 274.8L5.0 267.6L33.4 217.4L66.0 156.6L71.4 148.4L76.0 138.6L99.4 97.4L122.0 54.6L127.4 46.4L147.0 9.6L152.2 2.1ZM129.1 51.8L133.5 70.6L134.9 83.4L136.5 88.6L145.9 146.4L147.5 151.6L147.9 158.4L150.5 169.6L155.6 202.3L146.1 192.4L128.1 179.3L120.6 175.6L107.1 171.2L99.6 170.0L85.3 170.2L74.8 172.6L62.3 178.6L62.6 176.4L69.0 163.6L128.8 51.5Z"/></svg></a>
-    <span class="tag">Tài liệu chủ nhà</span>
+    <a class="logo" href="#" aria-label="Rivera Real Estate">RIVER<svg class="ra" viewBox="0 0 222.5 278" aria-hidden="true"><path fill="currentColor" fill-rule="evenodd" d="M152.8 2.0L171.6 2.0L174.6 4.4L187.5 78.6L187.9 85.4L197.5 135.6L198.9 148.4L200.5 153.6L209.9 211.4L211.5 216.6L212.9 229.4L214.5 234.6L216.9 253.4L219.5 264.6L220.5 274.2L219.2 275.9L172.8 276.0L170.0 275.0L168.9 272.4L158.5 211.6L156.2 205.6L145.1 195.4L133.1 187.3L125.6 183.6L113.6 179.6L101.6 177.0L88.8 177.0L76.8 179.6L69.3 182.3L57.3 189.4L52.2 194.6L47.0 203.6L9.1 274.9L7.6 276.0L3.8 276.0L2.1 274.8L5.0 267.6L33.4 217.4L66.0 156.6L71.4 148.4L76.0 138.6L99.4 97.4L122.0 54.6L127.4 46.4L147.0 9.6L152.2 2.1ZM129.1 51.8L133.5 70.6L134.9 83.4L136.5 88.6L145.9 146.4L147.5 151.6L147.9 158.4L150.5 169.6L155.6 202.3L146.1 192.4L128.1 179.3L120.6 175.6L107.1 171.2L99.6 170.0L85.3 170.2L74.8 172.6L62.3 178.6L62.6 176.4L69.0 163.6L128.8 51.5Z"/></svg></a>
+    <span class="tag">Tài liệu chủ sở hữu</span>
   </div>
 </header>
 
@@ -172,67 +175,60 @@ footer{background:var(--espresso);color:var(--sand);padding:34px 0;margin-top:24
 <section class="hero">
   <div class="wrap hero-in">
     <span class="eyebrow">Rivera Real Estate · Tháng 7, 2026</span>
-    <h1>Ba căn hộ tại The Canopy House</h1>
-    <p>Hai lựa chọn: dòng tiền cố định 600/tuần, hoặc quản lý 8% theo giá thị trường.</p>
-    <div class="hero-chips">
-      <span>Tài liệu dành riêng cho chủ nhà</span>
-    </div>
+    <h1>3 căn hộ tại The Canopy House</h1>
+    <p>2 lựa chọn: 600 AUD/tuần cố định, hoặc quản lý 8% mỗi năm theo giá thị trường.</p>
   </div>
 </section>
 
-<!-- 1. VỀ RIVERA -->
-<section class="sec" id="ve-rivera">
+<!-- 1. GIỚI THIỆU -->
+<section class="sec" id="gioi-thieu">
   <div class="wrap">
     <div class="sec-head">
       <span class="eyebrow">Phần 1</span>
-      <h2>Về Rivera</h2>
+      <h2>Giới thiệu</h2>
     </div>
-    <p class="lead">Công ty tư vấn và vận hành bất động sản, tập trung một việc duy nhất: phục vụ chủ nhà người Việt đầu tư tại Melbourne.</p>
+    <p class="lead">Công ty tư vấn và vận hành bất động sản. Phục vụ nhà đầu tư Việt Nam tại Melbourne.</p>
     <div class="stats">
       <div class="st"><div class="n">10+</div><div class="l">năm kinh nghiệm trên thị trường Melbourne</div></div>
       <div class="st"><div class="n">20+</div><div class="l">căn hộ đã trực tiếp giao dịch, khu CBD và nội đô</div></div>
       <div class="st"><div class="n">150</div><div class="l">căn từng trực tiếp quản lý, gồm danh mục và cho thuê ngắn hạn</div></div>
       <div class="st"><div class="n">5 phút</div><div class="l">từ văn phòng Rivera tới The Canopy House</div></div>
     </div>
-    <h3>Mô hình quản lý tinh gọn</h3>
-    <ul class="pts">
-      <li>Mỗi chủ nhà đều làm việc trực tiếp với cấp điều hành cao nhất.</li>
-      <li>Chúng tôi không dùng tổng đài hay quy trình qua nhiều cấp nhân viên phức tạp.</li>
-    </ul>
   </div>
 </section>
 
-<!-- 2. PHƯƠNG ÁN A -->
+<!-- 2. PROPERTY MANAGEMENT -->
 <section class="sec" id="phuong-an-a">
   <div class="wrap">
     <div class="sec-head">
       <span class="eyebrow">Phần 2</span>
-      <h2>Phương án A: Quản lý ủy thác truyền thống (Phí dịch vụ 8%)</h2>
+      <h2>Phương án A: Property Management · Quản lý ủy thác truyền thống (8%/năm)</h2>
     </div>
-    <p>Rivera đóng vai trò đại diện ủy thác; hợp đồng thuê sẽ ký trực tiếp giữa chủ nhà và người thuê. Căn hộ được chào thuê theo giá thị trường (ước tính hiện tại khoảng 730 – 770 AUD/tuần), thu nhập thực tế phụ thuộc vào giá chốt hợp đồng. Rivera chịu trách nhiệm tìm kiếm, thẩm định hồ sơ khách thuê, thu tiền, kiểm tra định kỳ và điều phối sửa chữa. Tiền thuê net sẽ được chuyển vào tài khoản của chủ nhà sau khi trừ phí quản lý 8% và các chi phí phát sinh nếu có.</p>
+    <p><strong><em>Chủ sở hữu ký hợp đồng trực tiếp với người thuê. Tiền thuê net được chuyển vào tài khoản của chủ sở hữu sau khi trừ phí quản lý 8% và các chi phí phát sinh nếu có.</em></strong></p>
     <h3>Trách nhiệm mỗi bên</h3>
     <ul class="duty">
-      <li><b>Chủ nhà</b>Đứng tên Rental Provider theo luật bang Victoria, chịu trách nhiệm cuối cùng về chất lượng căn hộ, thực hiện kiểm tra an toàn định kỳ và chi trả chi phí sửa chữa lớn.</li>
-      <li><b>Rivera</b>Thay mặt chủ nhà xử lý trọn gói mọi thủ tục: quảng cáo, sàng lọc khách thuê, ký hợp đồng, thu tiền, làm việc với thợ kỹ thuật và đại diện pháp lý tại tòa VCAT khi cần.</li>
-      <li><b>Bản chất</b>Doanh thu biến động theo nhịp thị trường: tối ưu hơn khi dòng khách ổn định, nhưng chịu rủi ro giảm thu nhập khi trống phòng hoặc khách chậm thanh toán.</li>
+      <li><b>Chủ sở hữu</b>Đứng tên hợp đồng thuê. Thực hiện các nghĩa vụ của chủ sở hữu theo luật bang Victoria. Chi trả chi phí sửa chữa lớn.</li>
+      <li><b>Rivera</b>Đại diện quản lý ủy thác: tìm kiếm và thẩm định hồ sơ khách thuê, quản lý dòng tiền, kiểm tra định kỳ và điều phối sửa chữa, đại diện pháp lý tại tòa VCAT khi cần.</li>
+      <li><b>Bản chất</b>Doanh thu biến động theo thị trường khi: 1. phòng trống; 2. gián đoạn thanh toán (có thể đến 120 ngày). Bù lại, chủ sở hữu hưởng trọn phần lợi khi thị trường thuận lợi.</li>
     </ul>
   </div>
 </section>
 
-<!-- 3. PHƯƠNG ÁN B -->
+<!-- 3. HEAD LEASE -->
 <section class="sec" id="phuong-an-b">
   <div class="wrap">
     <div class="sec-head">
       <span class="eyebrow">Phần 3</span>
-      <h2>Phương án B: Thuê bao trọn gói cố định (Head Lease)</h2>
+      <h2>Phương án B: Head Lease · Dịch vụ trọn gói</h2>
     </div>
-    <p>Rivera trực tiếp thuê lại căn hộ của chủ nhà với mức giá cố định 600 AUD/tuần và cam kết chi trả đủ 52 tuần/năm, bất kể nhà có khách hay trống. Chủ nhà hoàn toàn miễn phí quản lý, miễn phí tìm khách và chi phí marketing; Rivera gánh vác 100% rủi ro tài chính. Chúng tôi sẽ tự vận hành cho thuê lại và chịu trách nhiệm pháp lý như một chủ nhà đối với người thuê cuối. Điều khoản cho thuê lại này được quy định rõ ràng và có sự đồng ý bằng văn bản của chủ nhà trong hợp đồng gốc.</p>
+    <p><strong><em>Rivera trực tiếp thuê lại căn hộ với giá cố định 600 AUD/tuần, chi trả đủ 52 tuần mỗi năm, bất kể căn hộ có khách hay đang trống.</em></strong></p>
     <h3>Trách nhiệm mỗi bên</h3>
     <ul class="duty">
-      <li><b>Chủ nhà</b>Nhận nguồn thu cố định đều đặn mỗi tuần và chỉ chi trả các khoản phí liên quan đến quyền sở hữu tài sản cố định theo mục 4.2.</li>
-      <li><b>Rivera</b>Cam kết thanh toán đúng hạn suốt 52 tuần. Tự xử lý việc tìm khách, thu tiền, giải quyết tranh chấp hoặc chậm thanh toán, thực hiện kiểm tra an toàn và tự chi trả các khoản bảo trì nhỏ dưới 300 AUD/lần.</li>
-      <li><b>Bản chất</b>Dòng tiền của chủ nhà tuyệt đối an toàn trước mọi biến động thị trường. Rivera chịu trách nhiệm chịu lỗ nếu thị trường đi xuống, đổi lại phần chênh lệch khi vận hành hiệu quả.</li>
+      <li><b>Chủ sở hữu</b>Nhận nguồn thu cố định đều đặn mỗi tuần và chỉ chi trả các khoản phí thuộc quyền sở hữu tài sản (theo mục 4.2).</li>
+      <li><b>Rivera</b>Tự vận hành cho thuê lại và chịu trách nhiệm pháp lý với tư cách bên cho thuê đối với người thuê cuối. Tự tìm khách, thu tiền, xử lý tranh chấp và chậm thanh toán, kiểm tra an toàn định kỳ, chi trả bảo trì nhỏ (tối đa 300 AUD mỗi sự cố, không quá 1000 AUD mỗi năm cho mỗi căn). Chủ sở hữu được miễn phí quản lý, phí tìm khách và marketing.</li>
+      <li><b>Bản chất</b>Dòng tiền của chủ sở hữu ổn định trước biến động thị trường. Rivera tiếp nhận phần lớn rủi ro vận hành và dòng tiền trong thời hạn hợp đồng.</li>
     </ul>
+    <p>Việc cho thuê lại được quy định rõ ràng và có sự đồng ý bằng văn bản của chủ sở hữu trong hợp đồng gốc. Mức thuê Head Lease được xác định trên cơ sở điều kiện thị trường tại thời điểm ký hợp đồng, đồng thời phản ánh việc Rivera tiếp nhận chi phí vận hành và phần lớn rủi ro trong thời hạn thuê.</p>
   </div>
 </section>
 
@@ -241,78 +237,78 @@ footer{background:var(--espresso);color:var(--sand);padding:34px 0;margin-top:24
   <div class="wrap">
     <div class="sec-head">
       <span class="eyebrow">Phần 4</span>
-      <h2>So sánh hai phương án</h2>
+      <h2>So sánh hai mô hình</h2>
     </div>
 
     <h3>4.1. Trách nhiệm</h3>
-    <div class="tbl-wrap">
-      <table>
-        <thead>
-          <tr><th>Việc</th><th>Quản lý 8%</th><th>Head Lease</th></tr>
-        </thead>
-        <tbody>
-          <tr><th>Tình trạng căn hộ, kiểm tra an toàn định kỳ</th><td>Chủ sở hữu (rental provider theo luật Victoria)</td><td>Rivera</td></tr>
-          <tr><th>Tìm khách, hợp đồng, thu tiền</th><td>Rivera thay mặt chủ nhà</td><td>Rivera tự vận hành</td></tr>
-          <tr><th>Lỗi xây dựng trong thời hạn bảo hành builder</th><td>Chủ sở hữu</td><td>Rivera hỗ trợ</td></tr>
-          <tr><th>Hư hỏng do người thuê gây ra</th><td>Trừ bond người thuê</td><td>Rivera xử lý, trừ bond người thuê cuối</td></tr>
-          <tr><th>Bảo trì lớn, kết cấu, hệ thống</th><td>Chủ sở hữu</td><td>Chủ sở hữu (Rivera tổ chức thợ, báo giá trước)</td></tr>
-        </tbody>
-      </table>
+    <div class="ck">
+      <div class="ck-row ck-hd"><span class="ck-lbl">Việc</span><span class="ck-c">Property Management</span><span class="ck-c">Head Lease</span></div>
+      <div class="ck-row"><span class="ck-it">Tình trạng căn hộ, kiểm tra an toàn định kỳ</span><span class="ck-c"><i class="tick own"><svg viewBox="0 0 16 16"><path d="M3.5 8.5 6.5 11.5 12.5 4.5"/></svg></i></span><span class="ck-c"><i class="tick riv"><svg viewBox="0 0 16 16"><path d="M3.5 8.5 6.5 11.5 12.5 4.5"/></svg></i></span></div>
+      <div class="ck-row"><span class="ck-it">Tìm khách, ký hợp đồng, thu tiền</span><span class="ck-c"><i class="tick riv"><svg viewBox="0 0 16 16"><path d="M3.5 8.5 6.5 11.5 12.5 4.5"/></svg></i></span><span class="ck-c"><i class="tick riv"><svg viewBox="0 0 16 16"><path d="M3.5 8.5 6.5 11.5 12.5 4.5"/></svg></i></span></div>
+      <div class="ck-row"><span class="ck-it">Đại diện pháp lý tại VCAT</span><span class="ck-c"><i class="tick riv"><svg viewBox="0 0 16 16"><path d="M3.5 8.5 6.5 11.5 12.5 4.5"/></svg></i></span><span class="ck-c"><i class="tick riv"><svg viewBox="0 0 16 16"><path d="M3.5 8.5 6.5 11.5 12.5 4.5"/></svg></i></span></div>
+      <div class="ck-row"><span class="ck-it">Xử lý hư hỏng do người thuê (qua bond)</span><span class="ck-c"><i class="tick riv"><svg viewBox="0 0 16 16"><path d="M3.5 8.5 6.5 11.5 12.5 4.5"/></svg></i></span><span class="ck-c"><i class="tick riv"><svg viewBox="0 0 16 16"><path d="M3.5 8.5 6.5 11.5 12.5 4.5"/></svg></i></span></div>
+      <div class="ck-row"><span class="ck-it">Bảo trì lớn, kết cấu, hệ thống</span><span class="ck-c"><i class="tick own"><svg viewBox="0 0 16 16"><path d="M3.5 8.5 6.5 11.5 12.5 4.5"/></svg></i></span><span class="ck-c"><i class="tick own"><svg viewBox="0 0 16 16"><path d="M3.5 8.5 6.5 11.5 12.5 4.5"/></svg></i></span></div>
+    </div>
+    <div class="ck-legend">
+      <span><i class="tick own"><svg viewBox="0 0 16 16"><path d="M3.5 8.5 6.5 11.5 12.5 4.5"/></svg></i> Chủ sở hữu</span>
+      <span><i class="tick riv"><svg viewBox="0 0 16 16"><path d="M3.5 8.5 6.5 11.5 12.5 4.5"/></svg></i> Rivera</span>
     </div>
 
     <h3>4.2. Chi phí</h3>
-    <div class="tbl-wrap">
-      <table class="tbl-fit">
-        <thead>
-          <tr><th>Khoản phí</th><th>Đề xuất</th></tr>
-        </thead>
-        <tbody>
-          <tr><th>Council Rates</th><td>Chủ nhà</td></tr>
-          <tr><th>Owners Corporation</th><td>Chủ nhà</td></tr>
-          <tr><th>Land Tax</th><td>Chủ nhà</td></tr>
-          <tr><th>Water Service Charge</th><td>Chủ nhà</td></tr>
-          <tr><th>Water Usage</th><td>Tenant (qua công ty)</td></tr>
-          <tr><th>Gas / Electricity</th><td>Tenant</td></tr>
-          <tr><th>Internet</th><td>Tenant</td></tr>
-          <tr><th>Bảo trì nhỏ (ví dụ &lt;300 AUD/lần)</th><td>Công ty</td></tr>
-          <tr><th>Bảo trì lớn, kết cấu, mái, điều hoà, hệ thống nước</th><td>Chủ nhà</td></tr>
-        </tbody>
-      </table>
+    <div class="ck">
+      <div class="ck-row ck-hd"><span class="ck-lbl">Khoản phí</span><span class="ck-c">Property Management</span><span class="ck-c">Head Lease</span></div>
+      <div class="ck-row"><span class="ck-it">Phí hội đồng địa phương</span><span class="ck-c"><i class="tick own"><svg viewBox="0 0 16 16"><path d="M3.5 8.5 6.5 11.5 12.5 4.5"/></svg></i></span><span class="ck-c"><i class="tick own"><svg viewBox="0 0 16 16"><path d="M3.5 8.5 6.5 11.5 12.5 4.5"/></svg></i></span></div>
+      <div class="ck-row"><span class="ck-it">Phí ban quản lý toà nhà</span><span class="ck-c"><i class="tick own"><svg viewBox="0 0 16 16"><path d="M3.5 8.5 6.5 11.5 12.5 4.5"/></svg></i></span><span class="ck-c"><i class="tick own"><svg viewBox="0 0 16 16"><path d="M3.5 8.5 6.5 11.5 12.5 4.5"/></svg></i></span></div>
+      <div class="ck-row"><span class="ck-it">Thuế đất</span><span class="ck-c"><i class="tick own"><svg viewBox="0 0 16 16"><path d="M3.5 8.5 6.5 11.5 12.5 4.5"/></svg></i></span><span class="ck-c"><i class="tick own"><svg viewBox="0 0 16 16"><path d="M3.5 8.5 6.5 11.5 12.5 4.5"/></svg></i></span></div>
+      <div class="ck-row"><span class="ck-it">Phí dịch vụ nước</span><span class="ck-c"><i class="tick own"><svg viewBox="0 0 16 16"><path d="M3.5 8.5 6.5 11.5 12.5 4.5"/></svg></i></span><span class="ck-c"><i class="tick own"><svg viewBox="0 0 16 16"><path d="M3.5 8.5 6.5 11.5 12.5 4.5"/></svg></i></span></div>
+      <div class="ck-row"><span class="ck-it">Điện, gas, nước tiêu thụ, internet</span><span class="ck-c"><i class="tick ten"><svg viewBox="0 0 16 16"><path d="M3.5 8.5 6.5 11.5 12.5 4.5"/></svg></i></span><span class="ck-c"><i class="tick riv"><svg viewBox="0 0 16 16"><path d="M3.5 8.5 6.5 11.5 12.5 4.5"/></svg></i></span></div>
+      <div class="ck-row"><span class="ck-it">Bảo trì nhỏ (dưới 300 AUD/lần)</span><span class="ck-c"><i class="tick own"><svg viewBox="0 0 16 16"><path d="M3.5 8.5 6.5 11.5 12.5 4.5"/></svg></i></span><span class="ck-c"><i class="tick riv"><svg viewBox="0 0 16 16"><path d="M3.5 8.5 6.5 11.5 12.5 4.5"/></svg></i></span></div>
+      <div class="ck-row"><span class="ck-it">Bảo trì lớn, kết cấu, hệ thống</span><span class="ck-c"><i class="tick own"><svg viewBox="0 0 16 16"><path d="M3.5 8.5 6.5 11.5 12.5 4.5"/></svg></i></span><span class="ck-c"><i class="tick own"><svg viewBox="0 0 16 16"><path d="M3.5 8.5 6.5 11.5 12.5 4.5"/></svg></i></span></div>
+      <div class="ck-row"><span class="ck-it">Phí tìm khách</span><span class="ck-c"><i class="tick own"><svg viewBox="0 0 16 16"><path d="M3.5 8.5 6.5 11.5 12.5 4.5"/></svg></i></span><span class="ck-c"><span class="ck-na">·</span></span></div>
+      <div class="ck-row"><span class="ck-it">Phí marketing</span><span class="ck-c"><i class="tick own"><svg viewBox="0 0 16 16"><path d="M3.5 8.5 6.5 11.5 12.5 4.5"/></svg></i></span><span class="ck-c"><span class="ck-na">·</span></span></div>
+      <div class="ck-row"><span class="ck-it">Phí quản lý</span><span class="ck-c"><i class="tick own"><svg viewBox="0 0 16 16"><path d="M3.5 8.5 6.5 11.5 12.5 4.5"/></svg></i></span><span class="ck-c"><span class="ck-na">·</span></span></div>
+    </div>
+    <div class="ck-legend">
+      <span><i class="tick own"><svg viewBox="0 0 16 16"><path d="M3.5 8.5 6.5 11.5 12.5 4.5"/></svg></i> Chủ sở hữu</span>
+      <span><i class="tick riv"><svg viewBox="0 0 16 16"><path d="M3.5 8.5 6.5 11.5 12.5 4.5"/></svg></i> Rivera</span>
+      <span><i class="tick ten"><svg viewBox="0 0 16 16"><path d="M3.5 8.5 6.5 11.5 12.5 4.5"/></svg></i> Người thuê</span>
+      <span><span class="ck-na">·</span> không áp dụng</span>
     </div>
     <div class="note">
-      <p>Nếu chọn Quản lý 8%, chủ nhà sẽ tự trả chi phí bảo trì nhỏ (Rivera hỗ trợ gọi thợ), đồng thời thanh toán phí tìm khách đầu vào (khoảng 1.5 tuần tiền thuê), phí marketing (khoảng 400 AUD) và phí quản lý hàng tháng. Đối với phương án Head Lease, chủ nhà hoàn toàn không phải bận tâm về ba khoản chi phí này.</p>
+      <p>Với Head Lease, Rivera thanh toán điện, gas, nước tiêu thụ và internet, có thể thu lại từ người thuê hoặc tính gộp vào tiền thuê theo hợp đồng.</p>
     </div>
 
     <h3>4.3. Rủi ro</h3>
-    <div class="tbl-wrap">
-      <table>
-        <thead>
-          <tr><th>Rủi ro</th><th>Quản lý 8%</th><th>Head Lease</th></tr>
-        </thead>
-        <tbody>
-          <tr><th>Nhà trống</th><td>Chủ sở hữu</td><td>Rivera</td></tr>
-          <tr><th>Người thuê không trả tiền</th><td>Chủ sở hữu</td><td>Rivera</td></tr>
-          <tr><th>Người thuê rời sớm, phải tìm khách lại</th><td>Chủ sở hữu</td><td>Rivera</td></tr>
-          <tr><th>Giá thuê thị trường tăng, giảm</th><td>Lên xuống theo</td><td>Không ảnh hưởng trong kỳ hạn</td></tr>
-          <tr><th>Tranh chấp, VCAT</th><td>Chủ sở hữu là một bên, Rivera đại diện</td><td>Việc của Rivera</td></tr>
-        </tbody>
-      </table>
+    <div class="ck">
+      <div class="ck-row ck-hd"><span class="ck-lbl">Rủi ro</span><span class="ck-c">Property Management</span><span class="ck-c">Head Lease</span></div>
+      <div class="ck-row"><span class="ck-it">Người thuê không thanh toán</span><span class="ck-c"><i class="tick own"><svg viewBox="0 0 16 16"><path d="M3.5 8.5 6.5 11.5 12.5 4.5"/></svg></i></span><span class="ck-c"><i class="tick riv"><svg viewBox="0 0 16 16"><path d="M3.5 8.5 6.5 11.5 12.5 4.5"/></svg></i></span></div>
+      <div class="ck-row"><span class="ck-it">Người thuê chậm thanh toán</span><span class="ck-c"><i class="tick own"><svg viewBox="0 0 16 16"><path d="M3.5 8.5 6.5 11.5 12.5 4.5"/></svg></i></span><span class="ck-c"><i class="tick riv"><svg viewBox="0 0 16 16"><path d="M3.5 8.5 6.5 11.5 12.5 4.5"/></svg></i></span></div>
+      <div class="ck-row"><span class="ck-it">Người thuê chấm dứt hợp đồng sớm</span><span class="ck-c"><i class="tick own"><svg viewBox="0 0 16 16"><path d="M3.5 8.5 6.5 11.5 12.5 4.5"/></svg></i></span><span class="ck-c"><i class="tick riv"><svg viewBox="0 0 16 16"><path d="M3.5 8.5 6.5 11.5 12.5 4.5"/></svg></i></span></div>
+      <div class="ck-row"><span class="ck-it">Biến động giá thuê thị trường</span><span class="ck-c"><i class="tick own"><svg viewBox="0 0 16 16"><path d="M3.5 8.5 6.5 11.5 12.5 4.5"/></svg></i></span><span class="ck-c"><i class="tick riv"><svg viewBox="0 0 16 16"><path d="M3.5 8.5 6.5 11.5 12.5 4.5"/></svg></i></span></div>
+      <div class="ck-row"><span class="ck-it">Tranh chấp, khiếu nại tại VCAT</span><span class="ck-c"><i class="tick own"><svg viewBox="0 0 16 16"><path d="M3.5 8.5 6.5 11.5 12.5 4.5"/></svg></i></span><span class="ck-c"><i class="tick riv"><svg viewBox="0 0 16 16"><path d="M3.5 8.5 6.5 11.5 12.5 4.5"/></svg></i></span></div>
+    </div>
+    <div class="ck-legend">
+      <span><i class="tick own"><svg viewBox="0 0 16 16"><path d="M3.5 8.5 6.5 11.5 12.5 4.5"/></svg></i> Chủ sở hữu</span>
+      <span><i class="tick riv"><svg viewBox="0 0 16 16"><path d="M3.5 8.5 6.5 11.5 12.5 4.5"/></svg></i> Rivera</span>
     </div>
     <div class="note">
-      <p>Các rủi ro phát sinh khó lường trước (như khách nợ tiền, phá vỡ hợp đồng sớm, tranh chấp pháp lý) sẽ là ẩn số mà chủ nhà phải tự gánh chịu nếu chọn gói Quản lý 8%; ngược lại, với Head Lease, đó hoàn toàn là trách nhiệm của Rivera.</p>
+      <p>Về tranh chấp tại VCAT: với Property Management, chủ sở hữu là bên tham gia tranh chấp, Rivera chủ yếu hỗ trợ. Với Head Lease, Rivera là bên trực tiếp tham gia và chịu trách nhiệm trong các tranh chấp với chủ sở hữu và với người thuê.</p>
+    </div>
+    <div class="note-hl">
+      <p><strong>Khác biệt cốt lõi giữa hai mô hình nằm ở việc ai là người chịu rủi ro. Với Head Lease, phần lớn rủi ro vận hành được chuyển từ chủ sở hữu sang Rivera trong thời hạn hợp đồng.</strong></p>
     </div>
 
-    <h3>4.4. Bảng tiền cả năm: hai phương án trên cùng một mẫu số</h3>
-    <p>Kịch bản cho phương án Quản lý 8%: giá đạt được 750/tuần (giữa vùng 730 – 770), trống nhà 4 tuần năm đầu khi 213 căn cùng ra hàng, phí tìm khách 1.5 tuần, marketing 400, bảo trì nhỏ 300.</p>
+    <h3>4.4. So sánh hiệu quả tài chính của hai mô hình</h3>
+    <p>Giả định cho phương án Property Management: tiền thuê đạt 750 AUD/tuần (mức giữa vùng 730 – 770 AUD/tuần), 4 tuần trống nhà trong năm đầu do nguồn cung lớn (213 căn cùng đưa ra thị trường), phí tìm khách tương đương 1,5 tuần tiền thuê, chi phí marketing 400 AUD và bảo trì nhỏ 300 AUD.</p>
     <div class="tbl-wrap">
       <table class="tbl-num">
         <thead>
-          <tr><th>Khoản (AUD/năm)</th><th>Quản lý 8% · kịch bản 750</th><th>Head Lease 600</th></tr>
+          <tr><th>Khoản (AUD/năm)</th><th>Property Management · 750</th><th>Head Lease · 600</th></tr>
         </thead>
         <tbody>
           <tr><th>Tiền thuê 52 tuần</th><td>39,000</td><td>31,200</td></tr>
           <tr><th>Trừ: trống nhà 4 tuần</th><td>-3,000</td><td>0</td></tr>
-          <tr><th>Trừ: phí tìm khách 1.5 tuần</th><td>-1,125</td><td>0</td></tr>
+          <tr><th>Trừ: phí tìm khách 1,5 tuần</th><td>-1,125</td><td>0</td></tr>
           <tr><th>Trừ: phí marketing</th><td>-400</td><td>0</td></tr>
           <tr><th>Trừ: phí quản lý 8%</th><td>-2,880</td><td>0</td></tr>
           <tr><th>Trừ: bảo trì nhỏ</th><td>-300</td><td>0</td></tr>
@@ -322,115 +318,67 @@ footer{background:var(--espresso);color:var(--sand);padding:34px 0;margin-top:24
         </tbody>
       </table>
     </div>
+    <p>Trong Head Lease, Rivera chịu chi phí bảo trì nhỏ tối đa 300 AUD mỗi sự cố, tổng không quá 1000 AUD mỗi năm cho mỗi căn.</p>
+    <div class="note-hl">
+      <p><strong>Đánh giá tổng quan: Theo các giả định sử dụng trong bảng trên, hiệu quả tài chính của hai phương án ở mức tương đương. Khác biệt cốt lõi nằm ở việc phương án Head Lease chuyển phần lớn rủi ro vận hành từ chủ sở hữu sang Rivera trong thời hạn hợp đồng.</strong></p>
+    </div>
     <div class="note">
-      <p><strong>Đánh giá tổng quan:</strong> Khi quy đổi về cùng một hệ quy chiếu, hiệu quả tài chính của hai phương án gần như tương đương với mức chênh lệch chỉ khoảng 95 AUD/căn/năm. Điểm khác biệt cốt lõi không nằm ở con số, mà ở việc bên nào sẽ chịu áp lực biến động. Nếu thị trường thuận lợi (cho thuê nhanh, giá đạt đỉnh 770 AUD), gói Quản lý 8% sẽ mang lại lợi nhuận cao hơn; nếu thị trường khó khăn, gói Head Lease bảo toàn nguyên vẹn con số 600 AUD cho chủ nhà.</p>
-      <p><strong>Rủi ro khi cả ba căn cùng trống:</strong> Cứ mỗi tuần không có khách, chủ nhà sẽ mất đi 2,250 AUD; nếu kéo dài 4 tuần trong mùa thấp điểm, thiệt hại lên tới 9,000 AUD. Chọn Head Lease, toàn bộ thiệt hại tài chính này do Rivera tự gánh vác.</p>
+      <p><strong>Property Management:</strong> Chủ sở hữu giữ toàn bộ cơ hội khi thị trường thuận lợi, đồng thời cũng trực tiếp chịu các biến động của thị trường.</p>
     </div>
   </div>
 </section>
 
-<!-- 5. CĂN CỨ ĐỊNH GIÁ -->
-<section class="sec" id="can-cu-dinh-gia">
-  <div class="wrap">
-    <div class="sec-head">
-      <span class="eyebrow">Phần 5</span>
-      <h2>Căn cứ định giá</h2>
-    </div>
-    <p class="lead">Định giá thị trường hiện tại: 730 – 770 mỗi tuần. Điều kiện thật của toà nhà trong sáu tháng đầu:</p>
-    <div class="stats">
-      <div class="st"><div class="n">213</div><div class="l">căn gần giống nhau bàn giao gần như cùng lúc</div></div>
-      <div class="st"><div class="n">Mùa đông</div><div class="l">mùa thấp điểm của thuê nhà Melbourne</div></div>
-      <div class="st"><div class="n">20 căn</div><div class="l">tương tự để người tìm nhà chọn, cùng một sảnh</div></div>
-      <div class="st"><div class="n">2–3 tuần</div><div class="l">mục tiêu thời gian cho thuê trong vùng giá trên</div></div>
-    </div>
-
-    <h3>Chi phí của việc chờ giá cao</h3>
-    <div class="stats" style="grid-template-columns:repeat(2,1fr)">
-      <div class="st"><div class="n">1 tuần trống</div><div class="l">mất trọn một tuần tiền thuê, 730 – 770 AUD</div></div>
-      <div class="st"><div class="n">18 tuần</div><div class="l">đăng ở đầu cao của vùng giá (chênh +40/tuần) cần chừng ấy thời gian mới bù lại một tuần trống</div></div>
-    </div>
-    <p>Trong bối cảnh thị trường tòa nhà đang thừa cung, việc neo giá cao để chờ đợi thường dẫn đến thua lỗ thực tế do chi phí cơ hội của số tuần nhà trống.</p>
-
-    <h3>Các căn so sánh tương tự tại Normanby Road</h3>
-    <div class="comps">
-      <a href="https://www.tenantapp.com.au/Rentals/ViewListing/4335917" target="_blank" rel="noopener">
-        <b>Căn so sánh 1 · Normanby Road</b>
-        Toà nhà có bể bơi, rạp phim.
-        <span class="src">Xem tin đăng · TenantApp</span>
-      </a>
-      <a href="https://www.tenantapp.com.au/Rentals/ViewListing/5004143" target="_blank" rel="noopener">
-        <b>Căn so sánh 2 · Normanby Road</b>
-        Cùng khu, phân khúc tương đương.
-        <span class="src">Xem tin đăng · TenantApp</span>
-      </a>
-      <a href="https://www.realestate.com.au/property-apartment-vic-southbank-437291648" target="_blank" rel="noopener">
-        <b>Căn so sánh 3 · Southbank</b>
-        Gym, bể bơi, amenities, kèm carpark.
-        <span class="src">Xem tin đăng · realestate.com.au</span>
-      </a>
-    </div>
-    <p>Mức giá 600 AUD cố định của gói Head Lease bản chất là giá thị trường đã khấu trừ các chi phí tìm khách, marketing, phí quản lý và rủi ro trống phòng. Rivera chấp nhận đứng ra gánh rủi ro đó để đổi lấy sự an tâm tuyệt đối và dòng tiền bao trọn 52 tuần cho chủ nhà.</p>
-  </div>
-</section>
-
-<!-- 6. KHUYẾN NGHỊ -->
+<!-- 5. KHUYẾN NGHỊ -->
 <section class="sec" id="khuyen-nghi">
   <div class="wrap">
     <div class="sec-head">
-      <span class="eyebrow">Phần 6</span>
+      <span class="eyebrow">Phần 5</span>
       <h2>Khuyến nghị</h2>
     </div>
-    <p>Cả hai phương án đều đúng, cho hai kiểu ưu tiên khác nhau.</p>
+    <p>Cả hai phương án đều có những ưu điểm và nhược điểm khác nhau.</p>
     <div class="opt2">
       <div class="op">
-        <b>Phương án Quản lý 8% phù hợp khi</b>
-        <p>Chủ nhà muốn tự chủ quyết định mọi vấn đề của tài sản, sẵn sàng chấp nhận những nhịp điều chỉnh của thị trường để đổi lấy cơ hội tối ưu hóa lợi nhuận trong các giai đoạn cao điểm.</p>
+        <b>Phương án Head Lease phù hợp khi</b>
+        <p>Ưu tiên hàng đầu của chủ sở hữu là sự an toàn, dòng tiền ổn định định kỳ, biết trước chính xác nguồn thu và không muốn mất thời gian cho các công việc vận hành, quản lý phát sinh hàng ngày.</p>
       </div>
       <div class="op">
-        <b>Phương án Head Lease phù hợp khi</b>
-        <p>Ưu tiên hàng đầu của chủ nhà là sự an toàn, dòng tiền ổn định định kỳ, biết trước chính xác nguồn thu và không muốn mất thời gian cho các công việc vận hành, quản lý phát sinh hàng ngày.</p>
+        <b>Phương án Property Management phù hợp khi</b>
+        <p>Chủ sở hữu toàn quyền quyết định đối với tài sản và sẵn sàng chấp nhận rủi ro vận hành và biến động của thị trường.</p>
       </div>
-    </div>
-    <p>Đối với chủ sở hữu nhiều tài sản cùng lúc, tính ổn định có giá trị cao hơn việc cố gắng tối đa hóa lợi nhuận biên: kịch bản ba căn cùng trống phòng vào mùa thấp điểm là rủi ro hiện hữu, nhưng rủi ro này bị triệt tiêu hoàn toàn trong mô hình thuê bao trọn gói. Khi Rivera có nghĩa vụ chuyển tiền đều đặn mỗi tuần bất kể tình trạng vận hành, lợi ích mang lại cho chủ nhà là cam kết bằng điều khoản hợp đồng cứng, không phụ thuộc vào lời hứa suông.</p>
-    <div class="chips">
-      <span>Thu nhập đứng ngoài biến động 213 căn</span>
-      <span>Không phí quản lý, không phí tìm khách, không marketing</span>
-      <span>Dòng tiền phẳng, một con số mỗi tuần</span>
     </div>
   </div>
 </section>
 
-<!-- 7. CAM KẾT -->
+<!-- 6. CAM KẾT -->
 <section class="sec" id="cam-ket">
   <div class="wrap">
     <div class="sec-head">
-      <span class="eyebrow">Phần 7</span>
+      <span class="eyebrow">Phần 6</span>
       <h2>Cam kết</h2>
     </div>
     <ol class="num">
-      <li><span class="k">1</span><b>Tiền thuê trả vào đầu kỳ, không trả sau.</b> Chủ nhà luôn cầm tiền trước khi kỳ đó bắt đầu.</li>
-      <li><span class="k">2</span><b>Quyền chấm dứt nhanh:</b> Rivera chậm trả quá 14 ngày, chủ nhà có quyền chấm dứt hợp đồng và lấy lại căn hộ.</li>
-      <li><span class="k">3</span><b>Không cho thuê ngắn hạn kiểu Airbnb,</b> cam kết bằng văn bản, trừ khi chủ nhà đồng ý riêng.</li>
-      <li><span class="k">4</span><b>Kỳ hạn năm đầu chỉ 12 tháng.</b> Cuối kỳ xem lại giá theo thị trường; chủ nhà toàn quyền gia hạn, chuyển phương án, hoặc rời đi.</li>
-      <li><span class="k">5</span><b>Báo cáo tình trạng căn hộ kèm ảnh mỗi quý.</b> Một đầu mối duy nhất qua Zalo, phản hồi trong 24 giờ.</li>
-      <li><span class="k">6</span><b>Thời gian bắt đầu: 2 tuần kể từ ngày nhận bàn giao căn hộ.</b> Khoảng thời gian này được dùng để hoàn thiện căn hộ: lắp rèm, kiểm tra kỹ thuật thiết bị, vệ sinh chuyên sâu, chụp hình catalog và triển khai tiếp thị.</li>
-      <li><span class="k">7</span><b>Hợp đồng do luật sư hành nghề tại Victoria soạn và rà.</b> Giấy đăng ký kinh doanh gửi tới chủ nhà ngay khi được cấp.</li>
+      <li><span class="k">1</span><b>Thanh toán đúng hạn.</b> Tiền thuê được thanh toán vào đầu mỗi chu kỳ thuê.</li>
+      <li><span class="k">2</span><b>Quyền chấm dứt.</b> Nếu Rivera chậm thanh toán quá 14 ngày, chủ sở hữu có quyền chấm dứt hợp đồng và nhận lại quyền quản lý căn hộ.</li>
+      <li><span class="k">3</span><b>Airbnb.</b> Không cho thuê ngắn hạn, trừ khi có sự đồng ý bằng văn bản của chủ sở hữu.</li>
+      <li><span class="k">4</span><b>Thời hạn.</b> Chủ sở hữu lựa chọn kỳ hạn phù hợp với nhu cầu của mình.</li>
+      <li><span class="k">5</span><b>Thời gian bắt đầu: 2 tuần kể từ ngày nhận bàn giao căn hộ.</b> Khoảng thời gian này được dùng để hoàn thiện căn hộ: lắp rèm, kiểm tra kỹ thuật thiết bị, vệ sinh chuyên sâu, chụp hình catalog và triển khai tiếp thị.</li>
+      <li><span class="k">6</span><b>Hợp đồng.</b> Được soạn thảo và rà soát bởi luật sư hành nghề tại Victoria.</li>
     </ol>
   </div>
 </section>
 
-<!-- 8. CÁC BƯỚC TIẾP THEO -->
+<!-- 7. CÁC BƯỚC TIẾP THEO -->
 <section class="sec" id="cac-buoc">
   <div class="wrap">
     <div class="sec-head">
-      <span class="eyebrow">Phần 8</span>
+      <span class="eyebrow">Phần 7</span>
       <h2>Các bước tiếp theo</h2>
     </div>
     <ol class="steps">
-      <li><b>Chủ nhà chọn phương án.</b> Không có phí, không có ràng buộc cho đến khi ký.</li>
-      <li><b>Rivera gửi bản mẫu hợp đồng</b> để chủ nhà và người nhà xem kỹ: Authority (quản lý) hoặc hợp đồng thuê chính kèm phụ lục Head Lease (thuê bao).</li>
-      <li><b>Rivera gửi giấy đăng ký kinh doanh</b> và hồ sơ pháp lý liên quan ngay khi được cấp.</li>
-      <li><b>Ký hợp đồng, bàn giao chìa khoá và triển khai.</b> Hoàn tất trước ngày settlement cuối tháng 7.</li>
+      <li><b>Lựa chọn phương án.</b> Chủ sở hữu lựa chọn giữa Property Management hoặc Head Lease. Không phát sinh bất kỳ chi phí hay ràng buộc nào cho đến khi hợp đồng được ký kết.</li>
+      <li><b>Xem trước hợp đồng.</b> Rivera gửi bản mẫu hợp đồng tương ứng (Authority hoặc Head Lease) để chủ sở hữu và gia đình xem xét trước khi quyết định.</li>
+      <li><b>Hồ sơ pháp lý.</b> Rivera cung cấp giấy đăng ký doanh nghiệp và các hồ sơ pháp lý liên quan ngay sau khi hoàn tất.</li>
+      <li><b>Ký kết và triển khai.</b> Hai bên ký hợp đồng, bàn giao chìa khóa và bắt đầu triển khai theo kế hoạch, hướng tới hoàn tất trước ngày settlement cuối tháng 7.</li>
     </ol>
   </div>
 </section>
