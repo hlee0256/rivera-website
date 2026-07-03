@@ -6,6 +6,16 @@ task, add one short entry to the top.
 
 ---
 
+### 2026-07-03 · Claude · Canopy proposal v6: owner copy rewrite (fuller prose)
+- Owner supplied line-by-line replacement copy; applied verbatim across the page. More formal/
+  fuller register than the terse v2–v5 wording (owner's explicit preference for this doc).
+- Về Rivera bullets → "Mô hình quản lý tinh gọn" heading + 2 bullets (dropped the third,
+  "nhìn tận mắt … bên thứ ba"). Phần 2 heading → "Quản lý ủy thác truyền thống (Phí dịch vụ
+  8%)"; Phần 3 heading → "Thuê bao trọn gói cố định (Head Lease)". Both intros + all six duty
+  cards, the 4.2/4.3/4.4 notes, both Phần 5 closers, both recommendation cards and the Phần 6
+  paragraph rewritten. Cam kết item 6 reworded, dropped its "Tiền thuê tính từ…" sentence.
+- No em-dashes introduced; range 730–770 and the 600 fixed/95-diff figures unchanged.
+
 ### 2026-07-03 · Claude · Canopy proposal v5: full-year money table, dedupe fee tables
 - **New 4.4 "Bảng tiền cả năm"** forcing both options onto one denominator, per owner + review:
   scenario 750/tuần (midpoint of the public 730–770 range, not a Rivera valuation), 4 weeks
