@@ -53,7 +53,9 @@ Deployed on **Vercel** from `main` (`https://rivera-website.vercel.app`). Pages:
 (landing, featuring AURA), `projects.html` (7-project collection), `about.html`, `map.html`,
 `insights.html` + insight articles, `enquire.html`, `guide.html`, and 7 project detail pages.
 AURA is the deliberately bespoke flagship; the other detail pages follow the shared `.pd-*`
-template.
+template. Two standalone, `noindex`, VI-only client documents also live in the repo (not linked
+from the site): `380-melbourne-so-sanh.html` and `canopy-van-hanh.html` (Canopy House owner
+proposal, 2026-07-03).
 
 ## Open threads
 
