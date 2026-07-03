@@ -6,6 +6,25 @@ task, add one short entry to the top.
 
 ---
 
+### 2026-07-03 · Claude · Canopy proposal v7: check-mark tables, restructure, terminology
+- **Mobile-friendly two-colour check tables** replace the horizontal-scroll tables in 4.1/4.2/4.3
+  (owner: "trên mobile phải kéo ngang"). One unified structure: rows = item, columns = the two
+  models; a coloured tick shows who is responsible/pays — **brown = Chủ sở hữu, beige (tan) =
+  Rivera**, outline = Người thuê, "·" = không áp dụng. Verified 0 horizontal overflow at 390px.
+  4.2 now folds the old fee note into the table (letting/marketing/management show brown under PM,
+  "·" under Head Lease). Fee names rewritten thuần Việt; "Công ty"→Rivera, dropped "(qua công ty)".
+- **Terminology standardised**: "chủ nhà"→"Chủ sở hữu" site-wide; the 8% model renamed
+  **Property Management** everywhere except the hero one-liner; the other stays **Head Lease**.
+- **Section 5 "Căn cứ định giá" removed entirely** (valuation basis, comps cards); its one
+  surviving sentence moved to the end of Phần 3. Sections renumbered 1–7 (Giới thiệu, Property
+  Management, Head Lease, So sánh, Khuyến nghị, Cam kết, Các bước).
+- **Softened absolutes** in Phần 3 ("100% rủi ro", "tuyệt đối an toàn" → "tiếp nhận phần lớn rủi
+  ro vận hành và dòng tiền trong thời hạn hợp đồng"); intro shortened, details moved into duty
+  bullets. Phần 1 → "Giới thiệu" (dropped the "Mô hình quản lý tinh gọn" block). Hero: "3 căn hộ",
+  "2 lựa chọn", chip removed. 4.4 retitled + neutral assumptions; the highlighted "Đánh giá tổng
+  quan" note. Khuyến nghị reordered (Head Lease first); trailing paragraph + chips removed. Cam
+  kết reworded to 6 items (dropped the quarterly-report item). Các bước reworded to 4 titled steps.
+
 ### 2026-07-03 · Claude · Canopy proposal v6: owner copy rewrite (fuller prose)
 - Owner supplied line-by-line replacement copy; applied verbatim across the page. More formal/
   fuller register than the terse v2–v5 wording (owner's explicit preference for this doc).
