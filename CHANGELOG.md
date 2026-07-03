@@ -6,6 +6,19 @@ task, add one short entry to the top.
 
 ---
 
+### 2026-07-03 · Claude · Canopy proposal v2: visual rework per owner feedback
+- **`canopy-van-hanh.html` heavily condensed and made graphic** (owner: "ít chữ, nhiều graphics"):
+  Về Rivera → stat cards + bullets; TOC section removed (sections renumbered 1–8); options A/B
+  tightened into 3 duty cards each; 4.1 table sorted owner-rows first, utilities merged into one
+  row ("Rivera tự quản lý"), builder-warranty row → Chủ sở hữu, the word "chịu" dropped; 4.2
+  merged the market up/down rows; 4.3 now a single 730 scenario ("giả lập tự cho thuê") with a
+  CSS bar chart: 730 nominal → ≈593/tuần net (−18%) vs Head Lease 620 (−15%), 770/820 removed.
+- Section 6 rewritten as "Căn cứ định giá": stat cards (213 căn · mùa đông · 20 căn · 2–3 tuần),
+  cost-of-waiting cards, 3-step verification flow.
+- "anh/chị" → "chủ nhà" throughout; "của Rivera" dropped from headings (Khuyến nghị, Cam kết);
+  RTBA bond commitment removed; all "bằng tiếng Việt" phrases removed; cam kết now 7 cards;
+  next steps as a numbered timeline.
+
 ### 2026-07-03 · Claude · The Canopy House owner proposal page (standalone)
 - **New `canopy-van-hanh.html`:** standalone, Vietnamese-only, `noindex` document page for one
   owner (three units at The Canopy House), built verbatim from the owner's Word doc
