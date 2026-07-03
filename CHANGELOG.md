@@ -6,6 +6,21 @@ task, add one short entry to the top.
 
 ---
 
+### 2026-07-03 · Claude · Canopy proposal v3: fixed rate 600/wk, restructured comparison
+- **Head Lease fixed rate locked at 600/tuần** (was 620) per owner. 4.4 recomputed with a
+  marketing fee line (−400): mgmt net 30,442 (≈585/tuần, −19.8% vs 730), HL 31,200 (−17.8%),
+  diff +758. Table now precedes the bar chart; "Cách đọc" rewritten neutral (no HL bias).
+- **Phần 4 restructured**: 4.1 Trách nhiệm (duties only; bảo hiểm toà nhà removed — OC covers
+  it; builder-warranty HL column → "Rivera hỗ trợ"), 4.2 Chi phí (owner's compact
+  Khoản phí | Đề xuất format), 4.3 Rủi ro (dropped "ai gánh" from title), 4.4 thực nhận.
+- **Phần 3** gains a "Các khoản phí trong Head Lease" table (OC/Council/Land Tax/Water Rates →
+  chủ sở hữu; utilities → công ty, thu lại từ tenant).
+- **Phần 5**: "Cách kiểm chứng" flow removed; added 3 comparable-listing link cards at
+  Normanby Road/Southbank (TenantApp ×2, realestate.com.au — links only, no scraped prices;
+  both sites block automated fetch).
+- **Cam kết**: builder-warranty item removed (selling agent's job); new item "Thời gian bắt
+  đầu: 2 tuần sau ngày bàn giao" (setup: rèm, kiểm tra, vệ sinh, ảnh, đăng tin).
+
 ### 2026-07-03 · Claude · Canopy proposal v2: visual rework per owner feedback
 - **`canopy-van-hanh.html` heavily condensed and made graphic** (owner: "ít chữ, nhiều graphics"):
   Về Rivera → stat cards + bullets; TOC section removed (sections renumbered 1–8); options A/B

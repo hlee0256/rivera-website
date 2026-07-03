@@ -115,17 +115,19 @@ tr.diff td.pos{color:var(--ok);font-weight:700}
 .bar .tr{height:14px;border-radius:999px;background:var(--paper);border:1px solid var(--line);overflow:hidden}
 .bar .tr i{display:block;height:100%;border-radius:999px}
 .bar--nom .tr i{width:100%;background:var(--sand)}
-.bar--net .tr i{width:81%;background:var(--clay)}
-.bar--hl .tr i{width:85%;background:var(--brown)}
+.bar--net .tr i{width:80.2%;background:var(--clay)}
+.bar--hl .tr i{width:82.2%;background:var(--brown)}
 .bar .bn{margin-top:6px;font-size:.78rem;color:var(--ink-soft)}
 .bar .bn b{color:var(--brown);font-weight:700}
 
-/* quy trình kiểm chứng */
-.flow{list-style:none;margin-top:14px;display:grid;grid-template-columns:repeat(3,1fr);gap:10px;counter-reset:fl}
-.flow li{border:1px solid var(--line);border-radius:12px;background:var(--paper-2);padding:16px;font-size:.92rem;color:var(--ink-soft);line-height:1.55}
-.flow li b{display:flex;align-items:center;gap:8px;color:var(--ink);font-weight:700;margin-bottom:8px;font-size:.94rem}
-.flow li b::before{counter-increment:fl;content:counter(fl);flex:none;width:22px;height:22px;border-radius:999px;background:var(--brown);color:#FBF6EE;font-size:.72rem;font-weight:700;display:inline-flex;align-items:center;justify-content:center}
-@media(max-width:760px){.flow{grid-template-columns:1fr}}
+/* thẻ căn so sánh (link ra tin đăng) */
+.comps{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:14px}
+.comps a{display:flex;flex-direction:column;border:1px solid var(--line);border-radius:12px;background:var(--paper-2);padding:16px;font-size:.9rem;color:var(--ink-soft);line-height:1.55;transition:border-color .2s ease}
+.comps a:hover{border-color:var(--brown)}
+.comps a b{display:block;color:var(--ink);font-weight:700;margin-bottom:6px;font-size:.95rem}
+.comps a .src{display:block;margin-top:auto;padding-top:12px;font-size:.7rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--brown)}
+@media(max-width:760px){.comps{grid-template-columns:1fr}}
+table.tbl-fit{min-width:0}
 
 /* hai lựa chọn */
 .opt2{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px}
@@ -241,10 +243,25 @@ footer{background:var(--espresso);color:var(--sand);padding:34px 0;margin-top:24
     <p>Rivera thuê trực tiếp căn hộ từ chủ nhà với giá cố định mỗi tuần, trả đủ 52 tuần mỗi năm, có khách hay đang trống. Rivera cho thuê lại và tự vận hành, đứng vai chủ nhà theo luật Victoria với người thuê cuối. Việc cho thuê lại được ghi rõ và được chủ nhà đồng ý bằng văn bản ngay trong hợp đồng.</p>
     <h3>Trách nhiệm mỗi bên</h3>
     <ul class="duty">
-      <li><b>Chủ nhà</b>Nhận một con số cố định mỗi tuần. Giữ các chi phí thuộc quyền sở hữu: phí Owners Corporation, council rates, thuế, bảo hiểm toà nhà, kết cấu và thiết bị lớn.</li>
-      <li><b>Rivera</b>Trả tiền đúng hạn 52 tuần. Tìm khách, thu tiền, xử lý chậm trả và tranh chấp, kiểm tra an toàn định kỳ, sửa chữa vận hành nhỏ đến 300 AUD mỗi lần.</li>
+      <li><b>Chủ nhà</b>Nhận một con số cố định mỗi tuần. Giữ các khoản phí thuộc quyền sở hữu, theo bảng dưới.</li>
+      <li><b>Rivera</b>Trả tiền đúng hạn 52 tuần. Tìm khách, thu tiền, xử lý chậm trả và tranh chấp, kiểm tra an toàn định kỳ, bảo trì nhỏ đến 300 AUD mỗi lần.</li>
       <li><b>Bản chất</b>Thu nhập đứng ngoài mọi biến động. Rivera hấp thụ rủi ro, đổi lại phần chênh lệch giữa giá cố định và giá cho thuê lại.</li>
     </ul>
+    <h3>Các khoản phí trong Head Lease</h3>
+    <div class="tbl-wrap">
+      <table class="tbl-fit">
+        <thead>
+          <tr><th>Khoản phí</th><th>Head Lease</th></tr>
+        </thead>
+        <tbody>
+          <tr><th>OC Fees</th><td>Thuộc chủ sở hữu · chủ sở hữu thanh toán</td></tr>
+          <tr><th>Council Rates</th><td>Thuộc chủ sở hữu · chủ sở hữu thanh toán</td></tr>
+          <tr><th>Land Tax</th><td>Thuộc chủ sở hữu · chủ sở hữu thanh toán</td></tr>
+          <tr><th>Water Rates (service charges)</th><td>Thuộc chủ sở hữu · chủ sở hữu thanh toán</td></tr>
+          <tr><th>Utilities (điện, gas, nước sử dụng, internet)</th><td>Công ty thanh toán, thu lại từ tenant hoặc tính gộp vào tiền thuê theo hợp đồng</td></tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 </section>
 
@@ -256,27 +273,45 @@ footer{background:var(--espresso);color:var(--sand);padding:34px 0;margin-top:24
       <h2>So sánh hai phương án</h2>
     </div>
 
-    <h3>4.1. Trách nhiệm và chi phí</h3>
+    <h3>4.1. Trách nhiệm</h3>
     <div class="tbl-wrap">
       <table>
         <thead>
-          <tr><th>Khoản</th><th>Quản lý 8%</th><th>Head Lease</th></tr>
+          <tr><th>Việc</th><th>Quản lý 8%</th><th>Head Lease</th></tr>
         </thead>
         <tbody>
-          <tr><th>Council rates, phí OC, thuế, bảo hiểm toà nhà</th><td>Chủ sở hữu</td><td>Chủ sở hữu</td></tr>
-          <tr><th>Water service charge</th><td>Chủ sở hữu</td><td>Chủ sở hữu</td></tr>
-          <tr><th>Thiết bị lớn, kết cấu, hệ thống</th><td>Chủ sở hữu</td><td>Chủ sở hữu (Rivera tổ chức thợ, báo giá trước)</td></tr>
-          <tr><th>Lỗi xây dựng trong thời hạn bảo hành builder</th><td>Chủ sở hữu</td><td>Chủ sở hữu</td></tr>
-          <tr><th>Water usage, điện, gas, internet</th><td>Người thuê tự đăng ký</td><td>Rivera tự quản lý</td></tr>
-          <tr><th>Sửa chữa vận hành nhỏ (đến 300 AUD/lần)</th><td>Chủ sở hữu</td><td>Rivera</td></tr>
+          <tr><th>Tình trạng căn hộ, kiểm tra an toàn định kỳ</th><td>Chủ sở hữu (rental provider theo luật Victoria)</td><td>Rivera</td></tr>
+          <tr><th>Tìm khách, hợp đồng, thu tiền</th><td>Rivera thay mặt chủ nhà</td><td>Rivera tự vận hành</td></tr>
+          <tr><th>Lỗi xây dựng trong thời hạn bảo hành builder</th><td>Chủ sở hữu</td><td>Rivera hỗ trợ</td></tr>
           <tr><th>Hư hỏng do người thuê gây ra</th><td>Trừ bond người thuê</td><td>Rivera xử lý, trừ bond người thuê cuối</td></tr>
-          <tr><th>Phí tìm khách (letting fee)</th><td>Chủ sở hữu (~1.5 tuần thuê)</td><td>Không có</td></tr>
-          <tr><th>Phí quản lý</th><td>8% tiền thuê thu được</td><td>Không có</td></tr>
+          <tr><th>Bảo trì lớn, kết cấu, hệ thống</th><td>Chủ sở hữu</td><td>Chủ sở hữu (Rivera tổ chức thợ, báo giá trước)</td></tr>
         </tbody>
       </table>
     </div>
 
-    <h3>4.2. Rủi ro: ai gánh</h3>
+    <h3>4.2. Chi phí</h3>
+    <div class="tbl-wrap">
+      <table class="tbl-fit">
+        <thead>
+          <tr><th>Khoản phí</th><th>Đề xuất</th></tr>
+        </thead>
+        <tbody>
+          <tr><th>Council Rates</th><td>Chủ nhà</td></tr>
+          <tr><th>Owners Corporation</th><td>Chủ nhà</td></tr>
+          <tr><th>Water Service Charge</th><td>Chủ nhà</td></tr>
+          <tr><th>Water Usage</th><td>Tenant (qua công ty)</td></tr>
+          <tr><th>Gas / Electricity</th><td>Tenant</td></tr>
+          <tr><th>Internet</th><td>Tenant</td></tr>
+          <tr><th>Bảo trì nhỏ (ví dụ &lt;300 AUD/lần)</th><td>Công ty</td></tr>
+          <tr><th>Bảo trì lớn, kết cấu, mái, điều hoà, hệ thống nước</th><td>Chủ nhà</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="note">
+      <p>Với phương án Quản lý 8%: bảo trì nhỏ do chủ nhà trả, Rivera điều phối thợ. Phí tìm khách, marketing và phí quản lý xem con số cụ thể ở mục 4.4.</p>
+    </div>
+
+    <h3>4.3. Rủi ro</h3>
     <div class="tbl-wrap">
       <table>
         <thead>
@@ -295,25 +330,8 @@ footer{background:var(--espresso);color:var(--sand);padding:34px 0;margin-top:24
       <p>Rủi ro không định giá trước được (khách chậm tiền, rời sớm, tranh chấp): với quản lý là ẩn số của chủ nhà; với Head Lease là việc của Rivera.</p>
     </div>
 
-    <h3>4.3. Con số thực nhận: giả lập cho thuê ở giá 730</h3>
-    <p>Giả lập năm đầu ở giá thuê 730/tuần: trống nhà 4 tuần khi cho thuê lần đầu, phí tìm khách 1.5 tuần, phí quản lý 8%, phát sinh nhỏ 300 AUD.</p>
-
-    <div class="bars">
-      <div class="bar bar--nom">
-        <div class="bt"><span>Giá thuê danh nghĩa</span><b>730 /tuần</b></div>
-        <div class="tr"><i></i></div>
-      </div>
-      <div class="bar bar--net">
-        <div class="bt"><span>Thực nhận · Quản lý 8%</span><b>≈ 593 /tuần</b></div>
-        <div class="tr"><i></i></div>
-        <div class="bn">Thấp hơn 730 khoảng <b>18%</b> sau trống nhà và các loại phí · gánh mọi rủi ro</div>
-      </div>
-      <div class="bar bar--hl">
-        <div class="bt"><span>Head Lease cố định</span><b>620 /tuần</b></div>
-        <div class="tr"><i></i></div>
-        <div class="bn">Thấp hơn 730 là <b>15%</b> · cố định 52 tuần, không rủi ro</div>
-      </div>
-    </div>
+    <h3>4.4. Con số thực nhận: giả lập cho thuê ở giá 730</h3>
+    <p>Giả lập năm đầu, phương án Quản lý 8%, đạt giá thuê 730/tuần: trống nhà 4 tuần khi cho thuê lần đầu, phí tìm khách 1.5 tuần, phí marketing khoảng 400, phí quản lý 8%, phát sinh nhỏ 300 AUD.</p>
 
     <div class="tbl-wrap">
       <table class="tbl-num">
@@ -324,16 +342,35 @@ footer{background:var(--espresso);color:var(--sand);padding:34px 0;margin-top:24
           <tr><th>Tiền thuê danh nghĩa (52 tuần × 730)</th><td>37,960</td></tr>
           <tr><th>Trừ: trống nhà 4 tuần</th><td>-2,920</td></tr>
           <tr><th>Trừ: phí tìm khách 1.5 tuần</th><td>-1,095</td></tr>
+          <tr><th>Trừ: phí marketing</th><td>-400</td></tr>
           <tr><th>Trừ: phí quản lý 8%</th><td>-2,803</td></tr>
-          <tr><th>Trừ: sửa chữa, phát sinh nhỏ</th><td>-300</td></tr>
-          <tr class="hl"><th>Thực nhận phương án Quản lý 8%</th><td>30,842</td></tr>
-          <tr class="hl"><th>Head Lease cố định 620/tuần</th><td>32,240</td></tr>
-          <tr class="diff"><th>Chênh lệch (Head Lease so với Quản lý)</th><td class="pos">+1,398</td></tr>
+          <tr><th>Trừ: bảo trì nhỏ, phát sinh</th><td>-300</td></tr>
+          <tr class="hl"><th>Thực nhận phương án Quản lý 8% (≈585/tuần)</th><td>30,442</td></tr>
+          <tr class="hl"><th>Head Lease cố định 600/tuần</th><td>31,200</td></tr>
+          <tr class="diff"><th>Chênh lệch (Head Lease so với Quản lý)</th><td class="pos">+758</td></tr>
         </tbody>
       </table>
     </div>
+
+    <div class="bars">
+      <div class="bar bar--nom">
+        <div class="bt"><span>Giá thuê danh nghĩa</span><b>730 /tuần</b></div>
+        <div class="tr"><i></i></div>
+      </div>
+      <div class="bar bar--net">
+        <div class="bt"><span>Thực nhận · Quản lý 8% (theo bảng trên)</span><b>≈ 585 /tuần</b></div>
+        <div class="tr"><i></i></div>
+        <div class="bn">Thấp hơn 730 khoảng <b>19.8%</b> sau trống nhà và các loại phí năm đầu</div>
+      </div>
+      <div class="bar bar--hl">
+        <div class="bt"><span>Head Lease cố định</span><b>600 /tuần</b></div>
+        <div class="tr"><i></i></div>
+        <div class="bn">Thấp hơn 730 là <b>17.8%</b> · cố định 52 tuần</div>
+      </div>
+    </div>
+
     <div class="note">
-      <p><strong>Cách đọc:</strong> ngay cả khi đạt đúng 730, con số thực nhận của phương án quản lý đã thấp hơn 730 khoảng 18%. Mức cố định 620 thấp hơn 15%, không mang rủi ro nào, và cho chủ nhà nhiều hơn 1,398 AUD mỗi năm.</p>
+      <p><strong>Cách đọc:</strong> ở giả định 730, hai phương án cách nhau 758 AUD một năm, gần như tương đương. Khác biệt nằm ở chỗ ai gánh dao động: năm thuận lợi hơn giả định (cho thuê nhanh, không phát sinh) thì Quản lý 8% cho nhiều hơn; năm kém hơn thì Head Lease vẫn giữ nguyên 600. Chủ nhà chọn theo mức ưu tiên sự chắc chắn, hai lựa chọn đều hợp lý.</p>
     </div>
   </div>
 </section>
@@ -360,13 +397,25 @@ footer{background:var(--espresso);color:var(--sand);padding:34px 0;margin-top:24
     </div>
     <p>Trong toà nhà đang dư cung, chờ giá cao thường là quyết định lỗ.</p>
 
-    <h3>Cách kiểm chứng</h3>
-    <ol class="flow">
-      <li><b>Quảng cáo tuần đầu</b>Đăng ở mức cao hơn 730 nếu chủ nhà muốn thử thị trường.</li>
-      <li><b>Báo cáo theo tuần</b>Số lượt xem, lượt hẹn và hồ sơ nộp gửi chủ nhà từng tuần.</li>
-      <li><b>Điều chỉnh theo dữ liệu</b>Chỉ hạ giá khi số liệu thật cho thấy cần. Thị trường tự trả lời trong 2 tuần.</li>
-    </ol>
-    <p>Mức cố định 620 của Head Lease được tính từ 730. Nếu chủ nhà tin thị trường cao hơn, phương án quản lý với quy trình trên là cách công bằng để chứng minh.</p>
+    <h3>Các căn so sánh tương tự tại Normanby Road</h3>
+    <div class="comps">
+      <a href="https://www.tenantapp.com.au/Rentals/ViewListing/4335917" target="_blank" rel="noopener">
+        <b>Căn so sánh 1 · Normanby Road</b>
+        Toà nhà có bể bơi, rạp phim.
+        <span class="src">Xem tin đăng · TenantApp</span>
+      </a>
+      <a href="https://www.tenantapp.com.au/Rentals/ViewListing/5004143" target="_blank" rel="noopener">
+        <b>Căn so sánh 2 · Normanby Road</b>
+        Cùng khu, phân khúc tương đương.
+        <span class="src">Xem tin đăng · TenantApp</span>
+      </a>
+      <a href="https://www.realestate.com.au/property-apartment-vic-southbank-437291648" target="_blank" rel="noopener">
+        <b>Căn so sánh 3 · Southbank</b>
+        Gym, bể bơi, amenities, kèm carpark.
+        <span class="src">Xem tin đăng · realestate.com.au</span>
+      </a>
+    </div>
+    <p>Mức cố định 600 của Head Lease được tính từ 730 và các căn so sánh trên.</p>
   </div>
 </section>
 
@@ -410,7 +459,7 @@ footer{background:var(--espresso);color:var(--sand);padding:34px 0;margin-top:24
       <li><span class="k">3</span><b>Không cho thuê ngắn hạn kiểu Airbnb,</b> cam kết bằng văn bản, trừ khi chủ nhà đồng ý riêng.</li>
       <li><span class="k">4</span><b>Kỳ hạn năm đầu chỉ 12 tháng.</b> Cuối kỳ xem lại giá theo thị trường; chủ nhà toàn quyền gia hạn, chuyển phương án, hoặc rời đi.</li>
       <li><span class="k">5</span><b>Báo cáo tình trạng căn hộ kèm ảnh mỗi quý.</b> Một đầu mối duy nhất qua Zalo, phản hồi trong 24 giờ.</li>
-      <li><span class="k">6</span><b>Trong thời hạn bảo hành xây dựng,</b> Rivera đại diện chủ nhà làm việc với builder, không thu phí.</li>
+      <li><span class="k">6</span><b>Thời gian bắt đầu: 2 tuần sau ngày bàn giao.</b> Khoảng này dành để chuẩn bị căn hộ lần đầu: lắp rèm, kiểm tra thiết bị, vệ sinh, chụp ảnh và đăng tin. Tiền thuê tính từ khi kỳ hạn bắt đầu.</li>
       <li><span class="k">7</span><b>Hợp đồng do luật sư hành nghề tại Victoria soạn và rà.</b> Giấy đăng ký kinh doanh gửi tới chủ nhà ngay khi được cấp.</li>
     </ol>
   </div>
