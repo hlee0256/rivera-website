@@ -6,6 +6,16 @@ task, add one short entry to the top.
 
 ---
 
+### 2026-07-03 · Claude · The Canopy House owner proposal page (standalone)
+- **New `canopy-van-hanh.html`:** standalone, Vietnamese-only, `noindex` document page for one
+  owner (three units at The Canopy House), built verbatim from the owner's Word doc
+  `Rivera_Canopy_De_Xuat_Van_Hanh.docx`. Nine sections as in the doc: about Rivera, contents,
+  option A (8% management), option B (head lease 620/wk), 3 comparison tables (costs, risk,
+  net-income at 730/770/820), the 730 valuation rationale, recommendation, 8 commitments, next steps.
+- Follows the `380-melbourne-so-sanh.html` pattern: self-contained CSS with the Rivera tokens,
+  own nav/footer, **no serif italic accents** (purely informational, per owner's request), no
+  `app.js`/lang toggle, not linked from any site page.
+
 ### 2026-06-30 · Claude (Opus) · About-page cleanup + real contact details (pre-client review)
 - **`about.html` rebuilt for client presentation:**
   - **Removed the fictional founder** "Elena Rivera" (name, signature, role, and the stock portrait).
