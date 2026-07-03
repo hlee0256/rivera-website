@@ -98,6 +98,10 @@ thead th{font-size:.7rem;font-weight:700;letter-spacing:.12em;text-transform:upp
 tbody tr:last-child th,tbody tr:last-child td{border-bottom:0}
 tbody th{font-weight:600;color:var(--ink)}
 td{color:var(--ink-soft)}
+table.tbl-num{min-width:0}
+.tbl-num td{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.tbl-num th{white-space:normal}
+tr.hl th,tr.hl td{background:var(--sand);color:var(--ink);font-weight:700}
 .note{margin-top:14px;border-left:3px solid var(--brown);padding:4px 0 4px 16px}
 .note p{margin-top:0}
 .note p + p{margin-top:10px}
@@ -187,7 +191,7 @@ footer{background:var(--espresso);color:var(--sand);padding:34px 0;margin-top:24
     <div class="stats">
       <div class="st"><div class="n">10+</div><div class="l">năm kinh nghiệm trên thị trường Melbourne</div></div>
       <div class="st"><div class="n">20+</div><div class="l">căn hộ đã trực tiếp giao dịch, khu CBD và nội đô</div></div>
-      <div class="st"><div class="n">150</div><div class="l">căn kinh nghiệm quản lý danh mục và cho thuê ngắn hạn</div></div>
+      <div class="st"><div class="n">150</div><div class="l">căn từng trực tiếp quản lý, gồm danh mục và cho thuê ngắn hạn</div></div>
       <div class="st"><div class="n">5 phút</div><div class="l">từ văn phòng Rivera tới The Canopy House</div></div>
     </div>
     <ul class="pts">
@@ -225,25 +229,10 @@ footer{background:var(--espresso);color:var(--sand);padding:34px 0;margin-top:24
     <p>Rivera thuê trực tiếp căn hộ từ chủ nhà với giá cố định 600 mỗi tuần, trả đủ 52 tuần mỗi năm, có khách hay đang trống. Không phí quản lý, không phí tìm khách, không marketing; Rivera nhận 100% rủi ro tài chính. Rivera cho thuê lại và tự vận hành, đứng vai chủ nhà theo luật Victoria với người thuê cuối. Việc cho thuê lại được ghi rõ và được chủ nhà đồng ý bằng văn bản ngay trong hợp đồng.</p>
     <h3>Trách nhiệm mỗi bên</h3>
     <ul class="duty">
-      <li><b>Chủ nhà</b>Nhận một con số cố định mỗi tuần. Giữ các khoản phí thuộc quyền sở hữu, theo bảng dưới.</li>
+      <li><b>Chủ nhà</b>Nhận một con số cố định mỗi tuần. Giữ các khoản phí thuộc quyền sở hữu, theo bảng chi phí ở mục 4.2.</li>
       <li><b>Rivera</b>Trả tiền đúng hạn 52 tuần. Tìm khách, thu tiền, xử lý chậm trả và tranh chấp, kiểm tra an toàn định kỳ, bảo trì nhỏ đến 300 AUD mỗi lần.</li>
       <li><b>Bản chất</b>Thu nhập đứng ngoài mọi biến động. Rivera hấp thụ rủi ro, đổi lại phần chênh lệch giữa giá cố định và giá cho thuê lại.</li>
     </ul>
-    <h3>Các khoản phí trong Head Lease</h3>
-    <div class="tbl-wrap">
-      <table class="tbl-fit">
-        <thead>
-          <tr><th>Khoản phí</th><th>Head Lease</th></tr>
-        </thead>
-        <tbody>
-          <tr><th>OC Fees</th><td>Thuộc chủ sở hữu · chủ sở hữu thanh toán</td></tr>
-          <tr><th>Council Rates</th><td>Thuộc chủ sở hữu · chủ sở hữu thanh toán</td></tr>
-          <tr><th>Land Tax</th><td>Thuộc chủ sở hữu · chủ sở hữu thanh toán</td></tr>
-          <tr><th>Water Rates (service charges)</th><td>Thuộc chủ sở hữu · chủ sở hữu thanh toán</td></tr>
-          <tr><th>Utilities (điện, gas, nước sử dụng, internet)</th><td>Công ty thanh toán, thu lại từ tenant hoặc tính gộp vào tiền thuê theo hợp đồng</td></tr>
-        </tbody>
-      </table>
-    </div>
   </div>
 </section>
 
@@ -280,6 +269,7 @@ footer{background:var(--espresso);color:var(--sand);padding:34px 0;margin-top:24
         <tbody>
           <tr><th>Council Rates</th><td>Chủ nhà</td></tr>
           <tr><th>Owners Corporation</th><td>Chủ nhà</td></tr>
+          <tr><th>Land Tax</th><td>Chủ nhà</td></tr>
           <tr><th>Water Service Charge</th><td>Chủ nhà</td></tr>
           <tr><th>Water Usage</th><td>Tenant (qua công ty)</td></tr>
           <tr><th>Gas / Electricity</th><td>Tenant</td></tr>
@@ -312,6 +302,30 @@ footer{background:var(--espresso);color:var(--sand);padding:34px 0;margin-top:24
       <p>Rủi ro không định giá trước được (khách chậm tiền, rời sớm, tranh chấp): với quản lý là ẩn số của chủ nhà; với Head Lease là việc của Rivera.</p>
     </div>
 
+    <h3>4.4. Bảng tiền cả năm: hai phương án trên cùng một mẫu số</h3>
+    <p>Kịch bản cho phương án Quản lý 8%: giá đạt được 750/tuần (giữa vùng 730 – 770), trống nhà 4 tuần năm đầu khi 213 căn cùng ra hàng, phí tìm khách 1.5 tuần, marketing 400, bảo trì nhỏ 300.</p>
+    <div class="tbl-wrap">
+      <table class="tbl-num">
+        <thead>
+          <tr><th>Khoản (AUD/năm)</th><th>Quản lý 8% · kịch bản 750</th><th>Head Lease 600</th></tr>
+        </thead>
+        <tbody>
+          <tr><th>Tiền thuê 52 tuần</th><td>39,000</td><td>31,200</td></tr>
+          <tr><th>Trừ: trống nhà 4 tuần</th><td>-3,000</td><td>0</td></tr>
+          <tr><th>Trừ: phí tìm khách 1.5 tuần</th><td>-1,125</td><td>0</td></tr>
+          <tr><th>Trừ: phí marketing</th><td>-400</td><td>0</td></tr>
+          <tr><th>Trừ: phí quản lý 8%</th><td>-2,880</td><td>0</td></tr>
+          <tr><th>Trừ: bảo trì nhỏ</th><td>-300</td><td>0</td></tr>
+          <tr class="hl"><th>Thu nhập ròng một căn</th><td>31,295</td><td>31,200</td></tr>
+          <tr class="hl"><th>Tương đương mỗi tuần</th><td>≈602</td><td>600</td></tr>
+          <tr><th>Tính trên ba căn</th><td>93,885</td><td>93,600</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="note">
+      <p><strong>Cách đọc:</strong> đưa về cùng một mẫu số, hai phương án gần như trùng nhau: chênh 95 AUD một căn mỗi năm. Khác biệt không nằm ở số tiền mà ở bên gánh biến động. Năm tốt hơn kịch bản (cho thuê nhanh, đạt 770) thì Quản lý 8% cho nhiều hơn; năm kém hơn thì Head Lease vẫn đúng 600.</p>
+      <p><strong>Kịch bản ba căn cùng trống:</strong> mỗi tuần cả ba căn trống là 2,250 AUD không quay lại; một đợt 4 tuần mùa đông là 9,000 AUD. Trong Head Lease, phần này là việc của Rivera.</p>
+    </div>
   </div>
 </section>
 
@@ -374,7 +388,7 @@ footer{background:var(--espresso);color:var(--sand);padding:34px 0;margin-top:24
       </div>
       <div class="op">
         <b>Chọn Head Lease khi</b>
-        <p>Điều chủ nhà coi trọng nhất là dòng tiền đều, con số biết trước, và không phải bận tâm việc gì từ xa.</p>
+        <p>Điều chủ nhà coi trọng nhất là dòng tiền đều, con số biết trước, và không bận tâm việc vận hành hằng ngày.</p>
       </div>
     </div>
     <p>Với chủ nhà nắm nhiều căn cùng lúc, sự ổn định thường đáng giá hơn phần tối đa hoá cuối cùng: ba căn cùng trống một mùa là tình huống thật, và nó biến mất trong mô hình thuê bao. Khi Rivera phải trả tiền mỗi tuần dù nhà có khách hay không, quyền lợi hai bên thẳng hàng theo thiết kế của hợp đồng, không phụ thuộc lời hứa.</p>

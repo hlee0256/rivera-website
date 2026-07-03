@@ -6,6 +6,19 @@ task, add one short entry to the top.
 
 ---
 
+### 2026-07-03 · Claude · Canopy proposal v5: full-year money table, dedupe fee tables
+- **New 4.4 "Bảng tiền cả năm"** forcing both options onto one denominator, per owner + review:
+  scenario 750/tuần (midpoint of the public 730–770 range, not a Rivera valuation), 4 weeks
+  vacancy, 1.5-week letting, 400 marketing, 8%, 300 repairs → mgmt net **31,295/yr (≈602/tuần)**
+  vs Head Lease **31,200 (600)** — chênh 95/căn/năm; ×3 căn: 93,885 vs 93,600. Plus the
+  three-units-vacant note (2,250/tuần; 9,000 for a 4-week winter void).
+- **Deduped fee tables**: Phần 3's Head Lease fee table removed; 4.2 Chi phí is now the single
+  cost table (Land Tax row added); Phần 3 duty card points to 4.2.
+- Phần 6 wording fix: "không phải bận tâm việc gì từ xa" → "không bận tâm việc vận hành hằng
+  ngày" (large maintenance stays with the owner, so the old line overclaimed).
+- "150 căn" stat label reworded to "từng trực tiếp quản lý" (defensible past-tense claim,
+  figure confirmed by owner).
+
 ### 2026-07-03 · Claude · Canopy proposal v4: range pricing, no point valuation
 - **Strategy shift per owner:** never present a 730 point valuation (owner intends to re-let
   above it; a point anchor next to a 600 offer reads as lowballing). The page now presents
