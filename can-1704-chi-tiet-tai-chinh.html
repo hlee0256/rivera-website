@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<title>Căn hộ 1704 · Chi tiết tài chính · Rivera</title>
+<meta name="description" content="Bảng thông tin tài chính căn hộ 1704: giá mua, kế hoạch thanh toán, chi phí sở hữu hàng năm và kịch bản cho thuê." />
+<meta name="robots" content="noindex" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500;1,600&display=swap" rel="stylesheet" />
+<link rel="icon" type="image/svg+xml" href="favicon.svg" />
+<style>
+/* ============================================================
+   Rivera — Bảng thông tin tài chính (tài liệu khách hàng, A4)
+   Trang độc lập, chỉ tiếng Việt, thuần thông tin.
+   In / xuất PDF: khổ A4, 2 trang. Token màu theo styles.css.
+   ============================================================ */
+:root{
+  --espresso:#1B130D; --coffee:#2A1E14; --brown:#7A4E2D; --clay:#9A6A41;
+  --tan:#C9A982; --sand:#E6DACA; --paper:#F4F0E9; --paper-2:#FBF9F4;
+  --ink:#231A12; --ink-soft:#6E5E4D; --line:rgba(35,26,18,.14);
+  --line-d:rgba(244,240,233,.16); --white:#FBF6EE;
+  --serif:"Cormorant Garamond",Georgia,serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+@page{size:A4;margin:0}
+html{-webkit-text-size-adjust:100%}
+body{
+  background:var(--sand);color:var(--ink);
+  font-family:"Manrope",system-ui,sans-serif;
+  font-size:12px;line-height:1.55;font-weight:400;letter-spacing:-.01em;
+  -webkit-font-smoothing:antialiased;
+  -webkit-print-color-adjust:exact;print-color-adjust:exact;
+}
+h1,h2,h3,p{margin:0}
+h1,h2,h3{font-weight:700;letter-spacing:-.03em;line-height:1.06;color:var(--ink)}
+.serif{font-family:var(--serif);font-style:italic;font-weight:600;letter-spacing:0;color:var(--brown)}
+
+/* ---------------- Trang A4 ---------------- */
+.page{
+  position:relative;display:flex;flex-direction:column;
+  width:210mm;min-height:297mm;margin:18px auto;
+  padding:14mm 16mm 12mm;overflow:hidden;
+  background:var(--paper);
+  box-shadow:0 16px 50px rgba(27,19,13,.16);
+}
+.page::before{content:"";position:absolute;inset:0 0 auto;height:5px;background:var(--brown)}
+.page + .page{page-break-before:always}
+
+/* ---------------- Brandbar ---------------- */
+.brandbar{
+  display:flex;align-items:flex-start;justify-content:space-between;gap:28px;
+  padding:6px 0 14px;border-bottom:1px solid var(--line);
+}
+.logo{font-size:19px;font-weight:800;letter-spacing:-.01em;color:var(--ink);
+  display:inline-flex;align-items:baseline;text-decoration:none}
+.logo .ra{height:.72em;width:auto;align-self:baseline;margin-left:.015em}
+.document-meta{
+  color:var(--ink-soft);font-size:8.5px;line-height:1.7;text-align:right;
+  text-transform:uppercase;letter-spacing:.14em;font-weight:600;
+}
+.document-meta b{color:var(--ink);font-weight:700}
+
+/* ---------------- Hero ---------------- */
+.hero{display:grid;grid-template-columns:1.45fr .55fr;gap:28px;align-items:end;padding:20px 0 22px}
+.eyebrow{display:inline-block;margin-bottom:9px;color:var(--brown);
+  font-size:8.5px;font-weight:600;text-transform:uppercase;letter-spacing:.2em}
+h1{font-size:34px}
+.hero-price{padding-left:18px;border-left:1px solid var(--line)}
+.hero-price .label{color:var(--ink-soft);font-size:8.5px;font-weight:600;text-transform:uppercase;letter-spacing:.14em}
+.hero-price .value{margin-top:7px;color:var(--brown);font-size:23px;font-weight:700;line-height:1.1;letter-spacing:-.02em}
+.hero-price .sub{margin-top:5px;color:var(--ink-soft);font-size:9px}
+
+/* ---------------- Dải thông số ---------------- */
+.spec-rail{display:grid;grid-template-columns:repeat(5,1fr);margin-bottom:20px;
+  border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:var(--paper-2)}
+.spec{padding:12px;border-right:1px solid var(--line)}
+.spec:last-child{border-right:0}
+.spec b{display:block;font-size:15px;font-weight:700;line-height:1.1;letter-spacing:-.02em}
+.spec span{display:block;margin-top:5px;color:var(--ink-soft);font-size:7.5px;font-weight:600;
+  text-transform:uppercase;letter-spacing:.12em}
+
+/* ---------------- Tóm tắt giá ---------------- */
+.price-summary{display:grid;grid-template-columns:repeat(3,1fr);margin-bottom:18px;
+  border:1px solid var(--line);background:var(--paper-2)}
+.price-card{min-height:84px;padding:14px;border-right:1px solid var(--line)}
+.price-card:last-child{border-right:0}
+.price-card.featured{box-shadow:inset 0 3px 0 var(--brown)}
+.price-card .kicker{color:var(--ink-soft);font-size:7.5px;font-weight:600;text-transform:uppercase;letter-spacing:.13em}
+.price-card .aud{margin-top:8px;font-size:18px;font-weight:700;line-height:1.1;letter-spacing:-.02em}
+.price-card.featured .aud{color:var(--brown)}
+.price-card .vnd{margin-top:5px;color:var(--ink-soft);font-size:8.5px}
+
+/* ---------------- Các khoản hỗ trợ (thuần thông tin) ---------------- */
+.support{display:grid;grid-template-columns:1.1fr 1.9fr;margin-bottom:20px;
+  border:1px solid var(--line);background:var(--paper-2)}
+.support-lead{display:flex;flex-direction:column;justify-content:center;padding:16px;
+  border-right:1px solid var(--line)}
+.support-lead .eyebrow{margin-bottom:6px}
+.support-total{color:var(--ink);font-size:24px;font-weight:300;line-height:1.05;letter-spacing:-.02em}
+.support-vnd{margin-top:6px;color:var(--ink-soft);font-size:8.5px}
+.support-items{display:grid;grid-template-columns:repeat(3,1fr);align-items:stretch}
+.support-item{padding:16px 13px;border-right:1px solid var(--line)}
+.support-item:last-child{border-right:0}
+.support-item span{display:block;min-height:24px;color:var(--ink-soft);font-size:7.5px;font-weight:600;
+  text-transform:uppercase;letter-spacing:.1em}
+.support-item b{display:block;margin-top:6px;color:var(--brown);font-size:13px;letter-spacing:-.01em}
+.support-item small{display:block;margin-top:4px;color:var(--ink-soft);font-size:8px}
+
+/* ---------------- Đầu mục ---------------- */
+.section-head{display:flex;align-items:flex-end;justify-content:space-between;gap:20px;margin:0 0 12px}
+.section-head h2{font-size:18px}
+.section-head p{max-width:44ch;color:var(--ink-soft);font-size:9px;text-align:right}
+
+/* ---------------- Bảng ---------------- */
+table{width:100%;border-collapse:collapse;table-layout:fixed;background:var(--paper-2)}
+th,td{padding:8px 11px;border-bottom:1px solid var(--line);vertical-align:middle}
+th{color:var(--ink-soft);font-size:7.5px;font-weight:600;text-align:left;
+  text-transform:uppercase;letter-spacing:.13em}
+th.amount,td.amount{text-align:right}
+td.amount{white-space:nowrap}
+td.vnd-col{color:var(--ink-soft)}
+.group-row td{padding-top:11px;padding-bottom:6px;background:var(--paper);color:var(--brown);
+  font-size:7.5px;font-weight:700;text-transform:uppercase;letter-spacing:.16em}
+.subtotal td{font-weight:700}
+.covered td{color:var(--ink-soft)}
+.covered del{text-decoration-thickness:1.5px}
+.grand-total td{padding-top:12px;padding-bottom:12px;border-bottom:0;background:var(--coffee);
+  color:var(--white);font-size:12.5px;font-weight:700}
+.grand-total td.vnd-col{color:var(--sand)}
+.metric-total td{border-top:2px solid var(--brown);border-bottom:0;background:var(--paper-2);
+  color:var(--ink);font-size:11.5px;font-weight:700}
+.optional td{color:var(--ink-soft);font-size:8.5px;font-style:italic}
+.not-applicable{color:var(--brown);font-style:normal;font-weight:700}
+
+/* ---------------- Ghi chú ---------------- */
+.note{margin-top:10px;padding:11px 13px;border:1px solid var(--line);border-left:3px solid var(--brown);
+  background:var(--paper-2);color:var(--ink-soft);font-size:8.5px;line-height:1.6}
+.note strong{color:var(--ink)}
+
+/* ---------------- Trang 2 ---------------- */
+.page-title{margin-bottom:22px;padding:22px 0 20px;border-bottom:1px solid var(--line)}
+.page-title h1{font-size:27px}
+.block{margin-bottom:22px}
+
+/* ---------------- Chân trang ---------------- */
+.footer-note{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;
+  margin-top:auto;padding-top:10px;border-top:1px solid var(--line);
+  color:var(--ink-soft);font-size:8px;line-height:1.6}
+.footer-note p{max-width:100ch}
+.footer-note .brand{white-space:nowrap;font-weight:600;letter-spacing:.08em;text-transform:uppercase}
+.page-number{white-space:nowrap;font-weight:700}
+
+/* ---------------- Màn hình nhỏ (chỉ áp dụng khi xem, không áp dụng khi in) ---------------- */
+@media screen and (max-width:860px){
+  body{background:var(--paper);font-size:14px}
+  .page{width:100%;min-height:auto;margin:0;padding:26px 20px 60px;box-shadow:none}
+  .hero{grid-template-columns:1fr}
+  .hero-price{padding:14px 0 0;border-top:1px solid var(--line);border-left:0}
+  .spec-rail{grid-template-columns:repeat(2,1fr)}
+  .spec{border-bottom:1px solid var(--line)}
+  .price-summary,.support{grid-template-columns:1fr}
+  .price-card{border-right:0;border-bottom:1px solid var(--line)}
+  .support-lead{border-right:0;border-bottom:1px solid var(--line)}
+  .support-items{grid-template-columns:1fr}
+  .support-item{border-right:0;border-bottom:1px solid var(--line)}
+  .support-item:last-child{border-bottom:0}
+  .section-head{align-items:flex-start;flex-direction:column}
+  .section-head p{text-align:left}
+  table{font-size:10px}
+  th,td{padding:8px 5px}
+  td.vnd-col{letter-spacing:-.02em}
+  .grand-total td{font-size:11px}
+  .metric-total td{font-size:10.5px}
+  .footer-note{flex-wrap:wrap}
+}
+
+@media print{
+  body{background:#fff}
+  .page{margin:0;box-shadow:none}
+}
+</style>
+</head>
+<body>
+
+<!-- ======================= TRANG 1 ======================= -->
+<article class="page">
+  <header class="brandbar">
+    <a class="logo" href="https://rivera.au" aria-label="Rivera Real Estate">RIVER<svg class="ra" viewBox="0 0 222.5 278" aria-hidden="true"><path fill="currentColor" fill-rule="evenodd" d="M152.8 2.0L171.6 2.0L174.6 4.4L187.5 78.6L187.9 85.4L197.5 135.6L198.9 148.4L200.5 153.6L209.9 211.4L211.5 216.6L212.9 229.4L214.5 234.6L216.9 253.4L219.5 264.6L220.5 274.2L219.2 275.9L172.8 276.0L170.0 275.0L168.9 272.4L158.5 211.6L156.2 205.6L145.1 195.4L133.1 187.3L125.6 183.6L113.6 179.6L101.6 177.0L88.8 177.0L76.8 179.6L69.3 182.3L57.3 189.4L52.2 194.6L47.0 203.6L9.1 274.9L7.6 276.0L3.8 276.0L2.1 274.8L5.0 267.6L33.4 217.4L66.0 156.6L71.4 148.4L76.0 138.6L99.4 97.4L122.0 54.6L127.4 46.4L147.0 9.6L152.2 2.1ZM129.1 51.8L133.5 70.6L134.9 83.4L136.5 88.6L145.9 146.4L147.5 151.6L147.9 158.4L150.5 169.6L155.6 202.3L146.1 192.4L128.1 179.3L120.6 175.6L107.1 171.2L99.6 170.0L85.3 170.2L74.8 172.6L62.3 178.6L62.6 176.4L69.0 163.6L128.8 51.5Z"/></svg></a>
+    <div class="document-meta">
+      Bảng thông tin tài chính<br>
+      <b>Căn hộ 1704 · Tầng 17</b><br>
+      Tháng 7, 2026 · 1 AUD = 18,500 VND
+    </div>
+  </header>
+
+  <section class="hero">
+    <div>
+      <span class="eyebrow">Tài liệu khách hàng</span>
+      <h1>Căn hộ <span class="serif">1704</span></h1>
+    </div>
+    <div class="hero-price">
+      <div class="label">Giá mua sau chiết khấu</div>
+      <div class="value">$999,600</div>
+      <div class="sub">18,492,600,000 VND</div>
+    </div>
+  </section>
+
+  <section class="spec-rail" aria-label="Thông số căn hộ">
+    <div class="spec"><b>1704</b><span>Căn hộ</span></div>
+    <div class="spec"><b>17</b><span>Tầng</span></div>
+    <div class="spec"><b>2</b><span>Phòng ngủ</span></div>
+    <div class="spec"><b>2</b><span>Phòng tắm</span></div>
+    <div class="spec"><b>64.2 m²</b><span>Diện tích</span></div>
+  </section>
+
+  <section class="price-summary" aria-label="Tóm tắt giá mua">
+    <div class="price-card">
+      <div class="kicker">Giá niêm yết</div>
+      <div class="aud">$1,020,000</div>
+      <div class="vnd">18,870,000,000 VND</div>
+    </div>
+    <div class="price-card">
+      <div class="kicker">Chiết khấu 2%</div>
+      <div class="aud">−$20,400</div>
+      <div class="vnd">−377,400,000 VND</div>
+    </div>
+    <div class="price-card featured">
+      <div class="kicker">Giá mua sau chiết khấu</div>
+      <div class="aud">$999,600</div>
+      <div class="vnd">18,492,600,000 VND</div>
+    </div>
+  </section>
+
+  <section class="support" aria-label="Các khoản hỗ trợ từ chủ đầu tư">
+    <div class="support-lead">
+      <span class="eyebrow">Các khoản hỗ trợ</span>
+      <div class="support-total">$51,400</div>
+      <div class="support-vnd">950,900,000 VND · tổng giá trị hỗ trợ</div>
+    </div>
+    <div class="support-items">
+      <div class="support-item">
+        <span>Chiết khấu trừ vào giá</span>
+        <b>$20,400</b>
+        <small>377,400,000 VND</small>
+      </div>
+      <div class="support-item">
+        <span>Phí luật sư · chủ đầu tư hỗ trợ</span>
+        <b>$2,800</b>
+        <small>51,800,000 VND</small>
+      </div>
+      <div class="support-item">
+        <span>Phí FIRB · được miễn</span>
+        <b>$28,200</b>
+        <small>521,700,000 VND</small>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-head">
+      <div>
+        <span class="eyebrow">Thanh toán</span>
+        <h2>Kế hoạch <span class="serif">thanh toán</span></h2>
+      </div>
+      <p>Chiết khấu được trừ trước. Đặt cọc, số dư và stamp duty đều tính trên giá mua $999,600.</p>
+    </div>
+
+    <table aria-label="Kế hoạch thanh toán căn hộ 1704">
+      <colgroup><col style="width:48%"><col style="width:24%"><col style="width:28%"></colgroup>
+      <thead>
+        <tr><th>Khoản thanh toán</th><th class="amount">AUD</th><th class="amount">VND</th></tr>
+      </thead>
+      <tbody>
+        <tr class="group-row"><td colspan="3">Giai đoạn 1 · Đặt cọc</td></tr>
+        <tr><td>Đặt cọc 10% giá mua</td><td class="amount">$99,960</td><td class="amount vnd-col">1,849,260,000</td></tr>
+        <tr class="subtotal"><td>Cộng giai đoạn 1</td><td class="amount">$99,960</td><td class="amount vnd-col">1,849,260,000</td></tr>
+
+        <tr class="group-row"><td colspan="3">Giai đoạn 2 · Settlement</td></tr>
+        <tr><td>Thanh toán 90% còn lại</td><td class="amount">$899,640</td><td class="amount vnd-col">16,643,340,000</td></tr>
+        <tr><td>Stamp duty 13.5%</td><td class="amount">$134,946</td><td class="amount vnd-col">2,496,501,000</td></tr>
+        <tr><td>Chi phí hoàn tất giao dịch (dự phòng)</td><td class="amount">$10,000</td><td class="amount vnd-col">185,000,000</td></tr>
+        <tr class="covered"><td>Phí luật sư / conveyancer · chủ đầu tư hỗ trợ</td><td class="amount"><del>$2,800</del></td><td class="amount vnd-col"><del>51,800,000</del></td></tr>
+        <tr class="subtotal"><td>Cộng giai đoạn 2</td><td class="amount">$1,044,586</td><td class="amount vnd-col">19,324,841,000</td></tr>
+
+        <tr class="grand-total"><td>Tổng chi phí mua dự kiến</td><td class="amount">$1,144,546</td><td class="amount vnd-col">21,174,101,000</td></tr>
+      </tbody>
+    </table>
+
+    <div class="note"><strong>Chi phí hoàn tất giao dịch:</strong> khoản $10,000 là ngân sách dự phòng cho các điều chỉnh và chi phí khi bàn giao, có thể gồm điều chỉnh OC, council và water, phí đăng ký quyền sở hữu, phí settlement, nền tảng giao dịch và các khoản hành chính liên quan. Luật sư hoặc conveyancer sẽ xác nhận số thực tế trên settlement statement.</div>
+  </section>
+
+  <footer class="footer-note">
+    <p>Tỷ giá quy đổi cố định theo thỏa thuận: 1 AUD = 18,500 VND. Các số VND chỉ mang tính tham khảo. Số liệu cuối cùng theo hợp đồng và settlement statement.</p>
+    <span class="brand">Rivera · rivera.au</span>
+    <span class="page-number">01 / 02</span>
+  </footer>
+</article>
+
+<!-- ======================= TRANG 2 ======================= -->
+<article class="page">
+  <header class="brandbar">
+    <a class="logo" href="https://rivera.au" aria-label="Rivera Real Estate">RIVER<svg class="ra" viewBox="0 0 222.5 278" aria-hidden="true"><path fill="currentColor" fill-rule="evenodd" d="M152.8 2.0L171.6 2.0L174.6 4.4L187.5 78.6L187.9 85.4L197.5 135.6L198.9 148.4L200.5 153.6L209.9 211.4L211.5 216.6L212.9 229.4L214.5 234.6L216.9 253.4L219.5 264.6L220.5 274.2L219.2 275.9L172.8 276.0L170.0 275.0L168.9 272.4L158.5 211.6L156.2 205.6L145.1 195.4L133.1 187.3L125.6 183.6L113.6 179.6L101.6 177.0L88.8 177.0L76.8 179.6L69.3 182.3L57.3 189.4L52.2 194.6L47.0 203.6L9.1 274.9L7.6 276.0L3.8 276.0L2.1 274.8L5.0 267.6L33.4 217.4L66.0 156.6L71.4 148.4L76.0 138.6L99.4 97.4L122.0 54.6L127.4 46.4L147.0 9.6L152.2 2.1ZM129.1 51.8L133.5 70.6L134.9 83.4L136.5 88.6L145.9 146.4L147.5 151.6L147.9 158.4L150.5 169.6L155.6 202.3L146.1 192.4L128.1 179.3L120.6 175.6L107.1 171.2L99.6 170.0L85.3 170.2L74.8 172.6L62.3 178.6L62.6 176.4L69.0 163.6L128.8 51.5Z"/></svg></a>
+    <div class="document-meta">
+      Bảng thông tin tài chính<br>
+      <b>Căn hộ 1704 · Tầng 17</b><br>
+      Tháng 7, 2026 · 1 AUD = 18,500 VND
+    </div>
+  </header>
+
+  <section class="page-title">
+    <span class="eyebrow">Sau khi nhận nhà</span>
+    <h1>Chi phí sở hữu <span class="serif">&amp; cho thuê</span></h1>
+  </section>
+
+  <section class="block">
+    <div class="section-head">
+      <div>
+        <span class="eyebrow">Hàng năm</span>
+        <h2>Chi phí sở hữu <span class="serif">hàng năm</span></h2>
+      </div>
+      <p>Các khoản chi định kỳ dự kiến, chưa gồm bảo trì bất thường hoặc thay đổi biểu phí.</p>
+    </div>
+
+    <table aria-label="Chi phí sở hữu hàng năm">
+      <colgroup><col style="width:48%"><col style="width:24%"><col style="width:28%"></colgroup>
+      <thead><tr><th>Khoản chi</th><th class="amount">AUD / năm</th><th class="amount">VND / năm</th></tr></thead>
+      <tbody>
+        <tr><td>Owners Corporation (OC)</td><td class="amount">$5,700</td><td class="amount vnd-col">105,450,000</td></tr>
+        <tr><td>Council rate</td><td class="amount">$1,200</td><td class="amount vnd-col">22,200,000</td></tr>
+        <tr><td>Water rate</td><td class="amount">$800</td><td class="amount vnd-col">14,800,000</td></tr>
+        <tr class="metric-total"><td>Tổng chi phí hàng năm</td><td class="amount">$7,700</td><td class="amount vnd-col">142,450,000</td></tr>
+        <tr class="optional">
+          <td>Absentee owner surcharge: 4% trên land value giả định $100,000</td>
+          <td class="amount">$4,000</td>
+          <td class="amount vnd-col">74,000,000</td>
+        </tr>
+        <tr class="optional">
+          <td colspan="3"><span class="not-applicable">Hiện không áp dụng</span>, không cộng vào tổng chi phí hàng năm. Land value thực tế cần được xác nhận trên council rates notice hoặc SRO assessment.</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="block">
+    <div class="section-head">
+      <div>
+        <span class="eyebrow">Cho thuê</span>
+        <h2>Kịch bản <span class="serif">cho thuê</span></h2>
+      </div>
+      <p>Giả định giá thuê $1,000 mỗi tuần và phí quản lý cho thuê bằng 6% doanh thu.</p>
+    </div>
+
+    <table aria-label="Kịch bản cho thuê căn hộ 1704">
+      <colgroup><col style="width:48%"><col style="width:24%"><col style="width:28%"></colgroup>
+      <thead><tr><th>Thu nhập / chi phí</th><th class="amount">AUD</th><th class="amount">VND</th></tr></thead>
+      <tbody>
+        <tr><td>Giá thuê dự kiến mỗi tuần</td><td class="amount">$1,000</td><td class="amount vnd-col">18,500,000</td></tr>
+        <tr class="subtotal"><td>Thu nhập thuê gộp mỗi năm (52 tuần)</td><td class="amount">$52,000</td><td class="amount vnd-col">962,000,000</td></tr>
+        <tr><td>Trừ phí quản lý cho thuê 6%</td><td class="amount">−$3,120</td><td class="amount vnd-col">−57,720,000</td></tr>
+        <tr><td>Trừ chi phí sở hữu hàng năm</td><td class="amount">−$7,700</td><td class="amount vnd-col">−142,450,000</td></tr>
+        <tr><td>Landlord insurance</td><td class="amount">Chưa xác định</td><td class="amount vnd-col">Chưa xác định</td></tr>
+        <tr class="metric-total"><td>Còn lại mỗi năm (chưa gồm landlord insurance)</td><td class="amount">$41,180</td><td class="amount vnd-col">761,830,000</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <footer class="footer-note">
+    <p>Tài liệu thông tin dành cho khách hàng, không phải tư vấn tài chính. Các số liệu là dự kiến tại thời điểm lập, cần được xác nhận trong hợp đồng, council rates notice và settlement statement. VND quy đổi theo 1 AUD = 18,500.</p>
+    <span class="brand">Rivera · rivera.au</span>
+    <span class="page-number">02 / 02</span>
+  </footer>
+</article>
+
+</body>
+</html>

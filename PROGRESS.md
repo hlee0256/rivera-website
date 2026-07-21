@@ -54,14 +54,18 @@ Deployed on **Vercel** from `main`; **live on the custom domain `https://rivera.
 (landing, featuring AURA), `projects.html` (7-project collection), `about.html`, `map.html`,
 `insights.html` + insight articles, `enquire.html`, `guide.html`, and 7 project detail pages.
 AURA is the deliberately bespoke flagship; the other detail pages follow the shared `.pd-*`
-template. Two standalone, `noindex`, VI-only client documents also live in the repo (not linked
-from the site): `380-melbourne-so-sanh.html` and `canopy-van-hanh.html` (Canopy House owner
-proposal, 2026-07-03).
+template. Three standalone, `noindex`, VI-only client documents also live in the repo (not linked
+from the site): `380-melbourne-so-sanh.html`, `canopy-van-hanh.html` (Canopy House owner
+proposal, 2026-07-03) and `can-1704-chi-tiet-tai-chinh.html` (A4 financial summary for
+apartment 1704, 2026-07-21; reusable skeleton in `templates/bang-gia-template.html`).
 
 ## Open threads
 
 - ~~`about.html` placeholder founder "Elena"~~ — **done (2026-06-30):** removed; story is now an anonymous practice story, no name/signature/portrait. Stats set to 10 yrs · 100+ families · 50+ suburbs.
 - ~~Contact email `hello@rivera.estate`~~ — **done (2026-06-30):** now `info.riveraau@gmail.com` site-wide, with VN +84 782 067 555 / AUS +61 450 151 686 in every footer. **Still open:** the `index.html` enquiry form `YOUR_FORM_ID` (Formspree id) is unset; verify the Zalo deep-link (`zalo.me/0782067555`) resolves.
+- `can-1704-chi-tiet-tai-chinh.html`: the source brief named no project/development for
+  unit 1704, so the doc header carries only unit + level. Add the project name (and address)
+  once the owner confirms which development it is.
 - AU real-estate legals still missing: agent licence number, agency details, privacy policy. (About-page credentials copy softened on 2026-06-30 to avoid an unverifiable REIV-membership claim until confirmed.)
 - Map (`map.html` / `map-data.js`) and the landing teaser: keep in sync as projects change.
 - ~~Domain not yet pointed~~ — **done:** `rivera.au` + `www.rivera.au` are pointed and serving

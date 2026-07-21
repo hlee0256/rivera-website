@@ -6,6 +6,22 @@ task, add one short entry to the top.
 
 ---
 
+### 2026-07-21 · Claude · Client doc: bảng thông tin tài chính căn 1704 + template bảng giá
+- Reviewed and rebuilt the ChatGPT-made price sheet for apartment 1704 as
+  `can-1704-chi-tiet-tai-chinh.html` (A4 two-page print doc, VI-only, noindex). Changes vs the
+  source: Rivera brandbar + logo added (it had no branding), Manrope + Cormorant Garamond
+  actually loaded with serif accents (it declared Manrope but never loaded a font), EN labels
+  ("Owner benefit", "Settlement plan"...) rewritten in native VI, "discount" → "chiết khấu",
+  em-dashes removed, and the dark sales-style benefit band restyled as a neutral "Các khoản
+  hỗ trợ" strip (owner: information doc, not a sales doc). All AUD figures and 18,500-rate VND
+  conversions re-verified by script; every number was correct.
+- Fixed a print bug inherited from the source: the ≤860px mobile media query also applied to
+  the ~794px A4 print layout, stacking the grids and spilling the PDF to 3 pages. Scoped it to
+  `screen`; the PDF is now exactly 2 pages.
+- Added `templates/bang-gia-template.html`: the same doc with `{{TOKEN}}` placeholders and a
+  fill-in / math-check / PDF-export instruction header for future price sheets.
+- Open: the source brief named no project for unit 1704; header carries unit + level only.
+
 ### 2026-07-03 · Claude · Canopy proposal v9: consistent ✓/✕ table markers
 - Owner: the ✓-vs-faint-dot mix looked inconsistent. Replaced the faint ring with a matched
   cross so every cell is the same-size badge: **solid brown ✓ = Chủ sở hữu · muted ✕ = không
