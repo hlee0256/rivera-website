@@ -6,6 +6,14 @@ task, add one short entry to the top.
 
 ---
 
+### 2026-07-26 · Claude · Vendored two design skills into the repo (tooling, no site change)
+- Installed **Impeccable** (`pbakaus/impeccable`, `/impeccable <command>`) and **Taste Skill**
+  (`Leonxlnx/taste-skill`, install name `design-taste-frontend`) into `.claude/skills/`.
+- `.gitignore` now reads `.claude/*` + `!.claude/skills/`, so the skills are committed and every
+  machine/session picks them up, while `settings.local.json` and the rest of `.claude/` stay local.
+- Note for future agents: these are *generic* frontend-design skills. `Aura-design.md` and the
+  Rivera token system still win on any conflict. Nothing about the site itself changed.
+
 ### 2026-07-03 · Claude · Canopy proposal v9: consistent ✓/✕ table markers
 - Owner: the ✓-vs-faint-dot mix looked inconsistent. Replaced the faint ring with a matched
   cross so every cell is the same-size badge: **solid brown ✓ = Chủ sở hữu · muted ✕ = không

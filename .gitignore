@@ -11,7 +11,10 @@ Projects/
 _sheets/
 
 # --- Editor / tooling ---
-.claude/
+# .claude/ stays local EXCEPT the installed design skills, which are vendored
+# so every machine/session gets the same /impeccable + taste-skill behaviour.
+.claude/*
+!.claude/skills/
 .vscode/
 .idea/
 
