@@ -13,6 +13,9 @@ task, add one short entry to the top.
   machine/session picks them up, while `settings.local.json` and the rest of `.claude/` stay local.
 - Note for future agents: these are *generic* frontend-design skills. `Aura-design.md` and the
   Rivera token system still win on any conflict. Nothing about the site itself changed.
+- Owner-facing handover doc (Vietnamese, zero-knowledge): **`BAN-GIAO-SKILLS.md`** at the repo
+  root. Covers the mechanism, locations, all 23 commands, usage ideas, and the three decisions
+  still open (merge to `main`, enable the detector hook, whether to run `/impeccable init`).
 
 ### 2026-07-03 · Claude · Canopy proposal v9: consistent ✓/✕ table markers
 - Owner: the ✓-vs-faint-dot mix looked inconsistent. Replaced the faint ring with a matched
