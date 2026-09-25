@@ -387,17 +387,30 @@
     window.addEventListener('resize',function(){ map.invalidateSize(); });
   }
 
-  // ---- enquire form: POST to Formspree, fall back to on-page thanks ----
+  // ---- enquire form: same Apps Script backend as enquire.html ----
+  var FORM_ENDPOINT = "https://script.google.com/macros/s/AKfycbwurdZI9R-458lfe4Aelh67iBZJ4-8ZAxO4iTIANxkyLkSsqjkrTHJb0fN8nv8NhV52Qw/exec";
   document.querySelectorAll('form.efrm').forEach(function(f){
     f.addEventListener('submit',function(e){
       e.preventDefault();
       var email=f.querySelector('input[type=email]');
-      if(!email.value||email.value.indexOf('@')===-1){email.focus();email.closest('.fld').style.borderColor='var(--brown)';return;}
-      var action=f.getAttribute('action')||'';
-      if(!action||action.indexOf('YOUR_FORM_ID')!==-1){f.classList.add('sent');return;}
-      var data=new FormData(f);
-      fetch(action,{method:'POST',body:data,headers:{'Accept':'application/json'}})
-        .then(function(){f.classList.add('sent');})
+      var nameI=f.querySelector('input[name=name]');
+      if(!email||!email.value||email.value.indexOf('@')===-1){if(email){email.focus();if(email.closest('.fld'))email.closest('.fld').style.borderColor='var(--brown)';}return;}
+      var looking=((f.querySelector('[name=looking]')||{}).value||'').trim();
+      var message=((f.querySelector('[name=message]')||{}).value||'').trim();
+      var payload={
+        name:     ((nameI&&nameI.value)||'').trim(),
+        phone:    '',
+        email:    email.value.trim(),
+        interest: looking ? [looking] : ['unsure'],
+        intent:   'exploring',
+        message:  message
+      };
+      fetch(FORM_ENDPOINT,{
+        method:'POST',
+        mode:'no-cors',
+        headers:{'Content-Type':'text/plain;charset=utf-8'},
+        body:JSON.stringify(payload)
+      }).then(function(){f.classList.add('sent');})
         .catch(function(){f.classList.add('sent');});
     });
   });

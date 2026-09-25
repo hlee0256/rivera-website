@@ -6,6 +6,14 @@ task, add one short entry to the top.
 
 ---
 
+### 2026-09-25 · Claude · Deploy the landing enquiry form fix
+- The 2026-08-15 form fix below was never pushed; live `index.html` still pointed at Formspree `YOUR_FORM_ID`, so homepage enquiries were silently dropped. Now deployed on its own (Map 2.0 stays local).
+
+### 2026-08-15 · New Bot · Wire landing enquiry form to Apps Script
+- **Landing form actually sends.** `index.html` / `index-380.html` `.efrm` no longer points at Formspree `YOUR_FORM_ID` (which `app.js` treated as a fake success). It now POSTs JSON (`name`, empty `phone`, `email`, `interest` from the looking field, `intent: exploring`, `message`) to the same Google Apps Script web app as `enquire.html`.
+- `Aura-design.md` §4.4 example dropped the Formspree action so it matches production.
+- **Follow-ups:** Zalo deep-link still to verify; AU licence / privacy still missing.
+
 ### 2026-07-03 · Claude · Canopy proposal v9: consistent ✓/✕ table markers
 - Owner: the ✓-vs-faint-dot mix looked inconsistent. Replaced the faint ring with a matched
   cross so every cell is the same-size badge: **solid brown ✓ = Chủ sở hữu · muted ✕ = không

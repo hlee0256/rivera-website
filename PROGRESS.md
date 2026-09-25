@@ -61,7 +61,8 @@ proposal, 2026-07-03).
 ## Open threads
 
 - ~~`about.html` placeholder founder "Elena"~~ — **done (2026-06-30):** removed; story is now an anonymous practice story, no name/signature/portrait. Stats set to 10 yrs · 100+ families · 50+ suburbs.
-- ~~Contact email `hello@rivera.estate`~~ — **done (2026-06-30):** now `info.riveraau@gmail.com` site-wide, with VN +84 782 067 555 / AUS +61 450 151 686 in every footer. **Still open:** the `index.html` enquiry form `YOUR_FORM_ID` (Formspree id) is unset; verify the Zalo deep-link (`zalo.me/0782067555`) resolves.
+- ~~Contact email `hello@rivera.estate`~~ — **done (2026-06-30):** now `info.riveraau@gmail.com` site-wide, with VN +84 782 067 555 / AUS +61 450 151 686 in every footer.
+- ~~`index.html` enquiry form `YOUR_FORM_ID`~~ — **done (2026-08-15):** landing `.efrm` now POSTs to the same Google Apps Script backend as `enquire.html` (no Formspree). Homepage has no phone field, so that column lands empty; `looking` maps to `interest`. **Still open:** verify the Zalo deep-link (`zalo.me/0782067555`) resolves.
 - AU real-estate legals still missing: agent licence number, agency details, privacy policy. (About-page credentials copy softened on 2026-06-30 to avoid an unverifiable REIV-membership claim until confirmed.)
 - Map (`map.html` / `map-data.js`) and the landing teaser: keep in sync as projects change.
 - ~~Domain not yet pointed~~ — **done:** `rivera.au` + `www.rivera.au` are pointed and serving

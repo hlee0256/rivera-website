@@ -470,7 +470,7 @@ form.efrm.sent .fld,form.efrm.sent .btn{ display:none; }   /* on success */
 form.efrm.sent .thanks{ display:block; }
 ```
 ```html
-<form class="efrm" action="https://formspree.io/f/YOUR_FORM_ID" method="POST" novalidate>
+<form class="efrm" method="POST" novalidate>
   <div class="fld"><input type="text"  name="name"  placeholder="Your name" required /></div>
   <div class="fld"><input type="email" name="email" placeholder="Email address" required /></div>
   <div class="fld"><textarea name="message" rows="3" placeholder="Anything you'd like us to know"></textarea></div>
