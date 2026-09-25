@@ -639,9 +639,15 @@
       function fly(key,to){
         var v=vids[key];
         if(m2Reduce||!v){ land(to); return; }
-        busy=true; chip.classList.add('is-flying'); label(key==='intro'?'intro':'flying',to);
+        busy=true; chip.classList.remove('is-landed'); chip.classList.add('is-flying'); label(key==='intro'?'intro':'flying',to);
         zoneBtns.forEach(function(b){ b.disabled=true; });
-        var done=false, finish=function(){ if(done) return; done=true; v.onended=null; land(to); };
+        // Watchdog: a visible page whose flight stalls (autoplay policy, a dropped stream) is nudged,
+        // then landed, so the buttons can never stay locked.
+        var stalls=0, dog=setInterval(function(){
+          if(document.hidden||v.ended) return;
+          if(v.paused){ stalls++; var q=v.play(); if(q&&q.catch) q.catch(function(){}); if(stalls>=3) finish(); } else stalls=0;
+        },1000);
+        var done=false, finish=function(){ if(done) return; done=true; clearInterval(dog); v.onended=null; land(to); };
         v.onended=finish;
         v.onerror=finish;
         var show=function(){ v.classList.add('on'); Object.keys(stills).forEach(function(k){ stills[k].classList.remove('on'); }); };
