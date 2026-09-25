@@ -1072,7 +1072,7 @@ footer{background:var(--espresso);color:var(--sand);padding:80px 0 40px}
 .m2-fstill{transition-duration:.6s}
 .m2-fv.on,.m2-fstill.on{opacity:1}
 .m2-hero.m2-flying .m2-dawn,.m2-hero.m2-flying .m2-dusk,.m2-hero.m2-flying .m2-night,.m2-hero.m2-flying .m2-glow,.m2-hero.m2-flying .m2-haze,.m2-hero.m2-flying .m2-stars{opacity:0!important}
-.m2-hero.m2-flying .m2-sky img{opacity:0}
+.m2-hero.m2-flying .m2-sky picture img{opacity:0}
 .m2-zonechip .m2-zonebar{gap:4px;padding:5px}
 .m2-zonechip .m2-zonebar,.m2-zonechip .m2-zoneres{opacity:0;pointer-events:none;transform:translateY(-4px);transition:opacity .45s ease,transform .45s ease}
 .m2-zonechip.is-landed .m2-zonebar,.m2-zonechip.is-landed .m2-zoneres{opacity:1;pointer-events:auto;transform:none}
