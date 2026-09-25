@@ -17,10 +17,12 @@
      descEn/descVi   one calm line of description
      status          OPTIONAL {en,vi} — availability, shown for projects
      url             OPTIONAL — only projects carry a listing link
+     img, suburb, facts   OPTIONAL — used by the Map 2.0 residence rail (map.html)
 ---------------------------------------------------------- */
 window.MAP_LOCATIONS=[
   // --- Projects (the brand-brown heroes) ---
   { id:'aura-melbourne-square', cat:'project', url:'aura-melbourne-square.html',
+    img:'images/aura-melbourne-square/hero-poster.jpg', suburb:'Southbank',
     nameEn:'AURA at Melbourne Square', nameVi:'AURA tại Melbourne Square',
     lat:-37.8268, lng:144.9645,
     address:'7 Hoff Boulevard, Southbank VIC 3006',
@@ -28,6 +30,7 @@ window.MAP_LOCATIONS=[
     descVi:'Toà tháp cửa ngõ 67 tầng của Melbourne Square, ôm quanh công viên Kennedy rộng 3.745 m².',
     status:{ en:'Pre-construction · selling now', vi:'Chưa khởi công · đang mở bán' } },
   { id:'collins-wharf-aluna', cat:'project', url:'collins-wharf-aluna.html',
+    img:'images/collins-wharf-aluna/hero-poster.jpg', suburb:'Docklands',
     nameEn:'Collins Wharf · Aluna', nameVi:'Collins Wharf · Aluna',
     lat:-37.8202, lng:144.9395,
     address:'989 Collins Street, Docklands VIC',
@@ -35,6 +38,7 @@ window.MAP_LOCATIONS=[
     descVi:'Căn hộ ven sông trên Collins Wharf, giữa sông Yarra và cảng Victoria.',
     status:{ en:'Off the plan · 2029', vi:'Theo bản vẽ · 2029' } },
   { id:'collins-wharf-ancora', cat:'project', url:'collins-wharf-ancora.html',
+    img:'images/collins-wharf-ancora/hero-poster.jpg', suburb:'Docklands',
     nameEn:'Collins Wharf · Ancora', nameVi:'Collins Wharf · Ancora',
     lat:-37.8222, lng:144.9443,
     address:'971 Collins Street, Docklands VIC',
@@ -42,6 +46,7 @@ window.MAP_LOCATIONS=[
     descVi:'Căn hộ ven nước của Lendlease, nơi phố Collins gặp cảng Victoria Harbour.',
     status:{ en:'Off the plan · 2027', vi:'Theo bản vẽ · 2027' } },
   { id:'671-chapel-street', cat:'project', url:'671-chapel-street.html',
+    img:'images/671-chapel-street/hero-poster.jpg', suburb:'South Yarra',
     nameEn:'671 Chapel Street', nameVi:'671 Chapel Street',
     lat:-37.8380, lng:144.9923,   // approximate (northern end of Chapel St, Como precinct)
     address:'671 Chapel Street, South Yarra VIC',
@@ -49,6 +54,7 @@ window.MAP_LOCATIONS=[
     descVi:'Căn hộ South Yarra của CASA, tầm nhìn thoáng ra sông Yarra và đường chân trời thành phố.',
     status:{ en:'Off the plan · 2028', vi:'Theo bản vẽ · 2028' } },
   { id:'380-melbourne', cat:'project', url:'380-melbourne.html',
+    img:'images/380-melbourne/hero-poster.jpg', suburb:'Melbourne CBD',
     nameEn:'380 Melbourne', nameVi:'380 Melbourne',
     lat:-37.8118, lng:144.9601,
     address:'380 Lonsdale Street, Melbourne VIC',
@@ -56,6 +62,7 @@ window.MAP_LOCATIONS=[
     descVi:'Căn hộ trung tâm, vài bước tới Melbourne Central, RMIT và chợ Queen Victoria.',
     status:{ en:'Move-in ready', vi:'Sẵn sàng dọn vào' } },
   { id:'aspire', cat:'project', url:'aspire.html',
+    img:'images/aspire/hero-poster.jpg', suburb:'Melbourne CBD',
     nameEn:'Aspire Melbourne', nameVi:'Aspire Melbourne',
     lat:-37.8133, lng:144.9556,
     address:'301 King Street, Melbourne VIC',
@@ -63,12 +70,42 @@ window.MAP_LOCATIONS=[
     descVi:'Căn hộ tầng cao ở rìa tây yên tĩnh của lưới phố.',
     status:{ en:'Move-in ready', vi:'Sẵn sàng dọn vào' } },
   { id:'piccolo-house', cat:'project', url:'piccolo-house.html',
+    img:'images/piccolo-house/hero-poster.jpg', suburb:'Kew',
     nameEn:'Piccolo House', nameVi:'Piccolo House',
     lat:-37.8042, lng:145.0268,   // approximate (Barry St, near Studley Park Rd, Kew)
     address:'18 Barry Street, Kew VIC',
     descEn:'Five low-rise garden pavilions by Woods Bagot in leafy Kew, with a resort-style wellness level.',
     descVi:'Năm toà pavilion thấp tầng do Woods Bagot thiết kế giữa Kew xanh mát, với một tầng wellness chuẩn resort.',
     status:{ en:'Off the plan · 2027', vi:'Theo bản vẽ · 2027' } },
+
+  // --- New to the collection (2026-09): map entries first; detail pages to follow ---
+  { id:'640-bourke-street', cat:'project',
+    nameEn:'640 Bourke Street', nameVi:'640 Bourke Street',
+    lat:-37.8163, lng:144.9540,   // approximate (Bourke & Spencer corner, west end)
+    address:'640 Bourke Street, Melbourne VIC 3000',
+    suburb:'Melbourne CBD',
+    descEn:'A 68-level tower by Far East Consortium and Rothelowman, rising from the heritage Eliza Tinsley warehouse, two hundred metres from Southern Cross.',
+    descVi:'Toà tháp 68 tầng của Far East Consortium và Rothelowman, vươn lên từ kho di sản Eliza Tinsley, cách ga Southern Cross hai trăm mét.',
+    facts:{ en:'68 levels · 629 residences · from $670,000', vi:'68 tầng · 629 căn · từ $670.000' },
+    status:{ en:'Off the plan · selling now', vi:'Theo bản vẽ · đang mở bán' } },
+  { id:'623-collins-street', cat:'project',
+    nameEn:'623 Collins Street', nameVi:'623 Collins Street',
+    lat:-37.8192, lng:144.9546,   // approximate (607–623 Collins, between King and Spencer)
+    address:'607–623 Collins Street, Melbourne VIC 3000',
+    suburb:'Melbourne CBD',
+    descEn:'Sterling Global reimagines the 1924 State Savings Bank on Collins Street: 42 levels, 320 residences, interiors by Fiona Lynch.',
+    descVi:'Sterling Global làm mới toà State Savings Bank năm 1924 trên phố Collins: 42 tầng, 320 căn, nội thất do Fiona Lynch thiết kế.',
+    facts:{ en:'42 levels · 320 residences · from $616,000', vi:'42 tầng · 320 căn · từ $616.000' },
+    status:{ en:'Off the plan · est. 2029', vi:'Theo bản vẽ · dự kiến 2029' } },
+  { id:'atlas-melbourne', cat:'project',
+    nameEn:'Atlas Melbourne', nameVi:'Atlas Melbourne',
+    lat:-37.8104, lng:144.9580,   // approximate (La Trobe & Queen corner)
+    address:'383 La Trobe Street, Melbourne VIC 3000',
+    suburb:'Melbourne CBD',
+    descEn:'SP Setia\u2019s 71-level tower by Cox Architecture on La Trobe Street, a short walk from Flagstaff Gardens and Queen Victoria Market.',
+    descVi:'Toà tháp 71 tầng của SP Setia do Cox Architecture thiết kế trên phố La Trobe, đi bộ vài phút tới vườn Flagstaff và chợ Queen Victoria.',
+    facts:{ en:'71 levels · 797 residences · price on application', vi:'71 tầng · 797 căn · giá theo yêu cầu' },
+    status:{ en:'Off the plan · late 2029', vi:'Theo bản vẽ · cuối 2029' } },
 
   // --- Universities ---
   { id:'unimelb', cat:'university',

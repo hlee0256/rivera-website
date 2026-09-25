@@ -4,18 +4,19 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Map — Rivera</title>
-<meta name="description" content="A map of Melbourne showing where each Rivera residence sits, and how close it stands to the city's universities, library, shopping and stations." />
+<meta name="description" content="Melbourne from dawn to dark: where each Rivera residence sits, the precincts around it, the city in numbers, and what is moving in the market right now." />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&family=Instrument+Serif:ital@0;1&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500;1,600&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
 <link rel="stylesheet" href="styles.css" />
 <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+<link rel="preload" as="image" href="images/map/melbourne-skyline.jpg" media="(min-width: 761px)" />
 </head>
-<body>
+<body id="map2">
 
-<!-- NAV (starts solid on a light page) -->
-<header class="nav onlight" id="nav">
+<!-- NAV (transparent over the dark sky, solid on scroll) -->
+<header class="nav" id="nav">
   <div class="wrap nav-in">
     <a class="logo" href="index.html" aria-label="Rivera — Real Estate">RIVER<svg class="ra" viewBox="0 0 222.5 278" aria-hidden="true"><path fill="currentColor" fill-rule="evenodd" d="M152.8 2.0L171.6 2.0L174.6 4.4L187.5 78.6L187.9 85.4L197.5 135.6L198.9 148.4L200.5 153.6L209.9 211.4L211.5 216.6L212.9 229.4L214.5 234.6L216.9 253.4L219.5 264.6L220.5 274.2L219.2 275.9L172.8 276.0L170.0 275.0L168.9 272.4L158.5 211.6L156.2 205.6L145.1 195.4L133.1 187.3L125.6 183.6L113.6 179.6L101.6 177.0L88.8 177.0L76.8 179.6L69.3 182.3L57.3 189.4L52.2 194.6L47.0 203.6L9.1 274.9L7.6 276.0L3.8 276.0L2.1 274.8L5.0 267.6L33.4 217.4L66.0 156.6L71.4 148.4L76.0 138.6L99.4 97.4L122.0 54.6L127.4 46.4L147.0 9.6L152.2 2.1ZM129.1 51.8L133.5 70.6L134.9 83.4L136.5 88.6L145.9 146.4L147.5 151.6L147.9 158.4L150.5 169.6L155.6 202.3L146.1 192.4L128.1 179.3L120.6 175.6L107.1 171.2L99.6 170.0L85.3 170.2L74.8 172.6L62.3 178.6L62.6 176.4L69.0 163.6L128.8 51.5Z"/></svg></a>
     <button class="burger" id="burger" aria-label="Menu / Trình đơn"><span></span><span></span><span></span></button>
@@ -32,22 +33,78 @@
   </div>
 </header>
 
-<!-- PAGE HEADER -->
-<section class="pagehead">
-  <div class="wrap">
-    <span class="eyebrow" data-en="Orientation" data-vi="Định vị">Orientation</span>
-    <h1><span data-en="Find your place " data-vi="Tìm chỗ của bạn ">Find your place </span><span class="serif" data-en="in the city." data-vi="giữa lòng phố thị.">in the city.</span></h1>
-    <p data-en="See exactly where each Rivera residence sits in Melbourne, and how close it stands to the city's universities, library, shopping and stations. Hover a marker for a quick read, or open it for the full detail." data-vi="Xem chính xác mỗi dự án của Rivera nằm ở đâu tại Melbourne, và gần đến mức nào với các trường đại học, thư viện, khu mua sắm và nhà ga. Di chuột qua một điểm để xem nhanh, hoặc mở ra để biết chi tiết.">See exactly where each Rivera residence sits in Melbourne, and how close it stands to the city's universities, library, shopping and stations. Hover a marker for a quick read, or open it for the full detail.</p>
+<!-- HERO: one photograph of Melbourne, graded through a whole day by app.js -->
+<section class="m2-hero" id="m2-hero">
+  <div class="m2-sky" aria-hidden="true">
+    <picture>
+      <source media="(max-width: 760px)" srcset="images/map/melbourne-skyline-m.jpg" />
+      <img src="images/map/melbourne-skyline.jpg" alt="" width="2000" height="1333" decoding="async" fetchpriority="high" />
+    </picture>
+    <!-- THE FLIGHT: a 1:1 Melbourne (City of Melbourne footprints + 2020 photomesh), rendered in Blender.
+         Intro flies from a plane window into the CBD; the precinct buttons fly between the three stops. -->
+    <div class="m2-flight" id="m2-flight">
+      <img class="m2-fstill" data-zone="cbd" src="images/map/flight/still_cbd.jpg" alt="" decoding="async" />
+      <img class="m2-fstill" data-zone="docklands" src="images/map/flight/still_docklands.jpg" alt="" decoding="async" />
+      <img class="m2-fstill" data-zone="southbank" src="images/map/flight/still_southbank.jpg" alt="" decoding="async" />
+      <video class="m2-fv" data-leg="intro" src="images/map/flight/00_intro.mp4" poster="images/map/flight/still_window.jpg" muted playsinline preload="auto"></video>
+      <video class="m2-fv" data-leg="cbd>docklands" src="images/map/flight/cbd-docklands.mp4" muted playsinline preload="metadata"></video>
+      <video class="m2-fv" data-leg="docklands>southbank" src="images/map/flight/docklands-southbank.mp4" muted playsinline preload="metadata"></video>
+      <video class="m2-fv" data-leg="southbank>cbd" src="images/map/flight/southbank-cbd.mp4" muted playsinline preload="metadata"></video>
+      <video class="m2-fv" data-leg="docklands>cbd" src="images/map/flight/docklands-cbd.mp4" muted playsinline preload="none"></video>
+      <video class="m2-fv" data-leg="southbank>docklands" src="images/map/flight/southbank-docklands.mp4" muted playsinline preload="none"></video>
+      <video class="m2-fv" data-leg="cbd>southbank" src="images/map/flight/cbd-southbank.mp4" muted playsinline preload="none"></video>
+    </div>
+    <div class="m2-layer m2-dawn"></div>
+    <div class="m2-layer m2-glow"></div>
+    <div class="m2-layer m2-dusk"></div>
+    <div class="m2-layer m2-night"></div>
+    <div class="m2-layer m2-haze"></div>
+    <div class="m2-layer m2-scrim"></div>
+    <div class="m2-layer m2-stars" id="m2-stars"></div>
+  </div>
+
+  <div class="m2-skychip m2-zonechip" id="m2-zonechip" aria-live="polite">
+    <div class="row">
+      <span class="dot" aria-hidden="true"></span>
+      <span class="lab" id="m2-zone-label" data-en="Approaching" data-vi="Đang bay vào">Approaching</span>
+      <span class="clk" id="m2-zone-name">Melbourne</span>
+    </div>
+    <div class="row m2-zonebar" id="m2-zonebar" role="group" aria-label="Fly to a precinct / Bay tới một khu">
+      <button class="m2-zone" type="button" data-zone="cbd" aria-pressed="false"><span data-en="CBD" data-vi="Trung tâm">CBD</span></button>
+      <button class="m2-zone" type="button" data-zone="docklands" aria-pressed="false">Docklands</button>
+      <button class="m2-zone" type="button" data-zone="southbank" aria-pressed="false">Southbank</button>
+    </div>
+    <div class="m2-zoneres" id="m2-zoneres"></div>
+    <button class="m2-skip" id="m2-skip" type="button"><span data-en="Skip the flight" data-vi="Bỏ qua đoạn bay">Skip the flight</span></button>
+  </div>
+
+  <div class="wrap m2-hero-in">
+    <span class="eyebrow" data-en="Orientation · Melbourne" data-vi="Định vị · Melbourne">Orientation · Melbourne</span>
+    <h1><span data-en="Fly it first, " data-vi="Bay một vòng, ">Fly it first, </span><span class="serif" data-en="before you land." data-vi="trước khi đặt chân.">before you land.</span></h1>
+    <p class="sub" data-en="From the plane window down into the Melbourne CBD, then across to Docklands and Southbank. Every Rivera residence sits exactly where it stands. Pick a precinct to fly there, or scroll to open the map." data-vi="Từ cửa sổ máy bay xuống trung tâm Melbourne, rồi lướt sang Docklands và Southbank. Mỗi nơi ở của Rivera đặt đúng vị trí thật của nó. Chọn một khu để bay tới, hoặc cuộn xuống để mở bản đồ.">From the plane window down into the Melbourne CBD, then across to Docklands and Southbank. Every Rivera residence sits exactly where it stands. Pick a precinct to fly there, or scroll to open the map.</p>
+    <div class="m2-hero-foot">
+      <div class="m2-hero-stats">
+        <div class="m2-hs"><div class="n" data-count="project">10</div><div class="l" data-en="Residences" data-vi="Nơi ở">Residences</div></div>
+        <div class="m2-hs"><div class="n" data-count="university">5</div><div class="l" data-en="Universities" data-vi="Đại học">Universities</div></div>
+        <div class="m2-hs"><div class="n" data-count="transit">7</div><div class="l" data-en="Stations" data-vi="Nhà ga">Stations</div></div>
+        <div class="m2-hs"><div class="n" data-count="landmark">6</div><div class="l" data-en="Landmarks" data-vi="Địa danh">Landmarks</div></div>
+      </div>
+      <a class="m2-cue" href="#m2-map"><span data-en="Open the map" data-vi="Mở bản đồ">Open the map</span><i aria-hidden="true"></i></a>
+    </div>
   </div>
 </section>
 
-<!-- INTERACTIVE MAP -->
-<section class="cbd-sec">
+<!-- THE MAP + RESIDENCE RAIL -->
+<section class="m2-mapsec" id="m2-map">
   <div class="wrap">
+    <div class="sec-top m2-sec-top">
+      <div>
+        <span class="eyebrow" data-en="The interactive map" data-vi="Bản đồ tương tác">The interactive map</span>
+        <h2><span data-en="Every residence, " data-vi="Mỗi dự án, ">Every residence, </span><span class="serif" data-en="in its true place." data-vi="đúng vị trí của nó.">in its true place.</span></h2>
+      </div>
+      <p data-en="Pick a residence from the list, or type its name and the map flies there. Switch on transit, shopping and landmarks to see real distances, not brochure ones." data-vi="Chọn một dự án trong danh sách, hoặc gõ tên để bản đồ bay tới. Bật thêm nhóm giao thông, mua sắm và địa danh để thấy khoảng cách thật, không phải khoảng cách trong tờ rơi.">Pick a residence from the list, or type its name and the map flies there. Switch on transit, shopping and landmarks to see real distances, not brochure ones.</p>
+    </div>
 
-    <!-- TOP ROW: search a residence (primary) on the left, view presets on the right.
-         SECOND ROW: category filters (toggle marker layers). Zoom/pan stays free via the
-         mouse wheel, the +/- control, or drag. -->
     <div class="rv-toolbar">
       <div class="rv-search" id="rv-search">
         <span class="rv-search-ic" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg></span>
@@ -77,10 +134,175 @@
       <button class="filt" data-cat="landmark"><span class="filt-ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3.2 9.5 12 4.2l8.8 5.3"/><path d="M5.5 10v8M9.2 10v8M14.8 10v8M18.5 10v8"/><path d="M3.5 20.5h17"/></svg></span><span data-en="Landmarks" data-vi="Địa danh">Landmarks</span></button>
     </div>
 
-    <p class="rv-hint" id="rv-hint"><span class="rv-hint-ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 20V5"/><path d="M6 11l6-6 6 6"/></svg></span><span data-en="Tap a category above to add it — transit, shopping and landmarks start hidden." data-vi="Chạm vào một nhóm phía trên để thêm — giao thông, mua sắm và địa danh đang ẩn lúc đầu.">Tap a category above to add it — transit, shopping and landmarks start hidden.</span></p>
+    <p class="rv-hint" id="rv-hint"><span class="rv-hint-ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 20V5"/><path d="M6 11l6-6 6 6"/></svg></span><span data-en="Tap a category above to add it. Transit, shopping and landmarks start hidden." data-vi="Chạm vào một nhóm phía trên để thêm. Giao thông, mua sắm và địa danh đang ẩn lúc đầu.">Tap a category above to add it. Transit, shopping and landmarks start hidden.</span></p>
 
-    <div class="rv-map" id="rivera-map" role="application" aria-label="Map of Melbourne with Rivera projects and city landmarks / Bản đồ Melbourne với các dự án Rivera và địa danh thành phố"></div>
+    <div class="m2-mapgrid">
+      <div class="rv-map" id="rivera-map" role="application" aria-label="Map of Melbourne with Rivera projects and city landmarks / Bản đồ Melbourne với các dự án Rivera và địa danh thành phố"></div>
+      <aside class="m2-rail" id="m2-rail" aria-label="Rivera residences / Các dự án Rivera">
+        <div class="m2-rail-h">
+          <span class="eyebrow" data-en="Rivera residences" data-vi="Nơi ở của Rivera">Rivera residences</span>
+          <span class="cnt" id="m2-count">10</span>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
 
+<!-- THE CITY IN NUMBERS (dark band) -->
+<section class="stats m2-stats">
+  <div class="wrap">
+    <div class="m2-band-top">
+      <div>
+        <span class="eyebrow light" data-en="Melbourne in numbers" data-vi="Melbourne trong vài con số">Melbourne in numbers</span>
+        <h2 style="margin-top:14px"><span data-en="A city that " data-vi="Một thành phố ">A city that </span><span class="serif" data-en="keeps growing." data-vi="đang lớn thêm mỗi ngày.">keeps growing.</span></h2>
+      </div>
+      <p data-en="A few figures to size the place you are about to choose a home in, and the pace it moves at." data-vi="Vài con số để hình dung quy mô và nhịp phát triển của nơi bạn sắp chọn nhà.">A few figures to size the place you are about to choose a home in, and the pace it moves at.</p>
+    </div>
+    <div class="grid4">
+      <div class="stat m2-stat"><div class="n"><span data-en="5.44" data-vi="5,44">5.44</span><span class="serif" data-en="m" data-vi="tr">m</span></div><div class="l" data-en="People in Greater Melbourne, June 2025" data-vi="Dân số Greater Melbourne, tháng 6/2025">People in Greater Melbourne, June 2025</div></div>
+      <div class="stat m2-stat"><div class="n"><span class="serif">+</span><span data-en="105k" data-vi="105k">105k</span></div><div class="l" data-en="New residents in a single year, the most of any Australian city" data-vi="Cư dân mới trong một năm, nhiều nhất trong các thành phố Úc">New residents in a single year, the most of any Australian city</div></div>
+      <div class="stat m2-stat"><div class="n">5</div><div class="l" data-en="New Metro Tunnel stations under the city, open since 30 Nov 2025" data-vi="Ga Metro Tunnel mới dưới lòng thành phố, mở từ 30/11/2025">New Metro Tunnel stations under the city, open since 30 Nov 2025</div></div>
+      <div class="stat m2-stat"><div class="n">1837</div><div class="l" data-en="The year the Hoddle Grid was laid out, still the centre today" data-vi="Năm lưới phố Hoddle được quy hoạch, vẫn là trung tâm cho đến hôm nay">The year the Hoddle Grid was laid out, still the centre today</div></div>
+    </div>
+    <p class="m2-src" data-en="Sources: ABS Regional Population 2024–25 (released 31 March 2026); Victoria's Big Build, Metro Tunnel; City of Melbourne. Figures are rounded." data-vi="Nguồn: ABS Regional Population 2024–25 (công bố 31/3/2026); Victoria's Big Build, Metro Tunnel; City of Melbourne. Số liệu đã làm tròn.">Sources: ABS Regional Population 2024–25 (released 31 March 2026); Victoria's Big Build, Metro Tunnel; City of Melbourne. Figures are rounded.</p>
+
+    <div class="m2-ways">
+      <div class="m2-way">
+        <h4 data-en="Tram" data-vi="Tram">Tram</h4>
+        <p data-en="The Free Tram Zone covers the whole grid and Docklands. Rivera's CBD, Southbank and Docklands residences sit inside it or a short walk from its edge." data-vi="Vùng Free Tram Zone phủ trọn lưới phố và Docklands, đi tram không mất tiền. Các dự án của Rivera ở CBD, Southbank và Docklands nằm trong vùng này hoặc cách rìa vài bước chân.">The Free Tram Zone covers the whole grid and Docklands. Rivera's CBD, Southbank and Docklands residences sit inside it or a short walk from its edge.</p>
+      </div>
+      <div class="m2-way">
+        <h4 data-en="Metro Tunnel" data-vi="Metro Tunnel">Metro Tunnel</h4>
+        <p data-en="Five new stations, Arden, Parkville, State Library, Town Hall and Anzac, link the university belt straight through the centre to the Domain, without a change in the City Loop." data-vi="Năm ga mới, Arden, Parkville, State Library, Town Hall và Anzac, nối thẳng vành đai đại học qua trung tâm tới Domain, không cần đổi tàu ở City Loop.">Five new stations, Arden, Parkville, State Library, Town Hall and Anzac, link the university belt straight through the centre to the Domain, without a change in the City Loop.</p>
+      </div>
+      <div class="m2-way">
+        <h4 data-en="Southern Cross" data-vi="Southern Cross">Southern Cross</h4>
+        <p data-en="Regional trains and the SkyBus to Tullamarine leave from Southern Cross. 640 Bourke Street and 623 Collins Street are a few minutes' walk from its doors." data-vi="Tàu liên vùng và xe SkyBus ra sân bay Tullamarine khởi hành từ Southern Cross. 640 Bourke Street và 623 Collins Street cách cửa ga vài phút đi bộ.">Regional trains and the SkyBus to Tullamarine leave from Southern Cross. 640 Bourke Street and 623 Collins Street are a few minutes' walk from its doors.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRECINCTS -->
+<section class="m2-precs">
+  <div class="wrap">
+    <div class="sec-top m2-sec-top">
+      <div>
+        <span class="eyebrow" data-en="The precincts" data-vi="Các khu vực">The precincts</span>
+        <h2><span data-en="Six precincts, " data-vi="Sáu khu vực, ">Six precincts, </span><span class="serif" data-en="six ways to live." data-vi="sáu nhịp sống.">six ways to live.</span></h2>
+      </div>
+      <p data-en="Each has a character of its own. Choose one and the map flies there." data-vi="Mỗi khu có một tính cách riêng. Chọn một khu để bản đồ bay tới đó.">Each has a character of its own. Choose one and the map flies there.</p>
+    </div>
+    <div class="m2-precgrid">
+      <article class="m2-prec">
+        <span class="m2-prec-k">01</span>
+        <h3 data-en="Hoddle Grid · CBD" data-vi="Hoddle Grid · Trung tâm">Hoddle Grid · CBD</h3>
+        <p data-en="The 1837 grid: free trams, the universities, the State Library and the laneway cafés. Five Rivera residences stand inside it." data-vi="Lưới phố từ năm 1837: tram miễn phí, các trường đại học, Thư viện Bang và những con hẻm cà phê. Năm dự án của Rivera nằm ngay trong lưới này.">The 1837 grid: free trams, the universities, the State Library and the laneway cafés. Five Rivera residences stand inside it.</p>
+        <div class="m2-chips"><span class="tag is-res">380 Melbourne</span><span class="tag is-res">Aspire</span><span class="tag is-res">640 Bourke</span><span class="tag is-res">623 Collins</span><span class="tag is-res">Atlas</span></div>
+        <button class="lk" type="button" data-fly="-37.8136,144.9631,15"><span data-en="See on the map" data-vi="Xem trên bản đồ">See on the map</span> <span aria-hidden="true">→</span></button>
+      </article>
+      <article class="m2-prec">
+        <span class="m2-prec-k">02</span>
+        <h3 data-en="Southbank" data-vi="Southbank">Southbank</h3>
+        <p data-en="The south bank of the Yarra: the Arts Centre, NGV, Crown and the new parks of Melbourne Square. A beat quieter than the grid, one bridge away." data-vi="Bờ nam sông Yarra: Arts Centre, NGV, Crown và những công viên mới của Melbourne Square. Yên hơn lưới phố một nhịp, chỉ cách một cây cầu.">The south bank of the Yarra: the Arts Centre, NGV, Crown and the new parks of Melbourne Square. A beat quieter than the grid, one bridge away.</p>
+        <div class="m2-chips"><span class="tag is-res">AURA</span></div>
+        <button class="lk" type="button" data-fly="-37.8252,144.9640,15"><span data-en="See on the map" data-vi="Xem trên bản đồ">See on the map</span> <span aria-hidden="true">→</span></button>
+      </article>
+      <article class="m2-prec">
+        <span class="m2-prec-k">03</span>
+        <h3 data-en="Docklands" data-vi="Docklands">Docklands</h3>
+        <p data-en="Victoria Harbour and Collins Wharf, where Collins Street meets the water. Marvel Stadium, Southern Cross and The District within a walk." data-vi="Cảng Victoria Harbour và Collins Wharf, nơi phố Collins gặp mặt nước. Marvel Stadium, Southern Cross và The District trong tầm đi bộ.">Victoria Harbour and Collins Wharf, where Collins Street meets the water. Marvel Stadium, Southern Cross and The District within a walk.</p>
+        <div class="m2-chips"><span class="tag is-res">Aluna</span><span class="tag is-res">Ancora</span></div>
+        <button class="lk" type="button" data-fly="-37.8212,144.9425,15"><span data-en="See on the map" data-vi="Xem trên bản đồ">See on the map</span> <span aria-hidden="true">→</span></button>
+      </article>
+      <article class="m2-prec">
+        <span class="m2-prec-k">04</span>
+        <h3 data-en="South Yarra" data-vi="South Yarra">South Yarra</h3>
+        <p data-en="Chapel Street, Toorak Road and the Botanic Gardens. The established, well-heeled south-east, close to private schools and the clubs." data-vi="Chapel Street, Toorak Road và Vườn Bách thảo. Khu ở lâu đời và sang trọng ở phía đông nam, gần các trường tư và câu lạc bộ.">Chapel Street, Toorak Road and the Botanic Gardens. The established, well-heeled south-east, close to private schools and the clubs.</p>
+        <div class="m2-chips"><span class="tag is-res">671 Chapel Street</span></div>
+        <button class="lk" type="button" data-fly="-37.8380,144.9923,15"><span data-en="See on the map" data-vi="Xem trên bản đồ">See on the map</span> <span aria-hidden="true">→</span></button>
+      </article>
+      <article class="m2-prec">
+        <span class="m2-prec-k">05</span>
+        <h3 data-en="Kew" data-vi="Kew">Kew</h3>
+        <p data-en="Green hills, gardens and large homes beside Studley Park. A family suburb known for its schools, ten minutes east of the river." data-vi="Đồi xanh, vườn cây và những ngôi nhà lớn bên Studley Park. Khu gia đình nổi tiếng nhờ trường học, cách sông mười phút về phía đông.">Green hills, gardens and large homes beside Studley Park. A family suburb known for its schools, ten minutes east of the river.</p>
+        <div class="m2-chips"><span class="tag is-res">Piccolo House</span></div>
+        <button class="lk" type="button" data-fly="-37.8042,145.0268,15"><span data-en="See on the map" data-vi="Xem trên bản đồ">See on the map</span> <span aria-hidden="true">→</span></button>
+      </article>
+      <article class="m2-prec">
+        <span class="m2-prec-k">06</span>
+        <h3 data-en="Parkville · Carlton" data-vi="Parkville · Carlton">Parkville · Carlton</h3>
+        <p data-en="The university belt: the University of Melbourne, RMIT, the big hospitals and Lygon Street. The new Parkville Station runs straight into the centre." data-vi="Vành đai đại học: University of Melbourne, RMIT, các bệnh viện lớn và Lygon Street. Ga Parkville mới nối thẳng vào trung tâm.">The university belt: the University of Melbourne, RMIT, the big hospitals and Lygon Street. The new Parkville Station runs straight into the centre.</p>
+        <div class="m2-chips"><span class="tag" data-en="University of Melbourne" data-vi="Đại học Melbourne">University of Melbourne</span><span class="tag" data-en="Parkville Station" data-vi="Ga Parkville">Parkville Station</span></div>
+        <button class="lk" type="button" data-fly="-37.7975,144.9610,15"><span data-en="See on the map" data-vi="Xem trên bản đồ">See on the map</span> <span aria-hidden="true">→</span></button>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- PULSE: market snapshot + city news -->
+<section class="m2-pulse">
+  <div class="wrap">
+    <div class="m2-pulsegrid">
+      <div>
+        <span class="eyebrow" data-en="Market · updated September 2026" data-vi="Thị trường · cập nhật 09/2026">Market · updated September 2026</span>
+        <h2><span data-en="The market, " data-vi="Nhịp thị trường ">The market, </span><span class="serif" data-en="as it stands." data-vi="lúc này.">as it stands.</span></h2>
+        <p class="lead" data-en="A few base figures to read any asking price in its proper context. Aggregates, not advice." data-vi="Vài chỉ số nền để đọc giá chào của một dự án trong đúng bối cảnh. Số liệu tổng hợp, không thay cho tư vấn.">A few base figures to read any asking price in its proper context. Aggregates, not advice.</p>
+        <div class="m2-mk"><div class="k"><span data-en="Melbourne dwelling values, July 2026" data-vi="Giá trị nhà ở Melbourne, tháng 7/2026">Melbourne dwelling values, July 2026</span><small data-en="month on month" data-vi="so với tháng trước">month on month</small></div><div class="v down" data-en="−1.2%" data-vi="−1,2%">−1.2%</div></div>
+        <div class="m2-mk"><div class="k"><span data-en="Since the November 2025 peak" data-vi="So với đỉnh tháng 11/2025">Since the November 2025 peak</span><small data-en="eight months of easing, about $46,000 off the median" data-vi="tám tháng hạ nhiệt, giá trung vị giảm khoảng $46.000">eight months of easing, about $46,000 off the median</small></div><div class="v down" data-en="−5.1%" data-vi="−5,1%">−5.1%</div></div>
+        <div class="m2-mk"><div class="k"><span data-en="Apartments since the peak" data-vi="Căn hộ so với đỉnh">Apartments since the peak</span><small data-en="houses fell further, at −6.0%" data-vi="nhà đất giảm sâu hơn, ở mức −6,0%">houses fell further, at −6.0%</small></div><div class="v down" data-en="−3.0%" data-vi="−3,0%">−3.0%</div></div>
+        <div class="m2-mk"><div class="k"><span data-en="RBA cash rate, held in August 2026" data-vi="Lãi suất cơ bản RBA, giữ nguyên tháng 8/2026">RBA cash rate, held in August 2026</span><small data-en="the next decision falls in September" data-vi="kỳ quyết định tiếp theo rơi vào tháng 9">the next decision falls in September</small></div><div class="v" data-en="4.35%" data-vi="4,35%">4.35%</div></div>
+        <div class="m2-mk"><div class="k"><span data-en="Rents, national, over the year" data-vi="Giá thuê toàn quốc, một năm qua">Rents, national, over the year</span><small data-en="vacancy at 1.7%, still below the long-run average" data-vi="tỷ lệ trống 1,7%, vẫn dưới mức trung bình dài hạn">vacancy at 1.7%, still below the long-run average</small></div><div class="v" data-en="+5.9%" data-vi="+5,9%">+5.9%</div></div>
+        <p class="m2-fine" data-en="Sources: Cotality (July 2026 data) via Metropole's August update; RBA decision of August 2026 as reported by Domain. City-wide indices; each precinct and each building will differ." data-vi="Nguồn: Cotality (dữ liệu tháng 7/2026), theo bản cập nhật tháng 8 của Metropole; quyết định của RBA tháng 8/2026 theo Domain. Chỉ số toàn thành phố; từng khu và từng toà nhà sẽ khác.">Sources: Cotality (July 2026 data) via Metropole's August update; RBA decision of August 2026 as reported by Domain. City-wide indices; each precinct and each building will differ.</p>
+        <div class="m2-more"><a class="lk" href="insights.html"><span data-en="Read Rivera's market notes" data-vi="Đọc góc nhìn thị trường của Rivera">Read Rivera's market notes</span> <span aria-hidden="true">→</span></a></div>
+      </div>
+
+      <div>
+        <span class="eyebrow" data-en="City news" data-vi="Tin trung tâm">City news</span>
+        <h2><span data-en="What is moving " data-vi="Chuyện đang diễn ra ">What is moving </span><span class="serif" data-en="in the CBD." data-vi="ở trung tâm.">in the CBD.</span></h2>
+        <p class="lead" data-en="Three recent stories from CBD News, the paper of the city's residents, each with a line on why it matters to a buyer." data-vi="Ba tin gần nhất từ CBD News, tờ báo của cư dân trung tâm, kèm một dòng vì sao nó đáng để người mua lưu ý.">Three recent stories from CBD News, the paper of the city's residents, each with a line on why it matters to a buyer.</p>
+        <article class="m2-news">
+          <div class="d" data-en="24 Aug 2026" data-vi="24/08/2026">24 Aug 2026</div>
+          <div>
+            <h3><a href="https://www.cbdnews.com.au/qvm-renewal-finances-the-numbers-arent-the-only-problem" target="_blank" rel="noopener" data-en="Queen Victoria Market renewal: the finances are not the only problem" data-vi="Cải tạo chợ Queen Victoria: tài chính không phải vấn đề duy nhất">Queen Victoria Market renewal: the finances are not the only problem</a></h3>
+            <p data-en="The renewal of the heritage market beside 380 Melbourne and Atlas is still being argued over, on budget and on delivery. Worth watching for anyone buying at the north-west corner of the grid." data-vi="Dự án làm mới khu chợ di sản sát 380 Melbourne và Atlas vẫn đang được tranh luận, cả về ngân sách lẫn cách triển khai. Đáng theo dõi với ai mua ở góc tây bắc lưới phố.">The renewal of the heritage market beside 380 Melbourne and Atlas is still being argued over, on budget and on delivery. Worth watching for anyone buying at the north-west corner of the grid.</p>
+            <span class="src">CBD News</span>
+          </div>
+        </article>
+        <article class="m2-news">
+          <div class="d" data-en="12 Aug 2026" data-vi="12/08/2026">12 Aug 2026</div>
+          <div>
+            <h3><a href="https://www.cbdnews.com.au/business-groups-maintain-pressure-as-carroll-pauses-work-from-home-laws" target="_blank" rel="noopener" data-en="The state pauses its work-from-home Bill; business keeps up the pressure" data-vi="Bang tạm dừng dự luật làm việc tại nhà; giới doanh nghiệp tiếp tục gây sức ép">The state pauses its work-from-home Bill; business keeps up the pressure</a></h3>
+            <p data-en="A proposed right to work from home two days a week has been paused over fears for the city's recovery. Office footfall shapes the rental demand of every CBD apartment." data-vi="Đề xuất cho quyền làm việc tại nhà hai ngày mỗi tuần được tạm dừng vì lo ngại cho sức sống của trung tâm. Lượng người đi làm ở văn phòng định hình nhu cầu thuê của mọi căn hộ trong CBD.">A proposed right to work from home two days a week has been paused over fears for the city's recovery. Office footfall shapes the rental demand of every CBD apartment.</p>
+            <span class="src">CBD News</span>
+          </div>
+        </article>
+        <article class="m2-news">
+          <div class="d" data-en="10 Aug 2026" data-vi="10/08/2026">10 Aug 2026</div>
+          <div>
+            <h3><a href="https://www.cbdnews.com.au/new-queen-victoria-market-initiative-backs-social-enterprises-to-create-jobs" target="_blank" rel="noopener" data-en="Queen Victoria Market backs social enterprises to create jobs" data-vi="Chợ Queen Victoria khởi động chương trình doanh nghiệp xã hội tạo việc làm">Queen Victoria Market backs social enterprises to create jobs</a></h3>
+            <p data-en="A six-year programme to open up work for people who find it hardest to get. A small sign of the market precinct being invested in, not just debated." data-vi="Chương trình sáu năm nhằm mở cơ hội việc làm cho những người khó tìm việc nhất. Một dấu hiệu nhỏ cho thấy khu chợ đang được đầu tư, chứ không chỉ được bàn tới.">A six-year programme to open up work for people who find it hardest to get. A small sign of the market precinct being invested in, not just debated.</p>
+            <span class="src">CBD News</span>
+          </div>
+        </article>
+        <div class="m2-more"><a class="lk" href="https://www.cbdnews.com.au/" target="_blank" rel="noopener"><span data-en="More at CBD News" data-vi="Đọc thêm tại CBD News">More at CBD News</span> <span aria-hidden="true">→</span></a></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="m2-cta">
+  <div class="wrap m2-cta-in">
+    <div>
+      <span class="eyebrow" data-en="The next step" data-vi="Bước tiếp theo">The next step</span>
+      <h2 style="margin-top:14px"><span data-en="Want to stand there " data-vi="Muốn đứng tại chỗ ">Want to stand there </span><span class="serif" data-en="and feel it for yourself?" data-vi="và tự cảm nhận?">and feel it for yourself?</span></h2>
+      <p data-en="Rivera arranges private viewings around your calendar, including a guided video walk-through if you are still in Vietnam." data-vi="Rivera sắp xếp buổi xem riêng theo lịch của bạn, kể cả một buổi dẫn xem qua video nếu bạn còn đang ở Việt Nam.">Rivera arranges private viewings around your calendar, including a guided video walk-through if you are still in Vietnam.</p>
+    </div>
+    <div class="btns">
+      <a class="btn" href="enquire.html"><span data-en="Book a viewing" data-vi="Đặt lịch xem nhà">Book a viewing</span> <span class="arw">→</span></a>
+      <a class="lk" href="projects.html"><span data-en="All projects" data-vi="Tất cả dự án">All projects</span></a>
+    </div>
   </div>
 </section>
 

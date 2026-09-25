@@ -6,8 +6,22 @@ task, add one short entry to the top.
 
 ---
 
+### 2026-09-25 · Claude · Map 2.0 goes live with the Melbourne flight hero
+- **1:1 Melbourne in Blender** (`Projects/map-flight/`, gitignored): City of Melbourne *2023 Building Footprints* (41,701 polygons, AHD elevations) extruded on the MGA55 grid + OSM water/roads/parks (`build_melbourne_1to1.py`); 123 *Photomesh 2020* tiles covering CBD, Docklands and Southbank, each shifted to the scene origin, decimated to 10% and its ~1,500 chunk textures packed into one grid atlas with remapped UVs (`process_tile.py`, no bake); `assemble.py` merges both layers and cuts the blockout away under the photomesh. Raw tiles live outside Dropbox (`~/Rivera-Archive/photomesh-raw`).
+- **The flight** (`render_flight.py`, EEVEE, golden hour, mist haze): plane window → CBD (10 s), then six 6 s legs between CBD, Docklands and Southbank, all sharing the same three stop frames. Encoded with AVFoundation (`encode_web.swift`, fast-start, 1080p + 720p) into `images/map/flight/`.
+- **`map.html` hero**: `.m2-flight` layer (videos + stills) under the copy; `#m2-zonechip` shows where you are, three precinct buttons fly between stops and list that precinct's Rivera residences from `MAP_LOCATIONS`; a Skip button during the intro; reduced-motion lands on the still. The day-scrub slider is gone from this page. New hero copy: *Bay một vòng, trước khi đặt chân.*
+- Map 2.0 (2026-09-02, previously local only) ships with it: three new pins (640 Bourke, 623 Collins, Atlas), residence rail, precincts, numbers.
+- Higgsfield: the Blender bridge connector exposes image/3D generation only and the trial credits refused the image call (403); Kling stays optional.
+
 ### 2026-09-25 · Claude · Deploy the landing enquiry form fix
 - The 2026-08-15 form fix below was never pushed; live `index.html` still pointed at Formspree `YOUR_FORM_ID`, so homepage enquiries were silently dropped. Now deployed on its own (Map 2.0 stays local).
+
+### 2026-09-02 · Claude · Map 2.0: map.html rebuilt as a full page, three new pins
+- **Hero:** the owner's Melbourne skyline photo (`images/map/melbourne-skyline*.jpg`), graded through a whole day by JS-driven custom properties (filter + dawn/dusk/night/glow/star layers), a time chip with a scrubbable slider, live counts from `MAP_LOCATIONS`; reduced-motion pins it at golden hour.
+- **Map:** same Leaflet engine and IDs, now in a grid with a generated **residence rail** (click → fly + popup; popup → highlights the rail). `app.js` gains `window.riveraMap` {focus, view}, `m._riveraId`, an optional `facts` line in the card, and a `#map2` page block. `styles.css` gains the `.m2-` block.
+- **Below the map:** city-in-numbers band (ABS 5.44m / +105k, 5 Metro Tunnel stations, 1837 grid) + tram / Metro Tunnel / Southern Cross notes; six precinct cards with "see on the map"; market snapshot (Cotality Jul-2026 via Metropole, RBA 4.35% Aug-2026) + three CBD News items; CTA.
+- **`map-data.js`:** `img` + `suburb` on the 7 existing projects; three new project pins **640 Bourke Street**, **623 Collins Street**, **Atlas Melbourne** (approximate coordinates, no `url` yet). `projects.html` untouched (still 7 cards) until their pages exist.
+- Not pushed to `main` yet, per the owner.
 
 ### 2026-08-15 · New Bot · Wire landing enquiry form to Apps Script
 - **Landing form actually sends.** `index.html` / `index-380.html` `.efrm` no longer points at Formspree `YOUR_FORM_ID` (which `app.js` treated as a fake success). It now POSTs JSON (`name`, empty `phone`, `email`, `interest` from the looking field, `intent: exploring`, `message`) to the same Google Apps Script web app as `enquire.html`.

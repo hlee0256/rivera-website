@@ -52,7 +52,7 @@ Melbourne property practice. One shared `styles.css` + `app.js` (map markers in 
 Deployed on **Vercel** from `main`; **live on the custom domain `https://rivera.au`** (apex +
 `www`). Pages: `index.html`
 (landing, featuring AURA), `projects.html` (7-project collection), `about.html`, `map.html`,
-`insights.html` + insight articles, `enquire.html`, `guide.html`, and 7 project detail pages.
+`insights.html` + insight articles, `enquire.html`, `guide.html`, and 7 project detail pages. `map.html` is the Map 2.0 page (page-scoped `.m2-` CSS block + a `#map2`-gated JS block; the map engine exposes `window.riveraMap`); its hero is the Blender flythrough (`.m2-flight`, JS section 4 of the `#map2` block).
 AURA is the deliberately bespoke flagship; the other detail pages follow the shared `.pd-*`
 template. Two standalone, `noindex`, VI-only client documents also live in the repo (not linked
 from the site): `380-melbourne-so-sanh.html` and `canopy-van-hanh.html` (Canopy House owner
@@ -65,6 +65,7 @@ proposal, 2026-07-03).
 - ~~`index.html` enquiry form `YOUR_FORM_ID`~~ — **done (2026-08-15):** landing `.efrm` now POSTs to the same Google Apps Script backend as `enquire.html` (no Formspree). Homepage has no phone field, so that column lands empty; `looking` maps to `interest`. **Still open:** verify the Zalo deep-link (`zalo.me/0782067555`) resolves.
 - AU real-estate legals still missing: agent licence number, agency details, privacy policy. (About-page credentials copy softened on 2026-06-30 to avoid an unverifiable REIV-membership claim until confirmed.)
 - Map (`map.html` / `map-data.js`) and the landing teaser: keep in sync as projects change.
+- **Map 2.0 + the flight (2026-09-25, live):** `map.html` rebuilt as a full page (dawn-to-night hero on the Melbourne skyline photo, map + residence rail, city-in-numbers band, six precincts, market snapshot + CBD news, CTA). Three new residences exist **only as map pins** for now: **640 Bourke Street** (Far East Consortium), **623 Collins Street** (Sterling Global), **Atlas Melbourne** (SP Setia). Still to do: their `projects.html` cards + detail pages (then add `url`/`img` in `map-data.js`); the market/news figures on the page are dated (Cotality Jul-2026, CBD News Aug-2026) and should be refreshed monthly; the three new pins' coordinates are street-level approximations. **The flight (2026-09-25):** the hero is now a Blender-rendered flythrough of a 1:1 Melbourne (City of Melbourne 2023 footprints + 2020 photomesh, MGA55, `Projects/map-flight/`): plane window → CBD, then precinct buttons fly CBD · Docklands · Southbank (7 clips in `images/map/flight/`, every leg starts and ends on a shared still). The day-scrub slider was retired on this page. Higgsfield/Kling was NOT used for the footage (the Blender bridge connector has no video tool; the trial credits only work through the main MCP); the renders are the source and Kling remains an optional polish pass.
 - ~~Domain not yet pointed~~ — **done:** `rivera.au` + `www.rivera.au` are pointed and serving
   production (verified 2026-07-03 via the Vercel project domains). The old
   `rivera-website.vercel.app` staging hostname is **not** assigned to the project and does not
