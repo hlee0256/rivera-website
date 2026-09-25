@@ -1070,6 +1070,7 @@ footer{background:var(--espresso);color:var(--sand);padding:80px 0 40px}
 .m2-flight{position:absolute;inset:0;overflow:hidden}
 .m2-fv,.m2-fstill{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 50%;opacity:0;transition:opacity .28s linear}
 .m2-fstill{transition-duration:.6s}
+.m2-sky .m2-fstill{filter:none;transform:none;will-change:auto}   /* stills are finished frames: no day-cycle grade */
 .m2-fv.on,.m2-fstill.on{opacity:1}
 .m2-hero.m2-flying .m2-dawn,.m2-hero.m2-flying .m2-dusk,.m2-hero.m2-flying .m2-night,.m2-hero.m2-flying .m2-glow,.m2-hero.m2-flying .m2-haze,.m2-hero.m2-flying .m2-stars{opacity:0!important}
 .m2-hero.m2-flying .m2-sky picture img{opacity:0}
