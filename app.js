@@ -624,22 +624,79 @@
       function residences(z){
         zoneRes.innerHTML='';
         (window.MAP_LOCATIONS||[]).filter(function(p){ return p.cat==='project' && p.url && ZONE[z].suburbs.indexOf(p.suburb)!==-1; }).forEach(function(p){
-          var a=document.createElement('a'); a.href=p.url; a.textContent=m2Lang()==='vi'?p.nameVi:p.nameEn; zoneRes.appendChild(a);
+          var a=document.createElement('a'); a.href=p.url; var sp=document.createElement('span'); sp.textContent=m2Lang()==='vi'?p.nameVi:p.nameEn; a.appendChild(sp); zoneRes.appendChild(a);
         });
       }
-      function land(z){
+      // ---- stop overlay: precinct outline, precinct name behind the skyline, project pins. Positions are
+      //      percentages of the 16:9 frame, projected from Blender's stop cameras (Projects/map-flight).
+      var ov=document.getElementById('m2-ov');
+      var PINS={
+        cbd:[{id:'380-melbourne',base:[68.32,76.38],top:[68.88,57.16]},{id:'aspire',base:[88.39,70.08],top:[89.34,54.66]}],
+        docklands:[{id:'collins-wharf-aluna',base:[82.32,82.09]},{id:'collins-wharf-ancora',base:[104.86,66.58]}],
+        southbank:[{id:'aura-melbourne-square',base:[18.97,69.66]}]
+      };
+      var COORD={cbd:'37.8136° S · 144.9631° E',docklands:'37.8183° S · 144.9469° E',southbank:'37.8230° S · 144.9640° E'};
+      var NS='http://www.w3.org/2000/svg', Y=function(v){ return v*0.5625; };
+      function ovSize(){ if(!ov) return; var w=heroEl.clientWidth,h=heroEl.clientHeight; var W=Math.max(w,h*16/9); ov.style.width=W+'px'; ov.style.height=(W*9/16)+'px'; ovFit(); }
+      // keep pin labels inside the hero: the overlay box is wider than the hero and zoomed 1.1, so a pin
+      // near a frame edge (Aspire, right of the CBD stop) would otherwise be cut off
+      function ovFit(){
+        var hr=heroEl.getBoundingClientRect(), k=(ov.getBoundingClientRect().width/ov.offsetWidth)||1, pad=14;
+        [].forEach.call(ov.querySelectorAll('.m2-pin'),function(a){
+          var edge=a.classList.contains('edge'); if(edge) a.style.right=''; else a.style.marginLeft='0px';
+          var r=a.getBoundingClientRect(), dx=0;
+          if(r.right>hr.right-pad) dx=hr.right-pad-r.right; else if(r.left<hr.left+pad) dx=hr.left+pad-r.left;
+          if(!dx) return;
+          if(edge) a.style.right='calc(2.2% + '+(-dx/k)+'px)'; else a.style.marginLeft=(dx/k)+'px';
+        });
+      }
+      function ovBuild(){
+        if(!ov) return;
+        var locs=window.MAP_LOCATIONS||[];
+        [].forEach.call(ov.querySelectorAll('.m2-ovz'),function(zEl){
+          var z=zEl.getAttribute('data-zone'), svg=zEl.querySelector('svg');
+          var arc=document.createElementNS(NS,'path'); arc.setAttribute('d','M 5 '+Y(32)+' Q 50 '+Y(4)+' 95 '+Y(28)); arc.setAttribute('class','arc'); svg.appendChild(arc);
+          var t=document.createElementNS(NS,'text'); t.setAttribute('x',50); t.setAttribute('y',Y(6.2)); t.setAttribute('text-anchor','middle'); t.setAttribute('class','coord'); t.textContent=COORD[z]; svg.appendChild(t);
+          (PINS[z]||[]).forEach(function(p){
+            var loc=null; for(var i=0;i<locs.length;i++){ if(locs[i].id===p.id){ loc=locs[i]; break; } }
+            if(!loc) return;
+            var a=document.createElement('a'); a.className='m2-pin'; a.href=loc.url||'#'; a.setAttribute('data-pin',p.id);
+            var b=document.createElement('b'); b.setAttribute('data-en',loc.status?loc.status.en:''); b.setAttribute('data-vi',loc.status?loc.status.vi:''); b.textContent=m2Lang()==='vi'?(loc.status?loc.status.vi:''):(loc.status?loc.status.en:'');
+            var sp=document.createElement('span'); sp.setAttribute('data-en',loc.nameEn); sp.setAttribute('data-vi',loc.nameVi); sp.textContent=m2Lang()==='vi'?loc.nameVi:loc.nameEn;
+            a.appendChild(b); a.appendChild(sp);
+            var bx=p.base[0], by=p.base[1];
+            if(bx>100||bx<0){ a.classList.add('edge'); a.style.top=by+'%'; var i2=document.createElement('i'); i2.textContent='→'; a.appendChild(i2); zEl.appendChild(a); return; }
+            var an=p.top||p.base, ly=Math.max(an[1]-(p.top?15:20),18);
+            var line=document.createElementNS(NS,'path'); line.setAttribute('d','M '+an[0]+' '+Y(ly)+' L '+an[0]+' '+Y(an[1])); line.setAttribute('class','pl'); svg.appendChild(line);
+            var dot=document.createElementNS(NS,'circle'); dot.setAttribute('cx',an[0]); dot.setAttribute('cy',Y(an[1])); dot.setAttribute('r',p.top?.28:.3); dot.setAttribute('class','pd'); svg.appendChild(dot);
+            if(!p.top){ [0,1].forEach(function(k){ var c=document.createElementNS(NS,'circle'); c.setAttribute('cx',bx); c.setAttribute('cy',Y(by)); c.setAttribute('r',.9); c.setAttribute('class','ring'); if(k) c.style.animationDelay='3.8s'; svg.appendChild(c); }); }
+            a.style.left=an[0]+'%'; a.style.top=ly+'%'; zEl.appendChild(a);
+            var hl=zEl.querySelector('.m2-ovh[data-pin="'+p.id+'"]');
+            if(hl){ a.addEventListener('mouseenter',function(){ hl.classList.add('hot'); }); a.addEventListener('mouseleave',function(){ hl.classList.remove('hot'); }); a.addEventListener('focus',function(){ hl.classList.add('hot'); }); a.addEventListener('blur',function(){ hl.classList.remove('hot'); }); }
+          });
+        });
+        ovSize(); window.addEventListener('resize',ovSize);
+      }
+      function ovShow(z){ if(!ov) return; [].forEach.call(ov.querySelectorAll('.m2-ovz'),function(e){ var on=e.getAttribute('data-zone')===z; if(on&&!e.classList.contains('on')){ e.classList.remove('on'); void e.offsetWidth; } e.classList.toggle('on',on); }); }
+      function ovHide(){ if(!ov) return; [].forEach.call(ov.querySelectorAll('.m2-ovz'),function(e){ e.classList.remove('on'); }); }
+      ovBuild();
+      // land(z, keep): the leg that just ended stays on top, paused on its last frame, so the next
+      //      leg cross-fades video to video (each AI-graded clip has its own sky; a still would jump).
+      function land(z,keep){
         Object.keys(stills).forEach(function(k){ stills[k].classList.toggle('on',k===z); });
-        Object.keys(vids).forEach(function(k){ vids[k].classList.remove('on'); });
+        Object.keys(vids).forEach(function(k){ if(vids[k]!==keep) vids[k].classList.remove('on'); });
+        ovShow(z); heroEl.classList.add('m2-landed');
         cur=z; busy=false;
         zoneBtns.forEach(function(b){ b.disabled=false; b.setAttribute('aria-pressed',String(b.getAttribute('data-zone')===z)); });
         chip.classList.remove('is-flying'); chip.classList.add('is-landed'); label('landed',z); residences(z);
+        var lineEl=document.getElementById('m2-line'); if(lineEl) lineEl.classList.add('on');
         // warm the legs out of this stop
         Object.keys(vids).forEach(function(k){ if(k.indexOf(z+'>')===0 && vids[k].preload==='none'){ vids[k].preload='auto'; vids[k].load(); } });
       }
       function fly(key,to){
         var v=vids[key];
         if(m2Reduce||!v){ land(to); return; }
-        busy=true; chip.classList.remove('is-landed'); chip.classList.add('is-flying'); label(key==='intro'?'intro':'flying',to);
+        busy=true; chip.classList.remove('is-landed'); chip.classList.add('is-flying'); label(key==='intro'?'intro':'flying',to); ovHide(); heroEl.classList.remove('m2-landed');
         zoneBtns.forEach(function(b){ b.disabled=true; });
         // Watchdog: a visible page whose flight stalls (autoplay policy, a dropped stream) is nudged,
         // then landed, so the buttons can never stay locked.
@@ -647,10 +704,10 @@
           if(document.hidden||v.ended) return;
           if(v.paused){ stalls++; var q=v.play(); if(q&&q.catch) q.catch(function(){}); if(stalls>=3) finish(); } else stalls=0;
         },1000);
-        var done=false, finish=function(){ if(done) return; done=true; clearInterval(dog); v.onended=null; land(to); };
+        var done=false, finish=function(){ if(done) return; done=true; clearInterval(dog); v.onended=null; land(to, v.ended?v:null); };
         v.onended=finish;
         v.onerror=finish;
-        var show=function(){ v.classList.add('on'); Object.keys(stills).forEach(function(k){ stills[k].classList.remove('on'); }); };
+        var show=function(){ v.classList.add('on'); setTimeout(function(){ Object.keys(vids).forEach(function(k){ if(vids[k]!==v) vids[k].classList.remove('on'); }); },500); };
         try{ v.currentTime=0; }catch(e){}
         var p=v.play();
         if(p&&p.then) p.then(show,finish); else show();
@@ -664,7 +721,37 @@
       });
       heroEl.classList.add('m2-flying');
       label('intro',null);
-      if(m2Reduce){ land('cbd'); }
+      // ---- scroll-scrubbed intro (desktop, fine pointer, motion allowed): the wrapper is 300vh tall,
+      //      the hero pins, and scroll position drives the intro video's time. Phones autoplay instead.
+      var wrap=document.getElementById('m2-scrollwrap');
+      var canScrub=wrap && !m2Reduce && window.matchMedia('(pointer: fine)').matches && window.matchMedia('(min-width: 761px)').matches;
+      if(/[?&]nofx/.test(location.search)) document.documentElement.classList.add('m2-nofx');   // screenshots: skip transitions
+      var hashZone=(location.hash||'').replace('#','').toLowerCase();
+      if(ZONE[hashZone]){ if(wrap) wrap.classList.remove('is-scrub'); skipBtn.hidden=true; land(hashZone); }   // map.html#docklands lands there directly
+      else if(m2Reduce){ land('cbd'); }
+      else if(canScrub){
+        var iv=vids.intro, caps=[].slice.call(document.querySelectorAll('#m2-captions .m2-cap'));
+        wrap.classList.add('is-scrub'); heroEl.classList.add('m2-scrubbing'); chip.classList.add('is-flying');
+        skipBtn.hidden=true; busy=true;
+        var landedIntro=false, targetT=0, shownT=-1, raf=0;
+        var showIntro=function(){ iv.classList.add('on'); Object.keys(stills).forEach(function(k){ stills[k].classList.remove('on'); }); };
+        var progress=function(){ var max=wrap.offsetHeight-window.innerHeight; return max>0?Math.min(1,Math.max(0,(window.scrollY-wrap.offsetTop)/max)):1; };
+        var paint=function(){
+          raf=0;
+          if(landedIntro) return;
+          var d=iv.duration||10, p=progress();
+          targetT=Math.min(d-0.04,p*d);
+          if(Math.abs(targetT-shownT)>0.02){ try{ iv.currentTime=targetT; shownT=targetT; }catch(e){} }
+          caps.forEach(function(c){ var a=+c.getAttribute('data-from'), b=+c.getAttribute('data-to'); c.classList.toggle('on',p>=a&&p<=b); });
+          heroEl.classList.toggle('m2-copy-in',p>0.62);
+          if(p>=0.985){ landedIntro=true; iv.pause(); land('cbd'); heroEl.classList.add('m2-copy-in'); caps.forEach(function(c){ c.classList.remove('on'); }); }
+        };
+        var onScroll=function(){ if(!raf) raf=requestAnimationFrame(paint); };
+        var ready=function(){ iv.pause(); showIntro(); paint(); window.addEventListener('scroll',onScroll,{passive:true}); window.addEventListener('resize',onScroll); };
+        if(iv.readyState>=1) ready(); else iv.addEventListener('loadedmetadata',ready,{once:true});
+        // if the video never becomes seekable (blocked, offline), fall back to autoplay
+        setTimeout(function(){ if(iv.readyState<1 && !landedIntro){ wrap.classList.remove('is-scrub'); heroEl.classList.remove('m2-scrubbing'); skipBtn.hidden=false; busy=false; fly('intro','cbd'); } },6000);
+      }
       else { fly('intro','cbd'); }
       // language switch re-renders the chip labels
       var langBtn=document.getElementById('lang'); if(langBtn) langBtn.addEventListener('click',function(){ setTimeout(function(){ if(cur){ label('landed',cur); residences(cur); } },0); });

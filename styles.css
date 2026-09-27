@@ -1068,9 +1068,10 @@ footer{background:var(--espresso);color:var(--sand);padding:80px 0 40px}
 
 /* ---- Map 2.0 · the flight: Blender-rendered 1:1 Melbourne in the hero, three precinct stops ---- */
 .m2-flight{position:absolute;inset:0;overflow:hidden}
-.m2-fv,.m2-fstill{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 50%;opacity:0;transition:opacity .28s linear}
+.m2-fv,.m2-fstill{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 50%;opacity:0;transition:opacity .45s linear}
 .m2-fstill{transition-duration:.6s}
-.m2-sky .m2-fstill{filter:none;transform:none;will-change:auto}   /* stills are finished frames: no day-cycle grade */
+.m2-sky .m2-fstill{filter:none;will-change:auto}   /* stills are finished frames: no day-cycle grade */
+.m2-sky .m2-fv,.m2-sky .m2-fstill{transform:scale(1.1);transform-origin:50% 50%}   /* 10% zoom hides the small AI mark in the clip corner; .m2-ov scales the same so pins stay aligned */
 .m2-fv.on,.m2-fstill.on{opacity:1}
 .m2-hero.m2-flying .m2-dawn,.m2-hero.m2-flying .m2-dusk,.m2-hero.m2-flying .m2-night,.m2-hero.m2-flying .m2-glow,.m2-hero.m2-flying .m2-haze,.m2-hero.m2-flying .m2-stars{opacity:0!important}
 .m2-hero.m2-flying .m2-sky picture img{opacity:0}
@@ -1090,3 +1091,74 @@ footer{background:var(--espresso);color:var(--sand);padding:80px 0 40px}
 .m2-zonechip.is-landed .m2-skip,.m2-zonechip.is-flying .m2-skip{display:none}
 @media(max-width:560px){.m2-zonechip .row + .row{display:inline-flex}.m2-zonechip .m2-zonebar{width:100%;justify-content:space-between}.m2-zone{flex:1;padding:9px 6px;font-size:.62rem}.m2-zoneres{display:none}}
 @media(prefers-reduced-motion:reduce){.m2-fv{display:none}}
+
+/* ---- Map 2.0 · scroll-scrubbed intro, captions, the residence line ---- */
+.m2-scrollwrap{position:relative}
+.m2-scrollwrap.is-scrub{height:300vh}
+.m2-scrollwrap.is-scrub .m2-hero{position:sticky;top:0;height:100vh;height:100svh;min-height:0}
+.m2-captions{position:absolute;inset:0;pointer-events:none;z-index:2}
+.m2-cap{position:absolute;left:clamp(24px,5vw,72px);bottom:20vh;margin:0;font-family:var(--serif);font-style:italic;font-size:clamp(1.4rem,2.6vw,2.2rem);color:rgba(251,246,238,.92);letter-spacing:0;text-shadow:0 2px 24px rgba(18,12,7,.45);opacity:0;transform:translateY(8px);transition:opacity .5s ease,transform .5s ease}
+:lang(vi) .m2-cap{font-weight:500}
+.m2-cap.on{opacity:1;transform:none}
+.m2-cap-hint{left:auto;right:clamp(24px,5vw,72px);bottom:32px;font-family:"Manrope",system-ui,sans-serif;font-style:normal;font-size:.68rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:rgba(251,246,238,.7);display:flex;align-items:center;gap:12px}
+.m2-cap-hint i{display:block;width:1px;height:34px;background:linear-gradient(to bottom,rgba(251,246,238,.0),rgba(251,246,238,.8));animation:m2drop 1.6s ease-in-out infinite}
+@keyframes m2drop{0%{transform:scaleY(.2);transform-origin:top;opacity:0}50%{transform:scaleY(1);opacity:1}100%{transform:scaleY(1);transform-origin:top;opacity:0}}
+.m2-hero.m2-scrubbing .m2-hero-in > .eyebrow,.m2-hero.m2-scrubbing .m2-hero-in > h1,.m2-hero.m2-scrubbing .m2-hero-in > .sub,.m2-hero.m2-scrubbing .m2-hero-foot,.m2-hero.m2-scrubbing .m2-line{opacity:0;transform:translateY(14px);transition:opacity .7s ease,transform .7s ease}
+.m2-hero.m2-scrubbing.m2-copy-in .m2-hero-in > .eyebrow,.m2-hero.m2-scrubbing.m2-copy-in .m2-hero-in > h1,.m2-hero.m2-scrubbing.m2-copy-in .m2-hero-in > .sub,.m2-hero.m2-scrubbing.m2-copy-in .m2-hero-foot,.m2-hero.m2-scrubbing.m2-copy-in .m2-line{opacity:1;transform:none}
+.m2-hero.m2-scrubbing.m2-copy-in .m2-hero-in > h1{transition-delay:.08s}.m2-hero.m2-scrubbing.m2-copy-in .m2-hero-in > .sub{transition-delay:.16s}.m2-hero.m2-scrubbing.m2-copy-in .m2-line{transition-delay:.24s}.m2-hero.m2-scrubbing.m2-copy-in .m2-hero-foot{transition-delay:.32s}
+.m2-line{display:flex;align-items:center;gap:18px;margin-top:30px;opacity:0;transition:opacity .5s ease}
+.m2-line.on{opacity:1}
+.m2-line-k{flex:none;font-size:.66rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--tan)}
+.m2-line .m2-zoneres{display:flex;align-items:center;gap:0;max-width:none;justify-content:flex-start;position:relative;flex:1;min-width:0}
+.m2-line .m2-zoneres::before{content:"";position:absolute;left:0;right:0;top:50%;height:1px;background:rgba(251,246,238,.22)}
+.m2-line .m2-zoneres a{position:relative;background:transparent;border:0;backdrop-filter:none;-webkit-backdrop-filter:none;padding:0 22px 0 0;margin-right:22px;font-size:.78rem;color:rgba(251,246,238,.9)}
+.m2-line .m2-zoneres a::before{content:"";display:inline-block;width:9px;height:9px;border-radius:50%;background:var(--tan);box-shadow:0 0 0 4px rgba(27,19,13,.8);margin-right:10px;vertical-align:middle;transition:transform .2s}
+.m2-line .m2-zoneres a:hover::before{transform:scale(1.35)}
+.m2-line .m2-zoneres a span{position:relative;background:linear-gradient(rgba(27,19,13,.0),rgba(27,19,13,.0));padding:2px 6px}
+@media(max-width:560px){.m2-line{gap:10px;margin-top:22px;flex-wrap:wrap}.m2-line .m2-zoneres a{font-size:.7rem;padding-right:12px;margin-right:12px}.m2-cap{font-size:1.3rem;bottom:26vh}.m2-cap-hint{display:none}}
+@media(prefers-reduced-motion:reduce){.m2-cap-hint i{animation:none}}
+
+/* ---- Map hero: stop overlay (precinct outline, name behind the skyline, project pins) ---- */
+.m2-ov{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%) scale(1.1);width:100%;aspect-ratio:16/9;pointer-events:none;z-index:2}
+.m2-hero-in>*{pointer-events:none}.m2-hero-in a,.m2-hero-in button,.m2-hero-in .m2-line,.m2-hero-in .m2-hero-foot{pointer-events:auto}
+.m2-ovz{position:absolute;inset:0;opacity:0;transition:opacity .9s ease;pointer-events:none}
+.m2-ovz.on{opacity:1;pointer-events:auto}
+.m2-ovz>img,.m2-ovz>svg{position:absolute;inset:0;width:100%;height:100%;display:block}
+.m2-ovcut{-webkit-mask-size:100% 100%;mask-size:100% 100%;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat}
+.m2-ovp{opacity:0;transition:opacity 1.4s ease .5s}
+.m2-ovz.on .m2-ovp{opacity:.85}
+.m2-ovt{position:absolute;left:0;right:0;top:var(--t,10%);margin:0;text-align:center;font-family:var(--serif);font-style:italic;font-weight:300;font-size:clamp(40px,var(--fs,8vw),190px);line-height:.9;letter-spacing:-.01em;color:rgba(251,246,238,.94);text-shadow:0 2px 30px rgba(18,12,7,.25);opacity:0;transform:translateY(16px);transition:opacity 1.3s ease .3s,transform 1.5s ease .3s}
+:lang(vi) .m2-ovt{font-weight:500}
+.m2-ovz.on .m2-ovt{opacity:.94;transform:none}
+.m2-ovt small{display:block;font-family:"Manrope",system-ui,sans-serif;font-style:normal;font-weight:600;font-size:clamp(9px,.8vw,13px);letter-spacing:.42em;text-transform:uppercase;color:var(--sand);opacity:.85;margin-bottom:1.1em}
+.m2-ovh{opacity:0;transition:opacity .5s ease}
+.m2-ovh.lot{opacity:.55;animation:m2lot 4.2s ease-in-out infinite}
+.m2-ovh.hot{opacity:1;animation:m2hot 1.6s ease-in-out infinite}
+@keyframes m2lot{0%,100%{opacity:.4}50%{opacity:.8}}
+@keyframes m2hot{0%,100%{opacity:.75}50%{opacity:1}}
+.m2-ovs .arc{fill:none;stroke:rgba(251,246,238,.38);stroke-width:.09;stroke-dasharray:.45 .7}
+.m2-ovs .coord{font:500 .78px "Manrope",system-ui,sans-serif;letter-spacing:.28px;fill:rgba(251,246,238,.72)}
+.m2-ovs .pl{fill:none;stroke:var(--tan);stroke-width:.14;filter:drop-shadow(0 0 .35px var(--tan));stroke-dasharray:40;stroke-dashoffset:40}
+.m2-ovz.on .m2-ovs .pl{transition:stroke-dashoffset 1.4s ease 1s;stroke-dashoffset:0}
+.m2-ovs .pd{fill:#FBF6EE;opacity:0}.m2-ovz.on .m2-ovs .pd{transition:opacity .5s 2s;opacity:1}
+.m2-ovs .ring{fill:none;stroke:var(--tan);stroke-width:.12;opacity:0;transform-box:fill-box;transform-origin:center}
+.m2-ovz.on .m2-ovs .ring{opacity:1;transition:opacity .5s 2s;animation:m2ring 2.8s ease-out 2.4s infinite}
+@keyframes m2ring{from{transform:scale(.4);opacity:.9}to{transform:scale(2.4);opacity:0}}
+.m2-pin{position:absolute;transform:translate(-50%,-100%);padding:.7em 1.25em .62em;border-radius:999px;background:rgba(27,19,13,.72);border:1px solid rgba(201,169,130,.6);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);white-space:nowrap;text-decoration:none;color:#FBF6EE;font-size:clamp(10px,1vw,15px);opacity:0;translate:0 8px;transition:opacity .7s ease,translate .7s ease,border-color .2s,background .2s}
+.m2-ovz.on .m2-pin{opacity:1;translate:0 0;transition-delay:1.7s,1.7s,0s,0s}
+.m2-pin b{display:block;font-weight:600;font-size:.6em;letter-spacing:.22em;text-transform:uppercase;color:var(--tan);margin-bottom:.4em}
+.m2-pin span{font-weight:500}
+.m2-pin:hover{border-color:var(--tan);background:rgba(27,19,13,.9)}
+.m2-pin.edge{transform:translateY(-50%);right:2.2%;border-style:dashed}
+.m2-pin.edge i{font-style:normal;color:var(--tan);margin-left:.5em}
+@media(max-width:760px){.m2-ovt,.m2-pin,.m2-ovs{display:none}}   /* phones: the still is cropped, so only the outline and the lot blink stay; residences live in the rail below */
+@media(prefers-reduced-motion:reduce){.m2-ovh.lot,.m2-ovh.hot,.m2-ovs .ring{animation:none}.m2-ovs .pl{stroke-dashoffset:0}}
+
+.m2-nofx *,.m2-nofx *::before,.m2-nofx *::after{transition:none!important;animation:none!important}
+
+/* landed: the hero copy steps back so the stop still, outline and pins read first */
+.m2-hero .m2-hero-in>h1,.m2-hero .m2-hero-in>.sub{transition:opacity .6s ease,font-size .6s ease,max-height .6s ease,margin .6s ease}
+.m2-hero.m2-landed .m2-hero-in>h1{font-size:clamp(1.5rem,2.6vw,2.4rem);margin-bottom:6px}
+.m2-hero.m2-landed .m2-hero-in>.sub{opacity:0;max-height:0;overflow:hidden;margin:0}
+.m2-hero.m2-landed .m2-hero-in>.eyebrow{opacity:.85}
+@media(max-width:760px){.m2-hero.m2-landed .m2-hero-in>h1{font-size:1.25rem}}

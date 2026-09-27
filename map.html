@@ -33,7 +33,9 @@
   </div>
 </header>
 
-<!-- HERO: one photograph of Melbourne, graded through a whole day by app.js -->
+<!-- HERO: the flight. On desktop the intro is scrubbed by scrolling (the wrapper is tall and the hero pins);
+     on phones and with reduced motion it plays on its own. -->
+<div class="m2-scrollwrap" id="m2-scrollwrap">
 <section class="m2-hero" id="m2-hero">
   <div class="m2-sky" aria-hidden="true">
     <picture>
@@ -62,6 +64,38 @@
     <div class="m2-layer m2-scrim"></div>
     <div class="m2-layer m2-stars" id="m2-stars"></div>
   </div>
+  <!-- STOP OVERLAY: at each stop the precinct is outlined on the ground, the precinct name sits behind the
+       skyline (the city is cut back in with a Blender mask), and Rivera projects are pinned: built towers
+       light up on hover, off-the-plan lots blink softly. Pins are placed by app.js from Blender's camera. -->
+  <div class="m2-ov" id="m2-ov" aria-hidden="true">
+    <div class="m2-ovz" data-zone="cbd">
+      <p class="m2-ovt" style="--t:12%;--fs:5.4vw"><small data-en="Precinct · 01" data-vi="Khu vực · 01">Khu vực · 01</small><span data-en="Melbourne CBD" data-vi="Trung tâm Melbourne">Trung tâm Melbourne</span></p>
+      <img class="m2-ovp" src="images/map/flight/overlay/cbd__precinct_cbd.png" alt="" loading="lazy" decoding="async" />
+      <img class="m2-ovcut" src="images/map/flight/still_cbd.jpg" alt="" loading="lazy" decoding="async" style="-webkit-mask-image:url(images/map/flight/mask_cbd.png);mask-image:url(images/map/flight/mask_cbd.png)" />
+      <img class="m2-ovh" data-pin="380-melbourne" src="images/map/flight/overlay/cbd__tower_380.png" alt="" loading="lazy" decoding="async" />
+      <img class="m2-ovh" data-pin="aspire" src="images/map/flight/overlay/cbd__tower_aspire.png" alt="" loading="lazy" decoding="async" />
+      <svg class="m2-ovs" viewBox="0 0 100 56.25" preserveAspectRatio="none"></svg>
+    </div>
+    <div class="m2-ovz" data-zone="docklands">
+      <p class="m2-ovt" style="--t:11%;--fs:10vw"><small data-en="Precinct · 02" data-vi="Khu vực · 02">Khu vực · 02</small><span>Docklands</span></p>
+      <img class="m2-ovp" src="images/map/flight/overlay/docklands__precinct_docklands.png" alt="" loading="lazy" decoding="async" />
+      <img class="m2-ovcut" src="images/map/flight/still_docklands.jpg" alt="" loading="lazy" decoding="async" style="-webkit-mask-image:url(images/map/flight/mask_docklands.png);mask-image:url(images/map/flight/mask_docklands.png)" />
+      <img class="m2-ovh lot" data-pin="collins-wharf-aluna" src="images/map/flight/overlay/docklands__lot_aluna.png" alt="" loading="lazy" decoding="async" />
+      <svg class="m2-ovs" viewBox="0 0 100 56.25" preserveAspectRatio="none"></svg>
+    </div>
+    <div class="m2-ovz" data-zone="southbank">
+      <p class="m2-ovt" style="--t:17%;--fs:10vw"><small data-en="Precinct · 03" data-vi="Khu vực · 03">Khu vực · 03</small><span>Southbank</span></p>
+      <img class="m2-ovp" src="images/map/flight/overlay/southbank__precinct_southbank.png" alt="" loading="lazy" decoding="async" />
+      <img class="m2-ovcut" src="images/map/flight/still_southbank.jpg" alt="" loading="lazy" decoding="async" style="-webkit-mask-image:url(images/map/flight/mask_southbank.png);mask-image:url(images/map/flight/mask_southbank.png)" />
+      <img class="m2-ovh lot" data-pin="aura-melbourne-square" src="images/map/flight/overlay/southbank__lot_aura.png" alt="" loading="lazy" decoding="async" />
+      <svg class="m2-ovs" viewBox="0 0 100 56.25" preserveAspectRatio="none"></svg>
+    </div>
+  </div>
+  <div class="m2-captions" id="m2-captions" aria-hidden="true">
+    <p class="m2-cap" data-from="0.04" data-to="0.30"><span data-en="Somewhere over Port Phillip Bay" data-vi="Đâu đó trên vịnh Port Phillip">Đâu đó trên vịnh Port Phillip</span></p>
+    <p class="m2-cap" data-from="0.36" data-to="0.62"><span data-en="Melbourne, from 2,000 metres" data-vi="Melbourne, từ độ cao 2.000 m">Melbourne, từ độ cao 2.000 m</span></p>
+    <p class="m2-cap m2-cap-hint" data-from="0.0" data-to="0.12"><span data-en="Scroll to fly" data-vi="Cuộn để bay">Cuộn để bay</span><i aria-hidden="true"></i></p>
+  </div>
 
   <div class="m2-skychip m2-zonechip" id="m2-zonechip" aria-live="polite">
     <div class="row">
@@ -74,7 +108,6 @@
       <button class="m2-zone" type="button" data-zone="docklands" aria-pressed="false">Docklands</button>
       <button class="m2-zone" type="button" data-zone="southbank" aria-pressed="false">Southbank</button>
     </div>
-    <div class="m2-zoneres" id="m2-zoneres"></div>
     <button class="m2-skip" id="m2-skip" type="button"><span data-en="Skip the flight" data-vi="Bỏ qua đoạn bay">Skip the flight</span></button>
   </div>
 
@@ -82,6 +115,10 @@
     <span class="eyebrow" data-en="Orientation · Melbourne" data-vi="Định vị · Melbourne">Orientation · Melbourne</span>
     <h1><span data-en="Fly it first, " data-vi="Bay một vòng, ">Fly it first, </span><span class="serif" data-en="before you land." data-vi="trước khi đặt chân.">before you land.</span></h1>
     <p class="sub" data-en="From the plane window down into the Melbourne CBD, then across to Docklands and Southbank. Every Rivera residence sits exactly where it stands. Pick a precinct to fly there, or scroll to open the map." data-vi="Từ cửa sổ máy bay xuống trung tâm Melbourne, rồi lướt sang Docklands và Southbank. Mỗi nơi ở của Rivera đặt đúng vị trí thật của nó. Chọn một khu để bay tới, hoặc cuộn xuống để mở bản đồ.">From the plane window down into the Melbourne CBD, then across to Docklands and Southbank. Every Rivera residence sits exactly where it stands. Pick a precinct to fly there, or scroll to open the map.</p>
+    <div class="m2-line" id="m2-line" aria-label="Rivera residences in this precinct / Nơi ở của Rivera trong khu này">
+      <span class="m2-line-k" id="m2-line-k" data-en="In this precinct" data-vi="Trong khu này">Trong khu này</span>
+      <div class="m2-zoneres" id="m2-zoneres"></div>
+    </div>
     <div class="m2-hero-foot">
       <div class="m2-hero-stats">
         <div class="m2-hs"><div class="n" data-count="project">10</div><div class="l" data-en="Residences" data-vi="Nơi ở">Residences</div></div>
@@ -93,6 +130,7 @@
     </div>
   </div>
 </section>
+</div>
 
 <!-- THE MAP + RESIDENCE RAIL -->
 <section class="m2-mapsec" id="m2-map">
